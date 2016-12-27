@@ -1,0 +1,29 @@
+<style type="text/css">
+	.success {
+		color: green;
+		margin-left: -7%;
+		margin-bottom: 0px;
+	}
+</style>
+<html>
+<head>
+	<title>unsuscribe Ajax</title>
+</head>
+<body>
+<div class = "unsuscribeAjax">
+	{% csrf_token %}
+     {% if NoEmail %}
+    	<p class = "error">{{ NoEmail }}</p>
+   	{% endif %}
+   	{% if success %}
+    	<p class = "success">{{ success }}</p>
+   	{% endif %}
+    <div class = "form-group">
+      <div class = "">
+      <label for = "email" class = "control-label">Your Email:</label>
+        <input type='text' name='email' class = "form-control last-control" id = "email" placeholder = "Email">
+      </div>
+    </div>
+</div>
+</body>
+</html>

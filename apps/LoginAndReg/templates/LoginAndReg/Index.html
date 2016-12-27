@@ -1,0 +1,132 @@
+<html>
+    <head>
+        <title>Login and Reg Index</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    </head>
+    <style>
+    {% load staticfiles %}
+    .error {
+      color:red;
+      margin-left: 200px;
+    }
+    .green {
+      color: green;
+    }
+    .btn {
+      margin-top: 15px;
+    }
+    h1 {
+      margin-left: 50px;
+    }
+    body {
+    background-image: url('{% static "LoginAndReg/seigaiha.png" %}');
+    }
+    </style>
+    <body>
+        <form action="{%url 'login:register' %}" method='post' class = "form-horizontal">
+        {% csrf_token %}
+          <h1>Registration Form</h1>
+          {% if TwoCharacters %}
+            <p class = 'error'> {{ TwoCharacters }} </p>
+          {% endif %}
+          {% if IsAlpha %}
+            <p class = 'error'> {{ IsAlpha }} </p>
+          {% endif %}
+          <div class = "form-group">
+            <label for ="first_name" class="col-sm-2 control-label">First Name:</label>
+            <div class = "col-sm-6">
+              <input type='text' class = "form-control" name='first_name' id = "first_name" placeholder = "First Name"> 
+            </div>
+          </div>
+          <div class = "form-group">
+            <label for = "last_name" class = "col-sm-2 control-label">Last Name:</label>
+            <div class = "col-sm-6">
+              <input type='text' name='last_name' class = "form-control" id = "last_name" placeholder = "Last Name">
+            </div>
+          </div>
+          {% if EmailRequired %}
+            <p class = 'error'> {{ EmailRequired }} </p>
+          {% endif %}
+          {% if InvalidEmail %}
+            <p class = 'error'> {{ InvalidEmail }} </p>
+          {% endif %}
+          {% if EmailDuplicate %}
+            <p class = 'error'> {{ EmailDuplicate }} </p>
+          {% endif %}
+        <div class = "form-group">
+          <label for = "email" class = "col-sm-2 control-label">Email:</label>
+          <div class = "col-sm-6">
+            <input type='text' name='email' class = "form-control" id = "email" placeholder = "Email">
+          </div>
+        </div>
+        {% if InvalidPhone %}
+            <p class = 'error'> {{ InvalidPhone }} </p>
+        {% endif %}
+        <div class = "form-group">
+          <label for = "phone" class = "col-sm-2 control-label">Phone Number: (XXX)-XXX-XXXX </label>
+          <div class = "col-sm-6">
+            <input type='tel' name='phone' class = "form-control" id = "phone" placeholder = "Number">
+          </div>
+        </div>
+         {% if PasswordRequired %}
+            <p class = 'error'> {{ PasswordRequired }} </p>
+          {% endif %}
+          {% if PasswordLength %}
+            <p class = 'error'> {{ PasswordLength }} </p>
+          {% endif %}
+          {% if InvalidPassword %}
+            <p class = 'error'> {{ InvalidPassword }} </p>
+          {% endif %}
+          {% if PasswordNonmatch %}
+            <p class = 'error'> {{ PasswordNonmatch }} </p>
+          {% endif %}
+        <div class = "form-group">
+          <label for = "password" class = "col-sm-2 control-label">Password:</label>
+          <div class = "col-sm-6">
+            <input type='password' name='password' class = "form-control" id = "password" placeholder = "Password">
+          </div>
+        </div>
+        <div class = "form-group">
+          <label for = "confirmpassword" class = "col-sm-2 control-label">Confirm Password:</label>
+          <div class = "col-sm-6">
+            <input type='password' name='confirm_password' class = "form-control" id = "confirmpassword"placeholder = "Password">
+            <input type='submit' value='Create User' class = "btn btn-primary">
+          </div>
+        </div>
+        </form>
+        <form action="{%url 'login:login' %}" method='post' class = "form-horizontal">
+        {% csrf_token %}
+          <h1> Login </h1>
+          {% if NoEmail %}
+            <p class = 'error'> {{ NoEmail }} </p>
+          {% endif %}
+          <div class = "form-group">
+            <label for = "email" class = "col-sm-2 control-label">Email:</label>
+            <div class = "col-sm-6">
+              <input type ='text' name ='email' id = "email" class = "form-control" placeholder = "Email">
+            </div>
+          </div>
+          {% if IncorrectLogin %}
+            <p class = 'error'> {{ IncorrectLogin }} </p>
+          {% endif %}
+          {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+          {% endif %}
+          <div class = "form-group">
+            <label for = "password" class = "col-sm-2 control-label">Password:</label>
+            <div class = "col-sm-6">
+              <input type='password' name='password' id = "password" class = "form-control" placeholder = "Password">
+              <input type='submit' value='Login' class = "btn btn-primary last-btn">
+            </div>
+          </div>
+        </form>
+    </body>
+</html>
+
+
+

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Great Homes Realty</title>
+	 {% load staticfiles %}
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script   src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"   integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="   crossorigin="anonymous"></script>
+	<script src="{% static 'GreatHomesRealty/GreatHomesRealty.js' %}"></script>
+
+</head>
+<style>
+{% load staticfiles %}
+html, body, .main {
+	font-family: serif;
+	margin: 0px auto 0px auto;
+    width: 1140px;
+	padding: 0;
+	background-image: url('{% static "GreatHomesRealty/cork-wallet.png" %}');
+}
+
+.header {
+	height: 300px;
+	text-align: center;
+	box-shadow: 0 2px 2px #ebebeb;
+	background-image: url('{% static "GreatHomesRealty/cork-wallet.png" %}');
+}
+
+.header h1{
+	color: black;
+	font-size: 5.5em;
+	font-style: bold;
+    font-weight: 800;
+	text-align: left;
+	margin-bottom: 30px;
+	position: relative;
+	top: 1em;
+	text-transform: uppercase;
+	font-family: serif;
+}
+
+.header img {
+	margin-top: 20px;
+}
+
+.col-md-12 {
+	display: inline;
+}
+.form-control{
+	padding: 12px 20px 12px 40px;
+	background-color: white;
+	font-size: 16px;
+	margin-top: 30px;
+}
+
+.btn {
+	margin-top: 20px;
+	padding: 5px 45px;
+	text-align: center;
+	background-color: rgb(139, 211, 157);
+}
+
+#menu {
+	border-width: 0px;
+}
+header {
+	background-color: rgb(55, 150, 239);
+}
+.nav {
+	background-color: white;
+	font-size: 16px;
+	background-attachment: fixed;
+	background-color: rgb(55, 150, 239);
+}
+.nav ul{
+	margin: 20px 20px;
+	text-align: center;
+	font-weight: 600;
+	font-size: 20px;
+	border: none;
+	font-family: serif;
+	background-color: rgb(55, 150, 239);
+}
+
+.nav li{
+	-webkit-transition:color .25s;
+	transition: color .25s;
+	color: black;
+	display: inline-block;
+	margin: 20px 20px 0px 20px;
+	
+}
+.nav li ul {
+	background-color: white;
+}
+.nav li li {
+	display: block;
+	text-align: left;
+	background-color: white;
+}
+
+.nav li {
+	color: black;
+	text-transform: uppercase;
+	padding-right: 20px;
+}
+
+.nav li:hover {
+	color: white;
+	font-style: bold;
+	cursor pointer;
+	-webkit-transition: color .25s;
+  	transition: color .25s;
+}
+
+
+.support2 {
+	background: rgb(255, 56, 56);
+	color: white;
+	height: 180px;
+}
+
+.support2 a{
+	text-decoration: none;
+	color: white;
+}
+
+.support2 h1 {
+	position: relative;
+	top: 50px;
+}
+.support {
+	height: 400px;
+	background-color: white;
+}
+.support h5 {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	text-align: center;
+	background-color: white;
+	color: rgb(109, 109, 109);
+	line-height: 30px;
+	text-decoration: none;
+	font-size: 15px;
+}
+.footer {
+	background-color: black;
+	color: white;
+}
+.footer h4 {
+	color: white;
+	padding-top: 20px;
+}
+.footer h5{
+	color: white;
+	padding-bottom: 20px;
+}
+.footer ul{
+	padding-top: 20px;
+	text-align: center;
+}
+.footer .col-md-9 li{
+	display: inline-block;
+	margin: 20px 20px 0px 20px;
+	color: white;
+}
+</style>
+<body>
+	<header>
+	<div class = "nav">
+		<div class = "container">
+			<div class = "row">
+			<div class = "col-xs-12">
+			<ul id = "menu">
+				<li><div>Home</div></li>
+				<li><div>Buying</div>
+					<ul>
+			            <li><div><a href="#">First Time Homebuyer</a></div></li>
+			            <li><div><a href="#">Repeat Buyer</a></div></li>
+			            <li><div><a href="#">Choosing A Qualified Mortgage Adviser</a></div></li>
+			            <li><div><a href="#">New Construction</a></div></li>
+          			</ul>  
+				</li>
+				<li><div>Selling</div>
+					<ul>
+			            <li><div><a href="#">Selling</a></div></li>
+			            <li><div><a href="#">Home Evaluation</a></div></li>
+			            <li><div><a href="#">Staging Your Home</a></div></li>
+			            <li><div><a href="#">Marketing Your Home</a></div></li>
+			            <li><div><a href="#">Home Inspection</a></div></li>
+			            <li><div><a href="#">Home Appraisal</a></div></li>
+			            <li><div><a href="#">Moving Truck</a></div></li>
+          			</ul></li>
+				<li><div>Home Search</div></li>
+				<li><div>Team</div></li>
+				<li><div>About Us</div></li>
+			</ul>
+			</div>
+			</div>
+		</div>
+	</div>
+	</header>
+
+	<div class = "header">
+		<div class = "container">
+			<div class = "row">
+				<div class = "col-xs-12">
+					<h1>Great Homes Realty</h1>
+				</div>
+			</div>	
+		</div>
+	</div>
+
+	<div class = "main">
+		<div class = "container">
+			<div class = "row">
+				<div class = "col-md-4">
+					
+					<img src = "http://i.imgur.com/s88fME8.jpg" width = "300">
+					
+					<h4>Columbia, MD</h4>
+					<p>$475,000</p>   
+
+				</div>
+				<div class = "col-md-4">
+					<img src = "http://i.imgur.com/s88fME8.jpg" width = "300">
+					
+					<h4>Columbia, MD</h4>
+					<p>$475,000</p>   
+					
+				</div>
+				<div class = "col-md-4">
+					<img src = "http://www.helpshop.com/c/wp-content/uploads/2009/01/renthomesorcondos.jpg" width = "300">
+					
+					<h4>Columbia, MD</h4>
+					<p>$475,000</p>   
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class = "support2">
+		<div class = "container">
+			<div class = "row">
+				<div class = "col-md-4">
+					<h1><a href= "#">Sell Your Home<a></h1>
+				</div>
+				<div class = "col-md-4">
+					<h1><a href= "#">Buy a Home<a></h1>
+				</div>
+				<div class = "col-md-4">
+					<h1><a href= "#">Contact Us<a></h1>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class = "support">
+		<div class = "container">
+			<h5> Great Homes Realty prides itself on going above and beyond the typical services offered by most other real estate agents. Life is busy, your time is precious and you need Sales Agents who can work with your schedule.
+
+With decades of experience and countless number of sales and purchases, it is our goal to handle every aspect of the sale or purchase of your home with the utmost professionalism and to provide the best customer service possible. Because we represent both buyers and sellers, we know what it takes to achieve the best possible results for you, in the shortest period of time - no matter what your price range. We offer a Team of highly trained, full-time professional Maryland Real Estate Agents waiting to assist you.
+
+For information about any of our properties, selling your home, or questions about our Team, please do not hesitate to contact us today. </h5>
+		</div>
+	</div>
+
+	<div class = "footer">
+		<div class = "container">
+			<div class = "row">
+				<div class = "col-md-3">
+			<h4>Broker: Bill Yu</h4>
+			<h5>Cell: (410)-984-6661 <br>
+			Email: BillYu99@Gmail.com <br>
+			9822 Tenney Ct <br> Ellicott City, MD 21042 </h5>
+		</div>
+				<div class = "col-md-9">
+					<ul>
+				<li><a href = "#">Home<a></li>
+				<li><a href = "#">Buying<a></li>
+				<li><a href = "#">Selling<a></li>
+				<li><a href = "#">Home Search<a></li>
+				<li><a href = "#">Team<a></li>
+				<li><a href = "#">About Us<a></li>
+			</ul>
+			</div>
+		</div>
+		</div>
+	</div>
+</body>
+</html>

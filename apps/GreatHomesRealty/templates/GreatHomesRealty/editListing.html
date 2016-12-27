@@ -1,0 +1,320 @@
+<html>
+<head>
+	<title>Edit Listing</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<link rel="stylesheet" type="text/css" href="{% static 'GreatHomesRealty/ionicons.min.css' %}">
+</head>
+<style>
+	body {
+		font-family: serif;
+	}.header {
+		background-image: linear-gradient(rgba(0, 0, 0, 0.83), rgba(0, 0, 0, 0.45));
+		height: 10em;
+		color: white;
+		text-align: right;
+		font-family: serif;
+	}
+	.header h1 {
+		display: inline-block;
+		position: relative;
+		right: 4.05em;
+		top: .15em;
+		font-size: 3em;
+		font-family: serif;
+	}
+	.header ul {
+		list-style: none;
+	}
+	.header ul li {
+		display: inline-block;
+		font-size: 1.2em;
+		padding-right: 1%;
+		padding-left: 1%;
+		border-right: 2px solid white;
+		position: relative;
+		right: 1.5em;
+		top: .4em;
+	}
+	.header ul li:last-child {
+		border-right: none;
+	}
+	.header a {
+		color: white;
+	}
+	.ion-ios-home {
+		font-size: 1.5em;
+		position: relative;
+	}
+	header ul {
+		list-style-type: none;
+		display: inline-block;
+		width: 99%;
+	}
+	header ul li {
+		display: inline-block;
+		margin-left: 2%;
+		margin-top: 1.5%;
+		font-size: 1.5em;
+		color: white;
+	}
+	header li a {
+		font-size: .9em;
+		color: rgb(55, 150, 239);
+	}
+	header {
+		background-color: rgb(1, 49, 94);
+		color: white;
+	}
+	body {
+		background-image: url('{% static "GreatHomesRealty/new_year_background.png" %}');
+		font-family: serif;
+		background-color: rgb(237, 246, 255);
+	}
+	.error {
+		color: red;
+		margin-left: 15em;
+	}
+
+	.footer {
+		background-image: linear-gradient(rgba(0, 0, 0, .65), rgba(0, 0, 0, .85));
+		height: 15em;
+		color: white;
+		font-family: sans-serif;
+		font-weight: 100;
+		margin-top: 1%;
+	}
+	.footer address {
+		margin-top: 18%;
+		font-size: 1.1em;
+	}
+	.footerlist ul {
+		margin-left: 21%;
+	}
+	.footerlist li { 
+		display: inline-block;
+		margin-top: 13%;
+		margin-right: 5%;
+		font-size: 1.1em;
+	}
+	.footerlist li a {
+		color: white
+	}
+	.social-media {
+		margin: 0px;
+	}
+	.social-media li {
+		margin: 0px;
+		margin-right: 4%;
+		color: white;
+		position: relative;
+		left: 65%;
+		top: .7em;
+		font-size: 1.5em;
+	}
+</style>
+<body>
+	{% if request.session.login > 0 %}
+	<header>
+		<ul>
+			<li><a href="{%url 'GreatHomes:index' %}">HomePage</a></li>
+			<li><a href="{%url 'UserDashboard:index' %}">DashBoard</a></li>
+			<li><a href="{%url 'UserDashboard:editProfileDisplay' %}">Edit Profile</a></li>
+			<li><a href="{%url 'GreatHomes:showAgentListing' id=request.session.login %}">Your Profile</a></li>
+			<li><a href="{%url 'GreatHomes:showAllListing' %}">Listings</a></li>
+			<li><a href="{%url 'GreatHomes:addListingDisplay' %}">Add Listing</a></li>
+		{% if user.user_level == "Admin" %}
+			<li><a href="{%url 'UserDashboard:createDisplay' %}">Add New Agent</a></li>
+		{% endif %}
+			<li><a href="{%url 'UserDashboard:logout' %}">Log Off</a></li>
+		</ul>
+	</header>
+	{% endif %}
+	<div class = "header">
+		<div class = "row">
+			<div class = "col-md-12 col-xs-6">
+				<ul>
+					<h1><i class = "ion-ios-home"></i> <a href="{%url 'GreatHomes:index' %}">Great Homes Realty</a></h1>
+					<li><a href="{%url 'GreatHomes:showAllListing' %}">More Listings</a></li>
+					<li>Buying</li>
+					<li>Selling</li>
+					<li>About Us</li>
+					<li><a href="{%url 'GreatHomes:suscribeDisplay' %}">Newsfeed</a></li>
+					<li><a href="{%url 'login:index' %}">Login</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class = "container">
+	<form action="{%url 'GreatHomes:editListing' id=listing.id %}" method='post' class = "form-horizontal">
+         {% csrf_token %}
+          <h1>Edit Listing</h1>
+          {% if allInputLengths %}
+            <p class = 'error'> {{ allInputLengths }} </p>
+          {% endif %}
+          <div class = "form-group">
+            <label for ="streetAddress" class="col-sm-2 control-label">Street Address:</label>
+            <div class = "col-sm-6">
+              <input type='text' class = "form-control" name='streetAddress' id = "streetAddress" value = "{{listing.addressStreet}}" > 
+            </div>
+          </div>
+          <div class = "form-group">
+            <label for ="suite" class="col-sm-2 control-label">Apt/Suite #:</label>
+            <div class = "col-sm-6">
+              <input type='text' class = "form-control" name='suite' id = "suite" value = "{{listing.addressAptNumber}}"> 
+            </div>
+          </div>
+          <div class = "form-group">
+            <label for ="city" class="col-sm-2 control-label">City:</label>
+            <div class = "col-sm-6">
+              <input type='text' class = "form-control" name='city' id = "city" value = "{{listing.addressCity}}"> 
+            </div>
+          </div>
+           <div class = "form-group">
+            <label for ="state" class="col-sm-2 control-label">State:</label>
+            <div class = "col-sm-6">
+              <input type='text' class = "form-control" name='state' id = "state" value = "{{listing.addressState}}"> 
+            </div>
+          </div>
+           <div class = "form-group">
+            <label for ="zipcode" class="col-sm-2 control-label">Zip Code:</label>
+            <div class = "col-sm-6">
+              <input type='text' class = "form-control" name='zipcode' id = "zipcode" value = "{{listing.addressZipcode}}"> 
+            </div>
+          </div>
+          <div class = "form-group">
+	          <label for = "MLS" class = "col-sm-2 control-label">MLS number:</label>
+	          <div class = "col-sm-6">
+	            <input type='number' name='mls' class = "form-control" id = "mls" value = "{{listing.MLS}}">
+          </div>
+     	 </div>
+          <div class = "form-group">
+            <label for = "price" class = "col-sm-2 control-label">Price: </label>
+            <div class = "col-sm-6">
+              <input type='number' name='price' class = "form-control" id = "price" value = "{{listing.price}}" >
+            </div>
+          </div>
+         <div class = "form-group">
+            <label for = "bedrooms" class = "col-sm-2 control-label">Bedrooms: </label>
+             <div class = "col-sm-6">
+	         <select value = "{{listing.bedrooms}}" name = "bedrooms" class="form-control" id = "bedrooms">
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
+				<option>5</option>
+				<option>6</option>
+				<option>7</option>
+				<option>8</option>
+			</select>
+			<p>Previous: {{listing.bedrooms}}</p>
+			</div>
+         </div>
+          <div class = "form-group">
+            <label for = "bathrooms" class = "col-sm-2 control-label">Bathrooms: </label>
+             <div class = "col-sm-6">
+	         <select value = "{{listing.bathrooms}}" class="form-control" id = "bathrooms" name = "bathrooms">
+				<option>1</option>
+				<option>1.5</option>
+				<option>2</option>
+				<option>2.5</option>
+				<option>3</option>
+				<option>3.5</option>
+				<option>4</option>
+				<option>4.5</option>
+				<option>5</option>
+				<option>5.5</option>
+				<option>6</option>
+				<option>6.5</option>
+			</select>
+			<p>Previous: {{listing.bathrooms}}</p>
+			</div>
+         </div>
+        <div class = "form-group">
+          <label for = "squarefootage" class = "col-sm-2 control-label">Square Footage:</label>
+          <div class = "col-sm-6">
+            <input type='number' name='squarefootage' class = "form-control" id = "squarefootage" value = "{{listing.squarefootage}}">
+          </div>
+        </div>
+        <div class = "form-group">
+          <label for = "housetype" class = "col-sm-2 control-label">House Type:</label>
+          <div class = "col-sm-6">
+            <input type='text' name='housetype' class = "form-control" id = "housetype" value = "{{listing.houseType}}">
+          </div>
+        </div>
+        <div class = "form-group">
+          <label for = "county" class = "col-sm-2 control-label">County:</label>
+          <div class = "col-sm-6">
+            <input type='text' name='county' class = "form-control" id = "county"  value = "{{listing.county}}">
+          </div>
+        </div>
+        <div class = "form-group">
+          <label for = "neighborhood" class = "col-sm-2 control-label">neighborhood:</label>
+          <div class = "col-sm-6">
+            <input type='text' name='neighborhood' class = "form-control" id = "neighborhood" value = "{{listing.neighborhood}}">
+          </div>
+        </div>
+         <div class = "form-group">
+            <label for = "status" class = "col-sm-2 control-label">Status: </label>
+             <div class = "col-sm-6">
+	         <select value = "{{listing.status}}"name = "status" class="form-control" id = "status">
+				<option>Undercontract</option>
+				<option>Available</option>
+				<option>Sold</option>
+				<option>Open House</option>
+			</select>
+			</div>
+         </div>
+		<div class = "form-group">
+          <label for = "neighborhood" class = "col-sm-2 control-label">Year built:</label>
+          <div class = "col-sm-6">
+            <input type='number' name='yearBuilt' class = "form-control" id = "yearBuilt" value = "{{listing.yearBuilt}}">
+          </div>
+        </div>
+         <div class="form-group">
+            <label for="description" class = "col-sm-2 control-label">Edit Description:</label>
+            <div class = "col-sm-8">
+        	<!-- <input type='text' name='description' class = "form-control" id = "description" value = "{{listing.description}}"> -->
+            <textarea class="form-control" rows="6" name="description" id="description" value = "{{listing.description}}"></textarea>
+            <p>{{listing.description}}</p>
+            <input rows="5" type='submit' value='Edit Listing' class = "btn btn-primary">
+           </div>
+         </div>
+        </form>
+       </div>
+
+
+	<div class = "footer">
+		<div class = "container">
+			<div class = "row">
+				<div class = "col-md-3">
+				<address>
+				Principal Broker: Bill Yu<br>
+				Cell: (410)-984-6661<br>
+				Email: BillYu99@gmail.com <br>
+				9822 Tenney Ct <br> Ellicott City, MD 21042
+				</address>
+				</div>
+				<div class = "col-md-9 footerlist">
+				<ul>
+					<li><a href = "#">Home<a></li>
+					<li><a href = "#">Buying<a></li>
+					<li><a href = "#">Selling<a></li>
+					<li><a href = "#">Home Search<a></li>
+					<li><a href = "#">Team<a></li>
+					<li><a href = "#">About Us<a></li>
+				</ul>
+				<ul class = "social-media">
+					<li><i class = "ion-social-instagram"></i></li>
+					<li><i class = "ion-social-facebook"></i></li>
+					<li><i class = "ion-social-twitter"></i></li>
+					<li><i class = "ion-social-googleplus"></i></li>
+				</ul>	
+			</div>
+		</div>
+		</div>
+	</div>
+</body>
+</html>

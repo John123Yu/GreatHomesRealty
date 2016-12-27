@@ -1,0 +1,133 @@
+<html>
+<head>
+	<title>User_Dashboard</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<style>
+	{% load staticfiles %}
+	.header {
+		background-image: linear-gradient(rgba(0, 0, 0, 0.83), rgba(0, 0, 0, 0.45));
+		height: 8em;
+		color: white;
+		text-align: right;
+	}
+	.header h1 {
+		display: inline-block;
+		position: relative;
+		right: 5.25em;
+		top: .15em;
+		font-size: 3.5em;
+	}
+	.header ul {
+		list-style: none;
+	}
+	.header ul li {
+		display: inline-block;
+		font-size: 1.5em;
+		margin-right: 1em;
+		position: relative;
+		right: 1.5em;
+	}
+	body {
+		background-image: url('{% static "UserDashboard/congruent_pentagon.png" %}');
+	}
+	header ul {
+		list-style-type: none;
+		display: inline-block;
+		width: 99%;
+	}
+	header ul li {
+		display: inline-block;
+		margin-left: 2%;
+		margin-top: 1.5%;
+		font-size: 1.5em;
+		color: white;
+	}
+	header li a {
+		font-size: .9em;
+		color: rgb(55, 150, 239);
+	}
+	header {
+		background-color: rgb(1, 49, 94);
+		color: white;
+	}
+	.Manage {
+		display: inline-block;
+	}
+	a {
+		color: rgb(55, 150, 239);
+	}
+	#removeUser {
+		display: inline-block;
+		margin-left: 2%;
+	}
+</style>
+<body>
+	{% if request.session.login > 0 %}
+	<header>
+		<ul>
+			<li><a href="{%url 'GreatHomes:index' %}">HomePage</a></li>
+			<li><a href="{%url 'UserDashboard:index' %}">DashBoard</a></li>
+			<li><a href="{%url 'UserDashboard:editProfileDisplay' %}">Edit Profile</a></li>
+			<li><a href="{%url 'GreatHomes:showAgentListing' id=request.session.login %}">Your Profile</a></li>
+			<li><a href="{%url 'GreatHomes:showAllListing' %}">Listings</a></li>
+			<li><a href="{%url 'GreatHomes:addListingDisplay' %}">Add Listing</a></li>
+		{% if user.user_level == "Admin" %}
+			<li><a href="{%url 'UserDashboard:createDisplay' %}">Add New Agent</a></li>
+		{% endif %}
+			<li><a href="{%url 'UserDashboard:logout' %}">Log Off</a></li>
+		</ul>
+	</header>
+	{% endif %}
+
+	<div class = "col-sm-4">
+		<h2 class = "Manage">Company Agents</h2>
+	</div>
+
+	<div class = "table-responsive col-sm-12">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Created At</th>
+				<th>User Level</th>
+				<th>Actions</th>
+			</tr>	
+		</thead>
+		<tbody>
+			{% for user in users %}
+			<tr>
+				<td>{{user.id}}</td>
+				<td><a href="{%url 'GreatHomes:showAgentListing' id=user.id %}">{{user.firstName}} {{user.lastName}}</a></td>
+				<td>{{user.email}}</td>
+				<td>{{user.created_at}}</td>
+				<td>{{user.user_level}}</td>
+			{% if activeUser.user_level == "Admin" %}
+				<td class = "td-buttons"><a class = "btn btn-success" href="{%url 'UserDashboard:adminEdit' id=user.id %}">Edit</a><form id="removeUser" action = "{%url 'login:removeUser' id=user.id %}">
+				{% csrf_token %}
+				 <button class = "btn btn-danger"
+				 onclick="return myFunction()">Remove</button>
+				</form></td>
+			{% endif %}
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	</div>
+</body>
+<script type="text/javascript">
+	function myFunction() {
+	    if (confirm("Are you sure you want to remove user? ") == true) {
+	    	document.getElementById('removeUser').submit();
+		    }
+	    else {
+        	return false;
+        	alert("nope");
+	  	}
+	}
+</script>
+</html>

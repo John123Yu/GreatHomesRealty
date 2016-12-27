@@ -1,0 +1,411 @@
+<html>
+<head>
+	<title>Newsfeed</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'GreatHomesRealty/ionicons.min.css' %}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+	<style>
+	body {
+		text-align: left;
+		background-image: url('{% static "GreatHomesRealty/contemporary_china.png" %}');
+	}
+	.form-control {
+		margin-bottom: 15px;
+	}
+	p {
+		color: rgb(12, 0, 147);
+	}
+	h2 {
+		margin-bottom: 3%;
+		font-size: 2.5em;
+		color: rgb(52, 53, 226);
+	}
+	h4 {
+		margin-top: 20%;
+		color: rgb(52, 53, 226);
+		margin-bottom: 4%;
+	}
+	.suscribe {
+		margin-top: 8%;
+	}
+	.container {
+		text-align: left;
+	}
+	.logout {
+		text-align: right;
+		margin-right: 100px;
+	}
+	.message {
+		font-size: 18px;
+		font-weight: bold;
+		margin: 0px;
+		color: black;
+	}
+	.message1 {
+		font-size: 16px;
+		margin-top: 0px;
+		margin-bottom: 10px;
+		color: black;
+		margin-bottom: 5%;
+	}
+	.userlist {
+		list-style-type: none;
+		text-align: left;
+		margin-left: 20%;
+		font-size: 18px;
+		color: black;
+	}
+	.header {
+		background-image: linear-gradient(rgba(0, 0, 0, 0.83), rgba(0, 0, 0, 0.45));
+		height: 10em;
+		color: white;
+		text-align: right;
+		font-family: serif;
+	}
+	.header h1 {
+		display: inline-block;
+		position: relative;
+		right: 4.05em;
+		top: .15em;
+		font-size: 3em;
+		font-family: serif;
+	}
+	.header ul {
+		list-style: none;
+	}
+	.header ul li {
+		display: inline-block;
+		font-size: 1.2em;
+		padding-right: 1%;
+		padding-left: 1%;
+		border-right: 2px solid white;
+		position: relative;
+		right: 1.5em;
+		top: .4em;
+	}
+	.header ul li:last-child {
+		border-right: none;
+	}
+	.header a {
+		color: white;
+	}
+	.ion-ios-home {
+		font-size: 1.5em;
+		position: relative;
+	}
+	header ul {
+		list-style-type: none;
+		display: inline-block;
+		width: 99%;
+	}
+	header ul li {
+		display: inline-block;
+		margin-left: 2%;
+		margin-top: 1.5%;
+		font-size: 1.5em;
+		color: white;
+	}
+	header li a {
+		font-size: .9em;
+		color: rgb(55, 150, 239);
+	}
+	header {
+		background-color: rgb(1, 49, 94);
+		color: white;
+	}
+	.Manage {
+		display: inline-block;
+	}
+	.ion-ios-lightbulb-outline {
+		color: black;
+	}
+	.newsfeed {
+		margin-top: 2%;
+	}
+	.form-group {
+		margin-bottom: 0px;
+	}
+	.form-control {
+		margin-bottom: 0px;
+	}
+	.last-control {
+		margin-bottom: 8px;
+	}
+	label {
+		margin-bottom: 0px;
+		margin-top: 0px;
+	}
+	strong {
+		color: blue;
+	}
+	.error {
+		color: red;
+		margin-bottom: 0px;
+		margin-left: -7%;
+	}
+
+	.footer {
+		background-image: linear-gradient(rgba(0, 0, 0, .65), rgba(0, 0, 0, .85));
+		height: 15em;
+		color: white;
+		font-family: sans-serif;
+		font-weight: 100;
+		margin-top: 2%;
+	}
+	.footer address {
+		margin-top: 18%;
+		font-size: 1.1em;
+	}
+	.footerlist ul {
+		margin-left: 21%;
+	}
+	.footerlist li { 
+		display: inline-block;
+		margin-top: 13%;
+		margin-right: 5%;
+		font-size: 1.1em;
+	}
+	.footerlist li a {
+		color: white
+	}
+	.social-media {
+		margin: 0px;
+	}
+	.social-media li {
+		margin: 0px;
+		margin-right: 4%;
+		color: white;
+		position: relative;
+		left: 65%;
+		top: .7em;
+		font-size: 1.5em;
+	}
+	</style>
+<body>
+	{% if request.session.login > 0 %}
+	<header>
+		<ul>
+			<li><a href="{%url 'GreatHomes:index' %}">HomePage</a></li>
+			<li><a href="{%url 'UserDashboard:index' %}">DashBoard</a></li>
+			<li><a href="{%url 'UserDashboard:editProfileDisplay' %}">Edit Profile</a></li>
+			<li><a href="{%url 'GreatHomes:showAgentListing' id=request.session.login %}">Your Profile</a></li>
+			<li><a href="{%url 'GreatHomes:showAllListing' %}">Listings</a></li>
+			<li><a href="{%url 'GreatHomes:addListingDisplay' %}">Add Listing</a></li>
+		{% if user.user_level == "Admin" %}
+			<li><a href="{%url 'UserDashboard:createDisplay' %}">Add New Agent</a></li>
+		{% endif %}
+			<li><a href="{%url 'UserDashboard:logout' %}">Log Off</a></li>
+		</ul>
+	</header>
+	{% endif %}
+	<div class = "header">
+		<div class = "row">
+			<div class = "col-md-12 col-xs-6">
+				<ul>
+					<h1><i class = "ion-ios-home"></i> <a href="{%url 'GreatHomes:index' %}">Great Homes Realty</a></h1>
+					<li><a href="{%url 'GreatHomes:showAllListing' %}">More Listings</a></li>
+					<li>Buying</li>
+					<li>Selling</li>
+					<li>About Us</li>
+					<li><a href="{%url 'GreatHomes:suscribeDisplay' %}">Newsfeed</a></li>
+					<li><a href="{%url 'login:index' %}">Login</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+
+	<div class = "container main-message">
+ 		<div class = "row">
+ 			<div class = "newsfeed col-sm-8">
+ 				<h2><i class = "ion-ios-lightbulb-outline"></i> Newsfeed From The Broker </h2>
+			  	{% for message in all_messages %}
+			   <p class = "message"> <strong>{{message.subject}}</strong> {{ message.created_at }}</p>
+			   <p class = "message1">{{ message.message}}</p>
+			   {% if Admin.user_level == "Admin" %}
+			   <form class = "deleteMessage" action = "{% url 'UserDashboard:deleteMessage' id=message.id %}" method = 'POST'>
+			   	{% csrf_token %}
+			   	 	<input type="submit" class = "btn btn-danger" value="Delete Message">
+			   </form>
+			   	<form action="{% url 'GreatHomes:suscriptionEmail' %}" method='POST'>
+					{% csrf_token %}
+					<input type = "hidden" name = "message" value = "{{message.message}}" >
+					<input type = "hidden" name = "subject" value = "{{message.subject}}" >
+				    <input type="submit" class = "btn btn-success" value="Send Mass Email">
+			  	</form>
+			  	<form action="{% url 'GreatHomes:displaySubscribers' %}" method='POST'>
+					{% csrf_token %}
+				    <input type="submit" class = "btn btn-primary" value="View subscribers">
+			  	</form>
+			   {% endif %}
+			   	{% endfor %}
+			</div>
+
+			<div class = "col-sm-offset-1 col-sm-3 suscribeAjax">
+				<h4>Interested In Learning About Real Estate And Real Estate Investing?</h4>
+			<form action="" method='post' class = "suscribe form-horizontal">
+		<div class = "suscribeAjaxCut">
+	        {% csrf_token %}
+	        {% if allInputLengths %}
+	        	<p class = "error">{{ allInputLengths }}</p>
+	        {% endif %}
+	        {% if IsAlpha %}
+	        	<p class = "error">{{ IsAlpha }}</p>
+	        {% endif %}
+	        <div class = "form-group">
+	            <div class = "">
+	            <label for = "first_name" class = "control-label">First Name:</label>
+	              <input type='text' name='first_name' class = "form-control" id = "first_name" placeholder = "First Name">
+	            </div>
+	          </div>
+	          <div class = "form-group">
+	            <div class = "">
+	            <label for = "last_name" class = "control-label">Last Name:</label>
+	              <input type='text' name='last_name' class = "form-control" id = "last_name" placeholder = "Last Name">
+	            </div>
+	          </div>
+	          {% if InvalidEmail %}
+	          	<p class = "error">{{InvalidEmail}}</p>
+	          {% endif %}
+	           {% if EmailDuplicate %}
+	        	<p class = "error">{{ EmailDuplicate }}</p>
+	       		{% endif %}
+	        <div class = "form-group">
+	          <div class = "">
+	          <label for = "email" class = "control-label">Your Email:</label>
+	            <input type='text' name='email' class = "form-control last-control" id = "email" placeholder = "Email">
+	          </div>
+	        </div>
+	    </div>
+	          <div class="form-group">
+	            <label for="submit" class=""></label>
+	            <div class = "">
+	            <input id = "submit" type='submit' value='Suscribe!' class = "btn btn-warning">
+	           </div>
+	         </div>
+		    </form> 
+
+			<form action="" method='post' class = "unsuscribe form-horizontal">
+        <div class = "unsuscribeAjax">
+	        {% csrf_token %}
+	         {% if NoEmail %}
+	        	<p class = "error">{{ NoEmail }}</p>
+	       	{% endif %}
+	        <div class = "form-group">
+	          <div class = "">
+	          <label for = "email" class = "control-label">Your Email:</label>
+	            <input type='text' name='email' class = "form-control last-control" id = "email" placeholder = "Email">
+	          </div>
+	        </div>
+	    </div>
+	          <div class="form-group">
+	            <label for="submit" class=""></label>
+	            <div class = "">
+	            <input id = "submit" type='submit' value='Unsuscribe' class = "btn btn-warning">
+	           </div>
+	         </div>
+		    </form> 
+		</div>
+		</div>
+	</div>
+
+	{% if Admin.user_level == "Admin" %}
+	<div class = "container">
+		<div class = "row">
+			<div class = "col-sm-8">
+				<form class = "formPostMessage" action="{% url 'UserDashboard:postMessage' %}" method='POST'>
+					{% csrf_token %}
+					<div class = "form-group">
+			          <div class = "">
+			          <label for = "subject" class = "control-label">Subject:</label>
+			            <input type='text' name='subject' class = "form-control last-control" id = "subject" placeholder = "subject">
+			          </div>
+			        </div>
+					<textarea class = "form-control" rows = "3" name = "message"></textarea>
+				    <input type="submit" class = "btn btn-success" value="Post">
+			  	</form>
+	  		</div>
+	  	</div>
+ 	</div>
+ 	{% endif %}
+
+
+	<div class = "footer">
+		<div class = "container">
+			<div class = "row">
+				<div class = "col-md-3">
+				<address>
+				Principal Broker: Bill Yu<br>
+				Cell: (410)-984-6661<br>
+				Email: BillYu99@gmail.com <br>
+				9822 Tenney Ct <br> Ellicott City, MD 21042
+				</address>
+				</div>
+				<div class = "col-md-9 footerlist">
+				<ul>
+					<li><a href = "#">Home<a></li>
+					<li><a href = "#">Buying<a></li>
+					<li><a href = "#">Selling<a></li>
+					<li><a href = "#">Home Search<a></li>
+					<li><a href = "#">Team<a></li>
+					<li><a href = "#">About Us<a></li>
+				</ul>
+				<ul class = "social-media">
+					<li><i class = "ion-social-instagram"></i></li>
+					<li><i class = "ion-social-facebook"></i></li>
+					<li><i class = "ion-social-twitter"></i></li>
+					<li><i class = "ion-social-googleplus"></i></li>
+				</ul>	
+			</div>
+		</div>
+		</div>
+	</div>
+
+</body>
+<script type="text/javascript">  
+  $('.formPostMessage').on('submit', function(e){
+    e.preventDefault()
+    $.ajax({
+      url: 'UserDashboard/postMessage',
+      method: 'post',
+      data: $(this).serialize(),
+      success: function(serverResponse){
+      	console.log('post')
+        $('.newsfeed').html(serverResponse)
+      }
+    })
+    $('.formPostMessage').trigger('reset')
+  });
+
+
+  $('.suscribe').on('submit', function(e){
+    e.preventDefault()
+    $.ajax({
+      url: '/suscribe',
+      method: 'POST',
+      data: $(this).serialize(),
+      success: function(serverResponse){
+        $('.suscribeAjaxCut').html(serverResponse)
+      }
+    })
+    $('.suscribe').trigger('reset')
+  });
+
+  $('.unsuscribe').on('submit', function(e){
+    e.preventDefault()
+    $.ajax({
+      url: '/unsuscribe',
+      method: 'post',
+      data: $(this).serialize(),
+      success: function(serverResponse){
+        $('.unsuscribeAjax').html(serverResponse)
+      }
+    })
+    $('.unsuscribe').trigger('reset')
+  });
+
+</script>
+</html>

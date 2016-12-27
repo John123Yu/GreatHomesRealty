@@ -1,0 +1,157 @@
+<html>
+    <head>
+        <title>Admin Edit </title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    </head>
+    <style>
+    {% load staticfiles %}
+    .error {
+      color:red;
+      margin-left: 200px;
+    }
+    .green {
+      color: green;
+    }
+    .btn {
+      margin-top: 15px;
+    }
+    h1 {
+      margin-left: 50px;
+    }
+    body {
+    background-image: url('{% static "LoginAndReg/seigaiha.png" %}');
+    }
+    ul {
+      list-style-type: none;
+      display: inline-block;
+      width: 70%;
+    }
+    li {
+      display: inline-block;
+      margin-left: 5%;
+      margin-top: 1.5%;
+      font-size: 1.5em;
+    }
+    a {
+      color: rgb(55, 150, 239);
+    }
+    header ul {
+      list-style-type: none;
+      display: inline-block;
+      width: 99%;
+    }
+    header ul li {
+      display: inline-block;
+      margin-left: 2%;
+      margin-top: 1.5%;
+      font-size: 1.5em;
+      color: white;
+    }
+    header li a {
+      font-size: .9em;
+      color: rgb(55, 150, 239);
+    }
+    header {
+      background-color: rgb(1, 49, 94);
+      color: white;
+    }
+    .Manage {
+      display: inline-block;
+    }
+</style>
+    <body>
+  {% if request.session.login > 0 %}
+  <header>
+    <ul>
+      <li><a href="{%url 'GreatHomes:index' %}">HomePage</a></li>
+      <li><a href="{%url 'UserDashboard:index' %}">DashBoard</a></li>
+      <li><a href="{%url 'UserDashboard:editProfileDisplay' %}">Edit Profile</a></li>
+      <li><a href="{%url 'GreatHomes:showAgentListing' id=request.session.login %}">Your Profile</a></li>
+      <li><a href="{%url 'GreatHomes:showAllListing' %}">Listings</a></li>
+      <li><a href="{%url 'GreatHomes:addListingDisplay' %}">Add Listing</a></li>
+    {% if user.user_level == "Admin" %}
+      <li><a href="{%url 'UserDashboard:createDisplay' %}">Add New Agent</a></li>
+    {% endif %}
+      <li><a href="{%url 'UserDashboard:logout' %}">Log Off</a></li>
+    </ul>
+  </header>
+  {% endif %}
+      <form action="{%url 'login:updateInfo' id=User.id %}" method='post' class = "form-horizontal">
+        {% csrf_token %}
+          <h1> Edit {{User.firstName}}'s Information</h1>
+          {% if error_messages.TwoCharacters %}
+            <p class = 'error'> {{ error_messages.TwoCharacters }} </p>
+          {% endif %}
+          {% if error_messages.IsAlpha %}
+            <p class = 'error'> {{ error_messages.IsAlpha }} </p>
+          {% endif %}
+          <div class = "form-group">
+            <label for ="first_name" class="col-sm-2 control-label">First Name:</label>
+            <div class = "col-sm-6">
+              <input type='text' class = "form-control" name='first_name' id = "first_name" value = "{{User.firstName}}" "First Name"> 
+            </div>
+          </div>
+          <div class = "form-group">
+            <label for = "last_name" class = "col-sm-2 control-label">Last Name:</label>
+            <div class = "col-sm-6">
+              <input type='text' name='last_name' class = "form-control" id = "last_name" value = "{{User.lastName}}">
+            </div>
+          </div>
+          {% if error_messages.EmailRequired %}
+            <p class = 'error'> {{ error_messages.EmailRequired }} </p>
+          {% endif %}
+          {% if error_messages.InvalidEmail %}
+            <p class = 'error'> {{ error_messages.InvalidEmail }} </p>
+          {% endif %}
+          {% if error_messages.EmailDuplicate %}
+            <p class = 'error'> {{ error_messages.EmailDuplicate }} </p>
+          {% endif %}
+        <div class = "form-group">
+          <label for = "email" class = "col-sm-2 control-label">Email:</label>
+          <div class = "col-sm-6">
+            <input type='text' name='email' class = "form-control" id = "email" value = "{{User.email}}">
+          </div>
+        </div>
+        {% if error_messages.InvalidPhone %}
+            <p class = 'error'> {{ error_messages.InvalidPhone }} </p>
+        {% endif %}
+        <div class = "form-group">
+          <label for = "phone" class = "col-sm-2 control-label">Phone Number: (XXX)-XXX-XXXX </label>
+          <div class = "col-sm-6">
+            <input type='text' name='phone' class = "form-control" id = "phone" value = "{{User.phone}}">
+            <input type='submit' value='Save' class = "btn btn-warning">
+          </div>
+        </div>
+      </form>
+
+     <form action="{%url 'login:updatePassword' id=User.id%}" method='post' class = "form-horizontal">
+      {% csrf_token %}
+         {% if error_messages.PasswordRequired %}
+            <p class = 'error'> {{ error_messages.PasswordRequired }} </p>
+          {% endif %}
+          {% if error_messages.PasswordLength %}
+            <p class = 'error'> {{ error_messages.PasswordLength }} </p>
+          {% endif %}
+          {% if error_messages.InvalidPassword %}
+            <p class = 'error'> {{ error_messages.InvalidPassword }} </p>
+          {% endif %}
+          {% if error_messages.PasswordNonmatch %}
+            <p class = 'error'> {{ error_messages.PasswordNonmatch }} </p>
+          {% endif %}
+        <div class = "form-group">
+          <label for = "password" class = "col-sm-2 control-label">Password:</label>
+          <div class = "col-sm-6">
+            <input type='password' name='password' class = "form-control" id = "password" placeholder = "Password">
+          </div>
+        </div>
+        <div class = "form-group">
+          <label for = "confirmpassword" class = "col-sm-2 control-label">Confirm Password:</label>
+          <div class = "col-sm-6">
+            <input type='password' name='confirm_password' class = "form-control" id = "confirmpassword"placeholder = "Password">
+            <input type='submit' value='Update Password' class = "btn btn-warning">
+          </div>
+        </div>
+        </form>
+    </body>
+</html>

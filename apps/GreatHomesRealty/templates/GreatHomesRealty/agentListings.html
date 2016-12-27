@@ -1,0 +1,190 @@
+<html>
+<head>
+	<title></title>
+	{% load staticfiles %}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'GreatHomesRealty/ionicons.min.css' %}">
+</head>
+<style>
+	.header {
+		background-image: linear-gradient(rgba(0, 0, 0, 0.83), rgba(0, 0, 0, 0.45));
+		height: 10em;
+		color: white;
+		text-align: right;
+		font-family: serif;
+		margin-bottom: 3%;
+	}
+	.header h1 {
+		display: inline-block;
+		position: relative;
+		right: 4.05em;
+		top: .15em;
+		font-size: 3em;
+		font-family: serif;
+	}
+	.header ul {
+		list-style: none;
+	}
+	.header ul li {
+		display: inline-block;
+		font-size: 1.2em;
+		padding-right: 1%;
+		padding-left: 1%;
+		border-right: 2px solid white;
+		position: relative;
+		right: 1.5em;
+		top: .4em;
+	}
+	.header ul li:last-child {
+		border-right: none;
+	}
+	.header a {
+		color: white;
+	}
+	.ion-ios-home {
+		font-size: 1.5em;
+		position: relative;
+	}
+	header ul {
+		list-style-type: none;
+		display: inline-block;
+		width: 99%;
+	}
+	header ul li {
+		display: inline-block;
+		margin-left: 2%;
+		margin-top: 1.5%;
+		font-size: 1.5em;
+		color: white;
+	}
+	header li a {
+		font-size: .9em;
+		color: rgb(55, 150, 239);
+	}
+	header {
+		background-color: rgb(1, 49, 94);
+		color: white;
+	}
+	i {
+		font-size: 1.5em;
+		position: relative;
+		top: .1em;
+	}
+	body {
+		background-image: url('{% static "GreatHomesRealty/new_year_background.png" %}');
+	}
+	.profileinfo {
+		margin-bottom: 3%;
+	}
+	.userPicture {
+		margin-top: 5%;
+	}
+
+	.footer {
+		background-image: linear-gradient(rgba(0, 0, 0, .75), rgba(0, 0, 0, .95));
+		height: 15em;
+		color: white;
+		font-family: sans-serif;
+		font-weight: 100;
+	}
+	.footer address {
+		margin-top: 18%;
+		font-size: 1.1em;
+	}
+	.footerlist ul {
+		margin-left: 21%;
+	}
+	.footerlist li { 
+		display: inline-block;
+		margin-top: 13%;
+		margin-right: 5%;
+		font-size: 1.1em;
+	}
+	.footerlist li a {
+		color: white
+	}
+	.social-media {
+		margin: 0px;
+	}
+	.social-media li {
+		margin: 0px;
+		margin-right: 4%;
+		color: white;
+		position: relative;
+		left: 65%;
+		top: .7em;
+		font-size: 1.5em;
+	}
+</style>
+<body>
+	{% if request.session.login > 0 %}
+	<header>
+		<ul>
+			<li><a href="{%url 'GreatHomes:index' %}">HomePage</a></li>
+			<li><a href="{%url 'UserDashboard:index' %}">DashBoard</a></li>
+			<li><a href="{%url 'UserDashboard:editProfileDisplay' %}">Edit Profile</a></li>
+			<li><a href="{%url 'GreatHomes:showAgentListing' id=request.session.login %}">Your Profile</a></li>
+			<li><a href="{%url 'GreatHomes:showAllListing' %}">Listings</a></li>
+			<li><a href="{%url 'GreatHomes:addListingDisplay' %}">Add Listing</a></li>
+		{% if user.user_level == "Admin" %}
+			<li><a href="{%url 'UserDashboard:createDisplay' %}">Add New Agent</a></li>
+		{% endif %}
+			<li><a href="{%url 'UserDashboard:logout' %}">Log Off</a></li>
+		</ul>
+	</header>
+	{% endif %}
+	<div class = "header">
+		<div class = "row">
+			<div class = "col-md-12 col-xs-6">
+				<ul>
+					<h1><i class = "ion-ios-home"></i> <a href="{%url 'GreatHomes:index' %}">Great Homes Realty</a></h1>
+					<li><a href="{%url 'GreatHomes:showAllListing' %}">More Listings</a></li>
+					<li>Buying</li>
+					<li>Selling</li>
+					<li>About Us</li>
+					<li><a href="{%url 'GreatHomes:suscribeDisplay' %}">Newsfeed</a></li>
+					<li><a href="{%url 'login:index' %}">Login</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class = "container">
+		<div class = "row">
+		<div class = "col-md-4">
+			{% if user.picture %}
+			<img class = "userPicture" src="{{user.picture.url}}" style= "width:90%">
+			{% endif %}
+			{% if user.id == request.session.login %}
+	        <form id = "addPicture" class="addPicture" action="{%url 'UserDashboard:addUserImage' id=user.id %}" method="post" enctype="multipart/form-data">
+	          {% csrf_token %}
+	          {{UserImage.as_p}}
+	          <input class = "btn btn-success" type="submit" value="Add Profile Picture">
+	        </form>
+	        {% endif %}
+		</div>
+
+		<div class = "col-md-4">
+			<h2>{{ user.firstName}} {{user.lastName }} </h2>
+			<p><i class = "ion-ios-telephone"></i> Phone: {{user.phone}}</p>
+			<p><i class = "ion-email"></i> Email: {{user.email}}</p>
+		</div>
+		<div class = "col-md-4 col-sm-6 col-xs-8">
+			<h2>Listings</h2>
+	{% for listing in listings %}
+			<p><a href="{%url 'GreatHomes:showListing' id=listing.listing.id %}">{{listing.listing.addressStreet}} <br> {{listing.listing.addressCity}}, {{listing.listing.addressState}}. {{listing.listing.addressZipcode}}</a></p>
+	{% endfor %}
+		</div>
+		</div>
+	</div>
+	<div class = "container">
+		<div class = "row">
+			<div class = "col-sm-8 profileinfo">
+				<p>{{user.profileInformation}}</p>
+			<div>
+		</div>
+	</div>
+
+</body>
+</html>

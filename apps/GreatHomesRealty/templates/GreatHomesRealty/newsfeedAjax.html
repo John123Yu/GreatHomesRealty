@@ -1,0 +1,30 @@
+<html>
+<head>
+	<title>Newsfeed AJAX</title>
+</head>
+<body>
+	<div class = "newsfeed">
+ 				<h2><i class = "ion-ios-lightbulb-outline"></i> Newsfeed From The Broker </h2>
+			  	{% for message in all_messages %}
+			   <p class = "message"> <strong>{{message.subject}}</strong> {{ message.created_at }}</p>
+			   <p class = "message1">{{ message.message}}</p>
+			   {% if Admin.user_level == "Admin" %}
+			   <form action = "{% url 'UserDashboard:deleteMessage' id=message.id %}" method = 'POST'>
+			   	{% csrf_token %}
+			   	 	<input type="submit" class = "btn btn-danger" value="Delete Message">
+			   </form>
+			   	<form action="{% url 'GreatHomes:suscriptionEmail' %}" method='POST'>
+					{% csrf_token %}
+					<input type = "hidden" name = "message" value = "{{message.message}}" >
+					<input type = "hidden" name = "subject" value = "{{message.subject}}" >
+				    <input type="submit" class = "btn btn-success" value="Send Mass Email">
+			  	</form>
+			  	<form action="{% url 'GreatHomes:displaySubscribers' %}" method='POST'>
+					{% csrf_token %}
+				    <input type="submit" class = "btn btn-primary" value="View subscribers">
+			  	</form>
+			   {% endif %}
+			   	{% endfor %}
+			</div>
+</body>
+</html>

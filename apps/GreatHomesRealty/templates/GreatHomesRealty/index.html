@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Great Homes Realty</title>
+	 {% load staticfiles %}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'GreatHomesRealty/ionicons.min.css' %}">
+</head>
+<style>
+	header ul {
+		list-style-type: none;
+		display: inline-block;
+		width: 99%;
+	}
+	header ul li {
+		display: inline-block;
+		margin-left: 2%;
+		margin-top: 1.5%;
+		font-size: 1.5em;
+		color: white;
+	}
+	header li a {
+		font-size: .9em;
+		color: rgb(55, 150, 239);
+	}
+	header {
+		background-color: rgb(1, 49, 94);
+		color: white;
+		font-family: sans-serif;
+	}
+	body {
+		background-image: linear-gradient(rgba(250, 197, 100, .65), rgba(250, 197, 100, .65)), url('{% static "GreatHomesRealty/diagonal_striped_brick.png" %}');
+		font-family: serif;
+	}
+	img {
+		border: 1px solid grey;
+	}
+	.header {
+		background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
+		color: white;
+		padding-bottom: 3%;
+		font-family: serif;
+	}
+	.header h1 {
+		display: inline-block;
+		position: relative;
+		top: .15em;
+		left: 5%;
+		font-size: 3em;
+		font-family: serif;
+	}
+	.header ul {
+		margin-left: 8%;
+		list-style: none;
+	}
+	.header ul li {
+		display: inline-block;
+		font-size: 1.2em;
+		padding-right: 2%;
+		padding-left: 2%;
+		border-right: 2px solid white;
+		position: relative;
+		right: 2em;
+		top: 4em;
+	}
+	.header ul li:last-child {
+		border-right: none;
+	}
+	.header a {
+		color: white;
+	}
+	.ion-ios-home {
+		font-size: 1.5em;
+		position: relative;
+	}
+	.body {
+		padding-top: 2%;
+	}
+	.support {
+		background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
+		height: 15em;
+		margin-top: 6%;
+		text-align: center;
+		color: white;
+		font-family: 'Verdana' sans-serif;
+	}
+	.support i {
+		font-size: 2em;
+		position: relative;
+		top: .2em;
+		left: -.1em;
+	}
+	.support h1 {
+		position: relative;
+		top: .6em;
+		font-size: 2.8em;
+	}
+	.support a {
+		color: white;
+	}
+	.addressdiv {
+		margin-top: 4%;
+		background: linear-gradient(rgba(0, 0, 0, .3), rgba(0, 0, 0, .7));
+		width: 300px;
+		border-radius: 5%;
+		margin-left: 0px;
+	}
+	.addressdiv img {
+		border-top-left-radius: 5%;
+		border-top-right-radius: 5%;
+	}
+	.address {
+		font-size: 1.2em;
+		color: white;
+		margin-left: 1em;
+		margin-bottom: 2%;
+		font-weight: 100;
+		font-family: sans-serif;
+		padding-top: 3%;
+	}
+	.address a {
+		color: white;
+		font-weight: 100;
+		font-family: sans-serif;
+		margin-bottom: 0px;
+	}
+	.imageAddress a {
+		color: white;
+		font-family: 'Verdana';
+	}
+	.imageprice {
+		font-size: 1.5em;
+	}
+	.imagelist {
+		font-weight: 100;
+	}
+	.imagelist:hover {
+		color: rgb(87, 172, 229);
+		text-decoration: none;
+	}
+	.picture {
+		padding: 0px;
+		text-align: center;
+		margin-top: 3%;
+	}
+	.support2 {
+		text-align: center;
+	}
+	.support2 p {
+		margin-top: 2.5em;
+		font-size: 1.4em;
+	}
+	.footer {
+		background-image: linear-gradient(rgba(0, 0, 0, .65), rgba(0, 0, 0, .85));
+		height: 15em;
+		color: white;
+		font-family: sans-serif;
+		font-weight: 100;
+		margin-top: 5%;
+		padding-top: 5%;
+	}
+	.footer address {
+		font-size: 1.1em;
+		margin-left: 15%;
+	}
+	.footerlist li { 
+		display: inline-block;
+		font-size: 1.1em;
+		padding-right: 3%;
+		margin-top: 3%;
+	}
+	.footerlist li a {
+		color: white
+	}
+	.footerlist li a i {
+		font-size: 1.5em;
+	}
+	@media only screen and (max-width: 480px) {
+		.header {
+			height: 21em;
+		}
+		.support {
+			height: 30em;
+		}
+		.footer {
+			height: 25em;
+		}
+	}
+/* Medium sized screens */
+	@media only screen and (min-width: 481px) {
+		.header {
+			height: 17em;
+		}
+		.support {
+			height: 30em;
+		}
+		.footer {
+			height: 25em;
+		}
+	}
+	/* Large sized screens */
+	@media only screen and (min-width: 1024px) {
+		.header {
+			height: 10em;
+		}
+		.support {
+			height: 15em;
+		}
+		.footer {
+			height: 15em;
+		}
+	}
+</style>
+<script type="text/javascript">
+
+</script>
+<body>
+	{% if request.session.login > 0 %}
+	<header>
+		<ul>
+			<li><a href="{%url 'GreatHomes:index' %}">HomePage</a></li>
+			<li><a href="{%url 'UserDashboard:index' %}">DashBoard</a></li>
+			<li><a href="{%url 'UserDashboard:editProfileDisplay' %}">Edit Profile</a></li>
+			<li><a href="{%url 'GreatHomes:showAgentListing' id=request.session.login %}">Your Profile</a></li>
+			<li><a href="{%url 'GreatHomes:showAllListing' %}">Listings</a></li>
+			<li><a href="{%url 'GreatHomes:addListingDisplay' %}">Add Listing</a></li>
+		{% if user.user_level == "Admin" %}
+			<li><a href="{%url 'UserDashboard:createDisplay' %}">Add New Agent</a></li>
+		{% endif %}
+			<li><a href="{%url 'UserDashboard:logout' %}">Log Off</a></li>
+		</ul>
+	</header>
+	{% endif %}
+	<div class = "header">
+		<div class = "container-fluid">
+			<div class = "col-sm-5">
+				<h1><i class = "ion-ios-home"></i> <a href="{%url 'GreatHomes:index' %}">Great Homes Realty</a></h1>
+			</div>
+			<div class = "col-sm-7 navlinks">
+				<ul>
+					<li><a href="{%url 'GreatHomes:showAllListing' %}">More Listings</a></li>
+					<li>Buying</li>
+					<li>Selling</li>
+					<li>About Us</li>
+					<li><a href="{%url 'GreatHomes:suscribeDisplay' %}">Newsfeed</a></li>
+					<li><a href="{%url 'login:index' %}">Login</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class = "container">
+	<div class = "body">
+		{% for listing in allListings %}
+			<div class = "col-md-4 col-sm-6 col-xs-12 picture">
+				<div class = "row addressdiv">
+					{% if listing.mainPicture %}
+					<a class = "imagelist" href="{%url 'GreatHomes:showListing' id=listing.id %}"><img class = "listingimage" src="{{listing.mainPicture.url}}" height = "200" width = "300"></a>
+					{% endif %}
+					<address class = "address" style="width:90%"><a class = "imagelist" href="{%url 'GreatHomes:showListing' id=listing.id %}"><i class="ion-home icon-big"></i>
+					{{listing.addressStreet}} <br>
+					{{listing.addressCity}},
+					{{listing.addressState}}. {{listing.addressZipcode}}</a><br>
+					${{ listing.price }} 
+					</address>
+				</div>
+			</div>
+		{% endfor %}
+		</div>	
+	</div>
+
+	<div class = "support">
+		<div class = "container">
+		<div class = "row">
+			<div class = "col-md-4 col-xd-10">
+				<h1><a href="{%url 'GreatHomes:contact' %}"><i class = "ion-ios-telephone"></i> Contact Agent</a></h1>
+			</div>
+			<div class = "col-md-4 col-xd-10">
+				<h1><i class = "ion-key"></i> Buy</h1>
+			</div>
+			<div class = "col-md-4 col-xd-10">
+				<h1><i class = "ion-ios-home"></i> Sell</h1>
+			</div>
+			
+		</div>
+		</div>
+	</div>
+	<div class = "support2">
+		<div class = "container">
+		<div class = "row">
+			<div class = "col-xs-12">
+				<p>Don't be deceived by the address - this charming James Bay border cottage with separate studio/guest suite is a sanctuary. Generously sized, this custom home stands out as a unique and refreshing offering. An ideal 5BR, 3 bath home in a convenient village location. Elegant Country fam home w/Ocean Views from all primary rooms. Sit on your front sundeck and enjoy your privacy or wonder to the sun-drenched, easy care, back yard that has been beautifully landscaped. Buses, church, shopping, all amenities close by. Just enough garden space so you can enjoy your own flower beds veggies - and there's a covered patio for morning coffee. granite island, Parking for three cars and a large eat in country kitchen overlooking the south facing rear yard and deck = peaceful suite potential. Please visit virtual tour for more information.</p>
+			</div>
+		</div>
+		</div>
+	</div>
+
+	<div class = "footer">
+		<div class = "container-fluid">
+		<div class = "row">
+			<div class = "col-md-3 col-sm-12">
+				<address>
+				Principal Broker: Bill Yu<br>
+				Cell: (410)-984-6661<br>
+				Email: BillYu99@gmail.com <br>
+				9822 Tenney Ct <br> Ellicott City, MD 21042
+				</address>
+			</div>
+			<div class = "col-md-8 col-md-offset-1 col-sm-12 footerlist">
+				<ul>
+					<li><a href = "#">Home<a></li>
+					<li><a href = "#">Buying<a></li>
+					<li><a href = "#">Selling<a></li>
+					<li><a href = "#">Home Search<a></li>
+					<li><a href = "#">Team<a></li>
+					<li><a href = "#">About Us<a></li>
+					<li><a href=""><i class = "ion-social-instagram"></i></a></li>
+					<li><a href=""><i class = "ion-social-facebook"></i></a></li>
+					<li><a href=""><i class = "ion-social-twitter"></i></a></li>
+					<li><a href=""><i class = "ion-social-googleplus"></i></a></li>
+				</ul>
+			</div>
+		</div>
+		</div>
+	</div>
+</body>
+</html>

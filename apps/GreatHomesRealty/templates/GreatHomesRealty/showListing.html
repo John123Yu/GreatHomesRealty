@@ -1,0 +1,564 @@
+<html>
+<head>
+	<title>Show Listing Great Homes Realty</title>
+	{% load staticfiles %}
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'GreatHomesRealty/ionicons.min.css' %}">
+</head>
+<STYLE>
+	{% load staticfiles %}
+	.header {
+		background-image: linear-gradient(rgba(0, 0, 0, 0.83), rgba(0, 0, 0, 0.45));
+		height: 10em;
+		color: white;
+		text-align: right;
+		font-family: serif;
+		font-size: .94em;
+		padding-top: 1em;
+	}
+	.header h1 {
+		display: inline-block;
+		position: relative;
+		right: 4.15em;
+		top: .15em;
+		font-size: 3em;
+		font-family: serif;
+	}
+	.header ul {
+		list-style: none;
+	}
+	.header ul li {
+		display: inline-block;
+		font-size: 1.2em;
+		padding-right: 1%;
+		padding-left: 1%;
+		border-right: 2px solid white;
+		position: relative;
+		right: 1.5em;
+		top: .4em;
+	}
+	.header ul li:last-child {
+		border-right: none;
+	}
+	.header a {
+		color: white;
+	}
+	.ion-ios-home {
+		font-size: 1.5em;
+		position: relative;
+	}
+	body {
+		background-image: url('{% static "GreatHomesRealty/new_year_background.png" %}');
+		font-family: serif;
+	}
+	header ul {
+		list-style-type: none;
+		display: inline-block;
+		width: 99%;
+	}
+	header ul li {
+		display: inline-block;
+		margin-left: 2%;
+		margin-top: 1.5%;
+		font-size: 1.5em;
+		color: white;
+	}
+	header li a {
+		font-size: .9em;
+		color: rgb(55, 150, 239);
+	}
+	header {
+		background-color: rgb(1, 49, 94);
+		color: white;
+	}
+	.listingAgent {
+		margin-top: 28%;
+		margin-bottom: 0px;
+		display: inline-block;
+	}
+   	.infobox {
+   		color: black;
+   		border-radius: 2%;
+   		margin-top: 1.8em;
+   		margin-left: 1em;
+   		padding: 1em;
+   	}
+	.agent {
+		display: inline-block;
+		font-size: 1.3em;
+		margin-top: 0px;
+		margin-left: -4em;
+	}
+	.carousel-caption {
+		margin-left: 10px;
+	}
+	.manager {
+		margin-left: 15%;
+	}
+	.slideshow {
+		margin-top: 2%;
+		margin-bottom: 3%;
+	}
+	.listingAdress {
+		margin-top: 3%;
+		margin-bottom: 0px;
+		font-family: serif;
+	}
+	.addressCity { 
+		margin-top: 0px; 
+		font-family: serif;
+	}
+	.descriptionborder {
+		padding-left: 23px;
+		margin-top: 2%;
+	}
+	.description { 
+		font-size: 1.2em;
+		margin-bottom: 6%;
+	}
+	img {
+		border: 1.5px solid grey;
+	}
+	dt,dd {
+		font-size: .8em;
+	}
+	h3 {
+		margin-bottom: 2%;
+	}
+    #map {
+    height: 400px;
+    width: 100%;
+    border: 2px solid grey;
+   	}
+   	.ion-ios-person, 
+   	.ion-email {
+   		font-size: 1.5em;
+   		border-radius: 20%;
+   		position: relative;
+   		top: .13em;
+   	}
+   	.ion-person {
+   		margin-left: 1em;
+   	}
+   	.maps {
+   		margin-bottom: 5%;
+   		height: 100px;
+   	}
+   	.agentName {
+   		color: rgb(0, 157, 255);
+   	}
+   	.addAgent {
+   		margin-top: 10%;
+   		margin-left: 0em;
+   		margin-bottom: 5%;
+   	}
+   	.editListing {
+   		margin-bottom: 5%;
+   	}
+   	.box {
+   		background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55));
+   		border-radius: 2%;
+   		text-align: center;
+   		margin-top: 4%;
+   		color: white;
+   		padding-top: .01%;
+   		padding-bottom: 6%;
+   		font-family: sans-serif;
+   	}
+   	.box h1, .box h3 {
+   		font-family: sans-serif;
+   		font-weight: 100;
+   	}
+   	.inforequest h3 {
+   		margin-top: 0px;
+   	}
+   	.inforequest {
+   		border: 1px solid grey;
+   		background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25));
+   		color: black;
+   		padding-top: 1%;
+   		padding: 2%;
+   		border-radius: 5px;
+   	}
+
+	.footer {
+		background-image: linear-gradient(rgba(0, 0, 0, .65), rgba(0, 0, 0, .85));
+		height: 15em;
+		color: white;
+		font-family: sans-serif;
+		font-weight: 100;
+		margin-top: 3%;
+	}
+	.footer address {
+		margin-top: 18%;
+		font-size: 1.1em;
+	}
+	.footerlist ul {
+		margin-left: 15%;
+	}
+	.footerlist li { 
+		display: inline-block;
+		margin-top: 13%;
+		margin-right: 5%;
+		font-size: 1.1em;
+	}
+	.footerlist li a {
+		color: white
+	}
+	.social-media {
+		margin: 0px;
+	}
+	.social-media li {
+		margin: 0px;
+		margin-right: 4%;
+		color: white;
+		position: relative;
+		left: 65%;
+		top: .7em;
+		font-size: 1.5em;
+	}
+	.status {
+		color: red;
+	}
+</STYLE>
+<SCRIPT>
+	var address = "{{listingAddress}}"
+	$(document).ready(function(){
+                $.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyCFloLP_K9qctz3vRmSUO_cI50axycTj4M"
+				, function(res) {
+					var lati = res.results[0].geometry.location.lat;
+					var lngi = res.results[0].geometry.location.lng;
+			        var place = {lat: lati, lng: lngi};
+			        var map = new google.maps.Map(document.getElementById('map'), {
+			          zoom: 15,
+			          center: place
+			        });
+			        var marker = new google.maps.Marker({
+			          position: place,
+			          map: map
+			        });
+                }, "json");
+            })
+</SCRIPT>
+<body>
+	{% if request.session.login > 0 %}
+	<header>
+		<ul>
+			<li><a href="{%url 'GreatHomes:index' %}">HomePage</a></li>
+			<li><a href="{%url 'UserDashboard:index' %}">DashBoard</a></li>
+			<li><a href="{%url 'UserDashboard:editProfileDisplay' %}">Edit Profile</a></li>
+			<li><a href="{%url 'GreatHomes:showAgentListing' id=request.session.login %}">Your Profile</a></li>
+			<li><a href="{%url 'GreatHomes:showAllListing' %}">Listings</a></li>
+			<li><a href="{%url 'GreatHomes:addListingDisplay' %}">Add Listing</a></li>
+		{% if user.user_level == "Admin" %}
+			<li><a href="{%url 'UserDashboard:createDisplay' %}">Add New Agent</a></li>
+		{% endif %}
+			<li><a href="{%url 'UserDashboard:logout' %}">Log Off</a></li>
+		</ul>
+	</header>
+	{% endif %}
+	<div class = "header">
+		<div class = "row">
+			<div class = "col-md-12 col-xs-6">
+				<ul>
+					<h1><i class = "ion-ios-home"></i> <a href="{%url 'GreatHomes:index' %}">Great Homes Realty</a></h1>
+					<li><a href="{%url 'GreatHomes:showAllListing' %}">More Listings</a></li>
+					<li>Buying</li>
+					<li>Selling</li>
+					<li>About Us</li>
+					<li><a href="{%url 'GreatHomes:suscribeDisplay' %}">Newsfeed</a></li>
+					<li><a href="{%url 'login:index' %}">Login</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class = "container first">
+		<div class = "row">
+			<div class = "col-sm-8">
+			<div class = "box">
+				<h1 class = "listingAdress">{{listing.addressAptNumber}} {{listing.addressStreet}} </h1>
+				<h3 class = "addressCity">{{listing.addressCity}} {{listing.addressState}}, {{listing.addressZipcode}}</h3>
+				<div class = "slideshow">
+					{% if listing.mainPicture %}
+					<img class = "mySlides" src="{{listing.mainPicture.url}}" style= "width:100%">
+					{% if request.session.login > 0 %}
+					<a href="{% url 'GreatHomes:deleteMainImage' id=listing.id %}">Delete Main Image {{image.id}}</a>
+					{% endif %}
+					{% endif %}
+					{% for image in images %}
+					<img class = "mySlides" src="{{ image.image.url }}" style = "width:100%"/>
+					{% if request.session.login > 0 %}
+					<a href="{% url 'GreatHomes:deleteImage' id=image.id %}">Delete Image {{image.id}}</a>
+					{% endif %}
+					{% endfor %} 
+					<a class="w3-btn-floating w3-display-left" onclick="plusDivs(-1)">&#10094;</a>
+					<a class="w3-btn-floating w3-display-right" onclick="plusDivs(+1)">&#10095;</a>
+				</div>
+			</div>
+			</div>
+			<div class = "col-sm-4">
+			<div class = "infobox">
+				<dl class = "dl-horizontal agent">
+					<dt><i class = "ion-ios-pricetags"></i> Price:</dt><dd>${{listing.price}}</dd>
+					<dt>Status:</dt><dd class = "status">{{listing.status}}</dd>
+					<dt>MLS:</dt><dd>{{listing.MLS}}</dd>
+					<dt>Bedrooms:</dt><dd>{{listing.bedrooms}}</dd>
+					<dt>Bathrooms:</dt><dd>{{listing.bathrooms}}</dd>
+					<dt>SquareFeet:</dt><dd>{{listing.squarefootage}}</dd>
+					<dt>Housetype:</dt><dd>{{listing.houseType}}</dd>
+					<dt>County:</dt><dd>{{listing.county}}</dd>
+					<dt>Neighborhood:</dt><dd>{{listing.neighborhood}}</dd>
+					<dt>Year Built:</dt><dd>{{listing.yearBuilt}}</dd>
+				</dl>
+					{% for Agent in primaryAgents %}
+					<dl class = "dl-horizontal agent">
+						<dt>Primary Agent <i class = "ion-ios-person"></i></dt><dd></dd>
+						<dt>Name:</dt><dd><a class = "agentName" href="{%url 'GreatHomes:showAgentListing' id=Agent.user.id %}">{{Agent.user.firstName}} {{Agent.user.lastName}}</a></dd>
+						<dt>Email:</dt><dd>{{Agent.user.email}}</dd>
+						<dt>Phone:</dt><dd> {{Agent.user.phone}} </dd>
+					</dl>
+					{% endfor %}
+					<dl class = "dl-horizontal agent">
+						<dt> President <i class = "ion-ios-person"></i></dt><dd></dd>
+						<dt>Name:</dt><dd>Bill Yu</dd>
+						<dt>Email:</dt><dd>BillYu99@gmail.com</dd>
+						<dt>Phone:</dt><dd> 410-984-6661 </dd>
+					</dl>
+			</div>
+			</div>
+		</div>
+	</div>
+
+	<div class = "container second">
+		<div class = "row secondrow">
+			<div class = "col-md-8 descriptionborder">
+			<h3>Listing Description:</h3>
+			<p class = "description"> {{listing.description}}</p>
+			</div>
+		</div>
+	</div>
+
+	{% if currentUser.user_level == "Admin" or request.session.login == listing.createdById %}
+	<div class = "container edits">
+		<div class = "row">
+			<div class = "col-md-4">
+				<form class="addImage" action="{%url 'GreatHomes:addMainImage' id=listing.id %}" method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+						{{mainImage.as_p}}
+					<input type="submit" class ="btn btn-primary" value="Add Main Image">
+				</form>
+				<form class="addImage" action="{%url 'GreatHomes:addListingImage' id=listing.id %}" method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+					{{addImage.as_p}}
+					<input class = "btn btn-primary" type="submit" value="Add Image">
+				</form>
+			</div>
+			<div class = "col-md-4">
+				<form class = "addAgent" action = "{%url 'GreatHomes:addAgent' id=listing.id %}" method = "post">
+					{% csrf_token %}
+					<input class = "btn btn-primary" type="submit" value="Add Agent">
+					<select name = "agent">
+					{% for agent in agents %}
+						<option value ="{{agent.id}}">{{agent.firstName}} {{agent.lastName}}</option>
+					{% endfor %}
+					</select>
+				</form>
+				<form action = "{%url 'GreatHomes:deleteListingAgent' id=listing.id %}" method = "post">
+					{% csrf_token %}
+					<input class = "btn btn-danger" type="submit" value="Delete Agent">
+					<select name = "agent">
+					{% for agent in agents %}
+						<option value ="{{agent.id}}">{{agent.firstName}} {{agent.lastName}}</option>
+					{% endfor %}
+					</select>
+				</form>
+				<a class = "btn btn-warning editListing" href="{%url 'GreatHomes:editListingDisplay' id=listing.id %}">Edit Listing</a>
+				<form id = "deleteListing" action = "{%url 'GreatHomes:deleteListing' id=listing.id %}" method = "post">
+					{% csrf_token %}
+					<button class = "btn btn-danger"
+				 onclick="return deleteListing()">Delete Listing</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	{% endif %}
+
+	{% for agent in primaryAgents %}
+	{% if currentUser.user_level != "Admin" and request.session.login != listing.createdById and request.session.login == agent.user.id %}
+	{% ifchanged request.session.login %}
+	<div class = "container edits">
+		<div class = "row">
+			<div class = "col-md-4">
+				<form class="addImage" action="{%url 'GreatHomes:addMainImage' id=listing.id %}" method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+						{{mainImage.as_p}}
+					<input type="submit" class ="btn btn-primary" value="Add Main Image">
+				</form>
+				<form class="addImage" action="{%url 'GreatHomes:addListingImage' id=listing.id %}" method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+					{{addImage.as_p}}
+					<input class = "btn btn-primary" type="submit" value="Add Image">
+				</form>
+			</div>
+			<div class = "col-md-4">
+				<a class = "btn btn-warning editListing" href="{%url 'GreatHomes:editListingDisplay' id=listing.id %}">Edit Listing</a>
+				<form action = "{%url 'GreatHomes:addAgent' id=listing.id %}" method = "post">
+					{% csrf_token %}
+					<input class = "btn btn-primary" type="submit" value="Add Agent">
+					<select name = "agent">
+					{% for agent in agents %}
+						<option value ="{{agent.id}}">{{agent.firstName}} {{agent.lastName}}</option>
+					{% endfor %}
+					</select>
+				</form>
+				<form action = "{%url 'GreatHomes:deleteListingAgent' id=listing.id %}" method = "post">
+					{% csrf_token %}
+					<input class = "btn btn-danger" type="submit" value="Delete Agent">
+					<select name = "agent">
+					{% for agent in agents %}
+						<option value ="{{agent.id}}">{{agent.firstName}} {{agent.lastName}}</option>
+					{% endfor %}
+					</select>
+				</form>
+			</div>
+		</div>
+	</div>
+	{% endifchanged %}
+	{% endif %}
+	{% endfor %}
+
+	<div class = "container third">
+	<div class = "row">
+		<div class = "col-sm-6 inforequest">
+			<h3><i class = "ion-email"></i> Contact Agent / Request Information: </h3>
+		<form action="" method='post' class = " sendMail form-horizontal">
+        {% csrf_token %}
+      <div class = "sendMailAjax">
+        <div class = "form-group">
+            <label for = "first_name" class = "col-sm-3 control-label">First Name:</label>
+            <div class = "col-sm-9">
+              <input type='text' name='first_name' class = "form-control" id = "first_name" placeholder = "First Name">
+            </div>
+          </div>
+          <div class = "form-group">
+            <label for = "last_name" class = "col-sm-3 control-label">Last Name:</label>
+            <div class = "col-sm-9">
+              <input type='text' name='last_name' class = "form-control" id = "last_name" placeholder = "Last Name">
+            </div>
+          </div>
+          <div class = "form-group">
+            <label for = "phone" class = "col-sm-3 control-label">Phone (xxx)-xxx-xxxx:</label>
+            <div class = "col-sm-9">
+              <input type='text' name='phone' class = "form-control" id = "phone" placeholder = "Phone Number">
+            </div>
+          </div>
+        <div class = "form-group">
+          <label for = "email" class = "col-sm-3 control-label">Your Email:</label>
+          <div class = "col-sm-9">
+            <input type='text' name='email' class = "form-control" id = "email" placeholder = "Email">
+          </div>
+        </div>
+          <div class="form-group">
+            <label for="message" class = "col-sm-3 control-label"> Message: </label>
+            <div class = "col-sm-9">
+            <textarea class="form-control" rows="5" name="message" id="message"></textarea>
+           </div>
+         </div>
+      </div>
+          <div class="form-group">
+            <label for="submit" class="col-sm-3"></label>
+            <div class = "col-sm-9">
+            <input id = "submit" type='submit' value='Send Message' class = "btn btn-success">
+           </div>
+         </div>
+    </form> 
+	</div>
+		<div class = "col-sm-6">
+			<div id = "map"></div>
+		</div>
+	</div>
+	</div>
+
+
+	<div class = "footer">
+		<div class = "container">
+			<div class = "row">
+				<div class = "col-md-3">
+				<address>
+				Principal Broker: Bill Yu<br>
+				Cell: (410)-984-6661<br>
+				Email: BillYu99@gmail.com <br>
+				9822 Tenney Ct <br> Ellicott City, MD 21042
+				</address>
+				</div>
+				<div class = "col-md-9 footerlist">
+				<ul>
+					<li><a href = "#">Home<a></li>
+					<li><a href = "#">Buying<a></li>
+					<li><a href = "#">Selling<a></li>
+					<li><a href = "#">Home Search<a></li>
+					<li><a href = "#">Team<a></li>
+					<li><a href = "#">About Us<a></li>
+				</ul>
+				<ul class = "social-media">
+					<li><i class = "ion-social-instagram"></i></li>
+					<li><i class = "ion-social-facebook"></i></li>
+					<li><i class = "ion-social-twitter"></i></li>
+					<li><i class = "ion-social-googleplus"></i></li>
+				</ul>	
+			</div>
+		</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		var slideIndex = 1;
+		showDivs(slideIndex);
+
+		function plusDivs(n) {
+		    showDivs(slideIndex += n);
+		}
+
+		function showDivs(n) {
+		    var i;
+		    var x = document.getElementsByClassName("mySlides");
+		    if (n > x.length) {slideIndex = 1} 
+		    if (n < 1) {slideIndex = x.length} ;
+		    for (i = 0; i < x.length; i++) {
+		        x[i].style.display = "none"; 
+		    }
+		    x[slideIndex-1].style.display = "block"; 
+		}
+
+		function deleteListing() {
+		    if (confirm("Are you sure you want to delete this listing? All information will be erased. ") == true) {
+		    	form.submit();
+			    }
+		    else {
+	        	return false;
+		  	}
+		}
+
+	$('.sendMail').on('submit', function(e){
+	    e.preventDefault()
+	    $.ajax({
+	      url: '/sendMail/' + "{{listing.id}}",
+	      method: 'post',
+	      data: $(this).serialize(),
+	      success: function(serverResponse){
+	        $('.sendMailAjax').html(serverResponse)
+	      }
+	    })
+	    $('.sendMail').trigger('reset')
+	  });
+	</script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFloLP_K9qctz3vRmSUO_cI50axycTj4M">
+    </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<html>
+<head>
+	<title></title>
+</head>
+	<style>
+	.info {
+		color: green;
+	}
+	</style>
+<body>
+	<h1>Success, Welcome {{ request.session.name }}</h1>
+	<h1>{{ request.session.loginStatement }}</h1>
+	{% if messages %}
+	<ul>
+	    {% for message in messages %}
+	    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+	    {% endfor %}
+	</ul>
+	{% endif %}
+</body>
+</html>

@@ -1,0 +1,12 @@
+<html>
+<head>
+	<title>Display Suscribers</title>
+</head>
+<body>
+	<ul>
+		{% for client in clients %}
+		<li>{{client.firstName}} {{client.lastName}} {{client.email}}</li>
+		{% endfor %}
+	</ul>
+</body>
+</html>
