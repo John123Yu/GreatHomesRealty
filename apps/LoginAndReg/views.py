@@ -11,6 +11,10 @@ def register(request):
 	error_messages = {}
 	if request.method == "POST":
 		result = User.registerMgr.userRegister(request.POST['first_name'], request.POST['last_name'], request.POST['email'], request.POST['password'], request.POST['confirm_password'], request.POST['phone'], 0, False)
+		if request.POST['passcode'] != "Ellicott042":
+			error_messages = {}
+			error_messages['passcodeError'] = "Incorrect Passcode"
+			return render(request, 'LoginAndReg/index.html',  error_messages )
 		if result[0]:
 			user = result[1]
 			request.session['login'] = result[1].id

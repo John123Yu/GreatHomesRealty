@@ -2,15 +2,16 @@
 <head>
 	<title>Newsfeed</title>
 	{% load staticfiles %}
+	<meta name="viewport" content="width=device-width, initial-scale=0.5">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<link rel="stylesheet" type="text/css" href="{% static 'GreatHomesRealty/ionicons.min.css' %}">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 	<style>
 	body {
 		text-align: left;
-		background-image: url('{% static "GreatHomesRealty/contemporary_china.png" %}');
+		background-image: linear-gradient(rgba(250, 197, 100, .65), rgba(250, 197, 100, .65)), url('{% static "GreatHomesRealty/diagonal_striped_brick.png" %}');
 	}
 	.form-control {
 		margin-bottom: 15px;
@@ -27,6 +28,7 @@
 		margin-top: 20%;
 		color: rgb(52, 53, 226);
 		margin-bottom: 4%;
+		margin-left: -8%;
 	}
 	.suscribe {
 		margin-top: 8%;
@@ -59,38 +61,42 @@
 		color: black;
 	}
 	.header {
-		background-image: linear-gradient(rgba(0, 0, 0, 0.83), rgba(0, 0, 0, 0.45));
-		height: 10em;
+		background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
 		color: white;
-		text-align: right;
+		padding-bottom: 3%;
 		font-family: serif;
 	}
 	.header h1 {
 		display: inline-block;
 		position: relative;
-		right: 4.05em;
 		top: .15em;
+		left: 5%;
 		font-size: 3em;
 		font-family: serif;
 	}
 	.header ul {
+		margin-left: 8%;
 		list-style: none;
 	}
 	.header ul li {
 		display: inline-block;
 		font-size: 1.2em;
-		padding-right: 1%;
-		padding-left: 1%;
+		padding-right: 2%;
+		padding-left: 2%;
 		border-right: 2px solid white;
 		position: relative;
-		right: 1.5em;
-		top: .4em;
+		right: 2em;
+		top: 4em;
 	}
 	.header ul li:last-child {
 		border-right: none;
 	}
 	.header a {
 		color: white;
+	}
+	a:hover {
+		color: rgb(250, 197, 100);
+		text-decoration: none;
 	}
 	.ion-ios-home {
 		font-size: 1.5em;
@@ -148,40 +154,61 @@
 	}
 
 	.footer {
-		background-image: linear-gradient(rgba(0, 0, 0, .65), rgba(0, 0, 0, .85));
+		background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
 		height: 15em;
 		color: white;
 		font-family: sans-serif;
 		font-weight: 100;
-		margin-top: 2%;
+		margin-top: 5%;
+		padding-top: 5%;
 	}
 	.footer address {
-		margin-top: 18%;
 		font-size: 1.1em;
+		margin-left: 15%;
 	}
 	.footerlist ul {
-		margin-left: 21%;
+		margin-left: 15%;
 	}
 	.footerlist li { 
 		display: inline-block;
-		margin-top: 13%;
-		margin-right: 5%;
 		font-size: 1.1em;
+		padding-right: 3%;
+		margin-top: 3%;
 	}
 	.footerlist li a {
 		color: white
 	}
-	.social-media {
-		margin: 0px;
-	}
-	.social-media li {
-		margin: 0px;
-		margin-right: 4%;
-		color: white;
-		position: relative;
-		left: 65%;
-		top: .7em;
+	.footerlist li a i {
 		font-size: 1.5em;
+	}
+	@media only screen and (max-width: 480px) {
+		.header {
+			height: 21em;
+		}
+		.footer {
+			height: 20em;
+		}
+	}
+/* Medium sized screens */
+	@media only screen and (min-width: 481px) {
+		.header {
+			height: 17em;
+		}
+		.footer {
+			height: 20em;
+		}
+		h4 {
+			margin-left: 0%;
+		}
+	}
+	/* Large sized screens */
+	@media only screen and (min-width: 1024px) {
+		.header {
+			height: 10em;
+		}
+		.footer {
+			height: 15em;
+		}
 	}
 	</style>
 <body>
@@ -202,13 +229,15 @@
 	</header>
 	{% endif %}
 	<div class = "header">
-		<div class = "row">
-			<div class = "col-md-12 col-xs-6">
+		<div class = "container-fluid">
+			<div class = "col-sm-5">
+				<h1><a href="{%url 'GreatHomes:index' %}"><i class = "ion-ios-home"></i> Great Homes Realty</a></h1>
+			</div>
+			<div class = "col-sm-7 navlinks">
 				<ul>
-					<h1><i class = "ion-ios-home"></i> <a href="{%url 'GreatHomes:index' %}">Great Homes Realty</a></h1>
 					<li><a href="{%url 'GreatHomes:showAllListing' %}">More Listings</a></li>
-					<li>Buying</li>
-					<li>Selling</li>
+					<li><a href="{%url 'GreatHomes:buying' %}">Buying</a></li>
+					<li><a href="{%url 'GreatHomes:selling' %}">Selling</a></li>
 					<li>About Us</li>
 					<li><a href="{%url 'GreatHomes:suscribeDisplay' %}">Newsfeed</a></li>
 					<li><a href="{%url 'login:index' %}">Login</a></li>
@@ -220,6 +249,7 @@
 
 	<div class = "container main-message">
  		<div class = "row">
+ 	<div class = "clientLoginAjax">
  			<div class = "newsfeed col-sm-8">
  				<h2><i class = "ion-ios-lightbulb-outline"></i> Newsfeed From The Broker </h2>
 			  	{% for message in all_messages %}
@@ -242,9 +272,10 @@
 			  	</form>
 			   {% endif %}
 			   	{% endfor %}
+			   	<h3>Suscribe and Login to see more posts! <i class = "ion-arrow-right-c"></i></h3>
 			</div>
 
-			<div class = "col-sm-offset-1 col-sm-3 suscribeAjax">
+			<div class = "col-sm-offset-1 col-sm-3 col-xs-8 col-xs-offset-2 suscribeAjax">
 				<h4>Interested In Learning About Real Estate And Real Estate Investing?</h4>
 			<form action="" method='post' class = "suscribe form-horizontal">
 		<div class = "suscribeAjaxCut">
@@ -283,7 +314,7 @@
 	          <div class="form-group">
 	            <label for="submit" class=""></label>
 	            <div class = "">
-	            <input id = "submit" type='submit' value='Suscribe!' class = "btn btn-warning">
+	            <input id = "submit" type='submit' value='Suscribe' class = "btn btn-success">
 	           </div>
 	         </div>
 		    </form> 
@@ -296,7 +327,7 @@
 	       	{% endif %}
 	        <div class = "form-group">
 	          <div class = "">
-	          <label for = "email" class = "control-label">Your Email:</label>
+	          <label for = "email" class = "control-label">Unsuscribe Your Email:</label>
 	            <input type='text' name='email' class = "form-control last-control" id = "email" placeholder = "Email">
 	          </div>
 	        </div>
@@ -304,12 +335,29 @@
 	          <div class="form-group">
 	            <label for="submit" class=""></label>
 	            <div class = "">
-	            <input id = "submit" type='submit' value='Unsuscribe' class = "btn btn-warning">
+	            <input id = "submit" type='submit' value='Unsuscribe' class = "btn btn-success">
+	           </div>
+	         </div>
+		    </form> 
+
+	    	<form action="" method='post' class = "clientLogin form-horizontal">
+	        {% csrf_token %}
+	        <div class = "form-group">
+	          <div class = "">
+	          <label for = "emailLogin" class = "control-label">Client Login - Your Email:</label>
+	            <input type='text' name='emailLogin' class = "form-control last-control" id = "emailLogin" placeholder = "Email">
+	          </div>
+	        </div>
+	          <div class="form-group">
+	            <label for="submit" class=""></label>
+	            <div class = "">
+	            <input id = "submit" type='submit' value='Client Login' class = "btn btn-success">
 	           </div>
 	         </div>
 		    </form> 
 		</div>
 		</div>
+	  </div>
 	</div>
 
 	{% if Admin.user_level == "Admin" %}
@@ -333,18 +381,18 @@
  	{% endif %}
 
 
-	<div class = "footer">
-		<div class = "container">
-			<div class = "row">
-				<div class = "col-md-3">
+		<div class = "footer">
+		<div class = "container-fluid">
+		<div class = "row">
+			<div class = "col-xs-3">
 				<address>
 				Principal Broker: Bill Yu<br>
 				Cell: (410)-984-6661<br>
 				Email: BillYu99@gmail.com <br>
 				9822 Tenney Ct <br> Ellicott City, MD 21042
 				</address>
-				</div>
-				<div class = "col-md-9 footerlist">
+			</div>
+			<div class = "col-xs-8 col-xs-offset-1 footerlist">
 				<ul>
 					<li><a href = "#">Home<a></li>
 					<li><a href = "#">Buying<a></li>
@@ -353,16 +401,11 @@
 					<li><a href = "#">Team<a></li>
 					<li><a href = "#">About Us<a></li>
 				</ul>
-				<ul class = "social-media">
-					<li><i class = "ion-social-instagram"></i></li>
-					<li><i class = "ion-social-facebook"></i></li>
-					<li><i class = "ion-social-twitter"></i></li>
-					<li><i class = "ion-social-googleplus"></i></li>
-				</ul>	
 			</div>
 		</div>
 		</div>
 	</div>
+
 
 </body>
 <script type="text/javascript">  
@@ -405,6 +448,19 @@
       }
     })
     $('.unsuscribe').trigger('reset')
+  });
+
+  $('.clientLogin').on('submit', function(e){
+    e.preventDefault()
+    $.ajax({
+      url: '/clientLogin',
+      method: 'post',
+      data: $(this).serialize(),
+      success: function(serverResponse){
+        $('.clientLoginAjax').html(serverResponse)
+      }
+    })
+    $('.clientLogin').trigger('reset')
   });
 
 </script>

@@ -2,7 +2,7 @@ from django.conf.urls import url, include
 from django.conf.urls.static import static 
 from django.conf import settings
 from . import views
-from views import Suscribe, Unsuscribe, SendMail
+from views import Suscribe, Unsuscribe, SendMail, ClientLogin
 
 urlpatterns = [
 	url(r'^$', views.index, name = "index"),
@@ -24,10 +24,16 @@ urlpatterns = [
 	url(r'^suscribeDisplay$', views.suscribeDisplay, name = "suscribeDisplay"),
 	url(r'^suscribe$', Suscribe.as_view(), name = "suscribe"),
 	url(r'^unsuscribe$', Unsuscribe.as_view(), name = "unsuscribe"),
+	url(r'^clientLogin$', ClientLogin.as_view(), name = "clientLogin"),
 	url(r'^suscriptionEmail$', views.suscriptionEmail, name = "suscriptionEmail"),
 	url(r'^displaySubscribers$', views.displaySubscribers, name = "displaySubscribers"),
-	url(r'^contact$', views.contact, name = "contact")
+	url(r'^contact$', views.contact, name = "contact"),
+	url(r'^buying$', views.buying, name = "buying"),
+	url(r'^selling$', views.selling, name = "selling"),
+	url(r'^mortgage$', views.mortgage, name = "mortgage"),
+	url(r'^investing$', views.investing, name = "investing"),
+	url(r'^owningHome$', views.owningHome, name = "owningHome")
 
-	# url(r'^showWall/(?P<id>\d+)$', views.showWall, name = "showWall"),
+
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

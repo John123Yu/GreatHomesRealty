@@ -3,6 +3,8 @@
 	<title>Contact Agent</title>
 </head>
 {% load staticfiles %}
+	<meta name="viewport" content="width=device-width, initial-scale=0.5">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<link rel="stylesheet" type="text/css" href="{% static 'GreatHomesRealty/ionicons.min.css' %}">
@@ -28,37 +30,37 @@
 		color: white;
 	}
 	body {
-		background-image: url('{% static "GreatHomesRealty/new_year_background.png" %}');
+		background-image: linear-gradient(rgba(250, 197, 100, .65), rgba(250, 197, 100, .65)), url('{% static "GreatHomesRealty/diagonal_striped_brick.png" %}');
 		font-family: serif;
-		background-color: rgb(237, 246, 255);
-	}.header {
-		background-image: linear-gradient(rgba(0, 0, 0, 0.83), rgba(0, 0, 0, 0.45));
-		height: 10em;
+	}
+	.header {
+		background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
 		color: white;
-		text-align: right;
+		padding-bottom: 3%;
 		font-family: serif;
-		margin-bottom: 1%;
+		margin-bottom: 3%;
 	}
 	.header h1 {
 		display: inline-block;
 		position: relative;
-		right: 4.05em;
 		top: .15em;
+		left: 5%;
 		font-size: 3em;
 		font-family: serif;
 	}
 	.header ul {
+		margin-left: 8%;
 		list-style: none;
 	}
 	.header ul li {
 		display: inline-block;
 		font-size: 1.2em;
-		padding-right: 1%;
-		padding-left: 1%;
+		padding-right: 2%;
+		padding-left: 2%;
 		border-right: 2px solid white;
 		position: relative;
-		right: 1.5em;
-		top: .4em;
+		right: 2em;
+		top: 4em;
 	}
 	.header ul li:last-child {
 		border-right: none;
@@ -66,46 +68,86 @@
 	.header a {
 		color: white;
 	}
+	a:hover {
+		color: rgb(255, 127, 0);
+		text-decoration: none;
+	}
 	.ion-ios-home {
 		font-size: 1.5em;
 		position: relative;
 	}
 
 	.footer {
-		background-image: linear-gradient(rgba(0, 0, 0, .65), rgba(0, 0, 0, .85));
+		background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
 		height: 15em;
 		color: white;
 		font-family: sans-serif;
 		font-weight: 100;
-		margin-top: 2%;
+		margin-top: 5%;
+		padding-top: 5%;
 	}
 	.footer address {
-		margin-top: 18%;
 		font-size: 1.1em;
+		margin-left: 15%;
 	}
 	.footerlist ul {
-		margin-left: 21%;
+		margin-left: 15%;
 	}
 	.footerlist li { 
 		display: inline-block;
-		margin-top: 13%;
-		margin-right: 5%;
 		font-size: 1.1em;
+		padding-right: 3%;
+		margin-top: 3%;
 	}
 	.footerlist li a {
 		color: white
 	}
-	.social-media {
-		margin: 0px;
-	}
-	.social-media li {
-		margin: 0px;
-		margin-right: 4%;
-		color: white;
-		position: relative;
-		left: 65%;
-		top: .7em;
+	.footerlist li a i {
 		font-size: 1.5em;
+	}
+	@media only screen and (max-width: 480px) {
+		.header {
+			height: 21em;
+		}
+		.support {
+			height: 30em;
+		}
+		.support2 {
+			height: 40em;
+		}
+		.footer {
+			height: 20em;
+		}
+	}
+/* Medium sized screens */
+	@media only screen and (min-width: 481px) {
+		.header {
+			height: 17em;
+		}
+		.support {
+			height: 30em;
+		}
+		.support2 {
+			height: 35em;
+		}
+		.footer {
+			height: 20em;
+		}
+	}
+	/* Large sized screens */
+	@media only screen and (min-width: 1024px) {
+		.header {
+			height: 10em;
+		}
+		.support {
+			height: 15em;
+		}
+		.support2 {
+			height: 22em;
+		}
+		.footer {
+			height: 15em;
+		}
 	}
 </style>
 <body>
@@ -126,13 +168,15 @@
 	</header>
 	{% endif %}
 	<div class = "header">
-		<div class = "row">
-			<div class = "col-md-12 col-xs-6">
+		<div class = "container-fluid">
+			<div class = "col-sm-5">
+				<h1><a href="{%url 'GreatHomes:index' %}"><i class = "ion-ios-home"></i> Great Homes Realty</a></h1>
+			</div>
+			<div class = "col-sm-7 navlinks">
 				<ul>
-					<h1><i class = "ion-ios-home"></i> <a href="{%url 'GreatHomes:index' %}">Great Homes Realty</a></h1>
 					<li><a href="{%url 'GreatHomes:showAllListing' %}">More Listings</a></li>
-					<li>Buying</li>
-					<li>Selling</li>
+					<li><a href="{%url 'GreatHomes:buying' %}">Buying</a></li>
+					<li><a href="{%url 'GreatHomes:selling' %}">Selling</a></li>
 					<li>About Us</li>
 					<li><a href="{%url 'GreatHomes:suscribeDisplay' %}">Newsfeed</a></li>
 					<li><a href="{%url 'login:index' %}">Login</a></li>
@@ -145,8 +189,9 @@
 	<div class = "row">
 	<div class = "col-md-12">
 		<h3><i class = "ion-email"></i> Contact Us / Request Information: </h3>
-	<form action="{%url 'GreatHomes:sendMail' id=0 %}" method='post' class = "form-horizontal">
+	<form action="" method='post' class = "sendMail form-horizontal">
         {% csrf_token %}
+        <div class = "sendMailAjax">
         <div class = "form-group">
             <label for = "first_name" class = "col-sm-2 control-label">First Name:</label>
             <div class = "col-sm-8">
@@ -160,9 +205,9 @@
             </div>
           </div>
           <div class = "form-group">
-            <label for = "phone" class = "col-sm-2 control-label">Phone(Numbers Only):</label>
+            <label for = "phone" class = "col-sm-2 control-label">Phone (xxx)-xxx-xxxx::</label>
             <div class = "col-sm-8">
-              <input type='number' name='phone' class = "form-control" id = "phone" placeholder = "Phone Number">
+              <input type='text' name='phone' class = "form-control" id = "phone" placeholder = "Phone Number">
             </div>
           </div>
         <div class = "form-group">
@@ -177,6 +222,7 @@
             <textarea class="form-control" rows="5" name="message" id="message"></textarea>
            </div>
          </div>
+   </div>
           <div class="form-group">
             <label for="submit" class="col-sm-2"></label>
             <div class = "col-sm-8">
@@ -190,17 +236,17 @@
 
 
 	<div class = "footer">
-		<div class = "container">
-			<div class = "row">
-				<div class = "col-md-3">
+		<div class = "container-fluid">
+		<div class = "row">
+			<div class = "col-xs-3">
 				<address>
 				Principal Broker: Bill Yu<br>
 				Cell: (410)-984-6661<br>
 				Email: BillYu99@gmail.com <br>
 				9822 Tenney Ct <br> Ellicott City, MD 21042
 				</address>
-				</div>
-				<div class = "col-md-9 footerlist">
+			</div>
+			<div class = "col-xs-8 col-xs-offset-1 footerlist">
 				<ul>
 					<li><a href = "#">Home<a></li>
 					<li><a href = "#">Buying<a></li>
@@ -209,15 +255,23 @@
 					<li><a href = "#">Team<a></li>
 					<li><a href = "#">About Us<a></li>
 				</ul>
-				<ul class = "social-media">
-					<li><i class = "ion-social-instagram"></i></li>
-					<li><i class = "ion-social-facebook"></i></li>
-					<li><i class = "ion-social-twitter"></i></li>
-					<li><i class = "ion-social-googleplus"></i></li>
-				</ul>	
 			</div>
 		</div>
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+	$('.sendMail').on('submit', function(e){
+	    e.preventDefault()
+	    $.ajax({
+	      url: '/sendMail/' + "0",
+	      method: 'post',
+	      data: $(this).serialize(),
+	      success: function(serverResponse){
+	        $('.sendMailAjax').html(serverResponse)
+	      }
+	    })
+	    $('.sendMail').trigger('reset')
+	  });
+</script>
 </html>

@@ -3,6 +3,10 @@
 <head>
 	<title>Great Homes Realty</title>
 	 {% load staticfiles %}
+	 <meta name="description" content="Real Estate site for the greater Baltimore and Washington D.C. region.">
+	 <meta name="keywords" content="House, Homes, Real Estate, Commission, Price, Sale, Sell, Buy, Price, Appraisal, Listing, Mortgage">
+	 <meta name="viewport" content="width=device-width, initial-scale=0.5">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<link rel="stylesheet" type="text/css" href="{% static 'GreatHomesRealty/ionicons.min.css' %}">
@@ -70,6 +74,10 @@
 	.header a {
 		color: white;
 	}
+	a:hover {
+		color: rgb(255, 127, 0);
+		text-decoration: none;
+	}
 	.ion-ios-home {
 		font-size: 1.5em;
 		position: relative;
@@ -98,6 +106,10 @@
 	}
 	.support a {
 		color: white;
+	}
+	.support a:hover {
+		color: rgb(250, 197, 100);
+		text-decoration: none;
 	}
 	.addressdiv {
 		margin-top: 4%;
@@ -145,6 +157,7 @@
 		margin-top: 3%;
 	}
 	.support2 {
+		height: 22em;
 		text-align: center;
 	}
 	.support2 p {
@@ -152,16 +165,19 @@
 		font-size: 1.4em;
 	}
 	.footer {
-		background-image: linear-gradient(rgba(0, 0, 0, .65), rgba(0, 0, 0, .85));
+		background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
 		height: 15em;
 		color: white;
-		font-family: sans-serif;
+		font-family: serif;
 		font-weight: 100;
 		margin-top: 5%;
 		padding-top: 5%;
 	}
 	.footer address {
 		font-size: 1.1em;
+		margin-left: 15%;
+	}
+	.footerlist ul {
 		margin-left: 15%;
 	}
 	.footerlist li { 
@@ -183,8 +199,11 @@
 		.support {
 			height: 30em;
 		}
+		.support2 {
+			height: 40em;
+		}
 		.footer {
-			height: 25em;
+			height: 20em;
 		}
 	}
 /* Medium sized screens */
@@ -195,8 +214,11 @@
 		.support {
 			height: 30em;
 		}
+		.support2 {
+			height: 35em;
+		}
 		.footer {
-			height: 25em;
+			height: 20em;
 		}
 	}
 	/* Large sized screens */
@@ -207,9 +229,33 @@
 		.support {
 			height: 15em;
 		}
+		.support2 {
+			height: 22em;
+		}
 		.footer {
 			height: 15em;
 		}
+	}
+	.dropdown-menu {
+	  background-color: black;
+	  border: 1px solid white;
+	  text-align: center;
+	}
+	.dropdown-menu li {
+		margin: 0px !important;
+		top: 0px !important;
+		left: 0px !important;
+		padding: 0px !important;
+		background-color: black;
+		border-right: 1px solid black !important;
+	}
+	.dropdown-menu li a:hover {
+		background-color: black;
+		color: orange;
+	}
+	.dropdown-menu li a {
+		background-color: black;
+		color: white;
 	}
 </style>
 <script type="text/javascript">
@@ -235,13 +281,22 @@
 	<div class = "header">
 		<div class = "container-fluid">
 			<div class = "col-sm-5">
-				<h1><i class = "ion-ios-home"></i> <a href="{%url 'GreatHomes:index' %}">Great Homes Realty</a></h1>
+				<h1><a href="{%url 'GreatHomes:index' %}"><i class = "ion-ios-home"></i> Great Homes Realty</a></h1>
 			</div>
 			<div class = "col-sm-7 navlinks">
 				<ul>
-					<li><a href="{%url 'GreatHomes:showAllListing' %}">More Listings</a></li>
-					<li>Buying</li>
-					<li>Selling</li>
+					<li><a href="{%url 'GreatHomes:showAllListing' %}">All Listings</a></li>
+					<li>
+						  <a class="dropdown-toggle" data-toggle="dropdown">Buying
+						  <span class="caret"></span></a>
+						  <ul class="dropdown-menu">
+						    <li><a href="{%url 'GreatHomes:buying' %}">Buying a Home</a></li>
+						    <li><a href="{%url 'GreatHomes:mortgage' %}">Mortgages</a></li>
+						    <li><a href="{%url 'GreatHomes:investing' %}">Investing</a></li>
+						    <li><a href="{%url 'GreatHomes:owningHome' %}">Owning A Home</a></li>
+						  </ul>
+					</li>
+					<li><a href="{%url 'GreatHomes:selling' %}">Selling</a></li>
 					<li>About Us</li>
 					<li><a href="{%url 'GreatHomes:suscribeDisplay' %}">Newsfeed</a></li>
 					<li><a href="{%url 'login:index' %}">Login</a></li>
@@ -253,7 +308,7 @@
 	<div class = "container">
 	<div class = "body">
 		{% for listing in allListings %}
-			<div class = "col-md-4 col-sm-6 col-xs-12 picture">
+			<div class = "col-md-4 col-sm-6 col-xs-6 picture">
 				<div class = "row addressdiv">
 					{% if listing.mainPicture %}
 					<a class = "imagelist" href="{%url 'GreatHomes:showListing' id=listing.id %}"><img class = "listingimage" src="{{listing.mainPicture.url}}" height = "200" width = "300"></a>
@@ -261,8 +316,8 @@
 					<address class = "address" style="width:90%"><a class = "imagelist" href="{%url 'GreatHomes:showListing' id=listing.id %}"><i class="ion-home icon-big"></i>
 					{{listing.addressStreet}} <br>
 					{{listing.addressCity}},
-					{{listing.addressState}}. {{listing.addressZipcode}}</a><br>
-					${{ listing.price }} 
+					{{listing.addressState}}. {{listing.addressZipcode}}<br>
+					${{ listing.price }} </a>
 					</address>
 				</div>
 			</div>
@@ -273,14 +328,14 @@
 	<div class = "support">
 		<div class = "container">
 		<div class = "row">
-			<div class = "col-md-4 col-xd-10">
+			<div class = "col-md-4 col-xs-12">
 				<h1><a href="{%url 'GreatHomes:contact' %}"><i class = "ion-ios-telephone"></i> Contact Agent</a></h1>
 			</div>
 			<div class = "col-md-4 col-xd-10">
-				<h1><i class = "ion-key"></i> Buy</h1>
+				<h1><a href="{%url 'GreatHomes:buying' %}"><i class = "ion-key"></i>Buying</a></h1>
 			</div>
 			<div class = "col-md-4 col-xd-10">
-				<h1><i class = "ion-ios-home"></i> Sell</h1>
+				<h1><a href="{%url 'GreatHomes:selling' %}"><i class = "ion-ios-home"></i> Selling</a></h1>
 			</div>
 			
 		</div>
@@ -299,7 +354,7 @@
 	<div class = "footer">
 		<div class = "container-fluid">
 		<div class = "row">
-			<div class = "col-md-3 col-sm-12">
+			<div class = "col-xs-3">
 				<address>
 				Principal Broker: Bill Yu<br>
 				Cell: (410)-984-6661<br>
@@ -307,18 +362,13 @@
 				9822 Tenney Ct <br> Ellicott City, MD 21042
 				</address>
 			</div>
-			<div class = "col-md-8 col-md-offset-1 col-sm-12 footerlist">
+			<div class = "col-xs-7 col-xs-offset-2 footerlist">
 				<ul>
 					<li><a href = "#">Home<a></li>
 					<li><a href = "#">Buying<a></li>
 					<li><a href = "#">Selling<a></li>
 					<li><a href = "#">Home Search<a></li>
-					<li><a href = "#">Team<a></li>
 					<li><a href = "#">About Us<a></li>
-					<li><a href=""><i class = "ion-social-instagram"></i></a></li>
-					<li><a href=""><i class = "ion-social-facebook"></i></a></li>
-					<li><a href=""><i class = "ion-social-twitter"></i></a></li>
-					<li><a href=""><i class = "ion-social-googleplus"></i></a></li>
 				</ul>
 			</div>
 		</div>

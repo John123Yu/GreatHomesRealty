@@ -99,6 +99,7 @@ class Image(models.Model):
 	created_at = models.DateField(auto_now_add=True)
 	updated_at = models.DateField(auto_now=True,)
 
+
 class Client(models.Model):
 	firstName = models.CharField(max_length=100)
 	lastName = models.CharField(max_length=100)

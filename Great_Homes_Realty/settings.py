@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    's3direct'
 ]
 
 MIDDLEWARE = [
@@ -129,3 +130,15 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'John123Yu@gmail.com'
 EMAIL_HOST_PASSWORD = 'P82ke57y'
 EMAIL_PORT = 587
+
+# AWS_SECRET_ACCESS_KEY = 'KeAhAwkm3kVLT446I8N2tcvcnCVgHXpit8zt5UvT'
+# AWS_ACCESS_KEY_ID = 'AKIAJNYQVRBWC4DYMD3A'
+# AWS_STORAGE_BUCKET_NAME = 'greathomesrealty'
+
+# S3DIRECT_REGION = 'us-east-1'
+
+# S3DIRECT_DESTINATIONS = {
+#      'greathomes': {
+#         'key': 'uploads/imgs'
+#     }
+# }

@@ -1,0 +1,476 @@
+<html>
+<head>
+	<title>Buying</title>
+	{% load staticfiles %}
+	<meta name="viewport" content="width=device-width, initial-scale=0.5">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'GreatHomesRealty/ionicons.min.css' %}">
+</head>
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".1").click(function(){
+    	$(".1a").toggle();
+	});
+	$(".2").click(function(){
+    	$(".2a").toggle();
+	});
+	$(".3").click(function(){
+    	$(".3a").toggle();
+	});
+	$(".4").click(function(){
+    	$(".4a").toggle();
+	});
+	$(".5").click(function(){
+    	$(".5a").toggle();
+	});
+	$(".6").click(function(){
+    	$(".6a").toggle();
+	});
+	$(".7").click(function(){
+    	$(".7a").toggle();
+	});
+	$(".8").click(function(){
+    	$(".8a").toggle();
+	});
+	$(".9").click(function(){
+    	$(".9a").toggle();
+	});
+})
+</script>
+<style type="text/css">
+	.question {
+		font-weight: 700;
+		list-style-type: none;
+		margin-top: 1%;
+		margin-left: 0%;
+	}
+	.main li {
+		list-style-type: none;
+		margin-left: 4%;
+		font-size: 1.2em;
+	}
+	.main {
+		padding-top: 3em;
+		padding-bottom: 3em;
+	}
+	.initiallyHidden {
+		display: none;
+	}
+	.main h1 {
+		font-weight: 700;
+	}
+	h3 {
+		margin-left: 3%;
+	}
+	header ul {
+		list-style-type: none;
+		display: inline-block;
+		width: 99%;
+	}
+	header ul li {
+		display: inline-block;
+		margin-left: 2%;
+		margin-top: 1.5%;
+		font-size: 1.5em;
+		color: white;
+	}
+	header li a {
+		font-size: .9em;
+		color: rgb(55, 150, 239);
+	}
+	header {
+		background-color: rgb(1, 49, 94);
+		color: white;
+		font-family: sans-serif;
+	}
+	body {
+		background-image: linear-gradient(rgba(250, 197, 100, .65), rgba(250, 197, 100, .65)), url('{% static "GreatHomesRealty/diagonal_striped_brick.png" %}');
+		font-family: serif;
+	}
+	.header {
+		background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
+		color: white;
+		padding-bottom: 3%;
+		font-family: serif;
+	}
+	.header h1 {
+		display: inline-block;
+		position: relative;
+		top: .55em;
+		left: 5%;
+		font-size: 3em;
+		font-family: serif;
+	}
+	.header ul {
+		margin-left: 8%;
+		list-style: none;
+	}
+	.header ul li {
+		display: inline-block;
+		font-size: 1.2em;
+		padding-right: 2%;
+		padding-left: 2%;
+		border-right: 2px solid white;
+		position: relative;
+		right: 2em;
+		top: 4em;
+	}
+	.header ul li:last-child {
+		border-right: none;
+	}
+	.header a {
+		color: white;
+	}
+	a:hover {
+		color: rgb(250, 197, 100);
+		text-decoration: none;
+	}
+	.footer {
+		background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
+		height: 15em;
+		color: white;
+		font-family: sans-serif;
+		font-weight: 100;
+		margin-top: 5%;
+		padding-top: 5%;
+	}
+	.footer address {
+		font-size: 1.1em;
+		margin-left: 15%;
+	}
+	.footerlist ul {
+		margin-left: 15%;
+	}
+	.footerlist li { 
+		display: inline-block;
+		font-size: 1.1em;
+		padding-right: 3%;
+		margin-top: 3%;
+	}
+	.footerlist li a {
+		color: white
+	}
+	.footerlist li a i {
+		font-size: 1.5em;
+	}
+	@media only screen and (max-width: 480px) {
+		.header {
+			height: 21em;
+		}
+		.footer {
+			height: 20em;
+		}
+	}
+/* Medium sized screens */
+	@media only screen and (min-width: 481px) {
+		.header {
+			height: 17em;
+		}
+		.footer {
+			height: 20em;
+		}
+	}
+	/* Large sized screens */
+	@media only screen and (min-width: 1024px) {
+		.header {
+			height: 10em;
+		}
+		.footer {
+			height: 15em;
+		}
+	}
+</style>
+<body>
+	{% if request.session.login > 0 %}
+	<header>
+		<ul>
+			<li><a href="{%url 'GreatHomes:index' %}">HomePage</a></li>
+			<li><a href="{%url 'UserDashboard:index' %}">DashBoard</a></li>
+			<li><a href="{%url 'UserDashboard:editProfileDisplay' %}">Edit Profile</a></li>
+			<li><a href="{%url 'GreatHomes:showAgentListing' id=request.session.login %}">Your Profile</a></li>
+			<li><a href="{%url 'GreatHomes:showAllListing' %}">Listings</a></li>
+			<li><a href="{%url 'GreatHomes:addListingDisplay' %}">Add Listing</a></li>
+		{% if user.user_level == "Admin" %}
+			<li><a href="{%url 'UserDashboard:createDisplay' %}">Add New Agent</a></li>
+		{% endif %}
+			<li><a href="{%url 'UserDashboard:logout' %}">Log Off</a></li>
+		</ul>
+	</header>
+	{% endif %}
+	<div class = "header">
+		<div class = "container-fluid">
+			<div class = "col-sm-5">
+				<h1><a href="{%url 'GreatHomes:index' %}"><i class = "ion-ios-home"></i> Great Homes Realty</a></h1>
+			</div>
+			<div class = "col-sm-7 navlinks">
+				<ul>
+					<li><a href="{%url 'GreatHomes:showAllListing' %}">More Listings</a></li>
+					<li><a href="{%url 'GreatHomes:buying' %}">Buying</a></li>
+					<li><a href="{%url 'GreatHomes:selling' %}">Selling</a></li>
+					<li>About Us</li>
+					<li><a href="{%url 'GreatHomes:suscribeDisplay' %}">Newsfeed</a></li>
+					<li><a href="{%url 'login:index' %}">Login</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class = "container main">
+		<h1>Selling Your Home</h1>
+		<h3 class = "1"><i class = "ion-android-remove"></i> Appraisals and Market Value</h3>
+		<ul class = "1a initiallyHidden">
+			<li class = "question">Are there standard ways to determine how much a home is worth?</li>
+			<li>Yes. A comparative market analysis and an appraisal are the two most common and reliable ways to determine a home's value. 
+Your real estate agent can provide a comparative market analysis, an informal estimate of value based on the recent selling price of similar neighborhood properties. Reviewing comparable homes that have sold within the past year along with the listing, or asking, price on current homes for sale should prevent you from overpaying.
+A certified appraiser can provide an appraisal of a home. After visiting the home to check such things as the number of rooms, improvements, size and square footage, construction quality, and the condition of the neighborhood, the appraiser then reviews recent comparable sales to determine the estimated value of the home.
+Lenders normally require an appraisal – which runs between $200 to $300 – before they will approve a mortgage loan. This protects the lender by ensuring the home is worth the money you want to borrow. 
+You also can check recent sales in public records, through private firms, and on the Internet to help you determine a home’s potential worth.</li>
+			<li class = "question">How do you determine how much a home is worth?</li>
+			<li>The short answer: a home is ultimately worth what is paid for it. Everything else is really an estimate of value. Take, for example, a hot seller’s market when demand for housing is high but the inventory of available homes for sale is low. During this time, homes can sell above and beyond the asking price as buyers bid up the price. The fair market value, or worth, is established when “a meeting of the minds” between the buyer and the seller takes place.</li>
+			<li class = "question">What about appraised value and market value?</li>
+			<li>A certified appraiser who is trained to provide the estimated value of a home determines its appraised value. The appraised value is based on comparable sales, the condition of the property, and several other factors.
+Market value is the price the house will bring at a given point in time, once the buyer and seller establish a “meeting of the minds” on price.</li>
+			<li class = "question">What is the difference between list price and sales price?</li>
+			<li>The list price is a seller's advertised price, or asking price, for a home. It is a rough estimate of what the seller wants to complete a home sale. A seller can price high, low – (which seldom happens), or very close to the amount they want to get. A good way to determine if the list price is a fair one is to look at the sales prices of similar homes that have recently sold in the area. 
+The sales price is the actual amount a home sells for.</li>
+		</ul>
+
+		<h3 class = "2"><i class = "ion-android-remove"></i> Disclosure</h3>
+		<ul class = "2a initiallyHidden">
+			<li class = "question">Are agents responsible for disclosing material facts?</li>
+			<li>They can certainly be held accountable, particularly if they had prior knowledge of a material fact or should have known about it.
+For example, if the seller has to use pans to collect water after a heavy rain, it is the agent’s responsibility to question the seller about the integrity of the roof, and then relay this information to potential buyers. However, if the seller deliberately hides a defect from the agent for which the agent had no prior knowledge, then the agent is not accountable.
+Experts say agents are not home inspectors, but they are expected to use their best judgment when something appears suspicious.</li>
+			<li class = "question">Do I have to disclose information about my home?</li>
+			<li>Disclosure could protect you from a lawsuit. Today, home sellers in most states must now fill out a form disclosing material facts about their homes. Material facts are details about the home’s condition or legal status, as well as the age of various components.
+If your state does not require a written disclosure, the real estate laws probably require sellers to disclose any known problems with the home they are selling.</li>
+			<li class = "question">What kinds of things are considered material facts?</li>
+			<li>The following examples include details that would qualify as material facts that must be revealed by sellers about their homes:
+
+Damage from wood boring insects
+Mold or mildew in the home
+Leaks in the roof or foundation walls
+Amount of property taxes paid annually
+Problems with sewer or septic systems
+Age of shingles and other roof components
+A buried oil tank
+Details about any individual who claims to have an interest in the property
+Information about a structure on the property that overlaps an adjacent property
+
+Some things are not material facts and do not have to be disclosed. They include personal information about the seller and the seller’s reason for moving.
+Among those things that may or may not be material facts: whether a death took place in the home or whether a home is considered haunted.</li>
+		</ul>
+
+		<h3 class = "3"><i class = "ion-android-remove"></i> Financing</h3>
+		<ul class = "3a initiallyHidden">
+			<li class = "question">How does the seller determine what rate to provide?</li>
+			<li>The interest rate on a purchase money note is negotiable, as are the other terms in a seller-financed transaction. To get an idea about what to charge, sellers can check with a lender or mortgage broker to determine current rates on mortgage loans, including second mortgages. 
+Because sellers, unlike conventional lenders, do not charge loan fees or points, seller-financed costs are generally less than those associated with conventional home loans. 
+Interest rates are generally influenced by current Treasury bill and certificate of deposit rates. 
+Understandably, most sellers are not open to making a loan for a lower return than could be invested at a more profitable rate of return elsewhere. So the interest rates they charge may be higher than those on conventional loans, and the length of the loan shorter, anywhere from five to 15 years.</li>
+			<li class = "question">What are the benefits of seller financing?</li>
+			<li>Seller financing is a viable option when the seller does not immediately need the entire cash equity they have accumulated in the home.
+In return for providing financial assistance to the buyer, the seller receives tax benefits, attracts a larger pool of potential buyers, generally completes the sale sooner, and gets good interest earnings.
+As for the buyer, seller financing offers less rigid qualification requirements and cost savings by eliminating nearly all loan fees.
+Fear of default often makes many sellers reluctant to take back a second note or finance the entire purchase. A thorough credit check should help to dispel many of these fears, although the mortgage also allows the seller to foreclose on the property in case of default. 
+A seller may also require the buyer to carry hazard insurance on the property and include a due-on-sale clause, a provision in the mortgage note that allows the seller to demand full repayment if the borrower sells the property. Other financing, disclosure and repayment-term requirements also will need to be met.
+It is a good idea to consult an attorney when putting together this kind of transaction.</li>
+			<li class = "question">What is a bridge loan?</li>
+			<li>It is a short-term bank loan of the equity in the home you are selling. You may take out a bridge loan, or interim financing, to help with a knotty situation: closing on the home you are buying before you close on the property you are selling. This loan basically enables you to have a place to live after the closing on the old home. 
+The key to a bridge loan is having a qualified buyer and a signed contract. Usually, the lender issuing the mortgage loan on the new home will write the interim financing as a personal note due at settlement on the property being sold.
+If, however, there is no buyer for the property you have up for sale, most lenders will place a lien on the property, thereby making that bridge loan a kind of second mortgage.
+Things to consider: interest rates are high, points are high, and there are costs and fees involved on bridge loans. It may be cheaper to borrow from your 401(K). Actually, any secured loan is acceptable to lenders for the down payment. So if you have stocks or bonds or an insurance policy, you can borrow against them as well.</li>
+			<li class = "question">What are the advantages of owning a home?</li>
+			<li>There are many. Among the most appealing: you own it, which gives you, instead of a landlord, control of your living space. Other benefits stem from potential tax savings and the buildup of equity as your property likely appreciates in price over time. Equity can be used to help put children through college, purchase a second home, or make home improvements.
+The mortgage interest paid on a home loan is tax deductible, as is the local property tax. If you get a fixed-rate home mortgage loan, you also can invest more wisely knowing your monthly mortgage payment, unlike rent, will not change substantially.</li>
+			<li class = "question">What is seller financing?</li>
+			<li>Also known as a purchase money mortgage, it is when the seller agrees to “lend” money to the buyer to purchase and close on the seller’s home. Usually sellers do this when money is tight, interest rates are high or when a buyer has difficulty qualifying for a conventional loan or meeting the purchase price.
+Seller financing differs from a traditional loan because the seller does not actually give the buyer cash to complete the purchase, as does the lender. Instead, it involves issuing a credit against the purchase price of the home. The buyer executes a promissory note or trust deed in the seller's favor.
+The seller may take back a second note or finance the entire purchase if he owns the home free and clear. 
+The buyer makes a sizeable down payment and agrees to pay the seller directly every month.</li>
+		</ul>
+
+		<h3 class = "4"><i class = "ion-android-remove"></i> Foreclosures</h3>
+		<ul class = "4a initiallyHidden">
+			<li class = "question">Can a home be sold for less than its mortgage?</li>
+			<li>Sometimes. But it is a complicated process and a lot will depend on the lender. This process is called a “short sale,” which occurs when a lender agrees to write off the portion of a mortgage that's higher than the value of a home. But, usually, a buyer must be willing to purchase the property first.
+A short sale may be more complicated if the loan has been sold in the secondary market.
+Then the lender will need permission from Freddie Mac or Fannie Mae, the two major secondary-market players.
+If the loan was a low down payment mortgage with private mortgage insurance, the lender also will need to involve the mortgage insurance company that insured the low down payment loan.
+The short sale can keep the homeowner from landing in bankruptcy or foreclosure. But it is not an easy procedure to approve, and it involves as much, if not more, paperwork than an original mortgage application.
+Instead of proving your credit worthiness and financial stability, you must prove you are broke. And any remaining difference between your home's value and the balance on your mortgage is considered a forgiveness of debt, which usually means it is taxable income.</li>
+			<li class = "question">How long do bankruptcies and foreclosure stay on a credit report?</li>
+			<li>They can remain on your credit record for seven to 10 years. 
+However, a borrower who has worked hard to reestablish good credit may be shown some leniency by the lender. And the circumstances surrounding the bankruptcy may also influence a lender's decision. For example, if you went bankrupt because you were laid off from your job, the lender may be more sympathetic. If, however, you went through bankruptcy because you overextended personal credit lines and lived beyond your means, it is unlikely the lender will readily give you a break.</li>
+			<li class = "question">If faced with foreclosure, what are my options?</li>
+			<li>Talk with your lender immediately. The lender may be able to arrange a repayment plan or the temporary reduction or suspension of your payment, particularly if your income has dropped substantially or expenses have shot up beyond your control. You also may be able to refinance the debt or extend the term of your mortgage loan. In almost every case, you will likely be able to work out some kind of deal that will avert foreclosure.
+If you have mortgage insurance, the insurer may also be interested in helping you. The company can temporarily pay the mortgage until you get back on your feet and are able to repay their “loan.”
+If your money problems are long term, the lender may suggest that you sell the property, which will allow you to avoid foreclosure and protect your credit record. 
+As a last resort, you could consider a deed-in-lieu of foreclosure. This is where you voluntarily “give back” your property to the lender. While this will not save your house, it is not as damaging to your credit rating as a foreclosure. Exhaust all other viable options before making a decision.</li>
+			<li class = "question">What types of foreclosures are there?</li>
+			<li>There are two types – judicial and non-judicial. A foreclosure that results from a court action is a judicial foreclosure. The mortgage deed or trust does not have a power of sale clause, therefore the lender, trustee or another lienholder must take the borrower to court to recover the unpaid balance of a delinquent debt. By contrast, a non-judicial foreclosure is one in which a foreclosure can be completed outside the court system. Real property can be sold under a power of sale in a mortgage deed or trust that is in default, but the lender is unable to obtain a deficiency judgment.</li>
+		</ul>
+
+		<h3 class = "5"><i class = "ion-android-remove"></i> Getting Started</h3>
+		<ul class = "5a initiallyHidden">
+			<li class = "question">Are there tips for selling a vacant home?</li>
+			<li>Yes. Once furniture is removed from the home, you will notice all kinds of imperfections you never paid attention to before – rips in the carpet, holes in the walls, and dinginess. In an empty house, everything stands out. What you see is what potential buyers will also see. So you may need to paint, tear up old carpet, and replace the kitchen floor. 
+To get rid of the “empty house” feeling, leave a few pieces of furniture behind – simple things like a lamp, chairs, and a table will do.
+Pay special attention to maintenance. Someone will need to dust and vacuum, leaves will need to be raked, and the grass cut.
+In the winter, consider having the heating system shut down and drained to save money. 
+But keep the electricity running because lights will be needed to show the house. 
+Watch out for that musty smell, particularly during the summer months, that settles in from having the windows sealed and locked. And beware of pests such as mice, squirrels, ants and bats.</li>
+			<li class = "question">Do I need an attorney to sell a home?</li>
+			<li>Although most sellers can handle routine real estate purchase contracts, some experts say it is a good idea to be represented by an attorney, particularly if you are selling on your own. You should choose one with expertise in real estate transactions. Before hiring someone discuss all the details of the transaction, including all legal costs you will incur. 
+A good attorney will assist you in completing the deal swiftly and with confidence.</li>
+			<li class = "question">How can I get a quick sale, particularly in a slow market?</li>
+			<li>One of the most important things to consider is price. You may want to reduce the price of your home or, at the very beginning, set it at a low price that will generate more buyer interest.
+Cash is often an incentive, both for the buyer as well as the agent. You could offer the buyer a $1,000 to $2,000 decorating rebate upon closing the deal. It is also not uncommon to offer the selling agent a $500 bonus. However, some brokers – who supervise agents and run real estate offices – may prohibit such incentives, as do some Realtor boards. Check to find out.
+Other common incentives: paying for the property inspection and warranty policy and getting your home preliminarily approved for FHA and VA loans, thereby making it more attractive to a larger number of buyers. Contact a lender who writes FHA-insured and VA-guaranteed loans.</li>
+			<li class = "question">Should I sell my home first or wait until I have bought another home?</li>
+			<li>This is a tough decision, but the answer will depend on your personal situation, as well as the condition of the local housing market. 
+If you put your home on the market first, you may have to scramble to find another one before settlement, which could cause you to buy a home that does not meet all your requirements. If you cannot find another home, you may need to move twice, temporarily staying with relatives or in a hotel. 
+On the other hand, if you make an offer to buy first, you may be tempted to sell your existing home quickly, even at a lower price.
+The advantage of buying first is you can shop carefully for the right home and feel comfortable with your decision before putting the existing home on the market.
+On the flip side, the advantage of selling your existing home first is that it maximizes your negotiating position because you are under no pressure to sell quickly. It also eliminates the need to carry two mortgages at once. 
+Talk with your agent for advice. Discuss the pros and of each and whether certain contingencies written into the contract can ease some of the pressures. </li>
+			<li class = "question">What are some costs associated with buying a new home?</li>
+			<li>Basically, the costs are no different from when you purchased your existing home. They include moving expenses, loan costs, the down payment, a home inspection, title work and policy, and paying for a new hazard insurance policy. Your lender can give you a disclosure of estimated costs when you apply to be pre-approved for a home loan.</li>
+			<li class = "question">What are some costs associated with selling my home?</li>
+			<li>Besides the costs related to making repairs and improving the overall appearance of the home, as the seller you will also need to pay the following:
+
+A real estate commission, if you use an agency to sell.
+Advertising costs, marketing materials, and other fees if you sell the home yourself.
+Attorney, closing, or other professional fees.
+Title insurance
+Excise tax for the sale.
+Prorated costs for your share of annual expenses, such as property taxes, homeowner association fees, and fuel tank rentals.
+Any other fees normally paid by sellers in your area, including points, survey, and appraisal fees.
+
+To get a better handle on all costs, ask a real estate agent. Agents deal with this information daily and can give you a pretty good estimate of the closing costs you can expect to pay.</li>
+			<li class = "question">What else should I know?</li>
+			<li>Once your home is available to be shown strive to keep it in tip-top shape. This will require a lot of effort on your part, but you want buyers to feel welcomed and not turned off by unmade beds, cluttered floors, and grungy bathrooms.
+Realize, too, that your life will be temporarily inconvenienced. When an agent – yours as well as others – calls wishing to bring a buyer to see the home at the last minute or on the same day, respond favorably. Remember your goal is to get the home sold, and that can only be accomplished if people get to see it. Flexibility is the key to a quick sale.
+Plan not to be present when buyers pass through. It is awkward and unsettling for them to have the owners present. If you cannot leave, sit in the backyard. But do not attempt to have conversations with the buyer. Speak only when spoken to; be brief and polite. 
+Finally, pay special attention to pets, particularly dogs. They can be intimidating. Put them on a leash and in the backyard. Better yet, when possible, take them with you. And be keen to pet odors. They can turn buyers away.</li>
+			<li class = "question">What should I do to prepare my home for sale?</li>
+			<li>Start by finding out its worth. Contact a real estate agent for a comparative market analysis, an informal estimate of value based on the recent selling price of similar neighborhood properties. Or get a certified appraiser to provide an appraisal.
+Next, get busy working on the home’s appearance. You want to make sure it is in the best condition possible for showing to prospective buyers so that you can get top dollar. This means fixing or sprucing up any trouble spots that could deter a buyer, such as squeaky doors, a leaky roof, dirty carpet and walls, and broken windows. 
+The “curb appeal” of your home is extremely important. In fact, it is the first impression that buyers form of your property as they drive or walk up. So make sure the lawn is pristine – the grass cut, debris removed, garden beds free of weeds, and hedges trimmed.
+The trick is not to overspend on pre-sale repairs and fix-ups, especially if there are few homes on the market but many buyers competing for them. On the other hand, making such repairs may be the only way to sell your home in a down market.</li>
+			<li class = "question">When is the best time to sell a home?</li>
+			<li>The best time to sell is when you are ready, or when you must. That is, when you have outgrown the space in your current home, or you prefer to trade down to something smaller. Perhaps your martial status has changed, which necessitates a move, or you need to relocate for a job. 
+Market conditions also play a role, as do seasonal conditions. For example, your chances of getting top dollar for your home are more likely in a seller’s market, when demand outweighs supply, than in a buyer’s market.
+Local and national economic factors also may dictate when to sell.</li>
+		</ul>
+
+		<h3 class = "6"><i class = "ion-android-remove"></i> Lease Options</h3>
+		<ul class = "6a initiallyHidden">
+			<li class = "question">How does a lease option work?</li>
+			<li>A landlord agrees to give a renter an exclusive option to purchase the property. The option price is usually determined at the outset, but not always, and the agreement states when the purchase should take place – whether, say, six months, or a year or two down the road.
+A portion of the rent is used to make the future down payment. Most lenders will accept the down payment if the rental payments exceed the market rent and a valid lease-purchase agreement is in effect. 
+Before you opt to do a lease option, find out as much as possible about how they work. Talk to real estate agents, read published materials, and, in the end, have an attorney review any paperwork before you sign on the dotted line.</li>
+			<li>What is a lease option?</li>
+			<li class = "question">It is an agreement between a renter and a landlord in which the renter signs a lease with an option to purchase the property. The option only binds the seller; the tenant has a choice to make a purchase or not.
+Lease options are common among buyers who would like to own a home but do not have enough money for the down payment and closing costs. A lease option may also be attractive to tenants who are working to improve bad credit before approaching a lender for a home loan. 
+A lease option also may be a way for the seller to move property in a slow market. Seller advantages include earning above-market rent, retaining all the property income tax deductions during the lease-option period, and attracting tenants who will care for the property as though they owned it.</li>
+		</ul>
+
+		<h3 class = "7"><i class = "ion-android-remove"></i> Negotiating</h3>
+		<ul class = "7a initiallyHidden">
+			<li class = "question">Any advice on negotiating?</li>
+			<li>Be patient, know your home’s worth, adopt a positive attitude, and do not let emotions – anger, pride, greed, or prejudice – get in the way of negotiating the best deal. 
+Your home obviously means a lot to you, but you have already made the decision to move on, so begin to think of your home as “the house” or “the condo,” instead of “my home.” 
+When reasonable offers come along, take them seriously. You can always counter any offer made by the buyer that comes near your asking price. Do not spoil a good deal over a few hundred dollars.</li>
+			<li class = "question">Can the seller also include contingencies in a contract?</li>
+			<li>Yes. For example, if you decide to sell your existing home first before buying another one, you can make the sale of your home contingent on finding a replacement home.
+Some sellers opt for this contingency to avoid a double move, such as moving to a hotel or rental until a new home is found and made available. 
+However, there is one problem with this type of contingency: it can inconvenience the buyer, particularly if his own home is in escrow. He may not be willing to wait for you to move. 
+This strategy has a better chance of working when the market is relatively strong, your home is a rare find, the price and terms of the transaction are very favorable for the buyer, or the buyer is in no hurry to move.</li>
+			<li class = "question">Do I have to consider contingencies made by the buyer?</li>
+			<li>You can reject, accept, or counter any offer that is presented to you. Most offers include contingencies, which protect the buyer in case something goes wrong.
+The two most common contingencies deal with financing, which makes the sale dependent on the buyer’s ability to obtain a loan commitment from a lender within a stated time period, and an inspection, which allows the buyer to have a professional inspect the property to their satisfaction.
+There really is no reason not to consider these contingencies because they are quite reasonable and standard.
+However, think twice about a contingency that is predicated on you making expensive home repairs, such as a kitchen renovation. Now, if the roof is caving in, that is an entirely different story. You may need to spend money to replace it or lower the asking price of the home.</li>
+			<li class = "question">How do I respond to a low-ball offer?</li>
+			<li>Let your agent know it is too low to warrant a counteroffer and that you are willing to negotiate but only once a more reasonable offer is made. Ask the agent if the buyer was shown comparable market values of similar homes that have recently sold in your area; and ask if the buyer was ever properly qualified. You do not have to settle for less if you are realistic about your chances of getting more.
+</li>
+		</ul>
+
+		<h3 class = "8"><i class = "ion-android-remove"></i> Tax Matters</h3>
+		<ul class = "8a initiallyHidden">
+			<li class = "question">Are home selling costs deductible?</li>
+			<li>If you sell your home and realize a taxable gain even after the exclusion, you can reduce your gain with selling costs.
+Your gain is defined as your home’s selling price, minus deductible closing costs, minus your basis. The basis is the original purchase price of the home, plus improvements, less any depreciation.
+Real estate broker’s commissions, title insurance, legal fees, administrative costs, and inspection fees are all considered to be selling costs.</li>
+			<li class = "question">Are property taxes deductible?</li>
+			<li>Yes. Like the mortgage interest paid on a home loan, property taxes are fully deductible from your income. You may deduct them every year on your primary residence, second home and other investment properties. 
+However, escrow money held for property taxes cannot be deducted until the money is actually used to pay the property taxes.</li>
+			<li class = "question">Are seller-paid points deductible?</li>
+			<li>For the buyer, yes, but not the seller – even though the seller pays them. Since January 1, 1991, homebuyers have been able to deduct points paid by the seller whereas, previously, they could only deduct the actual points they paid on the home loans themselves.</li>
+			<li class = "question">Can I deduct a loss on the sale of my home?</li>
+			<li>No. A loss from the sale of personal–use property, such as a home or car, is not deductible. They are considered nondeductible personal losses, and you cannot reduce your tax bill by deducting them the way you would deduct stock and investment losses on your tax returns.</li>
+			<li class = "question">Can I deduct improvements made to my home?</li>
+			<li>Yes, but only after you have sold it because improvements add to the basis of your home. Remember your gain is defined as your home’s selling price, minus deductible closing costs, minus your basis. The basis is the original purchase price of the home, plus improvements, less any depreciation.
+The IRS defines improvements as those items that “add to the value of your home, prolong its useful life, or adapt it to new uses” – such as putting in new plumbing or wiring or adding another bathroom.</li>
+			<li class = "question">How do capital gains work when you sell your home?</li>
+			<li>If you sell your primary residence, you may be able to exclude up to $250,000 of gain – $500,000 for married couples – from your federal tax return. To claim the exclusion, the IRS says your home must have been owned by you and used as your main home for a period of at least two out of the five years prior to its sale.
+You also must not have excluded gain on another home sold during the two years before the current sale. However, special rules apply for members of the armed, uniformed and foreign services and their families in calculating the 5-year period. 
+If you do not meet the ownership and use tests, you may use a reduced maximum exclusion amount. But only if you sold your home due to health, a change in place of employment, or unforeseen circumstances. 
+If you can exclude all the gain from the sale of your home, you do not report it on your federal tax return. If you cannot exclude all the gain, or you choose not to, you must use Schedule D of Form 1040, Capital Gains or Losses, to report the total gain and claim the exclusion you qualify for.</li>
+			<li class = "question">What about repairs made to get the home ready for sale?</li>
+			<li>If you realize a taxable gain after you sell your home, even with an exclusion, you can reduce your gain with selling costs. These selling costs may include items that are otherwise considered to be repairs – such as painting, wallpapering, even planting flowers – if you complete them within 90 days of your home sale and provided they were completed to make the home more saleable.</li>
+			<li class = "question">What if you have more than one home?</li>
+			<li>For more than one home, you can exclude the gain only from the sale of your main residence. You must pay tax on the gain from selling any other home. If you have two homes and live in both of them, your main home is usually the one you live in most often.</li>
+		</ul>
+
+		<h3 class = "9"><i class = "ion-android-remove"></i> Working with a Real Estate Agent</h3>
+		<ul class = "9a initiallyHidden">
+			<li class = "question">Do I really need an agent?</li>
+			<li>Most home sellers hire real estate agents to list and sell their homes. Most of those who do not are known as For Sale By Owners, or FSBOs. They market and sell their homes themselves.
+However, a small number of people sell without marketing their homes. They include homeowners who transfer property to family members or landlords who directly offer tenants the first right to purchase property before they place it for sale on the market.
+In the end, most FSBOs eventually hire an agent because the agent will handle all the details of a successful home sale – including the contract, forms, and disclosure statements – and expose the home to the widest range of prospective buyers through the local Multiple Listing Service (MLS).</li>
+			<li class = "question">How do I find the right agent for me?</li>
+			<li>To begin with, think local. Select someone who is very familiar with your neighborhood and the properties for sale in it. Then, if you are selling, say, a condominium, choose an agent with expertise selling apartments to potential homeowners. 
+Because you will want the widest possible exposure for your home, you also will want a real estate firm that works with other agencies to get your property sold. The Multiple Listing Service (MLS) used by REALTORS® , licensed members of the NATIONAL ASSOCIATION OF REALTORS®, is still the most common and effective form of cooperation used today.
+Beyond these parameters, select an agent who is competent, efficient, and ethical. 
+Perhaps the agent who first sold you your home would be a perfect candidate. If not, ask family, friends, and neighbors for recommendations, or choose a firm headed by an individual who is known in your community.</li>
+			<li class = "question">Is the commission negotiable?</li>
+			<li>Yes. There is no standard commission. They are not set by law and vary depending on service, customer needs, and company policy. In general, agents charge between 4 percent and 8 percent for full service. Some agents prefer not to offer sellers the option of paying a fee for an individual service.
+If you insist on overpricing your home, an agent may well insist on a higher commission to cover the added marketing expenses and time that are needed to sell it.
+Think of a commission as a point you must negotiate and evaluate.</li>
+			<li class = "question">What if I am not happy with the listing agent and want to terminate the contract?</li>
+			<li>Experts say unhappiness is not a legal reason to terminate a valid home sale-listing contract. Legally, to cancel a listing, you must be able to prove the agent's lack of "due diligence." This means the agent isn't taking the normal steps to properly market your home, such as putting your listing into the Multiple Listing Service (MLS), advertising on the Internet and in local newspapers, and posting a for-sale sign on the property.
+If your home is overpriced, perhaps you need to consider reducing the price to spark buyer interest. Otherwise, you may need to meet with the listing agent and his or her supervising broker to discuss the problem.</li>
+			<li class = "question">What is the most common type of contract for listing properties?</li>
+			<li>The exclusive right to sell. It gives the real estate broker the exclusive right to sell your home during the term of the listing. If a sale occurs – even if you sell the home yourself – the broker gets a commission. The broker may share the listing with other brokers on the Multiple Listing Service (MLS) to get the widest possible exposure for your home. If you request that the property not be listed on a multiple basis, only the broker named in the contract and his or her sales agents can market and show it.</li>
+		</ul>
+	</div>
+	</div>
+		<div class = "footer">
+		<div class = "container-fluid">
+		<div class = "row">
+			<div class = "col-xs-3">
+				<address>
+				Principal Broker: Bill Yu<br>
+				Cell: (410)-984-6661<br>
+				Email: BillYu99@gmail.com <br>
+				9822 Tenney Ct <br> Ellicott City, MD 21042
+				</address>
+			</div>
+			<div class = "col-xs-8 col-xs-offset-1 footerlist">
+				<ul>
+					<li><a href = "#">Home<a></li>
+					<li><a href = "#">Buying<a></li>
+					<li><a href = "#">Selling<a></li>
+					<li><a href = "#">Home Search<a></li>
+					<li><a href = "#">Team<a></li>
+					<li><a href = "#">About Us<a></li>
+				</ul>
+			</div>
+		</div>
+		</div>
+	</div>
+</body>
+</html>

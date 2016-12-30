@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from ..LoginAndReg.models import User, LoginManager, RegisterManager
 from ..UserDashboard.models import Messages
-from .form import addListingForm, ImageForm, MainImageForm, UserImageForm
+from .form import addListingForm, UserImageForm, MainImageForm, ImageForm
 from models import Listing, User_Listings, Image, ListingManager, Client
 from django.core.urlresolvers import reverse
 try:
@@ -12,9 +12,12 @@ from django.core.mail import send_mail, send_mass_mail
 from django.conf import settings
 import json 
 from django.views.generic.edit import View
+from django.views.generic import FormView
+# from .forms import S3DirectUploadForm
 
 
 def index(request):
+	request.session['clientLogin'] = "false"
 	allListings = Listing.listingMgr.all()[0:3]
 	try:
 		user = User.registerMgr.get(id = request.session['login'])
@@ -182,7 +185,6 @@ def deleteListing(request, id):
 	else:
 		return redirect(reverse('GreatHomes:showAllListing'))
 
-
 def deleteImage(request, id):
 	listing = Listing.listingMgr.get(images__id = image.id)
 	if request.method == "POST":
@@ -227,21 +229,27 @@ class SendMail(View):
 
 	def post(self, request, id):
 		if request.method == "POST":
+			emails = []
 			global sendMailMessages
 			sendMailMessages = {}
-			listing = Listing.listingMgr.get(id = id)
-			manyToMany = User_Listings.objects.filter(listing_id = id)
-			emails = []
-			for item in manyToMany:
-				emails.append(item.user.email)
+			if id == "0":
+				pass
+			else:
+				listing = Listing.listingMgr.get(id = id)
+				manyToMany = User_Listings.objects.filter(listing_id = id)
+				for item in manyToMany:
+					emails.append(item.user.email)
 			emails.append("billyu99@gmail.com")
+			emails.append("John123Yu@gmail.com")
 			results = Client.sendMailMgr.sendMail(request.POST['first_name'], request.POST['last_name'],request.POST['phone'], request.POST['email'], request.POST['message'])
 			if results[0]:
 				sendMailMessages['success'] = "Your email has been sent"
 				fromEmail = request.POST['email']
 				subject = request.POST['first_name'] + " " + request.POST['last_name'] + " " + "Prospective Client"
-				message =  request.POST['phone'] + " " + fromEmail + " " + listing.addressStreet + " " + str(listing.MLS) + " " + request.POST['message']
-				fromEmail = request.POST['email']
+				if id == "0":
+					message =  request.POST['phone'] + " " + fromEmail + " "  + request.POST['message']
+				else:
+					message =  request.POST['phone'] + " " + fromEmail + " " + listing.addressStreet + " " + str(listing.MLS) + " " + request.POST['message']
 				send_mail(
 					subject,
 					message,
@@ -264,11 +272,66 @@ def suscribeDisplay(request):
 		user = User.registerMgr.get(id = request.session['login'])
 	except:
 		user = "none"
-	context = {
+	try:
+		request.session['clientLogin']
+	except:
+		request.session['clientLogin'] = "false"
+	if request.session['clientLogin'] == "true":
+		context = {
 		'all_messages': Messages.objects.all(),
 		'Admin': user
-	}
+		}
+	elif user != "none":
+		context = {
+		'all_messages': Messages.objects.all(),
+		'Admin': user
+		}
+	else: 
+		context = {
+		'all_messages': Messages.objects.all().order_by('created_at')[:2],
+		'Admin': user
+		}
 	return render(request, 'GreatHomesRealty/suscribeDisplay.html',  context )
+
+clientLoginMessage = {}
+class ClientLogin(View):
+	def get(self, request):
+		if request.method == "GET":
+			global clientLoginMessage
+			print clientLoginMessage
+			try: 
+				user = User.registerMgr.get(id = request.session['login'])
+			except:
+				user = "none"
+			if request.session['clientLogin'] == "true":
+				clientLoginMessage['all_messages'] = Messages.objects.all()
+				clientLoginMessage['Admin'] = user
+			else:
+				clientLoginMessage['all_messages'] = Messages.objects.all().order_by('created_at')[:2]
+				clientLoginMessage['Admin'] = user
+			return render(request, 'GreatHomesRealty/clientLoginAjax.html', clientLoginMessage)
+		else:
+			return redirect(reverse('GreatHomes:suscribeDisplay'))
+
+	def post(self, request):
+		if request.method == "POST":
+			global clientLoginMessage
+			clientLoginMessage = {}
+			try:
+				client = Client.clientMgr.get(email = request.POST['emailLogin'])
+			except:
+				client = 0
+			if client == 0:
+				clientLoginMessage['noEmail'] = "Entered email is not yet suscribed"
+				return redirect(reverse('GreatHomes:clientLogin'))
+			else:
+				print "HEREEEEEE"
+				clientLoginMessage['success'] = "You've successfully logged in"
+				request.session['clientLogin'] = "true"
+				return redirect(reverse('GreatHomes:clientLogin'))
+		else:
+			return redirect(reverse('GreatHomes:suscribeDisplay'))
+
 
 suscribe_error_messages = {}
 class Suscribe(View):
@@ -351,4 +414,18 @@ def displaySubscribers(request):
 def contact(request):
 	return render(request, 'GreatHomesRealty/contact.html' )
 
+def buying(request):
+	return render(request, 'GreatHomesRealty/buy.html')
+
+def selling(request):
+	return render(request, 'GreatHomesRealty/sell.html')
+
+def mortgage(request):
+	return render(request, 'GreatHomesRealty/mortgage.html')
+
+def investing(request):
+	return render(request, 'GreatHomesRealty/investing.html')
+
+def owningHome(request):
+	return render(request, 'GreatHomesRealty/owningHome.html')
 

@@ -2,44 +2,49 @@
 <head>
 	<title></title>
 	{% load staticfiles %}
+	<meta name="viewport" content="width=device-width, initial-scale=0.5">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<link rel="stylesheet" type="text/css" href="{% static 'GreatHomesRealty/ionicons.min.css' %}">
 </head>
 <style type="text/css">
 	.header {
-		background-image: linear-gradient(rgba(0, 0, 0, 0.83), rgba(0, 0, 0, 0.45));
-		height: 10em;
+		background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
 		color: white;
-		text-align: right;
+		padding-bottom: 3%;
 		font-family: serif;
 	}
 	.header h1 {
 		display: inline-block;
 		position: relative;
-		right: 4.05em;
 		top: .15em;
+		left: 5%;
 		font-size: 3em;
 		font-family: serif;
 	}
 	.header ul {
+		margin-left: 8%;
 		list-style: none;
 	}
 	.header ul li {
 		display: inline-block;
 		font-size: 1.2em;
-		padding-right: 1%;
-		padding-left: 1%;
+		padding-right: 2%;
+		padding-left: 2%;
 		border-right: 2px solid white;
 		position: relative;
-		right: 1.5em;
-		top: .4em;
+		right: 2em;
+		top: 4em;
 	}
 	.header ul li:last-child {
 		border-right: none;
 	}
 	.header a {
 		color: white;
+	}
+	a:hover {
+		color: rgb(250, 197, 100);
+		text-decoration: none;
 	}
 	.ion-ios-home {
 		font-size: 1.5em;
@@ -64,10 +69,11 @@
 	header {
 		background-color: rgb(1, 49, 94);
 		color: white;
+		font-family: sans-serif;
 	}
 	img {border: 1.5px solid grey;}
 	body {
-		background-image: url('{% static "GreatHomesRealty/new_year_background.png" %}');
+		background-image: linear-gradient(rgba(250, 197, 100, .65), rgba(250, 197, 100, .65)), url('{% static "GreatHomesRealty/diagonal_striped_brick.png" %}');
 	}
 	.addressdiv {
 		margin-top: 4%;
@@ -116,28 +122,32 @@
 		margin-top: 3%;
 	}
 	.footer {
-		background-image: linear-gradient(rgba(0, 0, 0, .65), rgba(0, 0, 0, .85));
+		background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
 		height: 15em;
 		color: white;
 		font-family: sans-serif;
 		font-weight: 100;
-		margin-top: 3%;
+		margin-top: 5%;
+		padding-top: 5%;
 	}
 	.footer address {
-		margin-top: 18%;
 		font-size: 1.1em;
+		margin-left: 15%;
 	}
 	.footerlist ul {
-		margin-left: 21%;
+		margin-left: 15%;
 	}
 	.footerlist li { 
 		display: inline-block;
-		margin-top: 13%;
-		margin-right: 5%;
 		font-size: 1.1em;
+		padding-right: 3%;
+		margin-top: 3%;
 	}
 	.footerlist li a {
 		color: white
+	}
+	.footerlist li a i {
+		font-size: 1.5em;
 	}
 	.social-media {
 		margin: 0px;
@@ -150,6 +160,32 @@
 		left: 65%;
 		top: .7em;
 		font-size: 1.5em;
+	}
+	@media only screen and (max-width: 480px) {
+		.header {
+			height: 21em;
+		}
+		.footer {
+			height: 20em;
+		}
+	}
+/* Medium sized screens */
+	@media only screen and (min-width: 481px) {
+		.header {
+			height: 17em;
+		}
+		.footer {
+			height: 20em;
+		}
+	}
+	/* Large sized screens */
+	@media only screen and (min-width: 1024px) {
+		.header {
+			height: 10em;
+		}
+		.footer {
+			height: 15em;
+		}
 	}
 </style>
 <body>
@@ -170,13 +206,15 @@
 	</header>
 	{% endif %}
 	<div class = "header">
-		<div class = "row">
-			<div class = "col-md-12 col-xs-6">
+		<div class = "container-fluid">
+			<div class = "col-sm-5">
+				<h1><a href="{%url 'GreatHomes:index' %}"><i class = "ion-ios-home"></i> Great Homes Realty</a></h1>
+			</div>
+			<div class = "col-sm-7 navlinks">
 				<ul>
-					<h1><i class = "ion-ios-home"></i> <a href="{%url 'GreatHomes:index' %}">Great Homes Realty</a></h1>
 					<li><a href="{%url 'GreatHomes:showAllListing' %}">More Listings</a></li>
-					<li>Buying</li>
-					<li>Selling</li>
+					<li><a href="{%url 'GreatHomes:buying' %}">Buying</a></li>
+					<li><a href="{%url 'GreatHomes:selling' %}">Selling</a></li>
 					<li>About Us</li>
 					<li><a href="{%url 'GreatHomes:suscribeDisplay' %}">Newsfeed</a></li>
 					<li><a href="{%url 'login:index' %}">Login</a></li>
@@ -188,7 +226,7 @@
 	<div class = "body">
 		<div class = "container">
 		{% for listing in allListings %}
-			<div class = "col-md-4 col-sm-6 col-xs-8 picture">
+			<div class = "col-md-4 col-sm-6 col-xs-6 picture">
 				<div class = "row addressdiv">
 					{% if listing.mainPicture %}
 					<a class = "imagelist" href="{%url 'GreatHomes:showListing' id=listing.id %}"><img class = "listingimage" src="{{listing.mainPicture.url}}" height = "200" width = "300"></a>
@@ -207,17 +245,17 @@
 
 
 	<div class = "footer">
-		<div class = "container">
-			<div class = "row">
-				<div class = "col-md-3">
+		<div class = "container-fluid">
+		<div class = "row">
+			<div class = "col-xs-3">
 				<address>
 				Principal Broker: Bill Yu<br>
 				Cell: (410)-984-6661<br>
 				Email: BillYu99@gmail.com <br>
 				9822 Tenney Ct <br> Ellicott City, MD 21042
 				</address>
-				</div>
-				<div class = "col-md-9 footerlist">
+			</div>
+			<div class = "col-xs-8 col-xs-offset-1 footerlist">
 				<ul>
 					<li><a href = "#">Home<a></li>
 					<li><a href = "#">Buying<a></li>
@@ -226,12 +264,6 @@
 					<li><a href = "#">Team<a></li>
 					<li><a href = "#">About Us<a></li>
 				</ul>
-				<ul class = "social-media">
-					<li><i class = "ion-social-instagram"></i></li>
-					<li><i class = "ion-social-facebook"></i></li>
-					<li><i class = "ion-social-twitter"></i></li>
-					<li><i class = "ion-social-googleplus"></i></li>
-				</ul>	
 			</div>
 		</div>
 		</div>

@@ -20,7 +20,7 @@
       margin-left: 50px;
     }
     body {
-    background-image: url('{% static "LoginAndReg/seigaiha.png" %}');
+    background-image: linear-gradient(rgba(250, 197, 100, .65), rgba(250, 197, 100, .65)), url('{% static "GreatHomesRealty/diagonal_striped_brick.png" %}');
     }
     </style>
     <body>
@@ -91,6 +91,15 @@
           <label for = "confirmpassword" class = "col-sm-2 control-label">Confirm Password:</label>
           <div class = "col-sm-6">
             <input type='password' name='confirm_password' class = "form-control" id = "confirmpassword"placeholder = "Password">
+          </div>
+        </div>
+        {% if passcodeError %}
+          <p class = 'error'>{{ passcodeError }} </p>
+        {% endif %}
+        <div class = "form-group">
+          <label for = "passcode" class = "col-sm-2 control-label">Agent Passcode:</label>
+          <div class = "col-sm-6">
+            <input type='password' name='passcode' class = "form-control" id = "passcode"placeholder = "Passcode">
             <input type='submit' value='Create User' class = "btn btn-primary">
           </div>
         </div>

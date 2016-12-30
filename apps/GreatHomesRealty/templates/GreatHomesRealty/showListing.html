@@ -2,7 +2,7 @@
 <head>
 	<title>Show Listing Great Homes Realty</title>
 	{% load staticfiles %}
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=.5">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -12,34 +12,33 @@
 <STYLE>
 	{% load staticfiles %}
 	.header {
-		background-image: linear-gradient(rgba(0, 0, 0, 0.83), rgba(0, 0, 0, 0.45));
-		height: 10em;
+		background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
 		color: white;
-		text-align: right;
+		padding-bottom: 3%;
 		font-family: serif;
-		font-size: .94em;
-		padding-top: 1em;
+		margin-bottom: 2%;
 	}
 	.header h1 {
 		display: inline-block;
 		position: relative;
-		right: 4.15em;
-		top: .15em;
-		font-size: 3em;
+		top: .55em;
+		left: 5%;
+		font-size: 2.7em;
 		font-family: serif;
 	}
 	.header ul {
+		margin-left: 8%;
 		list-style: none;
 	}
 	.header ul li {
 		display: inline-block;
-		font-size: 1.2em;
-		padding-right: 1%;
-		padding-left: 1%;
+		font-size: 1.1em;
+		padding-right: 2%;
+		padding-left: 2%;
 		border-right: 2px solid white;
 		position: relative;
-		right: 1.5em;
-		top: .4em;
+		right: 2em;
+		top: 4em;
 	}
 	.header ul li:last-child {
 		border-right: none;
@@ -47,12 +46,16 @@
 	.header a {
 		color: white;
 	}
+	a:hover {
+		color: rgb(250, 197, 100);
+		text-decoration: none;
+	}
 	.ion-ios-home {
 		font-size: 1.5em;
 		position: relative;
 	}
 	body {
-		background-image: url('{% static "GreatHomesRealty/new_year_background.png" %}');
+		background-image: linear-gradient(rgba(250, 197, 100, .65), rgba(250, 197, 100, .65)), url('{% static "GreatHomesRealty/diagonal_striped_brick.png" %}');
 		font-family: serif;
 	}
 	header ul {
@@ -74,6 +77,7 @@
 	header {
 		background-color: rgb(1, 49, 94);
 		color: white;
+		font-family: sans-serif;
 	}
 	.listingAgent {
 		margin-top: 28%;
@@ -84,15 +88,8 @@
    		color: black;
    		border-radius: 2%;
    		margin-top: 1.8em;
-   		margin-left: 1em;
    		padding: 1em;
    	}
-	.agent {
-		display: inline-block;
-		font-size: 1.3em;
-		margin-top: 0px;
-		margin-left: -4em;
-	}
 	.carousel-caption {
 		margin-left: 10px;
 	}
@@ -123,16 +120,24 @@
 	img {
 		border: 1.5px solid grey;
 	}
-	dt,dd {
+	.agent {
 		font-size: .8em;
+	}
+	.agent li {
+		list-style-type: none;
+		font-size: 1.4em;
 	}
 	h3 {
 		margin-bottom: 2%;
+	}
+	span {
+		font-weight: 700;
 	}
     #map {
     height: 400px;
     width: 100%;
     border: 2px solid grey;
+    margin-top: 3%;
    	}
    	.ion-ios-person, 
    	.ion-email {
@@ -184,45 +189,68 @@
    		padding: 2%;
    		border-radius: 5px;
    	}
-
 	.footer {
-		background-image: linear-gradient(rgba(0, 0, 0, .65), rgba(0, 0, 0, .85));
+		background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
 		height: 15em;
 		color: white;
 		font-family: sans-serif;
 		font-weight: 100;
-		margin-top: 3%;
+		margin-top: 5%;
+		padding-top: 5%;
 	}
 	.footer address {
-		margin-top: 18%;
 		font-size: 1.1em;
+		margin-left: 15%;
 	}
 	.footerlist ul {
 		margin-left: 15%;
 	}
 	.footerlist li { 
 		display: inline-block;
-		margin-top: 13%;
-		margin-right: 5%;
 		font-size: 1.1em;
+		padding-right: 3%;
+		margin-top: 3%;
 	}
 	.footerlist li a {
 		color: white
 	}
-	.social-media {
-		margin: 0px;
-	}
-	.social-media li {
-		margin: 0px;
-		margin-right: 4%;
-		color: white;
-		position: relative;
-		left: 65%;
-		top: .7em;
+	.footerlist li a i {
 		font-size: 1.5em;
 	}
 	.status {
 		color: red;
+	}
+	@media only screen and (max-width: 480px) {
+		.header {
+			height: 21em;
+		}
+		.support {
+			height: 30em;
+		}
+		.support2 {
+			height: 40em;
+		}
+		.footer {
+			height: 20em;
+		}
+	}
+/* Medium sized screens */
+	@media only screen and (min-width: 481px) {
+		.header {
+			height: 17em;
+		}
+		.footer {
+			height: 20em;
+		}
+	}
+	/* Large sized screens */
+	@media only screen and (min-width: 1024px) {
+		.header {
+			height: 10em;
+		}
+		.footer {
+			height: 15em;
+		}
 	}
 </STYLE>
 <SCRIPT>
@@ -262,13 +290,15 @@
 	</header>
 	{% endif %}
 	<div class = "header">
-		<div class = "row">
-			<div class = "col-md-12 col-xs-6">
+		<div class = "container-fluid">
+			<div class = "col-sm-5">
+				<h1><a href="{%url 'GreatHomes:index' %}"><i class = "ion-ios-home"></i> Great Homes Realty</a></h1>
+			</div>
+			<div class = "col-sm-7 navlinks">
 				<ul>
-					<h1><i class = "ion-ios-home"></i> <a href="{%url 'GreatHomes:index' %}">Great Homes Realty</a></h1>
 					<li><a href="{%url 'GreatHomes:showAllListing' %}">More Listings</a></li>
-					<li>Buying</li>
-					<li>Selling</li>
+					<li><a href="{%url 'GreatHomes:buying' %}">Buying</a></li>
+					<li><a href="{%url 'GreatHomes:selling' %}">Selling</a></li>
 					<li>About Us</li>
 					<li><a href="{%url 'GreatHomes:suscribeDisplay' %}">Newsfeed</a></li>
 					<li><a href="{%url 'login:index' %}">Login</a></li>
@@ -303,32 +333,32 @@
 			</div>
 			<div class = "col-sm-4">
 			<div class = "infobox">
-				<dl class = "dl-horizontal agent">
-					<dt><i class = "ion-ios-pricetags"></i> Price:</dt><dd>${{listing.price}}</dd>
-					<dt>Status:</dt><dd class = "status">{{listing.status}}</dd>
-					<dt>MLS:</dt><dd>{{listing.MLS}}</dd>
-					<dt>Bedrooms:</dt><dd>{{listing.bedrooms}}</dd>
-					<dt>Bathrooms:</dt><dd>{{listing.bathrooms}}</dd>
-					<dt>SquareFeet:</dt><dd>{{listing.squarefootage}}</dd>
-					<dt>Housetype:</dt><dd>{{listing.houseType}}</dd>
-					<dt>County:</dt><dd>{{listing.county}}</dd>
-					<dt>Neighborhood:</dt><dd>{{listing.neighborhood}}</dd>
-					<dt>Year Built:</dt><dd>{{listing.yearBuilt}}</dd>
-				</dl>
+				<ul class = "dl-horizontal agent col-sm-12 col-xs-12">
+					<li><span>Price:</span> ${{listing.price}}</li>
+					<li class = "status"><span>Status: </span>{{listing.status}}</li>
+					<li><span>MLS: </span>{{listing.MLS}}</li>
+					<li><span>Bedrooms: </span>{{listing.bedrooms}}</li>
+					<li><span>Bathrooms: </span>{{listing.bathrooms}}</li>
+					<li><span>SquareFeet: </span>{{listing.squarefootage}}</li>
+					<li><span>Housetype: </span>{{listing.houseType}}</li>
+					<li><span>County: </span>{{listing.county}}</li>
+					<li><span>Neighborhood: </span>{{listing.neighborhood}}</li>
+					<li><span>Year Built: </span>{{listing.yearBuilt}}</li>
+				</ul>
 					{% for Agent in primaryAgents %}
-					<dl class = "dl-horizontal agent">
-						<dt>Primary Agent <i class = "ion-ios-person"></i></dt><dd></dd>
-						<dt>Name:</dt><dd><a class = "agentName" href="{%url 'GreatHomes:showAgentListing' id=Agent.user.id %}">{{Agent.user.firstName}} {{Agent.user.lastName}}</a></dd>
-						<dt>Email:</dt><dd>{{Agent.user.email}}</dd>
-						<dt>Phone:</dt><dd> {{Agent.user.phone}} </dd>
-					</dl>
+					<ul class = "dl-horizontal agent col-sm-12 col-xs-6">
+						<li><span>Primary Agent <i class = "ion-ios-person"></i> </span></li>
+						<li><span>Name: </span><a class = "agentName" href="{%url 'GreatHomes:showAgentListing' id=Agent.user.id %}">{{Agent.user.firstName}} {{Agent.user.lastName}}</a></li>
+						<li><span>Email: </span>{{Agent.user.email}}</li>
+						<li><span>Phone: </span>{{Agent.user.phone}} </li>
+					</ul>
 					{% endfor %}
-					<dl class = "dl-horizontal agent">
-						<dt> President <i class = "ion-ios-person"></i></dt><dd></dd>
-						<dt>Name:</dt><dd>Bill Yu</dd>
-						<dt>Email:</dt><dd>BillYu99@gmail.com</dd>
-						<dt>Phone:</dt><dd> 410-984-6661 </dd>
-					</dl>
+					<ul class = "dl-horizontal agent col-sm-12 col-xs-6">
+						<li><span> President <i class = "ion-ios-person"></i></li>
+						<li><span>Name: </span>Bill Yu</li>
+						<li><span>Email: </span>BillYu99@gmail.com</li>
+						<li><span>Phone: </span>410-984-6661 </li>
+					</ul>
 			</div>
 			</div>
 		</div>
@@ -346,7 +376,7 @@
 	{% if currentUser.user_level == "Admin" or request.session.login == listing.createdById %}
 	<div class = "container edits">
 		<div class = "row">
-			<div class = "col-md-4">
+			<div class = "col-md-4 ">
 				<form class="addImage" action="{%url 'GreatHomes:addMainImage' id=listing.id %}" method="post" enctype="multipart/form-data">
 					{% csrf_token %}
 						{{mainImage.as_p}}
@@ -434,7 +464,7 @@
 
 	<div class = "container third">
 	<div class = "row">
-		<div class = "col-sm-6 inforequest">
+		<div class = "col-sm-6 col-sm-offset-0 col-xs-10 col-xs-offset-1 inforequest">
 			<h3><i class = "ion-email"></i> Contact Agent / Request Information: </h3>
 		<form action="" method='post' class = " sendMail form-horizontal">
         {% csrf_token %}
@@ -478,7 +508,7 @@
          </div>
     </form> 
 	</div>
-		<div class = "col-sm-6">
+		<div class = "col-sm-6 col-sm-offset-0 col-xs-10 col-xs-offset-1">
 			<div id = "map"></div>
 		</div>
 	</div>
@@ -486,17 +516,17 @@
 
 
 	<div class = "footer">
-		<div class = "container">
-			<div class = "row">
-				<div class = "col-md-3">
+	<div class = "container-fluid">
+		<div class = "row">
+			<div class = "col-xs-4">
 				<address>
 				Principal Broker: Bill Yu<br>
 				Cell: (410)-984-6661<br>
 				Email: BillYu99@gmail.com <br>
 				9822 Tenney Ct <br> Ellicott City, MD 21042
 				</address>
-				</div>
-				<div class = "col-md-9 footerlist">
+			</div>
+			<div class = "col-xs-7 col-xs-offset-1 footerlist">
 				<ul>
 					<li><a href = "#">Home<a></li>
 					<li><a href = "#">Buying<a></li>
@@ -505,17 +535,12 @@
 					<li><a href = "#">Team<a></li>
 					<li><a href = "#">About Us<a></li>
 				</ul>
-				<ul class = "social-media">
-					<li><i class = "ion-social-instagram"></i></li>
-					<li><i class = "ion-social-facebook"></i></li>
-					<li><i class = "ion-social-twitter"></i></li>
-					<li><i class = "ion-social-googleplus"></i></li>
-				</ul>	
 			</div>
 		</div>
 		</div>
 	</div>
 
+</body>
 	<script type="text/javascript">
 		var slideIndex = 1;
 		showDivs(slideIndex);
@@ -560,5 +585,4 @@
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFloLP_K9qctz3vRmSUO_cI50axycTj4M">
     </script>
-</body>
 </html>

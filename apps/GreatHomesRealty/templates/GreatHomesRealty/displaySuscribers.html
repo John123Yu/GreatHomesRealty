@@ -3,6 +3,7 @@
 	<title>Display Suscribers</title>
 </head>
 <body>
+	<a href="{%url 'GreatHomes:suscribeDisplay' %}">Go Back To Newsfeed</a>
 	<ul>
 		{% for client in clients %}
 		<li>{{client.firstName}} {{client.lastName}} {{client.email}}</li>

@@ -1,0 +1,134 @@
+<html>
+<head>
+	<title></title>
+</head>
+<style type="text/css">
+	.error {
+		color: red;
+		display: block;
+		margin-left: -5%;
+	}
+	.success {
+		color: green;
+		display: block;
+		margin-left: -5%;
+	}
+</style>
+<body>
+<div class = "clientLoginAjax">
+ 			<div class = "newsfeed col-sm-8">
+ 				<h2><i class = "ion-ios-lightbulb-outline"></i> Newsfeed From The Broker </h2>
+			  	{% for message in all_messages %}
+			   <p class = "message"> <strong>{{message.subject}}</strong> {{ message.created_at }}</p>
+			   <p class = "message1">{{ message.message}}</p>
+			   {% if Admin.user_level == "Admin" %}
+			   <form class = "deleteMessage" action = "{% url 'UserDashboard:deleteMessage' id=message.id %}" method = 'POST'>
+			   	{% csrf_token %}
+			   	 	<input type="submit" class = "btn btn-danger" value="Delete Message">
+			   </form>
+			   	<form action="{% url 'GreatHomes:suscriptionEmail' %}" method='POST'>
+					{% csrf_token %}
+					<input type = "hidden" name = "message" value = "{{message.message}}" >
+					<input type = "hidden" name = "subject" value = "{{message.subject}}" >
+				    <input type="submit" class = "btn btn-success" value="Send Mass Email">
+			  	</form>
+			  	<form action="{% url 'GreatHomes:displaySubscribers' %}" method='POST'>
+					{% csrf_token %}
+				    <input type="submit" class = "btn btn-primary" value="View subscribers">
+			  	</form>
+			   {% endif %}
+			   	{% endfor %}
+			   	<h3>Suscribe and Login to see all posts! <i class = "ion-arrow-right-c"></i></h3>
+			</div>
+
+			<div class = "col-sm-offset-1 col-sm-3 suscribeAjax">
+				<h4>Interested In Learning About Real Estate And Real Estate Investing?</h4>
+			<form action="" method='post' class = "suscribe form-horizontal">
+		<div class = "suscribeAjaxCut">
+	        {% csrf_token %}
+	        {% if allInputLengths %}
+	        	<p class = "error">{{ allInputLengths }}</p>
+	        {% endif %}
+	        {% if IsAlpha %}
+	        	<p class = "error">{{ IsAlpha }}</p>
+	        {% endif %}
+	        <div class = "form-group">
+	            <div class = "">
+	            <label for = "first_name" class = "control-label">First Name:</label>
+	              <input type='text' name='first_name' class = "form-control" id = "first_name" placeholder = "First Name">
+	            </div>
+	          </div>
+	          <div class = "form-group">
+	            <div class = "">
+	            <label for = "last_name" class = "control-label">Last Name:</label>
+	              <input type='text' name='last_name' class = "form-control" id = "last_name" placeholder = "Last Name">
+	            </div>
+	          </div>
+	          {% if InvalidEmail %}
+	          	<p class = "error">{{InvalidEmail}}</p>
+	          {% endif %}
+	           {% if EmailDuplicate %}
+	        	<p class = "error">{{ EmailDuplicate }}</p>
+	       		{% endif %}
+	        <div class = "form-group">
+	          <div class = "">
+	          <label for = "email" class = "control-label">Your Email:</label>
+	            <input type='text' name='email' class = "form-control last-control" id = "email" placeholder = "Email">
+	          </div>
+	        </div>
+	    </div>
+	          <div class="form-group">
+	            <label for="submit" class=""></label>
+	            <div class = "">
+	            <input id = "submit" type='submit' value='Suscribe' class = "btn btn-success">
+	           </div>
+	         </div>
+		    </form> 
+
+			<form action="" method='post' class = "unsuscribe form-horizontal">
+        <div class = "unsuscribeAjax">
+	        {% csrf_token %}
+	         {% if NoEmail %}
+	        	<p class = "error">{{ NoEmail }}</p>
+	       	{% endif %}
+	        <div class = "form-group">
+	          <div class = "">
+	          <label for = "email" class = "control-label">Unsuscribe Your Email:</label>
+	            <input type='text' name='email' class = "form-control last-control" id = "email" placeholder = "Email">
+	          </div>
+	        </div>
+	    </div>
+	          <div class="form-group">
+	            <label for="submit" class=""></label>
+	            <div class = "">
+	            <input id = "submit" type='submit' value='Unsuscribe' class = "btn btn-success">
+	           </div>
+	         </div>
+		    </form> 
+
+	    	<form action="" method='post' class = " clientLogin form-horizontal">
+		<div class = "">
+	        {% csrf_token %}
+	          {% if noEmail %}
+	          	<p class = "error">{{noEmail}}</p>
+	          {% endif %}
+	           {% if success %}
+	        	<p class = "success">{{ success }}</p>
+	       		{% endif %}
+	        <div class = "form-group">
+	          <div class = "">
+	          <label for = "emailLogin" class = "control-label">Client Login - Your Email:</label>
+	            <input type='text' name='emailLogin' class = "form-control last-control" id = "emailLogin" placeholder = "Email">
+	          </div>
+	        </div>
+	 		<div class="form-group">
+	            <label for="submit" class=""></label>
+	            <div class = "">
+	            <input id = "submit" type='submit' value='Client Login' class = "btn btn-success">
+	           </div>
+	         </div>
+		    </form> 
+	  </div>
+
+</body>
+</html>
