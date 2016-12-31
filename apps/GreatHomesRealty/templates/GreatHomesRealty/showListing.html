@@ -172,10 +172,10 @@
    		color: white;
    		padding-top: .01%;
    		padding-bottom: 6%;
-   		font-family: sans-serif;
+   		font-family: serif;
    	}
    	.box h1, .box h3 {
-   		font-family: sans-serif;
+   		font-family: serif;
    		font-weight: 100;
    	}
    	.inforequest h3 {
@@ -193,7 +193,7 @@
 		background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
 		height: 15em;
 		color: white;
-		font-family: sans-serif;
+		font-family: serif;
 		font-weight: 100;
 		margin-top: 5%;
 		padding-top: 5%;
@@ -314,14 +314,14 @@
 				<h1 class = "listingAdress">{{listing.addressAptNumber}} {{listing.addressStreet}} </h1>
 				<h3 class = "addressCity">{{listing.addressCity}} {{listing.addressState}}, {{listing.addressZipcode}}</h3>
 				<div class = "slideshow">
-					{% if listing.mainPicture %}
-					<img class = "mySlides" src="{{listing.mainPicture.url}}" style= "width:100%">
+					{% if listing.url %}
+					<img class = "mySlides" src="{{listing.url}}" style= "width:100%">
 					{% if request.session.login > 0 %}
-					<a href="{% url 'GreatHomes:deleteMainImage' id=listing.id %}">Delete Main Image {{image.id}}</a>
+					<a href="{% url 'GreatHomes:deleteMainImage' id=listing.id %}">Delete Main Image {{listing.id}}</a>
 					{% endif %}
 					{% endif %}
 					{% for image in images %}
-					<img class = "mySlides" src="{{ image.image.url }}" style = "width:100%"/>
+					<img class = "mySlides" src="{{ image.url }}" style = "width:100%"/>
 					{% if request.session.login > 0 %}
 					<a href="{% url 'GreatHomes:deleteImage' id=image.id %}">Delete Image {{image.id}}</a>
 					{% endif %}

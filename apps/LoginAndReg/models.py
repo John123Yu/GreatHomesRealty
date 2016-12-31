@@ -83,6 +83,7 @@ class User(models.Model):
 	email = models.CharField(max_length=100)
 	phone = models.CharField(null = True, max_length = 100)
 	picture =  models.ImageField(null = True, upload_to = 'uploads/')
+	url = models.CharField(max_length = 128,  null = True)
 	user_level = models.CharField(max_length = 100, null = True)
 	password = models.CharField(max_length=250)
 	profileInformation = models.TextField(null = True)
@@ -90,5 +91,3 @@ class User(models.Model):
 	updated_at = models.DateField(auto_now=True)
 	registerMgr = RegisterManager()
 	loginMgr = LoginManager()
-
-

@@ -3,9 +3,12 @@ from models import Messages, Comments
 from ..LoginAndReg.models import User, LoginManager, RegisterManager
 from django.core.urlresolvers import reverse
 from django.db.models import Count
-from ..GreatHomesRealty.form import addListingForm, ImageForm, MainImageForm, UserImageForm
+from ..GreatHomesRealty.form import addListingForm, S3ImageForm
 from django.views.generic.edit import CreateView
-
+from boto.s3.connection import S3Connection
+from boto.s3.key import Key
+from django.conf import settings
+import mimetypes
 
 def index(request):
 	if request.session['login'] > 0:
@@ -39,13 +42,31 @@ def editProfileDisplay(request):
 		return redirect(reverse('GreatHomesRealty:index'))
 
 def addUserImage(request, id):
+	def store_in_s3(filename, content): 
+		conn = S3Connection(settings.AWS_ACCESS_KEY_ID, settings.AWS_SECRET_ACCESS_KEY)
+		b = conn.get_bucket('greathomesrealty')
+		mime = mimetypes.guess_type(filename)[0]
+		k = Key(b)
+		k.key = filename
+		k.set_metadata("Content-Type", mime)
+		k.set_contents_from_string(content)
+		# k.set_acl('public read')
 	if request.session['login'] > 0 and request.method == "POST":
 		user = User.registerMgr.get(id = id)
 		if request.method == 'POST':
-			form = UserImageForm(request.POST, request.FILES)
+			form = S3ImageForm(request.POST, request.FILES)
 			if form.is_valid():
-				user.picture = form.cleaned_data['picture']
+				# user.picture = form.cleaned_data['picture']
+				# user.save()
+				file = request.FILES['file']
+				filename = file.name
+				content = file.read()
+				store_in_s3(filename, content)
+				user.url = ('http://s3.amazonaws.com/greathomesrealty/' + filename)
 				user.save()
+				url = "/showAgentListing/" + str(user.id)
+				return redirect(url)
+			else: 
 				url = "/showAgentListing/" + str(user.id)
 				return redirect(url)
 	else:

@@ -197,8 +197,8 @@
 	<div class = "container">
 		<div class = "row">
 		<div class = "col-sm-4 col-xs-6">
-			{% if user.picture %}
-			<img class = "userPicture" src="{{user.picture.url}}" style= "width:90%">
+			{% if user.url %}
+			<img class = "userPicture" src="{{user.url}}" style= "width:90%">
 			{% endif %}
 			{% if user.id == request.session.login %}
 	        <form id = "addPicture" class="addPicture" action="{%url 'UserDashboard:addUserImage' id=user.id %}" method="post" enctype="multipart/form-data">

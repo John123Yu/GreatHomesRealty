@@ -9,20 +9,23 @@ class addListingForm(forms.ModelForm):
 		model = Listing
 		fields = '__all__'
 
-class ImageForm(forms.ModelForm):
-	class Meta:
-		model = Image
-		fields = ['image']
+# class ImageForm(forms.ModelForm):
+# 	class Meta:
+# 		model = Image
+# 		fields = ['image']
 
-class MainImageForm(forms.ModelForm):
-	class Meta:
-		model = Listing
-		fields = ['mainPicture']
+# class MainImageForm(forms.ModelForm):
+# 	class Meta:
+# 		model = Listing
+# 		fields = ['mainPicture']
 
-class UserImageForm(forms.ModelForm):
-	class Meta:
-		model = User
-		fields = ['picture']
+# class UserImageForm(forms.ModelForm):
+# 	class Meta:
+# 		model = User
+# 		fields = ['picture']
+
+class S3ImageForm(forms.Form):
+	file = forms.ImageField()
 
 # class editListingForm(forms.ModelForm):
 # 	class Meta:

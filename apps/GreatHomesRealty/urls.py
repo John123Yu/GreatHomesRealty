@@ -34,6 +34,5 @@ urlpatterns = [
 	url(r'^investing$', views.investing, name = "investing"),
 	url(r'^owningHome$', views.owningHome, name = "owningHome")
 
-
-
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+# + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

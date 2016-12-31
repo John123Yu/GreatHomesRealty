@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from ..LoginAndReg.models import User, LoginManager, RegisterManager
 from ..UserDashboard.models import Messages
-from .form import addListingForm, UserImageForm, MainImageForm, ImageForm
+from .form import addListingForm, S3ImageForm
 from models import Listing, User_Listings, Image, ListingManager, Client
 from django.core.urlresolvers import reverse
 try:
@@ -13,8 +13,10 @@ from django.conf import settings
 import json 
 from django.views.generic.edit import View
 from django.views.generic import FormView
-# from .forms import S3DirectUploadForm
-
+from boto.s3.connection import S3Connection
+from boto.s3.key import Key
+from django.conf import settings
+import mimetypes
 
 def index(request):
 	request.session['clientLogin'] = "false"
@@ -88,50 +90,74 @@ def editListing(request, id):
 		return redirect(reverse('GreatHomes:index'))
 
 def addMainImage(request, id):
-	if request.method == "POST":
-		listing = Listing.listingMgr.get(id = id)
-		if request.method == 'POST':
-			form = MainImageForm(request.POST, request.FILES)
-			if form.is_valid():
-				image = form.cleaned_data['mainPicture']
-				listing.mainPicture = image
-				listing.save()
-				url = "/showListing/" + str(listing.id)
-				return redirect(url)
-		else:
-			pass
+	def store_in_s3(filename, content): 
+		conn = S3Connection(settings.AWS_ACCESS_KEY_ID, settings.AWS_SECRET_ACCESS_KEY)
+		b = conn.get_bucket('greathomesrealty')
+		mime = mimetypes.guess_type(filename)[0]
+		k = Key(b)
+		k.key = filename
+		k.set_metadata("Content-Type", mime)
+		k.set_contents_from_string(content)
+	listing = Listing.listingMgr.get(id = id)
+	if request.method == 'POST':
+		form = S3ImageForm(request.POST, request.FILES)
+		if form.is_valid():
+			# image = form.cleaned_data['mainPicture']
+			# listing.mainPicture = image
+			# listing.save()
+			file = request.FILES['file']
+			filename = file.name
+			content = file.read()
+			store_in_s3(filename, content)
+			listing.url = ('http://s3.amazonaws.com/greathomesrealty/' + filename)
+			listing.save()
+			url = "/showListing/" + str(listing.id)
+			return redirect(url)
+		else: 
+			url = "/showListing/" + str(listing.id)
+			return redirect(url)
+	else:
 		url = "/showListing/" + str(listing.id)
-		return redirect(url)
-	else: 
-		url = "/showListing/" + str(id)
 		return redirect(url)
 
 def addListingImage(request, id):
+	def store_in_s3(filename, content): 
+		conn = S3Connection(settings.AWS_ACCESS_KEY_ID, settings.AWS_SECRET_ACCESS_KEY)
+		b = conn.get_bucket('greathomesrealty')
+		mime = mimetypes.guess_type(filename)[0]
+		k = Key(b)
+		k.key = filename
+		k.set_metadata("Content-Type", mime)
+		k.set_contents_from_string(content)
 	if request.method == "POST":
 		listing = Listing.listingMgr.get(id = id)
-		if request.method == 'POST':
-			form = ImageForm(request.POST, request.FILES)
-			if form.is_valid():
-				image = form.cleaned_data['image']
-				addImage = Image.objects.create(image = image, listing_id = listing.id)
-				url = "/showListing/" + str(listing.id)
-				return redirect(url)
+		form = S3ImageForm(request.POST, request.FILES)
+		if form.is_valid():
+			# image = form.cleaned_data['image']
+			file = request.FILES['file']
+			filename = file.name
+			content = file.read()
+			store_in_s3(filename, content)
+			addImage = Image.objects.create(listing_id = listing.id)
+			addImage.url = ('http://s3.amazonaws.com/greathomesrealty/' + filename)
+			addImage.save()
+			url = "/showListing/" + str(listing.id)
+			return redirect(url)
 		else:
-			pass
-		url = "/showListing/" + str(listing.id)
-		return redirect(url)
+			url = "/showListing/" + str(listing.id)
+			return redirect(url)
 	else: 
 		url = "/showListing/" + str(id)
 		return redirect(url)
 
 def showListing(request, id):
 	listing = Listing.listingMgr.get(id = id)
-	addImage = ImageForm()
+	addImage = S3ImageForm()
 	try:
 		currentUser = User.registerMgr.get(id = request.session['login'])
 	except:
 		currentUser = 0
-	mainImage = MainImageForm()
+	mainImage = S3ImageForm()
 	listingAddress = listing.addressStreet + " " +listing.addressCity + " " + listing.addressState
 	context = {
 		'listing': listing,
@@ -174,7 +200,7 @@ def showAgentListing(request, id):
 	context = {
 		'listings': listing,
 		'user':user,
-		'UserImage': UserImageForm()
+		'UserImage': S3ImageForm()
 	}
 	return render(request, 'GreatHomesRealty/agentListings.html',  context )
 
@@ -186,25 +212,17 @@ def deleteListing(request, id):
 		return redirect(reverse('GreatHomes:showAllListing'))
 
 def deleteImage(request, id):
-	listing = Listing.listingMgr.get(images__id = image.id)
-	if request.method == "POST":
-		image = Image.objects.get(id = id)
-		image.delete()
-		url = "/showListing/" + str(listing.id)
-		return redirect(url)
-	else:
-		url = "/showListing/" + str(listing.id)
-		return redirect(url)
+	listing = Listing.listingMgr.get(images__id = id)
+	image = Image.objects.get(id = id)
+	image.delete()
+	url = "/showListing/" + str(listing.id)
+	return redirect(url)
 
 def deleteMainImage(request, id):
-	if request.method == "POST":
-		listing = Listing.listingMgr.get(id = id)
-		listing.mainPicture.delete()
-		url = "/showListing/" + str(listing.id)
-		return redirect(url)
-	else: 
-		url = "/showListing/" + str(id)
-		return redirect(url)
+	listing = Listing.listingMgr.get(id = id)
+	listing.url.delete()
+	url = "/showListing/" + str(listing.id)
+	return redirect(url)
 
 def deleteListingAgent(request, id):
 	if request.method == "POST":

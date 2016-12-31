@@ -121,8 +121,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(BASE_DIR , 'media')
-MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR , 'media')
+# MEDIA_URL = '/media/'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
@@ -130,8 +130,8 @@ EMAIL_HOST_USER = 'John123Yu@gmail.com'
 EMAIL_HOST_PASSWORD = 'P82ke57y'
 EMAIL_PORT = 587
 
-# AWS_SECRET_ACCESS_KEY = 'KeAhAwkm3kVLT446I8N2tcvcnCVgHXpit8zt5UvT'
-# AWS_ACCESS_KEY_ID = 'AKIAJNYQVRBWC4DYMD3A'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = 'AKIAJNYQVRBWC4DYMD3A'
 # AWS_STORAGE_BUCKET_NAME = 'greathomesrealty'
 
 # S3DIRECT_REGION = 'us-east-1'

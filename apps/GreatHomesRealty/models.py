@@ -5,9 +5,6 @@ from django.forms import ModelForm
 from django.core.exceptions import ValidationError
 import re
 from django import forms
-from django.forms.widgets import (
-    Textarea
-)
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9\.\+_-]+@[a-zA-Z0-9\._-]+\.[a-zA-Z]*$')
 PHONE_REGEX = re.compile(r'^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$')
@@ -79,7 +76,8 @@ class Listing(models.Model):
 	neighborhood = models.CharField(max_length = 100)
 	MLS = models.IntegerField()
 	description = models.TextField()
-	mainPicture = models.ImageField(null = True, upload_to = 'uploads/')
+	# mainPicture = models.ImageField(null = True, upload_to = 'uploads/')
+	url = models.CharField(max_length = 128,  null = True)
 	status = models.CharField(max_length = 100, null = True)
 	yearBuilt = models.IntegerField(null = True)
 	createdById = models.IntegerField(null = True)
@@ -94,11 +92,11 @@ class User_Listings(models.Model):
 	updated_at = models.DateField(auto_now=True, null = True)
 
 class Image(models.Model):
-	image = models.ImageField(upload_to='uploads/')
+	# image = models.ImageField(upload_to='uploads/')
+	url = models.CharField(max_length = 128,  null = True)
 	listing = models.ForeignKey(Listing, null = True, related_name = "images")
 	created_at = models.DateField(auto_now_add=True)
 	updated_at = models.DateField(auto_now=True,)
-
 
 class Client(models.Model):
 	firstName = models.CharField(max_length=100)
