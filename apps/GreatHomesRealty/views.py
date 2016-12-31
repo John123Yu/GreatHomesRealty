@@ -20,7 +20,7 @@ import mimetypes
 
 def index(request):
 	request.session['clientLogin'] = "false"
-	allListings = Listing.listingMgr.all()[0:3]
+	allListings = Listing.listingMgr.filter(price__gte = 300000).filter(price__lte = 700000).order_by('-created_at')[0:3]
 	try:
 		user = User.registerMgr.get(id = request.session['login'])
 	except:
@@ -188,7 +188,7 @@ def addAgent(request, id):
 		return redirect(url)
 
 def showAllListing(request):
-	allListings = Listing.listingMgr.all()
+	allListings = Listing.listingMgr.all().order_by('price')
 	context = {
 		'allListings': allListings
 	}
@@ -220,7 +220,8 @@ def deleteImage(request, id):
 
 def deleteMainImage(request, id):
 	listing = Listing.listingMgr.get(id = id)
-	listing.url.delete()
+	listing.url = ""
+	listing.save()
 	url = "/showListing/" + str(listing.id)
 	return redirect(url)
 
