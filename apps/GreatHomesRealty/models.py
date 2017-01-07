@@ -14,7 +14,7 @@ class ListingManager(models.Manager):
 		errors = {}
 
 		if any(x < 1 for x in (len(streetAddress), len(city), len(state), len(zipcode), len(price), len(bedrooms), len(bathrooms), len(squarefootage), len(houseType), len(county), len(neighborhood), len(MLS), len(description), len(status), len(yearBuilt) )):
-			errors['allInputLengths'] = "Input fields must not be empty"
+			errors['allInputLengths'] = "All fields are required except Apt/Suite #"
 		if len(errors) is not 0:
 			return (False, errors)
 		elif len(errors) == 0 and edit == "no":
@@ -55,7 +55,7 @@ class SendMailManager(models.Manager):
 		if not EMAIL_REGEX.match(email):
 		    errors['InvalidEmail'] = ("Please enter a valid email address")
 		if not PHONE_REGEX.match(phone):
-			errors['InvalidPhone'] = ("Please enter valid phone number")
+			errors['InvalidPhone'] = ("Please enter a valid phone number")
 		if len(errors) is not 0:
 			return (False, errors)
 		elif len(errors) == 0:

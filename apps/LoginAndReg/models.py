@@ -33,7 +33,7 @@ class RegisterManager(models.Manager):
 		if not PASSWORD_REGEX.match(password):
 			errors['InvalidPassword'] = ("Password requires one uppercase letter and one number")
 		if not PHONE_REGEX.match(phone):
-			errors['InvalidPhone'] = ("Please enter valid phone number")
+			errors['InvalidPhone'] = ("Please enter a valid phone number")
 		if password != confirmPassword:
 			errors['PasswordNonmatch'] = ("Confirm password must match password")
 		if len(errors) is not 0:

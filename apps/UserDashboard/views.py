@@ -9,6 +9,7 @@ from boto.s3.connection import S3Connection
 from boto.s3.key import Key
 from django.conf import settings
 import mimetypes
+import random
 
 def index(request):
 	if request.session['login'] > 0:
@@ -60,9 +61,11 @@ def addUserImage(request, id):
 				# user.save()
 				file = request.FILES['file']
 				filename = file.name
+				specialNumber = random.randint(1,10000)
+				specialName = str(specialNumber) + file.name
 				content = file.read()
-				store_in_s3(filename, content)
-				user.url = ('http://s3.amazonaws.com/greathomesrealty/' + filename)
+				store_in_s3(specialName, content)
+				user.url = ('http://s3.amazonaws.com/greathomesrealty/' + specialName)
 				user.save()
 				url = "/showAgentListing/" + str(user.id)
 				return redirect(url)

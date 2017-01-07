@@ -16,7 +16,7 @@
 		color: white;
 		padding-bottom: 3%;
 		font-family: serif;
-		margin-bottom: 2%;
+		margin-bottom: 3%;
 	}
 	.header h1 {
 		display: inline-block;
@@ -57,6 +57,7 @@
 	body {
 		background-image: linear-gradient(rgba(250, 197, 100, .65), rgba(250, 197, 100, .65)), url('{% static "GreatHomesRealty/diagonal_striped_brick.png" %}');
 		font-family: serif;
+		color: black;
 	}
 	header ul {
 		list-style-type: none;
@@ -84,11 +85,23 @@
 		margin-bottom: 0px;
 		display: inline-block;
 	}
-   	.infobox {
+	h3 {
+		font-weight: 600;
+	}
+	.main {
+		margin: 0 5%;
+	}
+   	.infoboxOut {
+   		background: linear-gradient(rgba(250, 197, 100, .95), rgba(250, 197, 100, .95));
+   		padding: 3%;
+   		border-radius: 5%;
    		color: black;
-   		border-radius: 2%;
-   		margin-top: 1.8em;
-   		padding: 1em;
+   	}
+   	.infoboxOut a {
+   		color: black;
+   	}
+   	.infoboxOut a:hover {
+   		color: darkblue;
    	}
 	.carousel-caption {
 		margin-left: 10px;
@@ -109,16 +122,21 @@
 		margin-top: 0px; 
 		font-family: serif;
 	}
-	.descriptionborder {
+	.description {
 		padding-left: 23px;
 		margin-top: 2%;
+		background: linear-gradient(rgba(250, 197, 100, .95), rgba(250, 197, 100, .95));
+		padding: 3%;
+		border-radius: 5%;
+		margin-bottom: 1%;
+		line-height: 140%;
 	}
 	.description { 
 		font-size: 1.2em;
-		margin-bottom: 6%;
 	}
-	img {
-		border: 1.5px solid grey;
+	h3 {
+		display: inline-block;
+		margin-bottom: 2%;
 	}
 	.agent {
 		font-size: .8em;
@@ -126,9 +144,6 @@
 	.agent li {
 		list-style-type: none;
 		font-size: 1.4em;
-	}
-	h3 {
-		margin-bottom: 2%;
 	}
 	span {
 		font-weight: 700;
@@ -165,10 +180,9 @@
    		margin-bottom: 5%;
    	}
    	.box {
-   		background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55));
+   		background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65));
    		border-radius: 2%;
    		text-align: center;
-   		margin-top: 4%;
    		color: white;
    		padding-top: .01%;
    		padding-bottom: 6%;
@@ -178,16 +192,26 @@
    		font-family: serif;
    		font-weight: 100;
    	}
+   	.third {
+   		/*background: linear-gradient(rgba(250, 197, 100, .95), rgba(250, 197, 100, .95));*/
+   		margin-top: 2%;
+   		margin-bottom: 0px;
+   		padding: 0 6%;
+   	}
    	.inforequest h3 {
    		margin-top: 0px;
    	}
    	.inforequest {
-   		border: 1px solid grey;
-   		background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25));
+   		background: linear-gradient(rgba(0,0,0, .4), rgba(0,0,0, .4));
+   		margin-bottom: 2%;
+   		margin-top: 1%;
    		color: black;
    		padding-top: 1%;
-   		padding: 2%;
-   		border-radius: 5px;
+   		padding-left: 3%;
+   		padding-right: 3%;
+   		padding-top: 1%;
+   		padding-bottom: 1%;
+   		border-radius: 5%;
    	}
 	.footer {
 		background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
@@ -195,7 +219,6 @@
 		color: white;
 		font-family: serif;
 		font-weight: 100;
-		margin-top: 5%;
 		padding-top: 5%;
 	}
 	.footer address {
@@ -307,9 +330,11 @@
 		</div>
 	</div>
 
-	<div class = "container first">
+<div class = "main">
+<div class = "col-sm-8 col-xs-12">
+	<div class = "first">
 		<div class = "row">
-			<div class = "col-sm-8">
+			<div class = "col-xs-12">
 			<div class = "box">
 				<h1 class = "listingAdress">{{listing.addressAptNumber}} {{listing.addressStreet}} </h1>
 				<h3 class = "addressCity">{{listing.addressCity}} {{listing.addressState}}, {{listing.addressZipcode}}</h3>
@@ -331,48 +356,46 @@
 				</div>
 			</div>
 			</div>
-			<div class = "col-sm-4">
-			<div class = "infobox">
-				<ul class = "dl-horizontal agent col-sm-12 col-xs-12">
-					<li><span>Price:</span> ${{listing.price}}</li>
-					<li class = "status"><span>Status: </span>{{listing.status}}</li>
-					<li><span>MLS: </span>{{listing.MLS}}</li>
-					<li><span>Bedrooms: </span>{{listing.bedrooms}}</li>
-					<li><span>Bathrooms: </span>{{listing.bathrooms}}</li>
-					<li><span>SquareFeet: </span>{{listing.squarefootage}}</li>
-					<li><span>Housetype: </span>{{listing.houseType}}</li>
-					<li><span>County: </span>{{listing.county}}</li>
-					<li><span>Neighborhood: </span>{{listing.neighborhood}}</li>
-					<li><span>Year Built: </span>{{listing.yearBuilt}}</li>
-				</ul>
-					{% for Agent in primaryAgents %}
-					<ul class = "dl-horizontal agent col-sm-12 col-xs-6">
-						<li><span>Primary Agent <i class = "ion-ios-person"></i> </span></li>
-						<li><span>Name: </span><a class = "agentName" href="{%url 'GreatHomes:showAgentListing' id=Agent.user.id %}">{{Agent.user.firstName}} {{Agent.user.lastName}}</a></li>
-						<li><span>Email: </span>{{Agent.user.email}}</li>
-						<li><span>Phone: </span>{{Agent.user.phone}} </li>
-					</ul>
-					{% endfor %}
-					<ul class = "dl-horizontal agent col-sm-12 col-xs-6">
-						<li><span> President <i class = "ion-ios-person"></i></li>
-						<li><span>Name: </span>Bill Yu</li>
-						<li><span>Email: </span>BillYu99@gmail.com</li>
-						<li><span>Phone: </span>410-984-6661 </li>
-					</ul>
-			</div>
-			</div>
 		</div>
 	</div>
 
-	<div class = "container second">
+	<div class = "second">
 		<div class = "row secondrow">
-			<div class = "col-md-8 descriptionborder">
-			<h3>Listing Description:</h3>
-			<p class = "description"> {{listing.description}}</p>
+			<div class = "col-md-12 descriptionborder">
+				<p class = "description"> {{listing.description}}</p>
 			</div>
 		</div>
 	</div>
-
+</div>
+	<div class = "col-sm-4 col-xs-12 infoboxOut">
+			<ul class = "dl-horizontal agent col-sm-12 col-xs-12">
+				<li class = "status"><span>Status: </span>{{listing.status}}</li>
+				<li><span>Price:</span> ${{listing.price}}</li>
+				<li><span>MLS: </span>{{listing.MLS}}</li>
+				<li><span>Bedrooms: </span>{{listing.bedrooms}}</li>
+				<li><span>Bathrooms: </span>{{listing.bathrooms}}</li>
+				<li><span>SquareFeet: </span>{{listing.squarefootage}}</li>
+				<li><span>Housetype: </span>{{listing.houseType}}</li>
+				<li><span>County: </span>{{listing.county}}</li>
+				<li><span>Neighborhood: </span>{{listing.neighborhood}}</li>
+				<li><span>Year Built: </span>{{listing.yearBuilt}}</li>
+			</ul>
+				{% for Agent in primaryAgents %}
+				<ul class = "dl-horizontal agent col-sm-12 col-xs-6">
+					<a class = "agentName" href="{%url 'GreatHomes:showAgentListing' id=Agent.user.id %}"><li><span>Primary Agent <i class = "ion-ios-person"></i> </span></li>
+					<li><span>Name: </span>{{Agent.user.firstName}} {{Agent.user.lastName}}</li>
+					<li><span>Email: </span>{{Agent.user.email}}</li>
+					<li><span>Phone: </span>{{Agent.user.phone}} </li></a>
+				</ul>
+				{% endfor %}
+				<ul class = "dl-horizontal agent col-sm-12 col-xs-6">
+					<a href = ""><li><span> President <i class = "ion-ios-person"></i></li>
+					<li><span>Name: </span>Bill Yu</li>
+					<li><span>Email: </span>BillYu99@gmail.com</li>
+					<li><span>Phone: </span>410-984-6661 </li></a>
+				</ul>
+	</div>
+</div>
 	{% if currentUser.user_level == "Admin" or request.session.login == listing.createdById %}
 	<div class = "container edits">
 		<div class = "row">
@@ -462,9 +485,12 @@
 	{% endif %}
 	{% endfor %}
 
-	<div class = "container third">
+	<div class = "third">
 	<div class = "row">
-		<div class = "col-sm-6 col-sm-offset-0 col-xs-10 col-xs-offset-1 inforequest">
+		<div class = "col-sm-6 col-sm-offset-0 col-xs-12">
+			<div id = "map"></div>
+		</div>
+		<div class = "col-sm-6 col-sm-offset-0 col-xs-12 inforequest">
 			<h3><i class = "ion-email"></i> Contact Agent / Request Information: </h3>
 		<form action="" method='post' class = " sendMail form-horizontal">
         {% csrf_token %}
@@ -508,9 +534,6 @@
          </div>
     </form> 
 	</div>
-		<div class = "col-sm-6 col-sm-offset-0 col-xs-10 col-xs-offset-1">
-			<div id = "map"></div>
-		</div>
 	</div>
 	</div>
 

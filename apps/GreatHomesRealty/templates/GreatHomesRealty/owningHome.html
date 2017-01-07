@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>Owning</title>
+	<title>Owning A Home</title>
 	{% load staticfiles %}
 	<meta name="viewport" content="width=device-width, initial-scale=0.5">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -53,10 +53,17 @@ $(document).ready(function() {
 		color: black;
 	}
 	.main {
-		padding-top: 3em;
-		padding-bottom: 3em;
 		font-weight: 500;
+		background: linear-gradient(rgba(250, 197, 100, 1), rgba(250, 197, 100, 1));
+		border-radius: 30px;
+		padding: 1% 3%;
+		margin: 5% 3%;
+		height: 90%;
+		overflow-y: scroll;
 	}
+	::-webkit-scrollbar {
+      width: 15px;
+	} 
 	.initiallyHidden {
 		display: none;
 	}
@@ -218,217 +225,263 @@ $(document).ready(function() {
 			</div>
 		</div>
 	</div>
-	<div class = "container main">
-		<h1>Buying A Home</h1>
-		<h3 class = "1"><i class = "ion-android-remove"></i> Appraisals and Market Value</h3>
+	<div class = "container-fluid main">
+		<h1>Owning A Home</h1>
+		<h3 class = "1"><i class = "ion-arrow-down-b"></i> Building Permits and Zoning</h3>
 		<ul class = "1a initiallyHidden">
-			<li class = "question">Are there standard ways to determine how much a home is worth?</li>
-			<li>Yes. A comparative market analysis and an appraisal are the two most common and reliable ways to determine a home's value. 
-Your real estate agent can provide a comparative market analysis, an informal estimate of value based on the recent selling price of similar neighborhood properties. Reviewing comparable homes that have sold within the past year along with the listing, or asking, price on current homes for sale should prevent you from overpaying.
-A certified appraiser can provide an appraisal of a home. After visiting the home to check such things as the number of rooms, improvements, size and square footage, construction quality, and the condition of the neighborhood, the appraiser then reviews recent comparable sales to determine the estimated value of the home.
-Lenders normally require an appraisal – which runs between $200 to $300 – before they will approve a mortgage loan. This protects the lender by ensuring the home is worth the money you want to borrow. 
-You also can check recent sales in public records, through private firms, and on the Internet to help you determine a home’s potential worth.</li>
-			<li class = "question">How do you determine how much a home is worth?</li>
-			<li>The short answer: a home is ultimately worth what is paid for it. Everything else is really an estimate of value. Take, for example, a hot seller’s market when demand for housing is high but the inventory of available homes for sale is low. During this time, homes can sell above and beyond the asking price as buyers bid up the price. The fair market value, or worth, is established when “a meeting of the minds” between the buyer and the seller takes place.</li>
-			<li class = "question">What about appraised value and market value?</li>
-			<li>A certified appraiser who is trained to provide the estimated value of a home determines its appraised value. The appraised value is based on comparable sales, the condition of the property, and several other factors.
-Market value is the price the house will bring at a given point in time, once the buyer and seller establish a “meeting of the minds” on price.</li>
-			<li class = "question">What is the difference between list price and sales price?</li>
-			<li>The list price is a seller's advertised price, or asking price, for a home. It is a rough estimate of what the seller wants to complete a home sale. A seller can price high, low – (which seldom happens), or very close to the amount they want to get. A good way to determine if the list price is a fair one is to look at the sales prices of similar homes that have recently sold in the area. 
-The sales price is the actual amount a home sells for.</li>
+			<li class = "question">How can I find out how my property is zoned?</li>
+			<li>Zoning ordinances and maps are a matter of public record. Visit your local zoning office, city hall, or some other local planning board and get a copy of your local ordinance. 
+In some areas, if you have a legal description of the property (name, address, tax map, and parcel number), you can call the zoning office or city hall, or even e-mail your request for information. 
+Some communities also have their zoning maps and ordinances online and in local libraries.</li>
+			<li class = "question">How do building codes work?</li>
+			<li>Building codes set minimum public-safety standards for such things as building design, construction, use and occupancy, and maintenance. The codes are established and enforced by local politicians and government officials, who also tend to modify them constantly. The codes are usually enforced by denying permits, occupancy certificates, and by imposing fines. 
+While codes vary from one state, county, city, and town to the next, specialized codes generally exist for plumbing, electricity, and fire. Each usually involves separate inspections and inspectors. 
+There are building codes for most remodeling jobs. So if you have done significant remodeling, make sure you save proof of the permits involved in the project. There is a good chance potential buyers may request them. Failure to obtain the appropriate permits before you undertake a project could later result in fines or other serious consequences, such as having a structure ordered to be torn down because it was constructed improperly.</li>
+			<li class = "question">Should I always get a permit before making home improvements?</li>
+			<li>To save both time and money, some people avoid getting building permits. But most cities require them. Besides ensuring safety during construction – housing inspectors sometimes stop by to check on the progress of projects at key points – they are also a source of revenue. 
+Cities charge a fee when a building permit is issued. Also, work done with a building permit can result in an increase in the homeowners’ property taxes because, in general, a home improvement increases the assessed value of the property. 
+Permits are usually required when any structural work is planned or the basic living space of a home is altered. They generally cover new construction, repairs, alterations, demolition, and additions to a structure. Some jurisdictions require the permit to be posted in a visible spot on the premises while the work is being done. 
+Besides structural changes, permits also may be needed to cover the installation of foundations for tanks and equipment, as well as the construction or demolition of ducts, sprinkler systems, or standpipe systems. 
+By law, all buildings must have a building permit and a certificate of occupancy before they can be used.</li>
+			<li class = "question">What do zoning regulations do?</li>
+			<li>Zoning is the government’s way of controlling the physical development of land and the kinds of uses to which each individual property may be put. 
+Zoning regulations establish how the land can be used, either for residential, industrial, commercial, or recreational purposes – although they also can allow for more than one use in a given jurisdiction. 
+Designed to protect you, your neighbors, and the community from undesirable, or inappropriate, land uses and/or construction, zoning laws in many communities can be very rigid and inflexible. 
+On the other hand, they can protect your property value and give you a piece of mind. This is particularly true in instances where the community debates whether to locate a prison in your neighborhood or a neighbor illegally builds a second story onto his home that blocks your view of the lake or mountains. 
+Before you begin any remodeling jobs, determine how your local zoning laws might affect your project.</li>
+			<li class = "question">What is a variance?</li>
+			<li>It is a request made to your local jurisdiction to deviate from current zoning requirements. If granted, a variance will allow you to use your land in a way that is normally not permitted by the zoning ordinance. 
+However, do not view a variance as something that changes the zoning law because it does not. Rather it waives a certain requirement of the zoning ordinance. For example, it may allow the owner of an odd-shaped lot to reduce slightly the setback requirements in order to accommodate a building, or permit the building of a gazebo in the back yard.</li>
 		</ul>
-		<h3 class = "2"><i class = "ion-android-remove"></i> Closing Costs</h3>
+		<h3 class = "2"><i class = "ion-arrow-down-b"></i> Contractors</h3>
 		<ul class = "2a initiallyHidden">
-			<li class = "question">Is it possible to save on closing costs?</li>
-			<li>Certainly, once you get past the sticker shock. Closing costs are expensive. They can average between 5 to 6 percent of the total home purchase price. But here are a few ways to save:
+			<li class = "question">Are there different types of contractors?</li>
+			<li>Home improvement professionals vary. Who you hire also will depend largely on the size and complexity of your project. What follows is a brief description of the different contractors who do work for homeowners:
 
-Haggle with the seller. He may pay all or part of the closing costs.
-Nab a no-point loan. You may have to pay a higher interest rate, but if you are strapped for cash and can qualify for a higher interest rate, you may find this type of loan can significantly reduce your closing costs.
-Grab a no-fee loan. Although the fee is usually wrapped into a higher rate loan, it does offer one advantage – you get to save on the amount of cash you would need up-front.
-Secure seller financing. These loans typically avoid the traditional fees or charges imposed by lenders.
-Shop ‘til you drop for the best deal. Every lender has its own unique fee structure; you are bound to find one that works for you.</li>
-			<li class = "question">Is there anything I should know about closing day?</li>
-			<li>Yes. The following to-do list can help save you a few headaches and keep the closing on track:
+General contractors – they manage all facets of the project, including hiring and supervising subcontractors, obtaining building permits, scheduling inspections, and working with architects and designers.
+Specialty contractors – these are the folks who install products, such as cabinets, bathroom fixtures, and bookshelves.
+Architects – they design homes, additions, and major renovations.
+Design/build contractors – they offer one-stop service and will see your project through from start to finish.</li>
+			<li class = "question">Are there ways to save money when using a contractor?</li>
+			<li>Chances are you will have to pay the going rate for contractors in your area. Architects or designers will typically cost 12 to 20 percent more. 
+But remember you will want a home improvement that is done right the first time. That said, there are still ways you can save if you do decide to work with a contractor:
 
-Keep extra money in your account. Something unexpected can pop up during the closing that will require more money out of your pocket. Take your checkbook. Even better, find out how much you will need to pay and write a certified check for the total amount.
-Take your loan commitment letter. Use it to verify loan approval in case of a mistake or misunderstanding with the lender.
-Take your contract to purchase. Pull it out if something a little suspicious comes up.
-Take your personal ID. A driver’s license or other personal identification will do.
-Do a before-closing inspection. It is always a good idea, when possible, to walk through the property to make a list of any problems.
-Utilities. Arrange in advance to have the water and electric meters read on closing day and the service switched to your name to prevent interrupted service. The same applies for the fuel tank.</li>
-			<li class = "question">What are closing costs?</li>
-			<li>Closing, or settlement, costs are expenses over and above the price of the property. Both the buyer and seller incur some of these expenses when transferring ownership of a property. Who actually pays, however, often depends on local custom and what the buyer or seller negotiates. Closing costs normally include title insurance, loan points, escrow or closing day charges, property taxes, and document fees. The lender provides an estimate of closing costs for prospective homebuyers.</li>
+Shop around for the most reasonable bid - not necessarily the cheapest.
+Ask friends and family if the contractors they refer stuck to budget.
+Root out hidden costs written into contracts.
+Insist that trade discounts on materials be passed on to you, or buy materials yourself.
+Compare payment alternatives – flat vs. hourly rates, for example – and negotiate the more reasonable of the two.
+Do part of the project yourself, such as some disassembly or prep work.</li>
+			<li class = "question">How do I avoid being ripped off by a less than reputable contractor?</li>
+			<li>According to the Federal Trade Commission, there are several ways to spot less than reputable contractors because these hucksters tend to do the following:
+
+Only accept cash payments;
+Pressure you for an immediate decision;
+Ask you to pay for the entire job up-front;
+Solicit door-to-door;
+Offer exceptionally long guarantees;
+Just happen to have materials left over from a previous job;
+Ask you to get the required building permits;
+Not list a business number in the local telephone directory;
+Offer you discounts for finding other customers;
+Suggest that you borrow money from a lender the contractor knows, which could make you the target of a home improvement loan scam – a sure way to lose your home.</li>
+			<li class = "question">What guidelines should I use to find a contractor?</li>
+			<li>Use caution. Your home is your most valuable financial asset. You will want someone who completes the job, not botch it up. It is important that you find a competent and reliable contractor who will successfully complete your home improvement project. 
+Here’s what you can do:
+
+Avoid the Yellow Pages. Check with family, friends, neighbors and co-workers for recommendations.
+Contact local trade organizations, such as the local Builder Association or Remodelers Council, for the names of members in your area.
+Deal only with licensed contractors. The state licensing board and local Better Business Bureau also can tell you if there are any outstanding complaints against the license holder.
+Interview each contractor, request free estimates, if possible, and ask for recent references. Make sure bids are based on similar project specifications. And do not automatically settle for the lowest bid.
+Ask for proof of worker's compensation insurance and get policy and insurance company phone numbers so you can verify the information. If the contractor is not covered, you could be liable for any work-related injury that takes place during the project. Also check to make sure the contractor has an umbrella general liability policy.</li>
+			<li class = "question">What if the job is botched?</li>
+			<li>If you are displeased with the results for obvious reasons, keep after the contractor to make the needed repairs. When that fails, contact your local consumer protection agency. Make sure you have a copy of the contract, receipts showing payments, and photographs of the work. 
+Although it has no legal authority, you also may want to contact the Better Business Bureau, as well as your state’s Contractor License Board. And you can take the contractor to Small Claims Court to recover amounts usually under $2,000.</li>
 		</ul>
 
-		<h3 class = "3"><i class = "ion-android-remove"></i> Getting Started</h3>
+		<h3 class = "3"><i class = "ion-arrow-down-b"></i> Financing Remodeling Projects</h3>
 		<ul class = "3a initiallyHidden">
-			<li class = "question">How do you decide whether to add on to an existing home or purchase a new one?</li>
-			<li>There are a few things to consider, including cost, individual needs, and what will add value down the road. Also important: your emotional attachment to the existing home.
-			As designer and builder Philip S. Wenz, the author of Adding to a House: Planning, Design & Construction, notes, an addition is much cheaper than building a new home and can offer a “new” home without the heartache of moving.
-			Other considerations: 
-Can you finance the home improvement with your own cash or will you need a loan?
+			<li class = "question">Does the federal government offer home improvement programs?</li>
+			<li>Yes. Among the most popular:
+
+Title 1 Home Improvement Loan. HUD insures the loan up to $25,000 for a single-family home and lenders make loans for basic livability improvements – such as additions and new roofs – to eligible borrowers.
+Section 203(k) Program. HUD helps finance the major rehabilitation and repair of one- to four-family residential properties, excluding condos. Owner-occupants may use a combination loan to purchase a fixer-upper "as is" and rehabilitate it, or refinance a property plus include in the loan the cost of making the improvements. They also may use the loan solely to finance the rehabilitation.
+VA loans. Veterans can get loans from the Department of Veterans Affairs to buy, build, or improve a home, as well as refinance an existing loan at interest rates that are usually lower than that on conventional loans.
+Rural Housing Repair and Rehabilitation Loans. Funded by the Agriculture Department, these low-rate loans are available to low-income rural residents who own and occupy a home in need of repairs. Funds are available to improve or modernize a home or to remove health and safety hazards.</li>
+			<li class = "question">How can I finance work needed on a fixer-upper?</li>
+			<li>According to the Millennial Housing Commission, few lenders are willing to administer home improvement loans. Most prefer to make home equity loans or unsecured consumer loans because they are easier to manage. Home improvement loans usually require inspections and irregular draws on the loan amount as work is completed, which requires regional or national lenders to find local partners to provide oversight.
+Financing repairs and improvements with home equity is okay for most homeowners, but it is difficult for many first-time buyers. They have lower-incomes, smaller savings, and have made lower down payments on their homes than first-time buyers a decade ago. So they have little equity to borrow against. Unfortunately, it is often lower cost older homes purchased by first-time buyers that need the most work. 
+Unless you have a cash reserve, you will have to shop around for the best borrowing terms. In addition to the options listed above, you can ask relatives for a loan. Borrow against your whole life insurance policy. Refinance your existing mortgage and take out cash. Get a second mortgage. Contact the government about home improvement programs. And – as a last resort – borrow from a finance agency, which generally charge high rates.</li>
+			<li class = "question">How does an unsecured loan work?</li>
+			<li>The interest rates on these loans are often higher than on secured loans and you generally will not be able to get a tax deduction for the interest paid. However, the costs to obtain an unsecured loan are usually lower. And the relative ease of getting this type of loan makes it popular for small projects costing $10,000 or less. The lender evaluates applications based on credit history and income.</li>
+			<li class = "question">How does refinancing work?</li>
+			<li>With a refinancing, you pay off an old loan on your home and take out a new one, usually at a lower mortgage interest rate. To refinance, you will generally need to have equity in your home, a good credit rating, and steady income. You can borrow a percentage of the equity to cover remodeling costs, debt consolidate, and college tuition.
+When you refinance, you will incur all the closing costs that go along with getting a new mortgage. So unless you're doing extensive renovations and can get a mortgage interest rate at least two points below your current loan rate, you may want to select another financing option.</li>
+			<li class = "question">Is a home equity line of credit similar to a second mortgage?</li>
+			<li>A home equity loan, like a second mortgage, lets you tap up to about 80 percent of the appraised value of your home, minus your current mortgage balance. But because it is set up as a line of credit, you will not be charged interest until you actually make a withdrawal against the loan, although you will be responsible for paying closing costs.
+The withdrawals can be made gradually as you begin to pay contractors and suppliers for handling your remodeling project.
+The interest rates on these loans are usually variable. Of particular importance: make sure you understand the terms of the loan. If, for example, your loan requires that you pay interest only for the life of the loan, you will have to pay back the full amount borrowed at the end of the loan period or risk losing your home.</li>
+<li class = "question">What about a second mortgage?</li>
+			<li>It is a loan against the equity in your home. Financial institutions will generally let you borrow up to 80 percent of the appraised value of your home, minus the balance on your original mortgage. 
+You may incur all the fees normally associated with a mortgage, including closing costs, title insurance and processing fees.</li>
+<li class = "question">What about state and local governments?</li>
+			<li>Just about every state now offers loans for renovation and rehabilitation at below-market interest rates through its Housing Finance Agency or a similar agency. Call your governor’s office to get the name and phone number of the agency in your area.
+At the municipal level, many cities also have programs for special improvements to certain blocks and neighborhoods they are trying to spruce up. Call City Hall, as well as a Community Development Agency in your city.</li>
+		</ul>
+
+		<h3 class = "4"><i class = "ion-arrow-down-b"></i> Foreclosure</h3>
+		<ul class = "4a initiallyHidden">
+			<li class = "question">How can I protect my home from creditors?</li>
+			<li>Check with your state. It may provide special protection through the filing of a homestead exemption, which exempts some or all of the value of your equity in the homestead – or home that you live in and the land on which it sits – from claims of unsecured creditors. 
+Whether to file a homestead exemption will depend on your situation. Contact your county recorder's office for details.</li>
+			<li class = "question">If faced with foreclosure, what are my options?</li>
+			<li>Talk with your lender immediately. The lender may be able to arrange a repayment plan or the temporary reduction or suspension of your payment, particularly if your income has dropped substantially or expenses have shot up beyond your control. 
+You also may be able to refinance the debt or extend the term of your mortgage loan. In almost every case, you will likely be able to work out some kind of deal that will avert foreclosure. 
+If you have mortgage insurance, the insurer may also be interested in helping you. The company can temporarily pay the mortgage until you get back on your feet and are able to repay their “loan.” 
+If your money problems are long term, the lender may suggest that you sell the property, which will allow you to avoid foreclosure and protect your credit record. 
+As a last resort, you could consider a deed-in-lieu of foreclosure. This is where you voluntarily “give back” your property to the lender. While this will not save your house, it is not as damaging to your credit rating as a foreclosure</li>
+			<li class = "question">When do foreclosure proceedings begin?</li>
+			<li>Usually after the borrower has missed three consecutive mortgage payments. The lender will record a notice of default against the property. And unless the debt is satisfied, the lender will foreclose on the mortgage and proceed to set up a trustee sale, where the property is sold to the highest bidder.</li>
+			<li class = "question">Will I be able to buy again after losing a home to foreclosure?</li>
+			<li>It can happen. But a lot will depend on your circumstances and the mortgage interest rate you are willing to pay. Generally, most lenders will consider your request for a home loan two to four years after your foreclosure. Predatory lenders will issue a home mortgage in less time. But beware – they routinely charge high mortgage interest rates, fees, and penalties for this privilege. 
+A quality lender will expect you to show that you have cleaned up your credit. Providing a reasonable explanation about the circumstances that led to the foreclosure – such as exuberant medical expenses – is also helpful.</li>
+		</ul>
+
+		<h3 class = "5"><i class = "ion-arrow-down-b"></i> Getting Started</h3>
+		<ul class = "5a initiallyHidden">
+			<li class = "question">Should I hire a professional or do the job myself?</li>
+			<li>It depends on the complexity of the project and your ability to do the job well yourself. Really consider whether you have the time, skills, tools, help, and legal knowledge of local regulations to get the job done. While you could save up to an estimated 20% of the project cost doing the work yourself – there are plenty of how-to books and workshops offered by home improvement stores to guide you – be aware that you could also end up spending more money and time if you botch the job or unforeseen problems arise. Think, too, about resale value. If the quality of your work is less than professional, your home’s value could drop. So, unless you’re highly skilled or experienced, shy away from major home improvements that involve structural changes. Stick to building shelves, painting, and other minor improvements instead.</li>
+			<li class = "question">Should the architect and contractor have a “vested” interest in one another?</li>
+			<li>It does not hurt to have a situation where the architect and contractor already have an existing working relationship. In fact, such an association could benefit a project by ensuring the smooth integration between the design and implementation. In a residential project, there is sometimes a triangle of tension between the architect, the contractor and the homeowner in terms of finger pointing and assigning blame. There is greater coordination of efforts, and generally less stress, with a design/build firm where the architects and contractors are accustomed to working together and are knowledgeable about construction costs and can fit design plans and specifications to your budget.</li>
+			<li class = "question">What are the specific responsibilities of the contractor vs. the architect?</li>
+			<li>Beyond having the architect create the design and the contractor implement it, both professionals have additional responsibilities. The contractor is responsible for pricing the project and ensuring that it is completed in a timely fashion. The architect is responsible for getting the construction drawing completed with proper specifications and architectural detail. Since many jurisdictions require architectural drawings to be reviewed to ensure the plans sufficiently meet local codes, the architect may also be responsible for applying for and securing the permits. Make sure that everyone, you included, understand who is responsible for what before work begins in your home.</li>
+			<li class = "question">What factors should determine whether I decide to move or remodel?</li>
+			<li>Your personal needs, preferences and finances are all factors. If you’ve lived in your home awhile and prefer to stay in your school district or neighborhood, improving your existing space may work best for you. If a second bathroom is what you desire, it may also be cheaper to convert existing space than to relocate to another home. According to the American Homeowner Foundation, you can expect to spend 8-10% of your current home’s value when you move. Ask yourself if that money could be better spent on a remodeling project instead. Chances are you’d increase your home’s value, derive more pleasure from your home than you did previously, and save yourself the time, expense and headache of a move. </li>
+			<li class = "question">Who are the professionals that do home improvements?</li>
+			<li>They vary depending on the size and scope of your job. General contractors are companies or individuals who contract with you to manage all aspects of the project, including hiring and supervising subcontractors, obtaining building permits, and supplying materials and labor equipment needed to do the project. Specialty contractors, on the other hand, are mainly concerned with installing products, such as cabinets and fixtures. Architects design homes, additions, and major renovations. And design/build contractors basically offer one-stop service, providing design and construction services and overseeing a project from start to finish.</li>
+			<li class = "question">Who should be called to the project first, the contractor or the architect?</li>
+			<li>Opinions vary about which professional to call first. Some say the architect comes first because “you have to design it before you can build it.” The architect, who is trained to resolve problems creatively, can help define the project in ways that provide meaningful guidance for the design. The architect can also do site studies, help secure planning and zoning approvals, and perform a variety of other pre-design tasks. On the other hand, a contractor will be the one you interact with on a regular basis and the person who will likely be in your home every day, possibly for an extended period depending on the scope of your work. Many contractors have in-house design services, or design/build firms, and can possibly offer better price and integration between design and implementation. Others may have several architects with whom they work directly, which could also provide a smooth integration between design and implementation.</li>
+		</ul>
+
+		<h3 class = "6"><i class = "ion-arrow-down-b"></i> Insurance</h3>
+		<ul class = "6a initiallyHidden">
+			<li class = "question">What is guaranteed replacement cost insurance?</li>
+			<li>The most comprehensive insurance policy is guaranteed replacement cost coverage, which will pay to rebuild your home even if the cost to rebuild is more than your policy limit. 
+This kind of coverage is more expensive and can cost from about $400 to $1,000 a year or more, depending on the area and the price of the home. However, even if you can afford it, this insurance is not available everywhere or for every property. For example, older homes may not be eligible. And some big insurance companies have begun to limit the amount they will pay to 120 percent of the policy's face value.</li>
+			<li>What kind of home insurance should I have?</li>
+			<li class = "question">A standard policy protects against several natural disasters and catastrophic events, and covers your personal belongings. But it will not guard against earthquakes, floods, war, and nuclear accidents. The policy can be expanded to include these disasters as well as coverage for such things as workers' compensation. In fact, the lender may require that you purchase flood or earthquake insurance if the house is in a flood zone or a region susceptible to earthquakes.</li>
+		</ul>
+
+		<h3 class = "7"><i class = "ion-arrow-down-b"></i> Maintenance</h3>
+		<ul class = "7a initiallyHidden">
+			<li class = "question">How much, on average, can I expect to spend on maintenance?</li>
+			<li>Expect to spend one percent of the purchase price of your home every year to handle a myriad of tasks, including painting, tree trimming, repairing gutters, caulking windows, and routine system repairs and maintenance.
+An older home will usually require more maintenance, although a lot will depend on how well it has been maintained over the years. 
+Tell yourself that the upkeep of your home is mandatory, and budget accordingly. Otherwise, your home’s value will suffer if you allow it to fall into a state of disrepair. Remember, there is usually a direct link between a property’s condition and its market value: The better its condition, the more a buyer will likely pay for it down the road. 
+Also, adopt the attitude that the cost of good home maintenance is usually minor compared to what it will cost to remedy a situation that you allowed to get out of hand. For example, unclogging and sealing gutters may cost a few hundred dollars. But repairing damage to a corner of your home where gutters have leaked can potentially cost several thousands dollars.</li>
+			<li class = "question">Is it true you never really stop fixing up a home?</li>
+			<li>From the day you move in to the day you sell your home, there will always be something that will need to be repaired or remodeled. You may want to undertake some changes simply to elevate your comfort level – like installing central air conditioning – or spruce up the home’s aesthetics, such as adding a few stained-glass windows. 
+But other work will need to be done to maintain the property and minimize problems later on. For example, replacing a hazardous roof, fixing broken windows, and repairing leaky pipes. These are all necessities. Left undone, they can lead to major problems and damages within the home. 
+If you decide one day to sell, other improvements will likely be made to increase the home’s value and appeal to potential buyers.</li>
+			<li class = "question">Is there anything I should pay special attention to?</li>
+			<li>From the very beginning, get in the habit of taking an inventory at least once every year of every nook and cranny of your home to check for potential problems. Examine the roof, foundation, plumbing, electrical wiring – basically everything. Try to fix trouble spots as soon as you uncover them. This proactive approach will help you avoid larger expenses later on, so leave no stone unturned when taking your inventory.</li>
+			<li class = "question">What about the unseen problems like toxic gases?</li>
+			<li>Problems with your chimney, mechanical devices on your heating appliance, and pressure within the home can all cause combustion spillage, the unwanted flow of combustion gases into your home. Present in these gases are toxic elements such as carbon monoxide, sulfur dioxide, and nitrogen oxides.
+The best way to prevent spillage is to hire a professional – preferably one who specializes in building inspection, indoor air quality, ducting, chimneys and heating equipment – to do a yearly maintenance check of all your combustion appliances. These appliances include a gas-fired furnace, boiler, or water heater, an oil-fired furnace, boiler, or water heater, and a fireplace.
+The service professional can check for heat exchanger leakage, evidence of start up spillage, and condensation in the chimney. Maintenance normally includes a tune-up, or in the case of a chimney, clearing it of debris and fixing cracks on the inside wall.
+</li>
+		</ul>
+
+		<h3 class = "8"><i class = "ion-arrow-down-b"></i> Refinancing</h3>
+		<ul class = "8a initiallyHidden">
+			<li class = "question">Can an older homeowner who is cash poor but house rich use their home to tap into the equity?</li>
+			<li>Yes, but not so much by refinancing. A reverse mortgage is a better, and increasingly popular, option for older Americans to convert home equity into cash. Money can then be used to cover home repairs, everyday living expenses, and medical bills. 
+Instead of making monthly payments to a lender, the lender makes payments to the homeowner, who continues to own the home and hold title to it. 
+According to the National Reverse Mortgage Lenders Association, the money given by the lender is tax-free and does not affect Social Security or Medicare benefits, although it may affect the homeowners’ eligibility for certain kinds of government assistance, including Medicaid. 
+Homeowners must be at least 62 and own their own homes to get a reverse mortgage. No income or medical requirements are necessary to qualify, and they may be eligible even if they still owe money on a first or second mortgage. In fact, many seniors get reverse mortgages to pay off the original loan. 
+Repaying a reverse mortgage is not necessary until the property is sold or the owner moves. Should the owner die before the property is sold, the estate repays the loan, plus any interest that has accrued.</li>
+			<li class = "question">Can an older homeowner who is cash poor but house rich use their home to tap into the equity?</li>
+			<li>Yes, but not so much by refinancing. A reverse mortgage is a better, and increasingly popular, option for older Americans to convert home equity into cash. Money can then be used to cover home repairs, everyday living expenses, and medical bills. 
+Instead of making monthly payments to a lender, the lender makes payments to the homeowner, who continues to own the home and hold title to it. 
+According to the National Reverse Mortgage Lenders Association, the money given by the lender is tax-free and does not affect Social Security or Medicare benefits, although it may affect the homeowners’ eligibility for certain kinds of government assistance, including Medicaid. 
+Homeowners must be at least 62 and own their own homes to get a reverse mortgage. No income or medical requirements are necessary to qualify, and they may be eligible even if they still owe money on a first or second mortgage. In fact, many seniors get reverse mortgages to pay off the original loan. 
+Repaying a reverse mortgage is not necessary until the property is sold or the owner moves. Should the owner die before the property is sold, the estate repays the loan, plus any interest that has accrued.</li>
+			<li class = "question">Can I refinance a home loan more than once?</li>
+			<li>You most certainly can. During the most recent refinancing boom, for example, many homeowners refinanced their home loans two or three times within relatively short periods of time because interest rates kept treading downward, making it extremely attractive to trade in one loan for another. 
+Just remember that refinancing is basically like applying for a mortgage all over again. Each time you refinance, you will still have to go through the application process, get a home appraisal, and likely incur closing costs. Also, if you have a pre-payment penalty clause in your present mortgage, you will have to pay that penalty if you refinance. So be certain that it is actually worth it for you to refinance.</li>
+			<li class = "question">Can I refinance a home loan more than once?</li>
+			<li>You most certainly can. During the most recent refinancing boom, for example, many homeowners refinanced their home loans two or three times within relatively short periods of time because interest rates kept treading downward, making it extremely attractive to trade in one loan for another. 
+Just remember that refinancing is basically like applying for a mortgage all over again. Each time you refinance, you will still have to go through the application process, get a home appraisal, and likely incur closing costs. Also, if you have a pre-payment penalty clause in your present mortgage, you will have to pay that penalty if you refinance. So be certain that it is actually worth it for you to refinance.</li>
+			<li class = "question">When is the best time to refinance?</li>
+			<li>Many people flock to refinance while mortgage interest rates are low, particularly when rates are two percentage points below their existing home loans. 
+Other factors, like when to finance, will depend on how long you plan to hold on to your home and whether you have to pay considerable fees to refinance. It also will depend on how far along you are in paying off your current mortgage. 
+If you expect to sell your home shortly, you are not likely to recoup the costs you incurred to refinance. And if you are more than halfway through paying your current mortgage, you probably will gain little by refinancing. However, if you are going to own your home for at least another five years, that is probably long enough to recoup any refinancing costs and realize real savings as a result of lowering your monthly payment. 
+In fact, if it costs you nothing to refinance, you can gain even more. Many lenders will let you roll the costs of the refinancing into the new note and still reduce the amount of the monthly payment. Plus, there are no-cost refinancing deals available. 
+Contact your lender, and its competitors, before you refinance.</li>
+		</ul>
+
+		<h3 class = "9"><i class = "ion-arrow-down-b"></i> Renovating and Adding Value</h3>
+		<ul class = "9a initiallyHidden">
+			<li class = "question">Are there ways to save money when adding new space to my home?</li>
+			<li>The direction in which you build can make all the difference. Experts say building up is normally less expensive than building out on the ground level. Adding an expensive wing or addition requires a new foundation. It is less costly to extend plumbing and other mechanical systems upward, as opposed to installing new ones. So using the “air rights” over your house may be your best bet.</li>
+			<li class = "question">Is there such a thing as “over improving?”</li>
+			<li>Yes. The last thing you want to do when undertaking a home improvement is go overboard. This means fixing up the home to the point where it becomes worth far more than nearby neighborhood properties. 
+Down the road, when you may want to sell, potential homebuyers will be reluctant to pay, say, $200,000 for your home when others are priced at $150,000. If they want to pay that kind of money, they will likely make a purchase in a neighborhood where most of the homes sell in that price range. 
+Carefully measure the cost of any improvements you want to make against the overall values in your neighborhood. Otherwise, you may not recover your costs or increase your property value significantly.</li>
+			<li class = "question">What are the main reasons why homeowners remodel?</li>
+			<li>There are many reasons. Home remodeling can improve the appearance of your home, enhance its value, add to your quality of life, and appeal to future home buyers. According to a recent survey by the National Association of Home Builders, the top four reasons homeowners remodel is to obtain more space, avoid buying a new home, enjoy more amenities, and adjust to lifestyle changes.</li>
+			<li class = "question">What kind of return can I expect from home improvements?</li>
+			<li>Some improvements offer a greater return than others do. This will vary greatly depending on the type of work you have done. Remodeling magazine publishes an annual "Cost vs. Value Report'' that can answer this question in more detail, based on the top 15 home improvements. A recent study it conducted says the highest remodeling paybacks have come from siding and window replacements, major kitchen remodeling, bathroom and family room additions, and mid-range master bedroom suites.</li>
+			<li class = "question">What should I consider once I decide to add on?</li>
+			<li>If you must construct new space, ask yourself the following questions:
+
+Can I finance the home improvement with my own cash or will I need a loan?
 How much equity is in the property? A fair amount will make it that much easier to get a loan for home improvements.
 Is it feasible to expand the current space for an addition?
 What is permissible under local zoning and building laws? Despite your deep yearning for a new sunroom or garage, you will need to know if your town or city will allow such improvements.
-Are there affordable properties for sale that would satisfy your changing housing needs? 
-Explore your options. Make sure your decision is one you can live with – either under the same roof or under a different one.</li>
-			<li class = "question">How much can I afford?</li>
-			<li>The general rule is that you can buy a home that costs about two-and-one-half times your annual salary. A good real estate agent or lender can determine how much you can afford and estimate the maximum monthly payment based on the loan amount, taxes, insurance and other expenses. Your real estate agent can help you to figure out now how your income, debts, and expenses can affect what you can afford, and how much you may be able to borrow to purchase a home, and even prepare an estimated settlement sheet for homes you like.</li>
-			<li class = "question">Is it best to save for the ultimate dream home or begin with a less expensive starter home?</li>
-			<li>It can take a long time to save for that perfect dream home. Meanwhile, the market has been flooded with some of the most favorable mortgage interest rates in years. Low rates make housing more affordable, which is why so many buyers have jumped on the home buying bandwagon.
-Home-price appreciation has also been strong, making very solid gains in communities across the country. In fact, home prices are expected to increase 2.5 percent to 3 percent annually over the next five years. 
-If you purchase a starter home today, you can potentially begin to build value that can lead to the purchase of a larger, or more desirable, trade-up home in the future.</li>
-			<li class = "question">What are the advantages of owning a home?</li>
-			<li>There are many. Among the most appealing: you own it, which gives you, instead of a landlord, control of your living space. Other benefits stem from potential tax savings and the buildup of equity as your property likely appreciates in price over time. Equity can be used to help put children through college, purchase a second home, or make home improvements.
-The mortgage interest paid on a home loan is tax deductible, as is the local property tax. If you get a fixed-rate home mortgage loan, you also can invest more wisely knowing your monthly mortgage payment, unlike rent, will not change substantially.</li>
-			<li class = "question">What is the first step to buying a home?</li>
-			<li>Make sure you are ready – psychologically and financially. Ask yourself the following questions: Do I have steady income? Is my debt lower than my total income? Do I have enough money to pay for the down payment and closing costs? Am I working hard enough to improve bad credit?
-A house needs constant care and attention. Also ask yourself if your budget will allow for unexpected repairs and upkeep. Once you can honestly answer “yes” to these questions, you are several steps ahead of the game and that much closer to becoming a homeowner.</li>
+Should I make the improvement myself or hire a contractor?</li>
+			<li class = "question">What should I weigh before considering an addition to my home?</li>
+			<li>Thoroughly assess your space. You may find you have the room you need, particularly if there is unused or under utilized areas in your home. Perhaps a garage, attic, side porch, or basement can be converted to fit the use you have in mind. Or, maybe, a small area can be carved from a larger area like a kitchen or living room to create a powder room. These improvements are certainly cheaper than a major construction job.</li>
+			<li class = "question">When should I tackle the job myself or call in the pros?</li>
+			<li>A lot will depend on your time, level of expertise or willingness to handle the job, amount of help from friends or relatives, and how much you want, or need, to save by doing the job yourself. You could save up to 20 percent of the project cost through your own hard work. 
+There are several do-it-yourself books that offer guidance, and some home improvement stores, such as Home Depot or Lowe’s, offer classes that can be helpful getting you on the right track. 
+Be aware, however, that you may end up spending more time, and up to double your estimated budget, if problems arise. Also, you may have difficulty selling your home if the workmanship looks shoddy. 
+Unless you are very experienced, home improvement experts suggest that you stick to painting, minor landscaping, building interior shelving, and other minor improvements.
+Remember, too, that you may need to deal with local agencies to get permits, inspections, variances, and certificates of occupancy.</li>
 		</ul>
 
-		<h3 class = "4"><i class = "ion-android-remove"></i> Home Inspections</h3>
-		<ul class = "4a initiallyHidden">
-			<li class = "question">Do I need to be at the inspection?</li>
-			<li>No, but it is a very good idea to be there. Following the check-over, the home inspector can answer your questions and discuss problem areas with you. This is also an opportune time to get an objective opinion about the home from someone who does not have emotional or financial ties to the property.</li>
-			<li class = "question">How do I select a home inspector?</li>
-			<li>Begin by only hiring one who is qualified and experienced, someone who belongs to an industry trade group, such as the American Society of Home Inspectors (ASHI). This organization has developed formal inspection guidelines and a professional code of ethics for its members. Also, membership in ASHI is not automatic; members must have demonstrated field experience and technical knowledge about structures and their various systems.</li>
-			<li class = "question">Should I hire a home inspector?</li>
-			<li>By all means. Buying a home without getting expert advice is risky. Once a home inspector uncovers major plumbing and electrical problems, for example, you may decide you do not want to spend several thousand dollars on repairs. 
-Always include an inspection clause in your written offer. This clause gives you an “out” from buying if serious problems are detected. It also gives you another chance to negotiate the purchase price if repairs are needed. The clause can even specify that the sellers fix any problem that is uncovered before you settle, or close, on the home.
-You also may want to consider hiring experts to inspect the home for a number of health-related risks like radon gas, asbestos, or possible problems with the water or waste disposal system.</li>
-			<li class = "question">What does a home inspector do?</li>
-			<li>A home inspector is a paid professional – often a contractor or an engineer – who checks the safety of a home. Home inspectors search for defects or other problems that could become your worst nightmare later on. They focus particularly on the home’s structure, construction, and mechanical systems. 
-It is not the inspector’s job to determine whether you are getting good value for your money. He does not establish value, only whether the home might collapse in a storm or if the roof might cave in.
-A home inspection typically takes place after a purchase contract between the buyer and seller has been signed.</li>
+			<h3 class = "10"><i class = "ion-arrow-down-b"></i> Second Homes</h3>
+		<ul class = "10a initiallyHidden">
+			<li class = "question">Should I buy a vacation home?</li>
+			<li>The second home market has more ebbs and flows than the primary home market. Sales are iffy in a bad economy except, perhaps, on the high-end. That said, there is a growing trend toward the purchase of vacation homes. They are being bought for investment purposes, enjoyment, as well as retirement. In the latter instance, some people are buying with the idea of turning a vacation home into a permanent retirement haven down the road, a move that puts them ahead of the game now. 
+Some of the tax benefits of a second home mirror those for a primary residence. Before taking the leap, however, ask yourself if you can afford to carry two mortgages, maintain two households, and pay the extra utilities and maintenance costs. Also, learn about financing requirements and options, which can differ slightly from those on a primary residence.</li>
+			<li class = "question">What about a vacation home as an investment?</li>
+			<li>Like any investment, it can be risky. Location and current market conditions are extremely important when deciding whether to buy. 
+Other things to consider:
+
+Will you be able to afford repairs, maintenance, insurance, and utilities?
+What about fees to pay agents who rent the property for you?
+If you live several miles away from your vacation home, who will clean up between tenants and take an inventory of household items once the tenants leave?
+What if you are unable to rent your second home? Can your pocketbook withstand the strain of paying the mortgage?</li>
 		</ul>
 
-		<h3 class = "5"><i class = "ion-android-remove"></i> Insurance</h3>
-		<ul class = "5a initiallyHidden">
-			<li class = "question">Is private mortgage insurance necessary?</li>
-			<li>Lenders require private mortgage insurance (PMI) on most conventional loans with less than a 20 percent down payment. They believe there is a correlation between borrower equity and default. They have found that the less money borrowers put down, the more likely they are to default on a loan. PMI guarantees the lender will not lose money if this happens and a foreclosure is necessary. 
-The buyer pays this insurance, usually a small fee at the outset and a percentage of the face amount of the loan that is added to the monthly payment.
-What most homeowners do not realize is that the insurance is usually no longer necessary after enough equity has built up in the property. Contact your lender if you meet this requirement. 
-A precaution: do not confuse PMI with mortgage life insurance. The latter pays all, or a portion, of your mortgage in the event of your death.</li>
-			<li class = "question">What about title insurance?</li>
-			<li>Title insurance protects the lender against unclear title to the property you are buying. It is almost always a requirement for closing on a home. If you desire coverage as well, buy an owner’s policy, which will protect you against any title-search errors and losses that arise from disputes over property ownership. The cost of title insurance is usually a set value per thousand of dollars of the total loan amount.</li>
-			<li class = "question">What does homeowners’ insurance cover?</li>
-			<li>It protects against disasters – whether natural, manmade or mechanical. A standard policy insures the home, as well as your possessions. Because this insurance is packaged, it covers liability for any harm, loss, and property damage that you or your family members cause others. And it includes additional living expenses in case you are temporarily displaced because of damage from a fire or other insured disaster. 
-While you are not legally required to purchase homeowners' insurance, mortgage lenders require you to do so." or "mortgage lenders stipulate that you must.
-If your mortgage is paid up - or you never had one - it is still a good idea to have homeowners’ insurance to protect your home and your belongings.</li>
-			<li class = "question">What is condo and co-op insurance?</li>
-			<li>This insurance protects your investment and personal belongings from most disasters. As an owner, you will need two insurance policies – your own to cover liability, living expenses, your belongings and structural improvements, and a master policy provided by the condo or co-op board. The master policy covers the common areas that you share with others in the building. It is paid for using the monthly condo fee that you and other owners pay. </li>
-			<li class = "question">What is condo and co-op insurance?</li>
-			<li>This insurance protects your investment and personal belongings from most disasters. As an owner, you will need two insurance policies – your own to cover liability, living expenses, your belongings and structural improvements, and a master policy provided by the condo or co-op board. The master policy covers the common areas that you share with others in the building. It is paid for using the monthly condo fee that you and other owners pay.</li>
-			<li class = "question">What kind of home insurance should I get?</li>
-			<li>A standard policy will do in most instances. It protects against several natural disasters and catastrophic events. However, it will not guard against earthquakes, floods, war, and nuclear accidents. The policy can be expanded to include these disasters as well as coverage for such things as workers' compensation. In fact, the lender may require that you purchase flood or earthquake insurance if the house is in a flood zone or a region susceptible to earthquakes. 
-You also can increase coverage beyond the depreciated value of personal property such as televisions and furniture by purchasing a replacement-cost endorsement. Home-based business-coverage, once overlooked, is an ever-increasing popular rider. It does not cover liability associated with the business but rather contents such as home office equipment and general liability to cover injuries to clients and employees. 
-Other considerations: an inflation rider, which increases coverage as the home’s value rises, and getting insurance that is equal to the full replacement value of the home. 
-Insurance companies usually require an amount equal to at least 80 percent of the full replacement value. Otherwise, only a portion of the loss would be covered.</li>
-		</ul>
-
-		<h3 class = "6"><i class = "ion-android-remove"></i> Lease Options</h3>
-		<ul class = "6a initiallyHidden">
-			<li class = "question">How does a lease option work?</li>
-			<li>A landlord agrees to give a renter an exclusive option to purchase the property. The option price is usually determined at the outset, but not always, and the agreement states when the purchase should take place – whether, say, six months, or a year or two down the road.
-A portion of the rent is used to make the future down payment. Most lenders will accept the down payment if the rental payments exceed the market rent and a valid lease-purchase agreement is in effect. 
-Before you opt to do a lease option, find out as much as possible about how they work. Talk to real estate agents, read published materials, and, in the end, have an attorney review any paperwork before you sign on the dotted line.</li>
-			<li>What is a lease option?</li>
-			<li class = "question">It is an agreement between a renter and a landlord in which the renter signs a lease with an option to purchase the property. The option only binds the seller; the tenant has a choice to make a purchase or not.
-Lease options are common among buyers who would like to own a home but do not have enough money for the down payment and closing costs. A lease option may also be attractive to tenants who are working to improve bad credit before approaching a lender for a home loan.</li>
-		</ul>
-
-		<h3 class = "7"><i class = "ion-android-remove"></i> Negotiating & Closing the Best Deal</h3>
-		<ul class = "7a initiallyHidden">
-			<li class = "question">Are low-ball offers a good idea?</li>
-			<li>Any offer can be presented, but a low-ball one that is substantially less than the asking price can dampen a prospective sale and prevent the seller from negotiating at all. Unless the home is overpriced to begin with the offer will probably be rejected. 
-Do your homework before making an offer. Compare prices of recently sold homes and new listings in the neighborhood. It also helps to know something about the seller’s motivation. A lower price with a speedy closing, for example, might motivate a seller who must move, has another house under contract, or must sell quickly for other reasons. 
-Also recognize that while your low offer in a normal market might be rejected at once, it might motivate the seller in a buyer’s market to either accept it or make a counter-offer.</li>
-			<li class = "question">Can you negotiate interest rates?</li>
-			<li>A few lenders will negotiate the mortgage rate and number of points on a loan. However, this is more the exception than the rule with established lenders. As always, shop around and know the market before you enter a lender’s office. Rates are often published in local newspapers and on Internet Web sites.
-You may have more luck when dealing directly with a seller who has agreed to finance your loan. He is likely to be more open to negotiation, particularly when motivated to make a quick sale.</li>
-			<li class = "question">Do I need an attorney to buy a home?</li>
-			<li>A lot depends on the state where the property is located. Some require an attorney; others do not. 
-Most homebuyers can generally handle routine real estate purchase contracts as long as they read the fine print and understand all the terms. But pay close attention to any clauses, contingencies, and other special considerations that will allow you or the seller to back out of the contract.
-When in doubt, consult an attorney. Ask relatives and friends, or your real estate agent, for recommendations. Call to inquire about their fees and to check their level of experience. Expect that more seasoned attorneys will cost more.</li>
-			<li class = "question">Does the seller take the furnishings once the home is sold?</li>
-			<li>Normally. This is because the fixtures – personal property that is permanently attached to a home, such as built-in bookcases or a furnace – automatically stay with the house unless noted otherwise in the sales contract. Anything that is not nailed down is negotiable, including appliances that are not built in, such as washers and dryers.
-</li>
-			<li class = "question">Is it possible to buy a home below market price?</li>
-			<li>Certainly, but do not hold your breath. It takes a lot of determination and time to find a real bargain. But if you are adamant, here are some likely targets to pursue:
-
-foreclosed property
-a fixer-upper
-hard-to-sell new homes in a housing development
-tenant-in-common partnerships.
-
-With the latter, you may be able to buy a partial interest in this form of title to property owned by two or more individuals because the partners often sell at a discount.
-However, bargains are easier to come by in a soft real estate market, when the economy is in a recession, and when homeowners, and builders and sponsors of condominium conversions, are desperate to move unsold units.</li>
-			<li class = "question">What are some negotiating tips?
-</li>
-			<li>Know the seller's motivation to sell. This will enhance your negotiating position. Sellers who must move quickly due to a job transfer, divorce, or contract on another home, are more inclined to accept a lower price to speed the process along. 
-Remember, too, that the listing, or asking, price is what the seller would like to receive for the home. It is not necessarily what the seller will settle for. So know value. Before you make an offer, check recent sales and listing prices of comparable neighborhood homes and compare them to the seller's asking price. 
-Other tips:
-
-Be flexible. Never say, “take it or leave it.” That can sour negotiations and ruin the deal.
-Never show your hand or reveal your next step.
-Each time you increase your offering price ask for something in return, such as repairs, appliances, even lawn furniture.
-If you plan to pay cash or have a tentative commitment for a loan, use your strong financial position as a negotiating tool.
-Don’t let emotions such as pride, fear, love, and anger get in the way of negotiating the best deal. Leave irrational feelings at home.</li>
-			<li class = "question">What contingencies should appear in the offer?</li>
-			<li>When you look to purchase a home, anticipate potential problems. But protect against them so that if something does go wrong, you can cancel the contract without penalty. This is what contingencies allow you to do. They should be included in any offer you present to buy a home.
-Most offers include two standard contingencies: a financing contingency, which makes the sale dependent on your ability to obtain a loan commitment from a lender, and an inspection contingency, which allows you to have a professional inspect the property. 
-Without contingencies, a buyer could forfeit his deposit under certain circumstances if he backs out of a deal. 
-The purchase contract also should include the seller's responsibilities, such as passing clear title, maintaining the property in its present condition until closing, and making any agreed-upon repairs.</li>
-		</ul>
-
-		<h3 class = "8"><i class = "ion-android-remove"></i> Property Taxes</h3>
-		<ul class = "8a initiallyHidden">
-			<li class = "question">Are impound accounts required for all mortgage loans?</li>
-			<li>They can typically be waived on a conventional loan if the loan amount is 80 percent or less of the purchase price. But the lender might charge you an additional 1/4 point for this option to waive the escrow.
-One way to avoid an impound account on an owner-occupied mortgage is to raise your down payment amount slightly. The exact amount necessary to avoid the escrow will vary with the lender.
-In some states, lenders let buyers set up separate accounts in which they place specific funds and then pay the insurance and property taxes themselves. These are called pledge accounts, and they must be set up before you close on the home. 
-An impound account can usually be dropped on an owner-occupied loan once the loan-to-value ratio equals 80 percent or less. But restrictions apply: payments will have to be current and your record of making on-time payments pretty solid. Contact your lender if you meet these requirements and want to drop your impound account.</li>
-			<li class = "question">Are property taxes deductible?</li>
-			<li>Yes. Like the mortgage interest paid on a home loan, property taxes are fully deductible from your income. You may deduct them every year on your primary residence, second home and other investment properties. 
-However, escrow money held for property taxes cannot be deducted until the money is actually used to pay the property taxes.</li>
+		<h3 class = "11"><i class = "ion-arrow-down-b"></i> Taxing Matters</h3>
+		<ul class = "11a initiallyHidden">
+			<li class = "question">Are special tax breaks available for historic rehabilitation?</li>
+			<li>Certified historic structures now enjoy a 20 percent investment tax credit for qualified rehabilitation expenses, if they are income producing properties. A historic structure is one listed in the National Register of Historic Places or so designated by an appropriate state or local historic district that is certified by the government. The tax code does not allow deductions for the demolition or significant alteration of a historic structure. 
+For more information, contact the National Trust for Historic Preservation at (202) 588-6000, or visit its website at www.nationaltrust.org. 
+Many states offer tax incentives, reductions and abatement programs for owners of residential historic homes. These programs are described on the National Trust’s website.</li>
+			<li class = "question">Are victims whose homes are damaged by natural disasters granted any tax relief?</li>
+			<li>Damage, destruction, or loss of property from fires, floods, earthquakes and other disasters are deductible from both state and federal income taxes. 
+If destruction is caused by an event deemed a federal disaster by the president, homeowners can deduct their losses in the tax year before the event happened by filing an amended return. This helps to dramatically cut the wait for tax refund money that can immediately be used to make repairs or pay for living expenses.</li>
 			<li class = "question">Can I contest my property taxes?</li>
-			<li>Many people do, mainly because determining value can often be tricky. This is especially true in a changing market when local prices either take off dramatically or plunge precipitously, like during the Texas oil bust of the 1980s.
+			<li>Many people do, mainly because determining value can often be tricky. This is especially true in a changing market when local prices either take off dramatically or plunge precipitously, like during the Texas oil bust of the 1980s. 
 While it is up to a professional assessor to evaluate property value for tax purposes, property owners are usually allowed to contest their assessment until a certain date after they are made public. 
-Once you contest, you will have to prove why you think your property is worth less – few homeowners contest hoping to pay more taxes! The two most popular ways for determining value are an appraisal and a comparative market analysis. With an appraisal, a professional estimates the property's market value based on recent sales of comparable properties. A comparative market analysis is an informal estimate of market value performed by a real estate agent based on similar sales and property attributes. Most agents will offer free analyses to win your business.
-Contact your local tax assessor's office for procedures on appealing your property tax assessment.</li>
-			<li class = "question">How are individual tax bills figured?</li>
-			<li>Unlike the income tax and the sales tax you pay, the property tax is not based on how much money you earn or how much you spend. It is based solely on how much the property you own is worth. 
-The real property tax is an ad valorem tax, or a tax based on the value of property. 
-Ideally, the owners of property of equal value pay the same amount of property taxes, and the owners of more valuable property pay more in taxes than the owners of less valuable property. The tax is calculated using a variety of formulas and is based on a property’s assessed value – its full market value or a percentage thereof – and the tax rate of the taxing jurisdiction, minus any property tax exemptions, such as those offered for the elderly or veterans</li>
-			<li class = "question">What is an impound account?</li>
-			<li>It is a special bank account held by the lender to collect monthly payments from the borrower to pay property taxes, mortgage insurance, and hazard insurance. These accounts also are called escrow or reserve accounts.
-Lenders like to set up impound accounts to ensure the property taxes and insurance will be paid on time. They typically also collect a two-month cushion for taxes and insurance at the closing. A few states require the lender to pay interest on funds held in these accounts.</li>
-			<li class = "question">Why do homeowners have to pay property taxes?</li>
-			<li>Property taxes are assessed by city and county governments to generate the bulk of their operating revenues. The taxes help pay for such public services as schools, libraries, roads, and police protection. 
-Re-valuations of the tax are often done periodically, although the time interval varies from state to state or, in some states, from town to town, and can range from annual reassessments to periods of ten years or more.</li>
-		</ul>
-
-		<h3 class = "9"><i class = "ion-android-remove"></i> Tax Matters</h3>
-		<ul class = "9a initiallyHidden">
-			<li class = "question">Are fees and assessments owed a homeowner’s association deductible?</li>
-			<li>Generally not because they are considered personal living expenses. But if an association has a special assessment to make capital improvements, condo owners may be able to add the expense to their cost basis when the property is sold. Another exception may apply if you rent your condo – the monthly condo fee is deductible every year as a rental expense.</li>
-			<li class = "question">Are there tax credits for first-time homebuyers?</li>
-			<li>Yes, thanks to the many city and county governments that offer Mortgage Credit Certificate (MCC) programs, which allow first-time homebuyers to take advantage of a special federal income tax write-off. The credit reduces the amount of federal taxes paid by the buyer each year, if he keeps the same loan and lives in the same house. 
-An MCC also makes it easier for eligible buyers to qualify for a mortgage loan. The lender can reduce the housing expense ratio – the percentage of gross monthly income applied toward housing expenses – by the amount of the tax savings. Normally, lenders reject loans if the housing expense ratio is too high.
-Program requirements for MCCs vary, although most adhere to the following guidelines: 
-The buyer must live in the home being purchased with an MCC-assisted mortgage.
-Total household income cannot exceed certain limits.
-The buyer cannot have owned a principal residence within the past three years. This restriction may be waived if a property is purchased within a certain targeted area.
-The purchase price must fall within an established limit.</li>
-			<li class = "question">Are up-front fees and closing costs deductible?</li>
-			<li>Many of the costs paid at closing are not immediately deductible. 
-The exception is points you pay to purchase your home loan. They are deductible for that year. Points paid when you refinance an existing mortgage must be deducted over the life of the new loan.
-Some fees – including loan application, appraisal, document preparation and recording fees – that are assessed when purchasing a home can be recouped by adding them to the adjusted cost basis, the starting point for figuring a gain or loss when selling the home. 
-Significant home improvements also can be calculated into your cost basis.</li>
-			<li class = "question">How can owning a home pay off at tax time?</li>
-			<li>A home provides many tax benefits, literally from the time you buy to the time you sell. The mortgage interest paid on a home loan up to $1 million for a primary residence or second home is tax deductible every year, as is the local property tax. Other mortgage costs – including late-payment charges and early-payment penalties – are also deductible.
-And if you use a portion of your home for business purposes, you can take a depreciation deduction as well.
-Many federal tax benefits are also available from local and state tax agencies. Contact your local tax agency for more information.</li>
+Once you contest, you will have to prove why you think your property is worth less – few homeowners contest hoping to pay more taxes! The two most popular ways for determining value are an appraisal and a comparative market analysis. With an appraisal, a professional estimates the property's market value based on recent sales of comparable properties. A comparative market analysis is an informal estimate of market value performed by a real estate agent based on similar sales and property attributes. Most agents will offer free analyses to win your business. 
+Contact your local tax assessor's office for procedures on appealing your property tax assessment.</li>			
+			<li class = "question">Can I deduct improvements made to my home?</li>
+			<li>Yes, but only after you have sold it because improvements add to the basis of your home. Your gain is defined as your home’s selling price, minus deductible closing costs, minus your basis. The basis is the original purchase price of the home, plus improvements, less any depreciation. 
+The IRS defines improvements as those items that “add to the value of your home, prolong its useful life, or adapt it to new uses” – such as putting in new plumbing or wiring or adding another bathroom.</li>
 		</ul>
 	</div>
 		<div class = "footer">

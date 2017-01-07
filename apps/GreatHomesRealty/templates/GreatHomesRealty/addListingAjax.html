@@ -1,0 +1,174 @@
+<html>
+<head>
+	<title></title>
+</head>
+<style type="text/css">
+	.error {
+		color: red;
+		margin-left: 17%;
+	}
+	.success {
+		color: green;
+		margin-left: 17%;
+	}
+</style>
+<body>
+	<div class = "addListingAjax">
+        {% csrf_token %}
+          <h1>Add Listing</h1>
+          {% if allInputLengths %}
+            <p class = 'error'> {{ allInputLengths }} </p>
+          {% endif %}
+          {% if success %}
+	        <p class = 'success'> {{ success }} </p>
+	      {% endif %}
+          <div class = "form-group">
+            <label for ="streetAddress" class="col-sm-2 control-label">Street Address:</label>
+            <div class = "col-sm-6">
+              <input type='text' class = "form-control" name='streetAddress' id = "streetAddress" placeholder = "Street Address" value = "{{SA}}"> 
+            </div>
+          </div>
+          <div class = "form-group">
+            <label for ="suite" class="col-sm-2 control-label">Apt/Suite #:</label>
+            <div class = "col-sm-6">
+              <input type='text' class = "form-control" name='suite' id = "suite" placeholder = "#" value = "{{Apt}}"> 
+            </div>
+          </div>
+          <div class = "form-group">
+            <label for ="city" class="col-sm-2 control-label">City:</label>
+            <div class = "col-sm-6">
+              <input type='text' class = "form-control" name='city' id = "city" placeholder = "City" value = "{{C}}"> 
+            </div>
+          </div>
+           <div class = "form-group">
+            <label for ="state" class="col-sm-2 control-label">State:</label>
+            <div class = "col-sm-6">
+              <input type='text' class = "form-control" name='state' id = "state" placeholder = "State" value = "{{S}}"> 
+            </div>
+          </div>
+           <div class = "form-group">
+            <label for ="zipcode" class="col-sm-2 control-label">Zip Code:</label>
+            <div class = "col-sm-6">
+              <input type='number' class = "form-control" name='zipcode' id = "zipcode" placeholder = "Zip Code" value = "{{ZC}}"> 
+            </div>
+          </div>
+          <div class = "form-group">
+	          <label for = "MLS" class = "col-sm-2 control-label">MLS number:</label>
+	          <div class = "col-sm-6">
+	            <input type='number' name='mls' class = "form-control" id = "mls" placeholder = "MLS" value = "{{MLS}}">
+          </div>
+     	 </div>
+          <div class = "form-group">
+            <label for = "price" class = "col-sm-2 control-label">Price: </label>
+            <div class = "col-sm-6">
+              <input type='number' name='price' class = "form-control" id = "price" placeholder = "Price" value = "{{P}}">
+            </div>
+          </div>
+         <div class = "form-group">
+            <label for = "bedrooms" class = "col-sm-2 control-label">Bedrooms: </label>
+             <div class = "col-sm-6">
+	         <select name = "bedrooms" class="form-control" id = "bedrooms" value = "{{Bed}}">
+				<option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
+				<option>5</option>
+				<option>6</option>
+				<option>7</option>
+				<option>8</option>
+			</select>
+			</div>
+         </div>
+          <div class = "form-group">
+            <label for = "bathrooms" class = "col-sm-2 control-label">Bathrooms: </label>
+             <div class = "col-sm-6">
+	         <select class="form-control" id = "bathrooms" name = "bathrooms">
+				<option>1</option>
+				<option>1.5</option>
+				<option>2</option>
+				<option>2.5</option>
+				<option>3</option>
+				<option>3.5</option>
+				<option>4</option>
+				<option>4.5</option>
+				<option>5</option>
+				<option>5.5</option>
+				<option>6</option>
+				<option>6.5</option>
+			</select>
+			</div>
+         </div>
+        <div class = "form-group">
+          <label for = "squarefootage" class = "col-sm-2 control-label">Square Footage:</label>
+          <div class = "col-sm-6">
+            <input type='number' name='squarefootage' class = "form-control" id = "squarefootage" placeholder = "Square Footage" value = "{{SF}}">
+          </div>
+        </div>
+        <div class = "form-group">
+          <label for = "housetype" class = "col-sm-2 control-label">House Type:</label>
+          <div class = "col-sm-6">
+            <input type='text' name='housetype' class = "form-control" id = "housetype" placeholder = "House Type" value = "{{HT}}">
+          </div>
+        </div>
+        <div class = "form-group">
+          <label for = "county" class = "col-sm-2 control-label">County:</label>
+          <div class = "col-sm-6">
+            <input type='text' name='county' class = "form-control" id = "county" placeholder = "County" value = "{{County}}">
+          </div>
+        </div>
+        <div class = "form-group">
+          <label for = "neighborhood" class = "col-sm-2 control-label">neighborhood:</label>
+          <div class = "col-sm-6">
+            <input type='text' name='neighborhood' class = "form-control" id = "neighborhood"placeholder = "neighborhood"  value = "{{N}}">
+          </div>
+        </div>
+        <div class = "form-group">
+            <label for = "status" class = "col-sm-2 control-label">Status: </label>
+             <div class = "col-sm-6">
+	         <select name = "status" class="form-control" id = "status">
+				<option>Undercontract</option>
+				<option>Available</option>
+				<option>Sold</option>
+				<option>Open House</option>
+			</select>
+			</div>
+         </div>
+		<div class = "form-group">
+          <label for = "neighborhood" class = "col-sm-2 control-label">Year built:</label>
+          <div class = "col-sm-6">
+            <input type='number' name='yearBuilt' class = "form-control" id = "yearBuilt"placeholder = "yearBuilt" value = "{{Y}}">
+          </div>
+        </div>
+         <div class="form-group">
+            <label for="description" class = "col-sm-2 control-label">Edit Description:</label>
+            <div class = "col-sm-8">
+            <textarea class="form-control" rows="6" name="description" id="description"></textarea>
+            <p>{{D}}</p>
+        </div>
+		</div>
+		{% if allInputLengths %}
+            <p class = 'error'> {{ allInputLengths }} </p>
+          {% endif %}
+		{% if success %}
+	        <p class = 'success'> {{ success }} </p>
+	      {% endif %}
+	      {% if success %}
+	      	<p>{{listing.id}}</p>
+	      {% endif %}
+ </div>
+</body>
+<script type="text/javascript">
+	$('.addListingForm').on('submit', function(e){
+	    e.preventDefault()
+	    $.ajax({
+	      url: '/addListing',
+	      method: 'post',
+	      data: $(this).serialize(),
+	      success: function(serverResponse){
+	        $('.addListingAjax').html(serverResponse)
+	      }
+	    })
+	    // $('.sendMail').trigger('reset')
+	  });
+</script>
+</html>

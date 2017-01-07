@@ -61,8 +61,8 @@
 	.header ul li {
 		display: inline-block;
 		font-size: 1.2em;
-		padding-right: 2%;
-		padding-left: 2%;
+		padding-right: 1%;
+		padding-left: 1%;
 		border-right: 2px solid white;
 		position: relative;
 		right: 2em;
@@ -75,7 +75,7 @@
 		color: white;
 	}
 	a:hover {
-		color: rgb(255, 127, 0);
+		color: orange;
 		text-decoration: none;
 	}
 	.ion-ios-home {
@@ -108,7 +108,7 @@
 		color: white;
 	}
 	.support a:hover {
-		color: rgb(250, 197, 100);
+		color: orange;
 		text-decoration: none;
 	}
 	.addressdiv {
@@ -292,11 +292,16 @@
 						  <ul class="dropdown-menu">
 						    <li><a href="{%url 'GreatHomes:buying' %}">Buying a Home</a></li>
 						    <li><a href="{%url 'GreatHomes:mortgage' %}">Mortgages</a></li>
-						    <li><a href="{%url 'GreatHomes:investing' %}">Investing</a></li>
 						    <li><a href="{%url 'GreatHomes:owningHome' %}">Owning A Home</a></li>
 						  </ul>
 					</li>
-					<li><a href="{%url 'GreatHomes:selling' %}">Selling</a></li>
+					<li>
+						<a class="dropdown-toggle" data-toggle="dropdown">Selling
+						  <span class="caret"></span></a>
+						  <ul class="dropdown-menu">
+						    <li><a href="{%url 'GreatHomes:selling' %}">Selling</a></li>
+						    <li><a href="{%url 'GreatHomes:investing' %}">Investing</a></li>
+						  </ul>
 					<li>About Us</li>
 					<li><a href="{%url 'GreatHomes:suscribeDisplay' %}">Newsfeed</a></li>
 					<li><a href="{%url 'login:index' %}">Login</a></li>

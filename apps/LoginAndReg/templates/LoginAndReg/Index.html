@@ -16,6 +16,9 @@
     .btn {
       margin-top: 15px;
     }
+    .last-btn {
+      margin-bottom: 5%;
+    }
     h1 {
       margin-left: 50px;
     }
@@ -26,7 +29,7 @@
     <body>
         <form action="{%url 'login:register' %}" method='post' class = "form-horizontal">
         {% csrf_token %}
-          <h1>Registration Form</h1>
+          <h1>Agent Registration</h1>
           {% if TwoCharacters %}
             <p class = 'error'> {{ TwoCharacters }} </p>
           {% endif %}
@@ -106,7 +109,7 @@
         </form>
         <form action="{%url 'login:login' %}" method='post' class = "form-horizontal">
         {% csrf_token %}
-          <h1> Login </h1>
+          <h1> Agent Login </h1>
           {% if NoEmail %}
             <p class = 'error'> {{ NoEmail }} </p>
           {% endif %}

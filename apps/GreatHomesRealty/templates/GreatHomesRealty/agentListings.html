@@ -74,18 +74,40 @@
 	i {
 		font-size: 1.5em;
 		position: relative;
-		top: .1em;
+		top: .15em;
+	}
+	h2 {
+		font-weight: 700;
 	}
 	body {
 		background-image: linear-gradient(rgba(250, 197, 100, .65), rgba(250, 197, 100, .65)), url('{% static "GreatHomesRealty/diagonal_striped_brick.png" %}');
+		font-family: serif;
+		color: black;
 	}
-	.profileinfo {
-		margin-bottom: 3%;
+	.main2 {
+		background: linear-gradient(rgba(250, 197, 100, .95), rgba(250, 197, 100, .95));
+		border-radius: 5%;
+		padding: 3%;
 	}
 	.userPicture {
 		margin-top: 5%;
+		border: 1.5px solid lightgrey;
+		border-radius: 5%;
 	}
-
+	.profileinfo {
+		margin-top: 3%;
+	}
+	p a {
+		color: black;
+	}
+	p a:hover {
+		color: darkblue;
+	}
+	.listings {
+		background: linear-gradient(rgba(250, 197, 100, .95), rgba(250, 197, 100, .95));
+		border-radius: 5%;
+		padding-left: 3%;
+	}
 	.footer {
 		background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
 		height: 15em;
@@ -194,8 +216,11 @@
 		</div>
 	</div>
 
+<div class = "main container">
+	<div class = "col-xs-8 main2">
+
 	<div class = "container">
-		<div class = "row">
+	<div class = "row">
 		<div class = "col-sm-4 col-xs-6">
 			{% if user.url %}
 			<img class = "userPicture" src="{{user.url}}" style= "width:90%">
@@ -209,27 +234,28 @@
 	        {% endif %}
 		</div>
 
-		<div class = "col-sm-4 col-xs-4">
+		<div class = "col-sm-4 col-xs-4 userinfo">
 			<h2>{{ user.firstName}} {{user.lastName }} </h2>
-			<p><i class = "ion-ios-telephone"></i> Phone: {{user.phone}}</p>
-			<p><i class = "ion-email"></i> Email: {{user.email}}</p>
+			<p><i class = "ion-ios-telephone"></i> {{user.phone}}</p>
+			<p><i class = "ion-email"></i> {{user.email}}</p>
 		</div>
-		<div class = "col-md-4 col-xs-4">
-			<h2>Listings</h2>
+	</div>
+	</div>
+
+	<div class = "row">
+		<div class = "col-sm-12 col-xs-12 profileinfo">
+			<p>{{user.profileInformation}}</p>
+		</div>
+	</div>
+	</div>
+
+	<div class = "col-xs-3 col-xs-offset-1 listings">
+ 		<h2>Listings</h2>
 	{% for listing in listings %}
 			<p><a href="{%url 'GreatHomes:showListing' id=listing.listing.id %}">{{listing.listing.addressStreet}} <br> {{listing.listing.addressCity}}, {{listing.listing.addressState}}. {{listing.listing.addressZipcode}}</a></p>
 	{% endfor %}
-		</div>
-
-		<div class = "container">
-			<div class = "row">
-				<div class = "col-sm-12 col-xs-6 profileinfo">
-					<p>{{user.profileInformation}}</p>
-				</div>
-			</div>
-		</div>
-		</div>
 	</div>
+</div>
 
 	<div class = "footer">
 		<div class = "container-fluid">

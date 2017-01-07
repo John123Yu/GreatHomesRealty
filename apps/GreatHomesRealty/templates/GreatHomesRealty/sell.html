@@ -52,9 +52,17 @@ $(document).ready(function() {
 		font-size: 1.2em;
 	}
 	.main {
-		padding-top: 3em;
-		padding-bottom: 3em;
+		font-weight: 500;
+		background: linear-gradient(rgba(250, 197, 100, .95), rgba(250, 197, 100, .95));
+		border-radius: 30px;
+		padding: 1% 3%;
+		margin: 5% 3%;
+		height: 90%;
+		overflow-y: scroll;
 	}
+	::-webkit-scrollbar {
+      width: 15px;
+	} 
 	.initiallyHidden {
 		display: none;
 	}
@@ -216,9 +224,9 @@ $(document).ready(function() {
 			</div>
 		</div>
 	</div>
-	<div class = "container main">
+	<div class = "container-fluid main">
 		<h1>Selling Your Home</h1>
-		<h3 class = "1"><i class = "ion-android-remove"></i> Appraisals and Market Value</h3>
+		<h3 class = "1"><i class = "ion-arrow-down-b"></i> Appraisals and Market Value</h3>
 		<ul class = "1a initiallyHidden">
 			<li class = "question">Are there standard ways to determine how much a home is worth?</li>
 			<li>Yes. A comparative market analysis and an appraisal are the two most common and reliable ways to determine a home's value. 
@@ -236,7 +244,7 @@ Market value is the price the house will bring at a given point in time, once th
 The sales price is the actual amount a home sells for.</li>
 		</ul>
 
-		<h3 class = "2"><i class = "ion-android-remove"></i> Disclosure</h3>
+		<h3 class = "2"><i class = "ion-arrow-down-b"></i> Disclosure</h3>
 		<ul class = "2a initiallyHidden">
 			<li class = "question">Are agents responsible for disclosing material facts?</li>
 			<li>They can certainly be held accountable, particularly if they had prior knowledge of a material fact or should have known about it.
@@ -262,7 +270,7 @@ Some things are not material facts and do not have to be disclosed. They include
 Among those things that may or may not be material facts: whether a death took place in the home or whether a home is considered haunted.</li>
 		</ul>
 
-		<h3 class = "3"><i class = "ion-android-remove"></i> Financing</h3>
+		<h3 class = "3"><i class = "ion-arrow-down-b"></i> Financing</h3>
 		<ul class = "3a initiallyHidden">
 			<li class = "question">How does the seller determine what rate to provide?</li>
 			<li>The interest rate on a purchase money note is negotiable, as are the other terms in a seller-financed transaction. To get an idea about what to charge, sellers can check with a lender or mortgage broker to determine current rates on mortgage loans, including second mortgages. 
@@ -291,7 +299,7 @@ The seller may take back a second note or finance the entire purchase if he owns
 The buyer makes a sizeable down payment and agrees to pay the seller directly every month.</li>
 		</ul>
 
-		<h3 class = "4"><i class = "ion-android-remove"></i> Foreclosures</h3>
+		<h3 class = "4"><i class = "ion-arrow-down-b"></i> Foreclosures</h3>
 		<ul class = "4a initiallyHidden">
 			<li class = "question">Can a home be sold for less than its mortgage?</li>
 			<li>Sometimes. But it is a complicated process and a lot will depend on the lender. This process is called a “short sale,” which occurs when a lender agrees to write off the portion of a mortgage that's higher than the value of a home. But, usually, a buyer must be willing to purchase the property first.
@@ -312,7 +320,7 @@ As a last resort, you could consider a deed-in-lieu of foreclosure. This is wher
 			<li>There are two types – judicial and non-judicial. A foreclosure that results from a court action is a judicial foreclosure. The mortgage deed or trust does not have a power of sale clause, therefore the lender, trustee or another lienholder must take the borrower to court to recover the unpaid balance of a delinquent debt. By contrast, a non-judicial foreclosure is one in which a foreclosure can be completed outside the court system. Real property can be sold under a power of sale in a mortgage deed or trust that is in default, but the lender is unable to obtain a deficiency judgment.</li>
 		</ul>
 
-		<h3 class = "5"><i class = "ion-android-remove"></i> Getting Started</h3>
+		<h3 class = "5"><i class = "ion-arrow-down-b"></i> Getting Started</h3>
 		<ul class = "5a initiallyHidden">
 			<li class = "question">Are there tips for selling a vacant home?</li>
 			<li>Yes. Once furniture is removed from the home, you will notice all kinds of imperfections you never paid attention to before – rips in the carpet, holes in the walls, and dinginess. In an empty house, everything stands out. What you see is what potential buyers will also see. So you may need to paint, tear up old carpet, and replace the kitchen floor. 
@@ -365,19 +373,19 @@ Market conditions also play a role, as do seasonal conditions. For example, your
 Local and national economic factors also may dictate when to sell.</li>
 		</ul>
 
-		<h3 class = "6"><i class = "ion-android-remove"></i> Lease Options</h3>
+		<h3 class = "6"><i class = "ion-arrow-down-b"></i> Lease Options</h3>
 		<ul class = "6a initiallyHidden">
 			<li class = "question">How does a lease option work?</li>
 			<li>A landlord agrees to give a renter an exclusive option to purchase the property. The option price is usually determined at the outset, but not always, and the agreement states when the purchase should take place – whether, say, six months, or a year or two down the road.
 A portion of the rent is used to make the future down payment. Most lenders will accept the down payment if the rental payments exceed the market rent and a valid lease-purchase agreement is in effect. 
 Before you opt to do a lease option, find out as much as possible about how they work. Talk to real estate agents, read published materials, and, in the end, have an attorney review any paperwork before you sign on the dotted line.</li>
-			<li>What is a lease option?</li>
-			<li class = "question">It is an agreement between a renter and a landlord in which the renter signs a lease with an option to purchase the property. The option only binds the seller; the tenant has a choice to make a purchase or not.
+			<li class = "question">What is a lease option?</li>
+			<li>It is an agreement between a renter and a landlord in which the renter signs a lease with an option to purchase the property. The option only binds the seller; the tenant has a choice to make a purchase or not.
 Lease options are common among buyers who would like to own a home but do not have enough money for the down payment and closing costs. A lease option may also be attractive to tenants who are working to improve bad credit before approaching a lender for a home loan. 
 A lease option also may be a way for the seller to move property in a slow market. Seller advantages include earning above-market rent, retaining all the property income tax deductions during the lease-option period, and attracting tenants who will care for the property as though they owned it.</li>
 		</ul>
 
-		<h3 class = "7"><i class = "ion-android-remove"></i> Negotiating</h3>
+		<h3 class = "7"><i class = "ion-arrow-down-b"></i> Negotiating</h3>
 		<ul class = "7a initiallyHidden">
 			<li class = "question">Any advice on negotiating?</li>
 			<li>Be patient, know your home’s worth, adopt a positive attitude, and do not let emotions – anger, pride, greed, or prejudice – get in the way of negotiating the best deal. 
@@ -398,7 +406,7 @@ However, think twice about a contingency that is predicated on you making expens
 </li>
 		</ul>
 
-		<h3 class = "8"><i class = "ion-android-remove"></i> Tax Matters</h3>
+		<h3 class = "8"><i class = "ion-arrow-down-b"></i> Tax Matters</h3>
 		<ul class = "8a initiallyHidden">
 			<li class = "question">Are home selling costs deductible?</li>
 			<li>If you sell your home and realize a taxable gain even after the exclusion, you can reduce your gain with selling costs.
@@ -425,7 +433,7 @@ If you can exclude all the gain from the sale of your home, you do not report it
 			<li>For more than one home, you can exclude the gain only from the sale of your main residence. You must pay tax on the gain from selling any other home. If you have two homes and live in both of them, your main home is usually the one you live in most often.</li>
 		</ul>
 
-		<h3 class = "9"><i class = "ion-android-remove"></i> Working with a Real Estate Agent</h3>
+		<h3 class = "9"><i class = "ion-arrow-down-b"></i> Working with a Real Estate Agent</h3>
 		<ul class = "9a initiallyHidden">
 			<li class = "question">Do I really need an agent?</li>
 			<li>Most home sellers hire real estate agents to list and sell their homes. Most of those who do not are known as For Sale By Owners, or FSBOs. They market and sell their homes themselves.

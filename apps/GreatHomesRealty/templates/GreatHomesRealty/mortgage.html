@@ -53,10 +53,17 @@ $(document).ready(function() {
 		color: black;
 	}
 	.main {
-		padding-top: 3em;
-		padding-bottom: 3em;
 		font-weight: 500;
+		background: linear-gradient(rgba(250, 197, 100, .95), rgba(250, 197, 100, .95));
+		border-radius: 30px;
+		padding: 1% 3%;
+		margin: 5% 3%;
+		height: 90%;
+		overflow-y: scroll;
 	}
+	::-webkit-scrollbar {
+      width: 15px;
+	} 
 	.initiallyHidden {
 		display: none;
 	}
@@ -218,9 +225,9 @@ $(document).ready(function() {
 			</div>
 		</div>
 	</div>
-	<div class = "container main">
+	<div class = "container-fluid main">
 		<h1>Mortgage Info</h1>
-		<h3 class = "1"><i class = "ion-android-remove"></i> Creative Financing</h3>
+		<h3 class = "1"><i class = "ion-arrow-down-b"></i> Creative Financing</h3>
 		<ul class = "1a initiallyHidden">
 			<li class = "question">Are shared equity and shared appreciation mortgages the same?</li>
 			<li>No. With a shared appreciation mortgage, or SAM, a borrower receives a below-market interest rate in return for the lender receiving a share, usually 30 to 50 percent, in the future appreciation of the property upon its sale. 
@@ -295,7 +302,7 @@ The seller may take back a second note or finance the entire purchase if he owns
 The buyer makes a sizeable down payment and agrees to pay the seller directly every month. 
 The interest rate on a purchase money note is negotiable, as are the other terms in a seller-financed transaction, and is generally influenced by current Treasury bill and certificate of deposit rates. The rate may be higher than those on conventional loans, and the length of the loan shorter, anywhere from five to 15 years.</li>
 		</ul>
-		<h3 class = "2"><i class = "ion-android-remove"></i> Getting Started</h3>
+		<h3 class = "2"><i class = "ion-arrow-down-b"></i> Getting Started</h3>
 		<ul class = "2a initiallyHidden">
 			<li class = "question">Are there such things as no-cost and no-fee loans?</li>
 			<li>You see promotions for them all the time. But banking regulators have gone after lenders who misrepresent these loans. The reality is that no-cost and no-fee loans may actually cost the borrower more over the long term because costs are often hidden by rolling them into the new loan through higher principal or interest. 
@@ -371,7 +378,7 @@ However, if you purchase private mortgage insurance, the down payment requiremen
 Few lenders will lend the full value of a home unless they have special guarantees, such as that offered by the Veterans Administration (VA) under its mortgage assistance program.</li>
 		</ul>
 
-		<h3 class = "3"><i class = "ion-android-remove"></i> Interest Rates</h3>
+		<h3 class = "3"><i class = "ion-arrow-down-b"></i> Interest Rates</h3>
 		<ul class = "3a initiallyHidden">
 			<li class = "question">Are 40-year mortgages a good idea?</li>
 			<li>The main reason buyers sign on for these type of loans, which add 10 years to the traditional 30-year mortgage, is to take advantage of smaller monthly payments. 
@@ -408,7 +415,7 @@ Because the life of a fixed-term loan is usually long – anywhere from 15 to 30
 On the negative side, the interest rate on a fixed mortgage is usually two or three full points above the current rate on an adjustable rate loan, at least initially. But for buyers seeking security, the comfort of knowing what their payments will be year after year, and no plans of selling their home in the foreseeable future, this is a small price to pay. If rates drop, they may be able to refinance their home loan and get a lower rate.</li>
 		</ul>
 
-		<h3 class = "4"><i class = "ion-android-remove"></i> Mortgage Terms</h3>
+		<h3 class = "4"><i class = "ion-arrow-down-b"></i> Mortgage Terms</h3>
 		<ul class = "4a initiallyHidden">
 			<li class = "question">Is a home equity line of credit similar to a second mortgage?</li>
 			<li>A home equity loan, like a second mortgage, lets you tap up to about 80 percent of the appraised value of your home, minus your current mortgage balance. But because it is set up as a line of credit, you will not be charged interest until you actually make a withdrawal against the loan, although you will be responsible for paying closing costs.
@@ -450,7 +457,7 @@ The Federal Truth in Lending law requires mortgage companies to disclose the APR
 Usually, a small fee is paid at the outset and a percentage of the face amount of the loan is added to the monthly payment.</li>
 		</ul>
 
-		<h3 class = "5"><i class = "ion-android-remove"></i> Refinancing</h3>
+		<h3 class = "5"><i class = "ion-arrow-down-b"></i> Refinancing</h3>
 		<ul class = "5a initiallyHidden">
 			<li class = "question">Can I refinance a home loan more than once?</li>
 			<li>You most certainly can. During the most recent refinancing boom, for example, many homeowners refinanced their home loans two or three times within relatively short periods of time because interest rates kept treading downward, making it extremely attractive to trade in one loan for another. 
@@ -468,7 +475,7 @@ In fact, if it costs you nothing to refinance, you can gain even more. Many lend
 Contact your lender, and its competitors, before you refinance. </li>
 		</ul>
 
-		<h3 class = "6"><i class = "ion-android-remove"></i> Foreclosures</h3>
+		<h3 class = "6"><i class = "ion-arrow-down-b"></i> Foreclosures</h3>
 		<ul class = "6a initiallyHidden">
 			<li class = "question">Can a home be sold for less than its mortgage?</li>
 			<li>Sometimes. But it is a complicated process and a lot will depend on the lender.
@@ -477,8 +484,8 @@ A short sale may be more complex if the loan has been sold in the secondary mark
 If the loan was a low down payment mortgage with private mortgage insurance, the lender also will need to involve the mortgage insurance company that insured the low down payment loan. 
 The short sale can keep the homeowner from landing in bankruptcy or foreclosure. But it is not an easy procedure to approve, and it involves as much, if not more, paperwork than an original mortgage application. 
 Instead of proving your credit worthiness and financial stability, you must prove you are broke. And any remaining difference between your home's value and the balance on your mortgage is considered a forgiveness of debt, which usually means it is taxable income.</li>
-			<li>How long do bankruptcies and foreclosure stay on a credit report?</li>
-			<li class = "question">They can remain on your credit record for seven to 10 years. 
+			<li class = "question">How long do bankruptcies and foreclosure stay on a credit report?</li>
+			<li>They can remain on your credit record for seven to 10 years. 
 However, a borrower who has worked hard to reestablish good credit may be shown some leniency by the lender. And the circumstances surrounding the bankruptcy may also influence a lender's decision. For example, if you went bankrupt because you were laid off from your job, the lender may be more sympathetic. If, however, you went through bankruptcy because you overextended personal credit lines and lived beyond your means, it is unlikely the lender will readily give you a break.</li>
 				<li class = "question">If faced with foreclosure, what are my options?</li>
 				<li>Talk with your lender immediately. The lender may be able to arrange a repayment plan or the temporary reduction or suspension of your payment, particularly if your income has dropped substantially or expenses have shot up beyond your control. You also may be able to refinance the debt or extend the term of your mortgage loan. In almost every case, you will likely be able to work out some kind of deal that will avert foreclosure. 
@@ -490,7 +497,7 @@ As a last resort, you could consider a deed-in-lieu of foreclosure. This is wher
 A quality lender will expect you to show that you have cleaned up your credit. Providing a reasonable explanation about the circumstances that led to the foreclosure – such as exuberant medical expenses – is also helpful.</li>
 		</ul>
 
-		<h3 class = "7"><i class = "ion-android-remove"></i> Other Mortgage Considerations</h3>
+		<h3 class = "7"><i class = "ion-arrow-down-b"></i> Other Mortgage Considerations</h3>
 		<ul class = "7a initiallyHidden">
 			<li class = "question">Can you tell me more about FHA and VA?</li>
 			<li>The Federal Housing Administration (FHA) is an agency within the Department of Housing and Urban Development (HUD). Its main goal is to help provide housing opportunities for low- to moderate-income families. FHA has single-family and multi-family mortgage programs but does not generally provide mortgage funds. Instead, it insures home loans made by private lenders. 

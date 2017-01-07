@@ -17,6 +17,7 @@ from boto.s3.connection import S3Connection
 from boto.s3.key import Key
 from django.conf import settings
 import mimetypes
+import random 
 
 def index(request):
 	request.session['clientLogin'] = "false"
@@ -54,6 +55,45 @@ def addListing(request):
 			return render(request, 'GreatHomesRealty/addListing.html',  error_messages )
 	else: 
 		return redirect(reverse('GreatHomes:addListingDisplay'))
+
+# error_messages = {}
+# class AddListing(View):
+# 	def get(self, request):
+# 		if request.method == "GET":
+# 			print "HERE"
+# 			context = error_messages
+# 			return render(request, 'GreatHomesRealty/addListingAjax.html', context)
+# 		else: 
+# 			return redirect(reverse('GreatHomes:addListingDisplay'))
+	# def post(self, request):
+	# 	print "HEYOOO"
+	# 	if request.method == "POST":
+	# 		global error_messages
+	# 		error_messages = {}
+	# 		result = Listing.listingMgr.addListing(request.POST['streetAddress'], request.POST['suite'], request.POST['city'], request.POST['state'], request.POST['zipcode'], request.POST['price'], request.POST['bedrooms'], request.POST['bathrooms'], request.POST['squarefootage'], request.POST['housetype'], request.POST['county'], request.POST['neighborhood'], request.POST['mls'], request.POST['description'], "no", request.session['login'], request.POST['yearBuilt'], request.POST['status'])
+	# 		if result[0]:
+	# 			global listing
+	# 			error_messages['listing'] = result[1]
+	# 			error_messages['success'] = "Listing has been successfully added"
+	# 			return redirect(reverse('GreatHomes:addListing'))
+	# 		else:
+	# 			error_messages = result[1]
+	# 			error_messages['SA'] = request.POST['streetAddress']
+	# 			error_messages['C'] = request.POST['city']
+	# 			error_messages['S'] = request.POST['state']
+	# 			error_messages['ZC'] = request.POST['zipcode']
+	# 			error_messages['MLS'] = request.POST['mls']
+	# 			error_messages['P'] = request.POST['price']
+	# 			error_messages['Bed'] = request.POST['bedrooms']
+	# 			error_messages['SF'] = request.POST['squarefootage']
+	# 			error_messages['HT'] = request.POST['housetype']
+	# 			error_messages['County'] = request.POST['county']
+	# 			error_messages['N'] = request.POST['neighborhood']
+	# 			error_messages['Y'] = request.POST['yearBuilt']
+	# 			error_messages['D'] = request.POST['description']
+	# 			return redirect(reverse('GreatHomes:addListing'))
+	# 	else: 
+	# 		return redirect(reverse('GreatHomes:addListingDisplay'))
 
 def editListingDisplay(request, id):
 	# editForm = editListingForm()
@@ -107,9 +147,11 @@ def addMainImage(request, id):
 			# listing.save()
 			file = request.FILES['file']
 			filename = file.name
+			specialNumber = random.randint(1,10000)
+			specialName = str(specialNumber) + file.name
 			content = file.read()
-			store_in_s3(filename, content)
-			listing.url = ('http://s3.amazonaws.com/greathomesrealty/' + filename)
+			store_in_s3(specialName, content)
+			listing.url = ('http://s3.amazonaws.com/greathomesrealty/' + specialName)
 			listing.save()
 			url = "/showListing/" + str(listing.id)
 			return redirect(url)
@@ -136,10 +178,12 @@ def addListingImage(request, id):
 			# image = form.cleaned_data['image']
 			file = request.FILES['file']
 			filename = file.name
+			specialNumber = random.randint(1,10000)
+			specialName = str(specialNumber) + file.name
 			content = file.read()
-			store_in_s3(filename, content)
+			store_in_s3(specialName, content)
 			addImage = Image.objects.create(listing_id = listing.id)
-			addImage.url = ('http://s3.amazonaws.com/greathomesrealty/' + filename)
+			addImage.url = ('http://s3.amazonaws.com/greathomesrealty/' + specialName)
 			addImage.save()
 			url = "/showListing/" + str(listing.id)
 			return redirect(url)
@@ -241,6 +285,9 @@ class SendMail(View):
 	def get(self, request, id):
 		if request.method == "GET":
 			context = sendMailMessages
+			print id
+			if id == "0": 
+				return render(request, 'GreatHomesRealty/contactAjax.html', context)
 			return render(request, 'GreatHomesRealty/sendMailAjax.html', context)
 		else:
 			url = "/showListing/" + str(id)

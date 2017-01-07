@@ -130,5 +130,19 @@
 		    </form> 
 	  </div>
 
+<script type="text/javascript">
+	  $('.clientLogin').on('submit', function(e){
+	    e.preventDefault()
+	    $.ajax({
+	      url: '/clientLogin',
+	      method: 'post',
+	      data: $(this).serialize(),
+	      success: function(serverResponse){
+	        $('.clientLoginAjax').html(serverResponse)
+	      }
+	    })
+	    $('.clientLogin').trigger('reset')
+	  });
+</script>
 </body>
 </html>

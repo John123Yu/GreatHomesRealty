@@ -53,18 +53,27 @@ $(document).ready(function() {
 		color: black;
 	}
 	.main {
-		padding-top: 3em;
-		padding-bottom: 3em;
 		font-weight: 500;
+		background: linear-gradient(rgba(250, 197, 100, .45), rgba(250, 197, 100, .45));
+		border-radius: 30px;
+		padding: 1% 3%;
+		margin: 5% 3%;
+		height: 90%;
+		overflow-y: scroll;
 	}
+	::-webkit-scrollbar {
+      width: 15px;
+	} 
 	.initiallyHidden {
 		display: none;
 	}
 	.main h1 {
 		font-weight: 700;
+		/*color: #3435E2*/
 	}
 	h3 {
 		margin-left: 3%;
+		/*color: #3435E2;*/
 	}
 	header ul {
 		list-style-type: none;
@@ -218,9 +227,9 @@ $(document).ready(function() {
 			</div>
 		</div>
 	</div>
-	<div class = "container main">
+	<div class = "container-fluid main">
 		<h1>Buying A Home</h1>
-		<h3 class = "1"><i class = "ion-android-remove"></i> Appraisals and Market Value</h3>
+		<h3 class = "1"><i class = "ion-arrow-down-b"></i> Appraisals and Market Value</h3>
 		<ul class = "1a initiallyHidden">
 			<li class = "question">Are there standard ways to determine how much a home is worth?</li>
 			<li>Yes. A comparative market analysis and an appraisal are the two most common and reliable ways to determine a home's value. 
@@ -237,7 +246,7 @@ Market value is the price the house will bring at a given point in time, once th
 			<li>The list price is a seller's advertised price, or asking price, for a home. It is a rough estimate of what the seller wants to complete a home sale. A seller can price high, low – (which seldom happens), or very close to the amount they want to get. A good way to determine if the list price is a fair one is to look at the sales prices of similar homes that have recently sold in the area. 
 The sales price is the actual amount a home sells for.</li>
 		</ul>
-		<h3 class = "2"><i class = "ion-android-remove"></i> Closing Costs</h3>
+		<h3 class = "2"><i class = "ion-arrow-down-b"></i> Closing Costs</h3>
 		<ul class = "2a initiallyHidden">
 			<li class = "question">Is it possible to save on closing costs?</li>
 			<li>Certainly, once you get past the sticker shock. Closing costs are expensive. They can average between 5 to 6 percent of the total home purchase price. But here are a few ways to save:
@@ -260,7 +269,7 @@ Utilities. Arrange in advance to have the water and electric meters read on clos
 			<li>Closing, or settlement, costs are expenses over and above the price of the property. Both the buyer and seller incur some of these expenses when transferring ownership of a property. Who actually pays, however, often depends on local custom and what the buyer or seller negotiates. Closing costs normally include title insurance, loan points, escrow or closing day charges, property taxes, and document fees. The lender provides an estimate of closing costs for prospective homebuyers.</li>
 		</ul>
 
-		<h3 class = "3"><i class = "ion-android-remove"></i> Getting Started</h3>
+		<h3 class = "3"><i class = "ion-arrow-down-b"></i> Getting Started</h3>
 		<ul class = "3a initiallyHidden">
 			<li class = "question">How do you decide whether to add on to an existing home or purchase a new one?</li>
 			<li>There are a few things to consider, including cost, individual needs, and what will add value down the road. Also important: your emotional attachment to the existing home.
@@ -286,7 +295,7 @@ The mortgage interest paid on a home loan is tax deductible, as is the local pro
 A house needs constant care and attention. Also ask yourself if your budget will allow for unexpected repairs and upkeep. Once you can honestly answer “yes” to these questions, you are several steps ahead of the game and that much closer to becoming a homeowner.</li>
 		</ul>
 
-		<h3 class = "4"><i class = "ion-android-remove"></i> Home Inspections</h3>
+		<h3 class = "4"><i class = "ion-arrow-down-b"></i> Home Inspections</h3>
 		<ul class = "4a initiallyHidden">
 			<li class = "question">Do I need to be at the inspection?</li>
 			<li>No, but it is a very good idea to be there. Following the check-over, the home inspector can answer your questions and discuss problem areas with you. This is also an opportune time to get an objective opinion about the home from someone who does not have emotional or financial ties to the property.</li>
@@ -302,7 +311,7 @@ It is not the inspector’s job to determine whether you are getting good value 
 A home inspection typically takes place after a purchase contract between the buyer and seller has been signed.</li>
 		</ul>
 
-		<h3 class = "5"><i class = "ion-android-remove"></i> Insurance</h3>
+		<h3 class = "5"><i class = "ion-arrow-down-b"></i> Insurance</h3>
 		<ul class = "5a initiallyHidden">
 			<li class = "question">Is private mortgage insurance necessary?</li>
 			<li>Lenders require private mortgage insurance (PMI) on most conventional loans with less than a 20 percent down payment. They believe there is a correlation between borrower equity and default. They have found that the less money borrowers put down, the more likely they are to default on a loan. PMI guarantees the lender will not lose money if this happens and a foreclosure is necessary. 
@@ -326,7 +335,7 @@ Other considerations: an inflation rider, which increases coverage as the home�
 Insurance companies usually require an amount equal to at least 80 percent of the full replacement value. Otherwise, only a portion of the loss would be covered.</li>
 		</ul>
 
-		<h3 class = "6"><i class = "ion-android-remove"></i> Lease Options</h3>
+		<h3 class = "6"><i class = "ion-arrow-down-b"></i> Lease Options</h3>
 		<ul class = "6a initiallyHidden">
 			<li class = "question">How does a lease option work?</li>
 			<li>A landlord agrees to give a renter an exclusive option to purchase the property. The option price is usually determined at the outset, but not always, and the agreement states when the purchase should take place – whether, say, six months, or a year or two down the road.
@@ -337,7 +346,7 @@ Before you opt to do a lease option, find out as much as possible about how they
 Lease options are common among buyers who would like to own a home but do not have enough money for the down payment and closing costs. A lease option may also be attractive to tenants who are working to improve bad credit before approaching a lender for a home loan.</li>
 		</ul>
 
-		<h3 class = "7"><i class = "ion-android-remove"></i> Negotiating & Closing the Best Deal</h3>
+		<h3 class = "7"><i class = "ion-arrow-down-b"></i> Negotiating & Closing the Best Deal</h3>
 		<ul class = "7a initiallyHidden">
 			<li class = "question">Are low-ball offers a good idea?</li>
 			<li>Any offer can be presented, but a low-ball one that is substantially less than the asking price can dampen a prospective sale and prevent the seller from negotiating at all. Unless the home is overpriced to begin with the offer will probably be rejected. 
@@ -381,7 +390,7 @@ Without contingencies, a buyer could forfeit his deposit under certain circumsta
 The purchase contract also should include the seller's responsibilities, such as passing clear title, maintaining the property in its present condition until closing, and making any agreed-upon repairs.</li>
 		</ul>
 
-		<h3 class = "8"><i class = "ion-android-remove"></i> Property Taxes</h3>
+		<h3 class = "8"><i class = "ion-arrow-down-b"></i> Property Taxes</h3>
 		<ul class = "8a initiallyHidden">
 			<li class = "question">Are impound accounts required for all mortgage loans?</li>
 			<li>They can typically be waived on a conventional loan if the loan amount is 80 percent or less of the purchase price. But the lender might charge you an additional 1/4 point for this option to waive the escrow.
@@ -408,7 +417,7 @@ Lenders like to set up impound accounts to ensure the property taxes and insuran
 Re-valuations of the tax are often done periodically, although the time interval varies from state to state or, in some states, from town to town, and can range from annual reassessments to periods of ten years or more.</li>
 		</ul>
 
-		<h3 class = "9"><i class = "ion-android-remove"></i> Tax Matters</h3>
+		<h3 class = "9"><i class = "ion-arrow-down-b"></i> Tax Matters</h3>
 		<ul class = "9a initiallyHidden">
 			<li class = "question">Are fees and assessments owed a homeowner’s association deductible?</li>
 			<li>Generally not because they are considered personal living expenses. But if an association has a special assessment to make capital improvements, condo owners may be able to add the expense to their cost basis when the property is sold. Another exception may apply if you rent your condo – the monthly condo fee is deductible every year as a rental expense.</li>
