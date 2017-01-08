@@ -91,22 +91,18 @@
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th>ID</th>
 				<th>Name</th>
 				<th>Email</th>
 				<th>Joined Date</th>
-				<th>User Level</th>
 				<th>Actions</th>
 			</tr>	
 		</thead>
 		<tbody>
 			{% for user in users %}
 			<tr>
-				<td>{{user.id}}</td>
 				<td><a href="{%url 'GreatHomes:showAgentListing' id=user.id %}">{{user.firstName}} {{user.lastName}}</a></td>
 				<td>{{user.email}}</td>
 				<td>{{user.created_at}}</td>
-				<td>{{user.user_level}}</td>
 			{% if activeUser.user_level == "Admin" %}
 				<td class = "td-buttons"><a class = "btn btn-success" href="{%url 'UserDashboard:adminEdit' id=user.id %}">Edit</a><form id="removeUser" action = "{%url 'login:removeUser' id=user.id %}">
 				{% csrf_token %}

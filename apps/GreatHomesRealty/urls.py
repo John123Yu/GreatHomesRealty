@@ -33,8 +33,8 @@ urlpatterns = [
 	url(r'^selling$', views.selling, name = "selling"),
 	url(r'^mortgage$', views.mortgage, name = "mortgage"),
 	url(r'^investing$', views.investing, name = "investing"),
-	url(r'^owningHome$', views.owningHome, name = "owningHome"),
-	url(r'^latLon$', views.latLon, name = "latLon")
+	url(r'^owningHome$', views.owningHome, name = "owningHome")
+	# url(r'^latLon$', views.latLon, name = "latLon")
 
 ]
 # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

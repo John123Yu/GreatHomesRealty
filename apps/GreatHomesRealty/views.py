@@ -503,9 +503,9 @@ def investing(request):
 def owningHome(request):
 	return render(request, 'GreatHomesRealty/owningHome.html')
 
-def latLon(request):
-	print "Here"
-	print request.DATA
-	# print request.lat
-	# print request['lon']
-	return render(request, 'GreatHomesRealty/owningHome.html')
+# def latLon(request):
+# 	print request
+# 	print request.lat
+# 	# print request.lat
+# 	# print request['lon']
+# 	return render(request, 'GreatHomesRealty/owningHome.html')
