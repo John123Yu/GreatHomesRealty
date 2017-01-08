@@ -177,15 +177,16 @@ def addListingImage(request, id):
 		form = S3ImageForm(request.POST, request.FILES)
 		if form.is_valid():
 			# image = form.cleaned_data['image']
-			file = request.FILES['file']
-			filename = file.name
-			specialNumber = random.randint(1,10000)
-			specialName = str(specialNumber) + file.name
-			content = file.read()
-			store_in_s3(specialName, content)
-			addImage = Image.objects.create(listing_id = listing.id)
-			addImage.url = ('http://s3.amazonaws.com/greathomesrealty/' + specialName)
-			addImage.save()
+			for item in request.FILES.getlist('file'):
+				file = item
+				filename = file.name
+				specialNumber = random.randint(1,10000)
+				specialName = str(specialNumber) + file.name
+				content = file.read()
+				store_in_s3(specialName, content)
+				addImage = Image.objects.create(listing_id = listing.id)
+				addImage.url = ('http://s3.amazonaws.com/greathomesrealty/' + specialName)
+				addImage.save()
 			url = "/showListing/" + str(listing.id)
 			return redirect(url)
 		else:

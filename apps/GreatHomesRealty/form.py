@@ -25,7 +25,7 @@ class addListingForm(forms.ModelForm):
 # 		fields = ['picture']
 
 class S3ImageForm(forms.Form):
-	file = forms.ImageField()
+	file = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
 
 # class editListingForm(forms.ModelForm):
 # 	class Meta:
