@@ -8,9 +8,6 @@
 		<link rel="stylesheet" type="text/css" href="{% static 'GreatHomesRealty/ionicons.min.css' %}">
 </head>
 <style>
-	body {
-		font-family: serif;
-	}
 	.header {
 		background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
 		color: white;
@@ -81,7 +78,10 @@
 		color: red;
 		margin-left: 15em;
 	}
-
+	.red {
+		color: red;
+		display: inline-block;
+	}
 	.footer {
 		background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
 		height: 15em;
@@ -190,7 +190,8 @@
 		</div>
 	</div>
 
-	<div class = "container">
+	<div class = "container-fluid">
+	<div class = "col-sm-6">
 	<form action="{%url 'GreatHomes:editListing' id=listing.id %}" method='post' class = "form-horizontal">
          {% csrf_token %}
           <h1>Edit Listing</h1>
@@ -198,50 +199,63 @@
             <p class = 'error'> {{ allInputLengths }} </p>
           {% endif %}
           <div class = "form-group">
-            <label for ="streetAddress" class="col-sm-2 control-label">Street Address:</label>
-            <div class = "col-sm-6">
+            <label for = "status" class = "col-sm-3 control-label">Status: </label>
+             <div class = "col-sm-9">
+	         <select value = "{{listing.status}}"name = "status" class="form-control" id = "status">
+				<option>Undercontract</option>
+				<option>Available</option>
+				<option>Sold</option>
+				<option>Open House</option>
+				<option>For Rent</option>
+				<option>Rented Out</option>
+			</select>
+			</div>
+         </div>
+          <div class = "form-group">
+            <label for ="streetAddress" class="col-sm-3 control-label">Street Address:</label>
+            <div class = "col-sm-9">
               <input type='text' class = "form-control" name='streetAddress' id = "streetAddress" value = "{{listing.addressStreet}}" > 
             </div>
           </div>
           <div class = "form-group">
-            <label for ="suite" class="col-sm-2 control-label">Apt/Suite #:</label>
-            <div class = "col-sm-6">
+            <label for ="suite" class="col-sm-3 control-label">Apt/Suite #:</label>
+            <div class = "col-sm-9">
               <input type='text' class = "form-control" name='suite' id = "suite" value = "{{listing.addressAptNumber}}"> 
             </div>
           </div>
           <div class = "form-group">
-            <label for ="city" class="col-sm-2 control-label">City:</label>
-            <div class = "col-sm-6">
+            <label for ="city" class="col-sm-3 control-label">City:</label>
+            <div class = "col-sm-9">
               <input type='text' class = "form-control" name='city' id = "city" value = "{{listing.addressCity}}"> 
             </div>
           </div>
            <div class = "form-group">
-            <label for ="state" class="col-sm-2 control-label">State:</label>
-            <div class = "col-sm-6">
+            <label for ="state" class="col-sm-3 control-label">State:</label>
+            <div class = "col-sm-9">
               <input type='text' class = "form-control" name='state' id = "state" value = "{{listing.addressState}}"> 
             </div>
           </div>
            <div class = "form-group">
-            <label for ="zipcode" class="col-sm-2 control-label">Zip Code:</label>
-            <div class = "col-sm-6">
+            <label for ="zipcode" class="col-sm-3 control-label">Zip Code:</label>
+            <div class = "col-sm-9">
               <input type='text' class = "form-control" name='zipcode' id = "zipcode" value = "{{listing.addressZipcode}}"> 
             </div>
           </div>
           <div class = "form-group">
-	          <label for = "MLS" class = "col-sm-2 control-label">MLS number:</label>
-	          <div class = "col-sm-6">
+	          <label for = "MLS" class = "col-sm-3 control-label">MLS number:</label>
+	          <div class = "col-sm-9">
 	            <input type='number' name='mls' class = "form-control" id = "mls" value = "{{listing.MLS}}">
           </div>
      	 </div>
           <div class = "form-group">
-            <label for = "price" class = "col-sm-2 control-label">Price: </label>
-            <div class = "col-sm-6">
+            <label for = "price" class = "col-sm-3 control-label">Price: </label>
+            <div class = "col-sm-9">
               <input type='number' name='price' class = "form-control" id = "price" value = "{{listing.price}}" >
             </div>
           </div>
          <div class = "form-group">
-            <label for = "bedrooms" class = "col-sm-2 control-label">Bedrooms: </label>
-             <div class = "col-sm-6">
+            <label for = "bedrooms" class = "col-sm-3 control-label">Bedrooms: </label>
+             <div class = "col-sm-9">
 	         <select value = "{{listing.bedrooms}}" name = "bedrooms" class="form-control" id = "bedrooms">
 				<option>1</option>
 				<option>2</option>
@@ -252,12 +266,12 @@
 				<option>7</option>
 				<option>8</option>
 			</select>
-			<p>Previous: {{listing.bedrooms}}</p>
+			<p class = "red">Previous: {{listing.bedrooms}}</p>
 			</div>
          </div>
           <div class = "form-group">
-            <label for = "bathrooms" class = "col-sm-2 control-label">Bathrooms: </label>
-             <div class = "col-sm-6">
+            <label for = "bathrooms" class = "col-sm-3 control-label">Bathrooms: </label>
+             <div class = "col-sm-9">
 	         <select value = "{{listing.bathrooms}}" class="form-control" id = "bathrooms" name = "bathrooms">
 				<option>1</option>
 				<option>1.5</option>
@@ -272,60 +286,55 @@
 				<option>6</option>
 				<option>6.5</option>
 			</select>
-			<p>Previous: {{listing.bathrooms}}</p>
+			<p class = "red">Previous: {{listing.bathrooms}}</p>
 			</div>
          </div>
+        </div>
+
+
+        <div class = "col-sm-6 form-horizontal">
+        	<h1>&zwnj;</h1>
         <div class = "form-group">
-          <label for = "squarefootage" class = "col-sm-2 control-label">Square Footage:</label>
-          <div class = "col-sm-6">
+          <label for = "squarefootage" class = "col-sm-3 control-label">Square Footage:</label>
+          <div class = "col-sm-9">
             <input type='number' name='squarefootage' class = "form-control" id = "squarefootage" value = "{{listing.squarefootage}}">
           </div>
         </div>
         <div class = "form-group">
-          <label for = "housetype" class = "col-sm-2 control-label">House Type:</label>
-          <div class = "col-sm-6">
+          <label for = "housetype" class = "col-sm-3 control-label">House Type:</label>
+          <div class = "col-sm-9">
             <input type='text' name='housetype' class = "form-control" id = "housetype" value = "{{listing.houseType}}">
           </div>
         </div>
         <div class = "form-group">
-          <label for = "county" class = "col-sm-2 control-label">County:</label>
-          <div class = "col-sm-6">
+          <label for = "county" class = "col-sm-3 control-label">County:</label>
+          <div class = "col-sm-9">
             <input type='text' name='county' class = "form-control" id = "county"  value = "{{listing.county}}">
           </div>
         </div>
         <div class = "form-group">
-          <label for = "neighborhood" class = "col-sm-2 control-label">neighborhood:</label>
-          <div class = "col-sm-6">
+          <label for = "neighborhood" class = "col-sm-3 control-label">neighborhood:</label>
+          <div class = "col-sm-9">
             <input type='text' name='neighborhood' class = "form-control" id = "neighborhood" value = "{{listing.neighborhood}}">
           </div>
         </div>
-         <div class = "form-group">
-            <label for = "status" class = "col-sm-2 control-label">Status: </label>
-             <div class = "col-sm-6">
-	         <select value = "{{listing.status}}"name = "status" class="form-control" id = "status">
-				<option>Undercontract</option>
-				<option>Available</option>
-				<option>Sold</option>
-				<option>Open House</option>
-			</select>
-			</div>
-         </div>
 		<div class = "form-group">
-          <label for = "neighborhood" class = "col-sm-2 control-label">Year built:</label>
-          <div class = "col-sm-6">
+          <label for = "neighborhood" class = "col-sm-3 control-label">Year built:</label>
+          <div class = "col-sm-9">
             <input type='number' name='yearBuilt' class = "form-control" id = "yearBuilt" value = "{{listing.yearBuilt}}">
           </div>
         </div>
          <div class="form-group">
-            <label for="description" class = "col-sm-2 control-label">Edit Description:</label>
-            <div class = "col-sm-8">
+            <label for="description" class = "col-sm-3 control-label">Edit Description:</label>
+            <div class = "col-sm-9">
         	<!-- <input type='text' name='description' class = "form-control" id = "description" value = "{{listing.description}}"> -->
             <textarea class="form-control" rows="6" name="description" id="description" value = "{{listing.description}}"></textarea>
-            <p>{{listing.description}}</p>
+            <p><span class = "red">Copy and Paste:</span> {{listing.description}}</p>
             <input rows="5" type='submit' value='Edit Listing' class = "btn btn-primary">
            </div>
          </div>
         </form>
+	    </div>
        </div>
 
 

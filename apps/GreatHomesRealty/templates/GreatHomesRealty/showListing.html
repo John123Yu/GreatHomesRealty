@@ -172,12 +172,12 @@
    		color: rgb(0, 157, 255);
    	}
    	.addAgent {
-   		margin-top: 10%;
    		margin-left: 0em;
    		margin-bottom: 5%;
    	}
    	.editListing {
-   		margin-bottom: 5%;
+   		margin-top: 10%;
+   		margin-bottom: 3%;
    	}
    	.box {
    		background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65));
@@ -284,6 +284,17 @@
 					var lati = res.results[0].geometry.location.lat;
 					var lngi = res.results[0].geometry.location.lng;
 			        var place = {lat: lati, lng: lngi};
+			        $.ajax({
+					      url: '/latLon',
+					      method: 'get',
+					      data: {
+					      	lat: lati,
+					      	lon: lngi
+					      },
+					      success: function(){
+					        console.log('latLon Saved')
+					      }
+					    })
 			        var map = new google.maps.Map(document.getElementById('map'), {
 			          zoom: 15,
 			          center: place
@@ -370,7 +381,12 @@
 	<div class = "col-sm-4 col-xs-12 infoboxOut">
 			<ul class = "dl-horizontal agent col-sm-12 col-xs-12">
 				<li class = "status"><span>Status: </span>{{listing.status}}</li>
+			{% if listing.status == 'For Rent' or listing.status == 'Rented Out' %}
+				<li><span>Price:</span> ${{listing.price}}/month</li>
+			{% endif %}
+			{% if listing.status != 'For Rent' and listing.status != 'Rented Out' %}
 				<li><span>Price:</span> ${{listing.price}}</li>
+			{% endif %}
 				<li><span>MLS: </span>{{listing.MLS}}</li>
 				<li><span>Bedrooms: </span>{{listing.bedrooms}}</li>
 				<li><span>Bathrooms: </span>{{listing.bathrooms}}</li>
@@ -412,6 +428,12 @@
 				</form>
 			</div>
 			<div class = "col-md-4">
+				<a class = "btn btn-warning editListing" href="{%url 'GreatHomes:editListingDisplay' id=listing.id %}">Edit Listing</a>
+				<form id = "deleteListing" action = "{%url 'GreatHomes:deleteListing' id=listing.id %}" method = "post">
+					{% csrf_token %}
+					<button class = "btn btn-danger"
+				 onclick="return deleteListing()">Delete Listing</button>
+				</form>
 				<form class = "addAgent" action = "{%url 'GreatHomes:addAgent' id=listing.id %}" method = "post">
 					{% csrf_token %}
 					<input class = "btn btn-primary" type="submit" value="Add Agent">
@@ -429,12 +451,6 @@
 						<option value ="{{agent.id}}">{{agent.firstName}} {{agent.lastName}}</option>
 					{% endfor %}
 					</select>
-				</form>
-				<a class = "btn btn-warning editListing" href="{%url 'GreatHomes:editListingDisplay' id=listing.id %}">Edit Listing</a>
-				<form id = "deleteListing" action = "{%url 'GreatHomes:deleteListing' id=listing.id %}" method = "post">
-					{% csrf_token %}
-					<button class = "btn btn-danger"
-				 onclick="return deleteListing()">Delete Listing</button>
 				</form>
 			</div>
 		</div>

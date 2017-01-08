@@ -69,6 +69,8 @@ class Listing(models.Model):
 	addressZipcode = models.IntegerField(null = True)
 	price = models.DecimalField(max_digits = 12, decimal_places = 0)
 	bedrooms = models.IntegerField()
+	lat = models.DecimalField(max_digits = 20, decimal_places = 10, null = True)
+	lon = models.DecimalField(max_digits = 20, decimal_places = 10, null = True)
 	bathrooms = models.DecimalField(max_digits = 5, decimal_places = 1)
 	squarefootage = models.IntegerField()
 	houseType = models.CharField(max_length = 100)

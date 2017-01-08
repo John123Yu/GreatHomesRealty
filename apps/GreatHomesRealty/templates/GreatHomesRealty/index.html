@@ -285,7 +285,14 @@
 			</div>
 			<div class = "col-sm-7 navlinks">
 				<ul>
-					<li><a href="{%url 'GreatHomes:showAllListing' %}">All Listings</a></li>
+					<li>
+						  <a class="dropdown-toggle" data-toggle="dropdown">All Listings
+						  <span class="caret"></span></a>
+						  <ul class="dropdown-menu">
+						    <li><a href="{%url 'GreatHomes:showAllListing' %}">For Sale</a></li>
+						    <li><a href="{%url 'GreatHomes:showAllRentals' %}">For Rent</a></li>
+						  </ul>
+					</li>
 					<li>
 						  <a class="dropdown-toggle" data-toggle="dropdown">Buying
 						  <span class="caret"></span></a>

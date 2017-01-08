@@ -18,6 +18,7 @@ from boto.s3.key import Key
 from django.conf import settings
 import mimetypes
 import random 
+from django.db.models import Q
 
 def index(request):
 	request.session['clientLogin'] = "false"
@@ -232,11 +233,18 @@ def addAgent(request, id):
 		return redirect(url)
 
 def showAllListing(request):
-	allListings = Listing.listingMgr.all().order_by('price')
+	allListings = Listing.listingMgr.all().exclude(status = "For Rent").exclude(status = "Rented Out").order_by('price')
 	context = {
 		'allListings': allListings
 	}
 	return render(request, 'GreatHomesRealty/viewAllListing.html',  context )
+
+def showAllRentals(request):
+	allListings = Listing.listingMgr.filter(Q(status = "Rented Out") | Q(status = "For Rent")).order_by('price')
+	context = {
+		'allListings': allListings
+	}
+	return render(request, 'GreatHomesRealty/allRentals.html',  context )
 
 def showAgentListing(request, id):
 	user = User.registerMgr.get(id = id)
@@ -495,3 +503,9 @@ def investing(request):
 def owningHome(request):
 	return render(request, 'GreatHomesRealty/owningHome.html')
 
+def latLon(request):
+	print "Here"
+	print request.DATA
+	# print request.lat
+	# print request['lon']
+	return render(request, 'GreatHomesRealty/owningHome.html')

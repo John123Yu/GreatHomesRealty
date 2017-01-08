@@ -14,6 +14,7 @@ urlpatterns = [
 	url(r'^editListing/(?P<id>\d+)$', views.editListing, name = "editListing"),
 	url(r'^showListing/(?P<id>\d+)$', views.showListing, name = "showListing"),
 	url(r'^showAllListing$', views.showAllListing, name = "showAllListing"),
+	url(r'^showAllRentals$', views.showAllRentals, name = "showAllRentals"),
 	url(r'^showAgentListing/(?P<id>\d+)$', views.showAgentListing, name = "showAgentListing"),
 	url(r'^addAgent/(?P<id>\d+)$', views.addAgent, name = "addAgent"),
 	url(r'^deleteListing/(?P<id>\d+)$', views.deleteListing, name = "deleteListing"),
@@ -32,7 +33,8 @@ urlpatterns = [
 	url(r'^selling$', views.selling, name = "selling"),
 	url(r'^mortgage$', views.mortgage, name = "mortgage"),
 	url(r'^investing$', views.investing, name = "investing"),
-	url(r'^owningHome$', views.owningHome, name = "owningHome")
+	url(r'^owningHome$', views.owningHome, name = "owningHome"),
+	url(r'^latLon$', views.latLon, name = "latLon")
 
 ]
 # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

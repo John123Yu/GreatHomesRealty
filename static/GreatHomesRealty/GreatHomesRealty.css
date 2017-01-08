@@ -1,0 +1,150 @@
+{% load staticfiles %}
+html, body, .main {
+	background-color: lightblue;
+	font-family: sans-serif;
+	margin: 0px auto 0px auto;
+    width: 1140px;
+	padding: 0;
+}
+
+.header {
+	height: 400px;
+	background-attachment: fixed;
+	text-align: center;
+	box-shadow: 0 2px 2px #ebebeb;
+	background-image: url('{% static "GreatHomesRealty/purty_wood.png" %}');
+}
+
+.header h1{
+	color: rgb(232, 232, 232);
+	font-size: 45px;
+	font-style: bold;
+    font-weight: 800;
+	text-align: left;
+	margin-bottom: 30px;
+	position: relative;
+	text-transform: uppercase;
+}
+
+.header img {
+	margin-top: 20px;
+}
+
+.col-md-12 {
+	display: inline;
+}
+.form-control{
+	padding: 12px 20px 12px 40px;
+	background-color: white;
+	font-size: 16px;
+	margin-top: 30px;
+}
+
+.btn {
+	margin-top: 20px;
+	padding: 5px 45px;
+	text-align: center;
+	background-color: rgb(139, 211, 157);
+}
+
+#menu {
+	border-width: 0px;
+}
+.nav {
+	background-color: white;
+	font-size: 16px;
+	margin-bottom: 20px;
+}
+.nav ul{
+	margin: 0 0 0px;
+	padding-bottom: 20px;
+	text-align: center;
+	color: rgb(165, 165, 165);
+	background-color: lightblue;
+	border: none;
+	font-family: 'Merriweather Sans', sans-serif;
+}
+
+.nav li{
+	-webkit-transition:color .25s;
+	transition: color .25s;
+	color: black;
+	display: inline-block;
+	margin: 20px 20px 0px 20px;
+	
+}
+.nav li ul {
+	background-color: white;
+}
+.nav li li {
+	display: block;
+	text-align: left;
+	background-color: white;
+}
+
+.nav li {
+	color: black;
+	text-transform: uppercase;
+	padding-right: 20px;
+}
+
+.nav li:hover {
+	color: white;
+	font-style: bold;
+	cursor pointer;
+	-webkit-transition: color .25s;
+  	transition: color .25s;
+}
+
+
+.support2 {
+	background: rgb(255, 56, 56);
+	color: white;
+	height: 180px;
+}
+
+.support2 a{
+	text-decoration: none;
+	color: white;
+}
+
+.support2 h1 {
+	position: relative;
+	top: 50px;
+}
+.support {
+	height: 400px;
+	background-color: white;
+}
+.support h5 {
+	margin-top: 50px;
+	margin-bottom: 50px;
+	text-align: center;
+	background-color: white;
+	color: rgb(109, 109, 109);
+	line-height: 30px;
+	text-decoration: none;
+	font-size: 15px;
+}
+.footer {
+	background-color: black;
+	color: white;
+}
+.footer h4 {
+	color: white;
+	padding-top: 20px;
+}
+.footer h5{
+	color: white;
+	padding-bottom: 20px;
+}
+.footer ul{
+	padding-top: 20px;
+	text-align: center;
+}
+.footer .col-md-9 li{
+	display: inline-block;
+	margin: 20px 20px 0px 20px;
+	color: white;
+}
+

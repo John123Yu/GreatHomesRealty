@@ -73,12 +73,19 @@
 	}
 	body {
 		background-image: linear-gradient(rgba(250, 197, 100, .65), rgba(250, 197, 100, .65)), url('{% static "GreatHomesRealty/diagonal_striped_brick.png" %}');
+		font-family: serif;
 	}
 	.error {
 		color: red;
 		margin-left: 17%;
 	}
-
+	.smallH1 {
+		font-size: .4em;
+		color: red;
+	}
+	.body {
+		margin: 0 1%;
+	}
 	.footer {
 		background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
 		height: 15em;
@@ -187,60 +194,73 @@
 		</div>
 	</div>
 
-	<div class = "container">
+	<div class = "container-fluid body">
 	<div class = "row">
+	<div class = "col-sm-6">
 	<form action = "{%url 'GreatHomes:addListing' %}" method='post' class = "addListingForm form-horizontal">
-<div class = "addListingAjax">
         {% csrf_token %}
-          <h1>Add Listing</h1>
+          <h1>Add Listing <span class = "smallH1">All Input Fields are required except Apt/Suite#</span></h1>
           {% if allInputLengths %}
             <p class = 'error'> {{ allInputLengths }} </p>
           {% endif %}
           <div class = "form-group">
-            <label for ="streetAddress" class="col-sm-2 control-label">Street Address:</label>
-            <div class = "col-sm-6">
+            <label for = "status" class = "col-sm-3 control-label">Status: </label>
+             <div class = "col-sm-9">
+	         <select name = "status" class="form-control" id = "status">
+				<option>Undercontract</option>
+				<option>Available</option>
+				<option>Sold</option>
+				<option>Open House</option>
+				<option>For Rent</option>
+				<option>Rented Out</option>
+			</select>
+			</div>
+         </div>
+          <div class = "form-group">
+            <label for ="streetAddress" class="col-sm-3 control-label">Street Address:</label>
+            <div class = "col-sm-9">
               <input type='text' class = "form-control" name='streetAddress' id = "streetAddress" placeholder = "Street Address"> 
             </div>
           </div>
           <div class = "form-group">
-            <label for ="suite" class="col-sm-2 control-label">Apt/Suite #:</label>
-            <div class = "col-sm-6">
+            <label for ="suite" class="col-sm-3 control-label">Apt/Suite #:</label>
+            <div class = "col-sm-9">
               <input type='text' class = "form-control" name='suite' id = "suite" placeholder = "#"> 
             </div>
           </div>
           <div class = "form-group">
-            <label for ="city" class="col-sm-2 control-label">City:</label>
-            <div class = "col-sm-6">
+            <label for ="city" class="col-sm-3 control-label">City:</label>
+            <div class = "col-sm-9">
               <input type='text' class = "form-control" name='city' id = "city" placeholder = "City"> 
             </div>
           </div>
            <div class = "form-group">
-            <label for ="state" class="col-sm-2 control-label">State:</label>
-            <div class = "col-sm-6">
+            <label for ="state" class="col-sm-3 control-label">State:</label>
+            <div class = "col-sm-9">
               <input type='text' class = "form-control" name='state' id = "state" placeholder = "State"> 
             </div>
           </div>
            <div class = "form-group">
-            <label for ="zipcode" class="col-sm-2 control-label">Zip Code:</label>
-            <div class = "col-sm-6">
+            <label for ="zipcode" class="col-sm-3 control-label">Zip Code:</label>
+            <div class = "col-sm-9">
               <input type='number' class = "form-control" name='zipcode' id = "zipcode" placeholder = "Zip Code"> 
             </div>
           </div>
           <div class = "form-group">
-	          <label for = "MLS" class = "col-sm-2 control-label">MLS number:</label>
-	          <div class = "col-sm-6">
+	          <label for = "MLS" class = "col-sm-3 control-label">MLS number:</label>
+	          <div class = "col-sm-9">
 	            <input type='number' name='mls' class = "form-control" id = "mls" placeholder = "MLS">
           </div>
      	 </div>
           <div class = "form-group">
-            <label for = "price" class = "col-sm-2 control-label">Price: </label>
-            <div class = "col-sm-6">
+            <label for = "price" class = "col-sm-3 control-label">Price: </label>
+            <div class = "col-sm-9">
               <input type='number' name='price' class = "form-control" id = "price" placeholder = "Price">
             </div>
           </div>
          <div class = "form-group">
-            <label for = "bedrooms" class = "col-sm-2 control-label">Bedrooms: </label>
-             <div class = "col-sm-6">
+            <label for = "bedrooms" class = "col-sm-3 control-label">Bedrooms: </label>
+             <div class = "col-sm-9">
 	         <select name = "bedrooms" class="form-control" id = "bedrooms">
 				<option>1</option>
 				<option>2</option>
@@ -254,8 +274,8 @@
 			</div>
          </div>
           <div class = "form-group">
-            <label for = "bathrooms" class = "col-sm-2 control-label">Bathrooms: </label>
-             <div class = "col-sm-6">
+            <label for = "bathrooms" class = "col-sm-3 control-label">Bathrooms: </label>
+             <div class = "col-sm-9">
 	         <select class="form-control" id = "bathrooms" name = "bathrooms">
 				<option>1</option>
 				<option>1.5</option>
@@ -272,50 +292,43 @@
 			</select>
 			</div>
          </div>
+        </div>
+
+        <div class = "col-sm-6 form-horizontal">
+        <h1>&zwnj;</h1>
         <div class = "form-group">
-          <label for = "squarefootage" class = "col-sm-2 control-label">Square Footage:</label>
-          <div class = "col-sm-6">
+          <label for = "squarefootage" class = "col-sm-3 control-label">Square Footage:</label>
+          <div class = "col-sm-9">
             <input type='number' name='squarefootage' class = "form-control" id = "squarefootage" placeholder = "Square Footage">
           </div>
         </div>
         <div class = "form-group">
-          <label for = "housetype" class = "col-sm-2 control-label">House Type:</label>
-          <div class = "col-sm-6">
+          <label for = "housetype" class = "col-sm-3 control-label">House Type:</label>
+          <div class = "col-sm-9">
             <input type='text' name='housetype' class = "form-control" id = "housetype" placeholder = "House Type">
           </div>
         </div>
         <div class = "form-group">
-          <label for = "county" class = "col-sm-2 control-label">County:</label>
-          <div class = "col-sm-6">
+          <label for = "county" class = "col-sm-3 control-label">County:</label>
+          <div class = "col-sm-9">
             <input type='text' name='county' class = "form-control" id = "county" placeholder = "County">
           </div>
         </div>
         <div class = "form-group">
-          <label for = "neighborhood" class = "col-sm-2 control-label">neighborhood:</label>
-          <div class = "col-sm-6">
+          <label for = "neighborhood" class = "col-sm-3 control-label">neighborhood:</label>
+          <div class = "col-sm-9">
             <input type='text' name='neighborhood' class = "form-control" id = "neighborhood"placeholder = "neighborhood">
           </div>
         </div>
-        <div class = "form-group">
-            <label for = "status" class = "col-sm-2 control-label">Status: </label>
-             <div class = "col-sm-6">
-	         <select name = "status" class="form-control" id = "status">
-				<option>Undercontract</option>
-				<option>Available</option>
-				<option>Sold</option>
-				<option>Open House</option>
-			</select>
-			</div>
-         </div>
 		<div class = "form-group">
-          <label for = "neighborhood" class = "col-sm-2 control-label">Year built:</label>
-          <div class = "col-sm-6">
+          <label for = "neighborhood" class = "col-sm-3 control-label">Year built:</label>
+          <div class = "col-sm-9">
             <input type='number' name='yearBuilt' class = "form-control" id = "yearBuilt"placeholder = "yearBuilt">
           </div>
         </div>
          <div class="form-group">
-            <label for="description" class = "col-sm-2 control-label">Edit Description:</label>
-            <div class = "col-sm-8">
+            <label for="description" class = "col-sm-3 control-label">Edit Description:</label>
+            <div class = "col-sm-9">
             <textarea class="form-control" rows="6" name="description" id="description"></textarea>
           	</div>
          </div>
@@ -325,14 +338,14 @@
 		{% if success %}
 	        <p class = 'success'> {{ success }} </p>
 	      {% endif %}
- </div>
  		<div class = "form-group">
- 			<div class = "col-sm-8 col-sm-offset-2">
+ 			<div class = "col-sm-8 col-sm-offset-3">
             <input type='submit' value='Add Listing' class = "btn btn-primary">
            </div>
 	       </div>
          </div>
         </form>
+	    </div>
        </div>
    </div>
 
