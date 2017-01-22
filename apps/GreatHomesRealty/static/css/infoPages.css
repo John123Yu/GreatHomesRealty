@@ -1,0 +1,33 @@
+.question {
+	font-weight: 700;
+	list-style-type: none;
+	margin-top: 1%;
+	margin-left: 0%;
+}
+.main li {
+	list-style-type: none;
+	margin-left: 4%;
+	font-size: 1.2em;
+	color: black;
+}
+.main {
+	font-weight: 500;
+	background: linear-gradient(rgba(250, 197, 100, 1), rgba(250, 197, 100, 1));
+	border-radius: 30px;
+	padding: 1% 3%;
+	margin: 5% 3%;
+	height: 90%;
+	overflow-y: scroll;
+}
+::-webkit-scrollbar {
+  width: 15px;
+} 
+.initiallyHidden {
+	display: none;
+}
+.main h1 {
+	font-weight: 700;
+}
+h3 {
+	margin-left: 3%;
+}

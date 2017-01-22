@@ -8,78 +8,10 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 	<link rel="stylesheet" type="text/css" href="{% static 'GreatHomesRealty/ionicons.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 </head>
 <STYLE>
 	{% load staticfiles %}
-	.header {
-		background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
-		color: white;
-		padding-bottom: 3%;
-		font-family: serif;
-		margin-bottom: 0%;
-	}
-	.header h1 {
-		display: inline-block;
-		position: relative;
-		top: .55em;
-		left: 5%;
-		font-size: 2.7em;
-		font-family: serif;
-	}
-	.header ul {
-		margin-left: 8%;
-		list-style: none;
-	}
-	.header ul li {
-		display: inline-block;
-		font-size: 1.1em;
-		padding-right: 2%;
-		padding-left: 2%;
-		border-right: 2px solid white;
-		position: relative;
-		right: 2em;
-		top: 4em;
-	}
-	.header ul li:last-child {
-		border-right: none;
-	}
-	.header a {
-		color: white;
-	}
-	a:hover {
-		color: rgb(250, 197, 100);
-		text-decoration: none;
-	}
-	.ion-ios-home {
-		font-size: 1.5em;
-		position: relative;
-	}
-	body {
-		background-image: linear-gradient(rgba(250, 197, 100, .65), rgba(250, 197, 100, .65)), url('{% static "GreatHomesRealty/diagonal_striped_brick.png" %}');
-		font-family: serif;
-		color: black;
-	}
-	header ul {
-		list-style-type: none;
-		display: inline-block;
-		width: 99%;
-	}
-	header ul li {
-		display: inline-block;
-		margin-left: 2%;
-		margin-top: 1.5%;
-		font-size: 1.5em;
-		color: white;
-	}
-	header li a {
-		font-size: .9em;
-		color: rgb(55, 150, 239);
-	}
-	header {
-		background-color: rgb(1, 49, 94);
-		color: white;
-		font-family: sans-serif;
-	}
 	.listingAgent {
 		margin-top: 28%;
 		margin-bottom: 0px;
@@ -87,6 +19,9 @@
 	}
 	h3 {
 		font-weight: 600;
+	}
+	img {
+		width: 100%;
 	}
 	.main {
 		margin: 3% 5%;
@@ -158,7 +93,7 @@
     height: 400px;
     width: 100%;
     border: 2px solid grey;
-    margin-top: 3%;
+    margin-top: 1%;
    	}
    	.ion-ios-person, 
    	.ion-email {
@@ -212,108 +147,47 @@
    		margin-top: 0px;
    	}
    	.inforequest {
-   		background: linear-gradient(rgba(0,0,0, .4), rgba(0,0,0, .4));
-   		margin-bottom: 2%;
-   		margin-top: 1%;
+   		background: linear-gradient(rgba(0,0,0, .2), rgba(0,0,0,.2));
+   		margin: 2%;
+   		margin-left: 0px;
    		color: black;
-   		padding-top: 1%;
-   		padding-left: 3%;
-   		padding-right: 3%;
-   		padding-top: 1%;
-   		padding-bottom: 1%;
-   		border-radius: 5%;
+   		padding: 1% 4%;
+   		border-radius: 2%;
    	}
-	.footer {
-		background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
-		height: 15em;
-		color: white;
-		font-family: serif;
-		font-weight: 100;
-		padding-top: 5%;
-	}
-	.footer address {
-		font-size: 1.1em;
-		margin-left: 15%;
-	}
-	.footerlist ul {
-		margin-left: 15%;
-	}
-	.footerlist li { 
-		display: inline-block;
-		font-size: 1.1em;
-		padding-right: 3%;
-		margin-top: 3%;
-	}
-	.footerlist li a {
-		color: white
-	}
-	.footerlist li a i {
-		font-size: 1.5em;
-	}
-	.status {
-		color: red;
-	}
-	@media only screen and (max-width: 480px) {
-		.header {
-			height: 21em;
-		}
-		.support {
-			height: 30em;
-		}
-		.support2 {
-			height: 40em;
-		}
-		.footer {
-			height: 20em;
-		}
-		.infoboxOut {
-	   	min-height: 0%;
-	   	}
-	}
-/* Medium sized screens */
-	@media only screen and (min-width: 481px) {
-		.header {
-			height: 17em;
-		}
-		.footer {
-			height: 20em;
-		}
-		.infoboxOut {
-	   	min-height: 0%;
-	   	}
-	}
-	/* Large sized screens */
-	@media only screen and (min-width: 1024px) {
-		.header {
-			height: 10em;
-		}
-		.footer {
-			height: 15em;
-		}
-		.infoboxOut {
-	   	min-height: 103%;
-	   	}
-	}
 </STYLE>
 <SCRIPT>
 	var address = "{{listingAddress}}"
 	$(document).ready(function(){
+				if("{{listing.lat}}" != "None") {
+					console.log("{{listing.lat}}")
+					var place = {lat: Number("{{listing.lat}}"), lng: Number("{{listing.lon}}")};
+					var map = new google.maps.Map(document.getElementById('map'), {
+			          zoom: 15,
+			          center: place
+			        });
+			        var marker = new google.maps.Marker({
+			          position: place,
+			          map: map
+			        });
+			        // window.location.replace("http://localhost:8000/showListing/5")
+				} else {
                 $.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&key=AIzaSyCFloLP_K9qctz3vRmSUO_cI50axycTj4M"
 				, function(res) {
 					var lati = res.results[0].geometry.location.lat;
 					var lngi = res.results[0].geometry.location.lng;
 			        var place = {lat: lati, lng: lngi};
-			      //   $.ajax({
-					    //   url: '/latLon',
-					    //   method: 'get',
-					    //   data: {
-					    //   	lat: lati,
-					    //   	lon: lngi
-					    //   },
-					    //   success: function(){
-					    //     console.log('latLon Saved')
-					    //   }
-					    // })
+			        $.ajax({
+					      url: '/latLon',
+					      method: 'get',
+					      data: {
+					      	lat: lati,
+					      	lon: lngi,
+					      	id: "{{listing.id}}"
+					      },
+					      success: function(){
+					        console.log('latLon Saved')
+					      }
+					    })
 			        var map = new google.maps.Map(document.getElementById('map'), {
 			          zoom: 15,
 			          center: place
@@ -323,6 +197,7 @@
 			          map: map
 			        });
                 }, "json");
+				}
             })
 </SCRIPT>
 <body>
@@ -374,7 +249,7 @@
 				<form class="addImage" action="{%url 'GreatHomes:addListingImage' id=listing.id %}" method="post" enctype="multipart/form-data">
 					{% csrf_token %}
 					{{addImage.as_p}}
-					<input class = "btn btn-primary" type="submit" value="Add Image">
+					<input class = "btn btn-primary" type="submit" value="Add Multiple Images">
 				</form>
 			</div>
 			<div class = "col-sm-3 col-xs-6">
@@ -426,7 +301,7 @@
 				<form class="addImage" action="{%url 'GreatHomes:addListingImage' id=listing.id %}" method="post" enctype="multipart/form-data">
 					{% csrf_token %}
 					{{addImage.as_p}}
-					<input class = "btn btn-primary" type="submit" value="Add Image">
+					<input class = "btn btn-primary" type="submit" value="Add Multiple Images">
 				</form>
 			</div>
 			<div class = "col-sm-3 col-xs-6">
@@ -475,7 +350,7 @@
 				<div class = "slideshow">
 					{% if listing.url %}
 					<div class="w3-display-container mySlides">
-					<img  src="{{listing.url}}" style= "width:100%">
+					<img  src="{{listing.url}}">
 					{% if currentUser.user_level == "Admin" or request.session.login == listing.createdById %}
 					<div class="w3-display-bottomleft">
 					<a class = "btn btn-danger imagebtn" href="{% url 'GreatHomes:deleteMainImage' id=listing.id %}">Delete Main Image</a>
@@ -485,7 +360,7 @@
 					{% endif %}
 					{% for image in images %}
 					<div class="w3-display-container mySlides">
-					<img src="{{ image.url }}" style = "width:100%"/>
+					<img src="{{ image.url }}">
 					{% if currentUser.user_level == "Admin" or request.session.login == listing.createdById %}
 					<div class="w3-display-bottomleft">
 					<a class = "btn btn-danger imagebtn" href="{% url 'GreatHomes:deleteImage' id=image.id %}">Delete Image</a>
@@ -504,7 +379,7 @@
 	<div class = "second">
 		<div class = "row secondrow">
 			<div class = "col-md-12 descriptionborder">
-				<p class = "description"> {{listing.description}}</p>
+				<p class = "description"><span style = "color:darkblue">Listing Description:</span> {{listing.description}}</p>
 			</div>
 		</div>
 	</div>
@@ -544,49 +419,50 @@
 	</div>
 </div>
 
-	<div class = "third">
+	<div class = "third container-fluid">
 	<div class = "row">
-		<div class = "col-sm-6 col-sm-offset-0 col-xs-12">
+		<div class = "col-sm-12 col-sm-offset-0 col-xs-12">
+			<h2>Google Maps</h2>
 			<div id = "map"></div>
 		</div>
-		<div class = "col-sm-6 col-sm-offset-0 col-xs-12 inforequest">
+		<div class = "col-sm-12 col-sm-offset-0 col-xs-12 inforequest">
 			<h3><i class = "ion-email"></i> Contact Agent / Request Information: </h3>
-		<form action="" method='post' class = " sendMail form-horizontal">
+		<form action="" method='post' class = "sendMail form-horizontal">
         {% csrf_token %}
       <div class = "sendMailAjax">
         <div class = "form-group">
-            <label for = "first_name" class = "col-sm-3 control-label">First Name:</label>
+            <label for = "first_name" class = "col-sm-2 control-label">First Name:</label>
             <div class = "col-sm-9">
               <input type='text' name='first_name' class = "form-control" id = "first_name" placeholder = "First Name">
             </div>
           </div>
           <div class = "form-group">
-            <label for = "last_name" class = "col-sm-3 control-label">Last Name:</label>
+            <label for = "last_name" class = "col-sm-2 control-label">Last Name:</label>
             <div class = "col-sm-9">
               <input type='text' name='last_name' class = "form-control" id = "last_name" placeholder = "Last Name">
             </div>
           </div>
           <div class = "form-group">
-            <label for = "phone" class = "col-sm-3 control-label">Phone (xxx)-xxx-xxxx:</label>
+            <label for = "phone" class = "col-sm-2 control-label">Phone (xxx)-xxx-xxxx:</label>
             <div class = "col-sm-9">
               <input type='text' name='phone' class = "form-control" id = "phone" placeholder = "Phone Number">
             </div>
           </div>
         <div class = "form-group">
-          <label for = "email" class = "col-sm-3 control-label">Your Email:</label>
+          <label for = "email" class = "col-sm-2 control-label">Your Email:</label>
           <div class = "col-sm-9">
             <input type='text' name='email' class = "form-control" id = "email" placeholder = "Email">
           </div>
         </div>
           <div class="form-group">
-            <label for="message" class = "col-sm-3 control-label"> Message: </label>
+            <label for="message" class = "col-sm-2 control-label"> Message: </label>
             <div class = "col-sm-9">
             <textarea class="form-control" rows="5" name="message" id="message"></textarea>
            </div>
          </div>
       </div>
           <div class="form-group">
-            <label for="submit" class="col-sm-3"></label>
+            <label for="submit" class="col-sm-2"></label>
             <div class = "col-sm-9">
             <input id = "submit" type='submit' value='Send Message' class = "btn btn-success">
            </div>
@@ -624,6 +500,19 @@
 
 </body>
 	<script type="text/javascript">
+	$('.sendMail').on('submit', function(e){
+	    e.preventDefault()
+	    $.ajax({
+	      url: '/sendMail/' + "{{listing.id}}",
+	      method: 'post',
+	      data: $(this).serialize(),
+	      success: function(serverResponse){
+	        $('.sendMailAjax').html(serverResponse)
+	      }
+	    })
+	    $('.sendMail').trigger('reset')
+	  });
+
 		var slideIndex = 1;
 		showDivs(slideIndex);
 
@@ -651,18 +540,7 @@
 		  	}
 		}
 
-	$('.sendMail').on('submit', function(e){
-	    e.preventDefault()
-	    $.ajax({
-	      url: '/sendMail/' + "{{listing.id}}",
-	      method: 'post',
-	      data: $(this).serialize(),
-	      success: function(serverResponse){
-	        $('.sendMailAjax').html(serverResponse)
-	      }
-	    })
-	    $('.sendMail').trigger('reset')
-	  });
+
 	</script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFloLP_K9qctz3vRmSUO_cI50axycTj4M">

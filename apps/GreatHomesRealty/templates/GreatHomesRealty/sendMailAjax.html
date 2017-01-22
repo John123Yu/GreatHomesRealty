@@ -2,16 +2,18 @@
 	.error {
 		color: red;
 		display: block;
-		margin-left: 27%;
+		margin-left: 17%;
     margin-top: 0%;
     margin-bottom: 0px;
+    font-size: 1.1em;
 	}
 	.success {
 		color: green;
 		display: block;
-    margin-left: 27%;
+    margin-left: 17%;
     margin-top: 0%;
     margin-bottom: 0px;
+    font-size: 1.1em;
 	}
 </style>
 <html>
@@ -27,13 +29,13 @@
             <p class = 'success'> {{ success }} </p>
           {% endif %}
         <div class = "form-group">
-            <label for = "first_name" class = "col-sm-3 control-label">First Name:</label>
+            <label for = "first_name" class = "col-sm-2 control-label">First Name:</label>
             <div class = "col-sm-9">
               <input type='text' name='first_name' class = "form-control" id = "first_name" placeholder = "First Name">
             </div>
           </div>
           <div class = "form-group">
-            <label for = "last_name" class = "col-sm-3 control-label">Last Name:</label>
+            <label for = "last_name" class = "col-sm-2 control-label">Last Name:</label>
             <div class = "col-sm-9">
               <input type='text' name='last_name' class = "form-control" id = "last_name" placeholder = "Last Name">
             </div>
@@ -42,7 +44,7 @@
             <p class = 'error'> {{ InvalidPhone }} </p>
           {% endif %}
           <div class = "form-group">
-            <label for = "phone" class = "col-sm-3 control-label">Phone (xxx)-xxx-xxxx:</label>
+            <label for = "phone" class = "col-sm-2 control-label">Phone (xxx)-xxx-xxxx:</label>
             <div class = "col-sm-9">
               <input type='text' name='phone' class = "form-control" id = "phone" placeholder = "Phone Number">
             </div>
@@ -51,13 +53,13 @@
             <p class = 'error'> {{ InvalidEmail }} </p>
           {% endif %}
         <div class = "form-group">
-          <label for = "email" class = "col-sm-3 control-label">Your Email:</label>
+          <label for = "email" class = "col-sm-2 control-label">Your Email:</label>
           <div class = "col-sm-9">
             <input type='text' name='email' class = "form-control" id = "email" placeholder = "Email">
           </div>
         </div>
           <div class="form-group">
-            <label for="message" class = "col-sm-3 control-label">Question/Message: </label>
+            <label for="message" class = "col-sm-2 control-label">Question/Message: </label>
             <div class = "col-sm-9">
             <textarea class="form-control" rows="5" name="message" id="message"></textarea>
            </div>

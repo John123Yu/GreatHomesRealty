@@ -1,9 +1,12 @@
 <html>
     <head>
         <title>Create User</title>
+        {% load staticfiles %}
         <meta name="viewport" content="width=device-width, initial-scale=0.5">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     </head>
     <style>
     {% load staticfiles %}
@@ -36,26 +39,6 @@
 	}
 	a {
 		color: rgb(55, 150, 239);
-	}
-  header ul {
-    list-style-type: none;
-    display: inline-block;
-    width: 99%;
-  }
-  header ul li {
-    display: inline-block;
-    margin-left: 2%;
-    margin-top: 1.5%;
-    font-size: 1.5em;
-    color: white;
-  }
-  header li a {
-    font-size: .9em;
-    color: rgb(55, 150, 239);
-  }
-  header {
-    background-color: rgb(1, 49, 94);
-    color: white;
   }
 	.Manage {
 		display: inline-block;
@@ -78,6 +61,7 @@
     </ul>
   </header>
   {% endif %}
+    <div class = "container">
         <form action="{%url 'login:createUser' %}" method='post' class = "form-horizontal">
         {% csrf_token %}
           <h1>Registration Form</h1>
@@ -88,14 +72,14 @@
             <p class = 'error'> {{ IsAlpha }} </p>
           {% endif %}
           <div class = "form-group">
-            <label for ="first_name" class="col-sm-2 control-label">First Name:</label>
-            <div class = "col-sm-6">
+            <label for ="first_name" class="col-sm-3 control-label">First Name:</label>
+            <div class = "col-sm-8">
               <input type='text' class = "form-control" name='first_name' id = "first_name" placeholder = "First Name"> 
             </div>
           </div>
           <div class = "form-group">
-            <label for = "last_name" class = "col-sm-2 control-label">Last Name:</label>
-            <div class = "col-sm-6">
+            <label for = "last_name" class = "col-sm-3 control-label">Last Name:</label>
+            <div class = "col-sm-8">
               <input type='text' name='last_name' class = "form-control" id = "last_name" placeholder = "Last Name">
             </div>
           </div>
@@ -109,8 +93,8 @@
             <p class = 'error'> {{ EmailDuplicate }} </p>
           {% endif %}
         <div class = "form-group">
-          <label for = "email" class = "col-sm-2 control-label">Email:</label>
-          <div class = "col-sm-6">
+          <label for = "email" class = "col-sm-3 control-label">Email:</label>
+          <div class = "col-sm-8">
             <input type='text' name='email' class = "form-control" id = "email" placeholder = "Email">
           </div>
         </div>
@@ -118,8 +102,8 @@
             <p class = 'error'> {{ InvalidPhone }} </p>
         {% endif %}
         <div class = "form-group">
-          <label for = "phone" class = "col-sm-2 control-label">Phone Number: (XXX)-XXX-XXXX </label>
-          <div class = "col-sm-6">
+          <label for = "phone" class = "col-sm-3 control-label">Phone Number: (XXX)-XXX-XXXX </label>
+          <div class = "col-sm-8">
             <input type='tel' name='phone' class = "form-control" id = "phone" placeholder = "Number">
           </div>
         </div>
@@ -136,18 +120,19 @@
             <p class = 'error'> {{ PasswordNonmatch }} </p>
           {% endif %}
         <div class = "form-group">
-          <label for = "password" class = "col-sm-2 control-label">Password:</label>
-          <div class = "col-sm-6">
+          <label for = "password" class = "col-sm-3 control-label">Password:</label>
+          <div class = "col-sm-8">
             <input type='password' name='password' class = "form-control" id = "password" placeholder = "Password">
           </div>
         </div>
         <div class = "form-group">
-          <label for = "confirmpassword" class = "col-sm-2 control-label">Confirm Password:</label>
-          <div class = "col-sm-6">
+          <label for = "confirmpassword" class = "col-sm-3 control-label">Confirm Password:</label>
+          <div class = "col-sm-8">
             <input type='password' name='confirm_password' class = "form-control" id = "confirmpassword"placeholder = "Password">
             <input type='submit' value='Create User' class = "btn btn-primary">
           </div>
         </div>
         </form>
+    </div>
     </body>
 </html>

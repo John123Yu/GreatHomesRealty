@@ -11,6 +11,7 @@ except ImportError:
 from django.core.mail import send_mail, send_mass_mail
 from django.conf import settings
 import json 
+from django.http import JsonResponse
 from django.views.generic.edit import View
 from django.views.generic import FormView
 from boto.s3.connection import S3Connection
@@ -21,7 +22,6 @@ import random
 from django.db.models import Q
 
 def index(request):
-	request.session['clientLogin'] = "false"
 	allListings = Listing.listingMgr.filter(price__gte = 300000).filter(price__lte = 700000).order_by('-created_at')[0:3]
 	try:
 		user = User.registerMgr.get(id = request.session['login'])
@@ -43,61 +43,46 @@ def addListingDisplay(request):
 	else:
 		return redirect(reverse('GreatHomes:index'))
 
-def addListing(request):
-	if request.method == "POST":
-		error_messages = {}
-		result = Listing.listingMgr.addListing(request.POST['streetAddress'], request.POST['suite'], request.POST['city'], request.POST['state'], request.POST['zipcode'], request.POST['price'], request.POST['bedrooms'], request.POST['bathrooms'], request.POST['squarefootage'], request.POST['housetype'], request.POST['county'], request.POST['neighborhood'], request.POST['mls'], request.POST['description'], "no", request.session['login'], request.POST['yearBuilt'], request.POST['status'])
-		if result[0]:
-			listing = result[1]
-			url = "/showListing/" + str(listing.id)
-			return redirect(url)
-		else:
-			error_messages = result[1]
-			return render(request, 'GreatHomesRealty/addListing.html',  error_messages )
-	else: 
-		return redirect(reverse('GreatHomes:addListingDisplay'))
-
-# error_messages = {}
-# class AddListing(View):
-# 	def get(self, request):
-# 		if request.method == "GET":
-# 			print "HERE"
-# 			context = error_messages
-# 			return render(request, 'GreatHomesRealty/addListingAjax.html', context)
-# 		else: 
-# 			return redirect(reverse('GreatHomes:addListingDisplay'))
-	# def post(self, request):
-	# 	print "HEYOOO"
-	# 	if request.method == "POST":
-	# 		global error_messages
-	# 		error_messages = {}
-	# 		result = Listing.listingMgr.addListing(request.POST['streetAddress'], request.POST['suite'], request.POST['city'], request.POST['state'], request.POST['zipcode'], request.POST['price'], request.POST['bedrooms'], request.POST['bathrooms'], request.POST['squarefootage'], request.POST['housetype'], request.POST['county'], request.POST['neighborhood'], request.POST['mls'], request.POST['description'], "no", request.session['login'], request.POST['yearBuilt'], request.POST['status'])
-	# 		if result[0]:
-	# 			global listing
-	# 			error_messages['listing'] = result[1]
-	# 			error_messages['success'] = "Listing has been successfully added"
-	# 			return redirect(reverse('GreatHomes:addListing'))
-	# 		else:
-	# 			error_messages = result[1]
-	# 			error_messages['SA'] = request.POST['streetAddress']
-	# 			error_messages['C'] = request.POST['city']
-	# 			error_messages['S'] = request.POST['state']
-	# 			error_messages['ZC'] = request.POST['zipcode']
-	# 			error_messages['MLS'] = request.POST['mls']
-	# 			error_messages['P'] = request.POST['price']
-	# 			error_messages['Bed'] = request.POST['bedrooms']
-	# 			error_messages['SF'] = request.POST['squarefootage']
-	# 			error_messages['HT'] = request.POST['housetype']
-	# 			error_messages['County'] = request.POST['county']
-	# 			error_messages['N'] = request.POST['neighborhood']
-	# 			error_messages['Y'] = request.POST['yearBuilt']
-	# 			error_messages['D'] = request.POST['description']
-	# 			return redirect(reverse('GreatHomes:addListing'))
-	# 	else: 
-	# 		return redirect(reverse('GreatHomes:addListingDisplay'))
+error_messages = {}
+class AddListing(View):
+	def get(self, request):
+		if request.method == "GET":
+			context = error_messages
+			return render(request, 'GreatHomesRealty/addListingAjax.html', context)
+		else: 
+			return redirect(reverse('GreatHomes:addListingDisplay'))
+	def post(self, request):
+		if request.method == "POST":
+			global error_messages
+			error_messages = {}
+			result = Listing.listingMgr.addListing(request.POST['streetAddress'], request.POST['suite'], request.POST['city'], request.POST['state'], request.POST['zipcode'], request.POST['price'], request.POST['bedrooms'], request.POST['bathrooms'], request.POST['squarefootage'], request.POST['housetype'], request.POST['county'], request.POST['neighborhood'], request.POST['mls'], request.POST['description'], "no", request.session['login'], request.POST['yearBuilt'], request.POST['status'])
+			if result[0]:
+				global listing
+				error_messages['listing'] = result[1]
+				error_messages['success'] = "Listing has been successfully added"
+				return JsonResponse({"data": result[1]})
+			else:
+				error_messages = result[1]
+				error_messages['SA'] = request.POST['streetAddress']
+				error_messages['C'] = request.POST['city']
+				error_messages['Apt'] = request.POST['suite']
+				error_messages['Bathrooms'] = request.POST['bathrooms']
+				error_messages['S'] = request.POST['state']
+				error_messages['ZC'] = request.POST['zipcode']
+				error_messages['MLS'] = request.POST['mls']
+				error_messages['P'] = request.POST['price']
+				error_messages['Bed'] = request.POST['bedrooms']
+				error_messages['SF'] = request.POST['squarefootage']
+				error_messages['HT'] = request.POST['housetype']
+				error_messages['County'] = request.POST['county']
+				error_messages['N'] = request.POST['neighborhood']
+				error_messages['Y'] = request.POST['yearBuilt']
+				error_messages['D'] = request.POST['description']
+				return redirect(reverse('GreatHomes:addListing'))
+		else: 
+			return redirect(reverse('GreatHomes:addListingDisplay'))
 
 def editListingDisplay(request, id):
-	# editForm = editListingForm()
 	if request.session['login'] > 0:
 		listing = Listing.listingMgr.get(id = id)
 		context = {
@@ -143,9 +128,6 @@ def addMainImage(request, id):
 	if request.method == 'POST':
 		form = S3ImageForm(request.POST, request.FILES)
 		if form.is_valid():
-			# image = form.cleaned_data['mainPicture']
-			# listing.mainPicture = image
-			# listing.save()
 			file = request.FILES['file']
 			filename = file.name
 			specialNumber = random.randint(1,10000)
@@ -176,7 +158,6 @@ def addListingImage(request, id):
 		listing = Listing.listingMgr.get(id = id)
 		form = S3ImageForm(request.POST, request.FILES)
 		if form.is_valid():
-			# image = form.cleaned_data['image']
 			for item in request.FILES.getlist('file'):
 				file = item
 				filename = file.name
@@ -295,6 +276,7 @@ class SendMail(View):
 		if request.method == "GET":
 			context = sendMailMessages
 			print id
+			print "HEEEEEEEe"
 			if id == "0": 
 				return render(request, 'GreatHomesRealty/contactAjax.html', context)
 			return render(request, 'GreatHomesRealty/sendMailAjax.html', context)
@@ -303,6 +285,7 @@ class SendMail(View):
 			return redirect(url)
 
 	def post(self, request, id):
+		print "HREEEe"
 		if request.method == "POST":
 			emails = []
 			global sendMailMessages
@@ -504,9 +487,9 @@ def investing(request):
 def owningHome(request):
 	return render(request, 'GreatHomesRealty/owningHome.html')
 
-# def latLon(request):
-# 	print request
-# 	print request.lat
-# 	# print request.lat
-# 	# print request['lon']
-# 	return render(request, 'GreatHomesRealty/owningHome.html')
+def latLon(request):
+	listing = Listing.listingMgr.get(id = request.GET.getlist('id')[0])
+	listing.lat = request.GET.getlist('lat')[0]
+	listing.lon = request.GET.getlist('lon')[0]
+	listing.save()
+	return render(request, 'GreatHomesRealty/owningHome.html')

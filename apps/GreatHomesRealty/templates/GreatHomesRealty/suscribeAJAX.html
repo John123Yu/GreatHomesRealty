@@ -13,9 +13,6 @@
 	<title></title>
 </head>
 <body>
-		<!-- <div class =  "suscribeAjax">
-				<h4>Interested In Learning About Real Estate And Real Estate Investing?</h4>
-			<form action="{%url 'GreatHomes:suscribe' %}" method='post' class = "suscribe form-horizontal"> -->
 		<div class = "suscribeAjaxCut">
 	        {% csrf_token %}
 	        {% if allInputLengths %}
@@ -27,6 +24,12 @@
 	        {% if success %}
 	        	<p class = "success">{{ success }}</p>
 	        {% endif %}
+	        {% if InvalidEmail %}
+	          	<p class = "error">Entered email is invalid</p>
+	        {% endif %}
+	        {% if EmailDuplicate %}
+	        	<p class = "error">{{ EmailDuplicate }}</p>
+	       	{% endif %}
 	        <div class = "form-group">
 	            <div class = "">
 	            <label for = "first_name" class = "control-label">First Name:</label>
@@ -39,46 +42,13 @@
 	              <input type='text' name='last_name' class = "form-control" id = "last_name" placeholder = "Last Name">
 	            </div>
 	          </div>
-	          {% if InvalidEmail %}
-	          	<p class = "error">Entered email is invalid</p>
-	          {% endif %}
-	           {% if EmailDuplicate %}
-	        	<p class = "error">{{ EmailDuplicate }}</p>
-	       		{% endif %}
 	        <div class = "form-group">
 	          <div class = "">
 	          <label for = "email" class = "control-label">Your Email:</label>
 	            <input type='text' name='email' class = "form-control last-control" id = "email" placeholder = "Email">
 	          </div>
 	        </div>
-	       </div><!-- 
-	          <div class="form-group">
-	            <label for="submit" class=""></label>
-	            <div class = "">
-	            <input id = "submit" type='submit' value='Suscribe!' class = "btn btn-warning">
-	           </div>
-	         </div>
-		    </form> 
-
-			<form action="{%url 'GreatHomes:unsuscribe' %}" method='post' class = "form-horizontal">
-	        {% csrf_token %}
-	         {% if NoEmail %}
-	        	<p class = "error">{{ NoEmail }}</p>
-	       	{% endif %}
-	        <div class = "form-group">
-	          <div class = "">
-	          <label for = "email" class = "control-label">Your Email:</label>
-	            <input type='text' name='email' class = "form-control last-control" id = "email" placeholder = "Email">
-	          </div>
-	        </div>
-	          <div class="form-group">
-	            <label for="submit" class=""></label>
-	            <div class = "">
-	            <input id = "submit" type='submit' value='Unsuscribe' class = "btn btn-warning">
-	           </div>
-	         </div>
-		    </form> 
-		</div> -->
+	       </div>
 
 </body>
 </html>

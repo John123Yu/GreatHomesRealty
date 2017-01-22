@@ -1,0 +1,250 @@
+header ul {
+	list-style-type: none;
+	display: inline-block;
+	width: 99%;
+}
+header ul li {
+	display: inline-block;
+	margin-left: 2%;
+	margin-top: 1.5%;
+	font-size: 1.5em;
+	color: white;
+}
+header li a {
+	font-size: .9em;
+	color: rgb(55, 150, 239);
+}
+header {
+	background-color: rgb(1, 49, 94);
+	color: white;
+	font-family: sans-serif;
+}
+body {
+	background-image: linear-gradient(rgba(250, 197, 100, .65), rgba(250, 197, 100, .65)), url("diagonal_striped_brick.png");
+	font-family: serif;
+}
+img {
+	border: 1px solid grey;
+}
+.header {
+	background-image: linear-gradient(rgba(55, 55, 55, 1), rgba(55, 55, 55, 1));
+	color: white;
+	padding-bottom: 3%;
+	font-family: serif;
+}
+.header h1 {
+	display: inline-block;
+	position: relative;
+	top: .15em;
+	left: 5%;
+	font-size: 3em;
+	font-family: serif;
+}
+.header ul {
+	margin-left: 8%;
+	list-style: none;
+}
+.header ul li {
+	display: inline-block;
+	font-size: 1.2em;
+	padding-right: 1%;
+	padding-left: 1%;
+	border-right: 2px solid white;
+	position: relative;
+	right: 2em;
+	top: 4em;
+}
+.header ul li:last-child {
+	border-right: none;
+}
+.header a {
+	color: white;
+}
+a:hover {
+	color: rgb(73, 162, 252);
+	text-decoration: none;
+}
+.ion-ios-home {
+	font-size: 1.5em;
+	position: relative;
+}
+.body {
+	padding-top: 2%;
+	padding-left: 5%;
+	text-align: center;
+}
+.support {
+	background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
+	height: 15em;
+	margin-top: 6%;
+	text-align: center;
+	color: white;
+	font-family: 'Verdana' sans-serif;
+}
+.support i {
+	font-size: 2em;
+	position: relative;
+	top: .2em;
+	left: -.1em;
+}
+.support h1 {
+	position: relative;
+	top: .6em;
+	font-size: 2.8em;
+}
+.support a {
+	color: white;
+}
+.support a:hover {
+	color: orange;
+	text-decoration: none;
+}
+.addressdiv {
+	margin-top: 4%;
+	background: linear-gradient(rgba(250, 197, 100, 1), rgba(250, 197, 100, 1));
+	width: 300px;
+	border-radius: 5%;
+	margin-left: 0px;
+	/*box-shadow: 6.5px 6.5px rgb(86, 86, 86);*/
+}
+.addressdiv img {
+	border-top-left-radius: 5%;
+	border-top-right-radius: 5%;
+	border: 0px;
+}
+.address {
+	font-size: 1.2em;
+	color: white;
+	margin-left: 1em;
+	margin-bottom: 2%;
+	font-weight: 100;
+	padding-top: 3%;
+}
+.address a {
+	color: rgb(0, 1, 86);
+	font-weight: 100;
+	font-family: serif;
+	margin-bottom: 0px;
+}
+.imageAddress a {
+	color: white;
+
+}
+.imageprice {
+	font-size: 1.5em;
+}
+.imagelist {
+	font-weight: 100;
+}
+.imagelist:hover {
+	color: rgb(87, 172, 229);
+	text-decoration: none;
+}
+.picture {
+	padding: 0px;
+	text-align: center;
+	margin-top: 3%;
+	text-align: center;
+}
+.support2 {
+	height: 22em;
+	text-align: center;
+}
+.support2 p {
+	margin-top: 2.5em;
+	font-size: 1.4em;
+}
+.footer {
+	background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
+	height: 15em;
+	color: white;
+	font-family: serif;
+	font-weight: 100;
+	margin-top: 5%;
+	padding-top: 5%;
+}
+.footer address {
+	font-size: 1.1em;
+	margin-left: 15%;
+}
+.footerlist ul {
+	margin-left: 15%;
+}
+.footerlist li { 
+	display: inline-block;
+	font-size: 1.1em;
+	padding-right: 3%;
+	margin-top: 3%;
+}
+.footerlist li a {
+	color: white
+}
+.footerlist li a i {
+	font-size: 1.5em;
+}
+@media only screen and (max-width: 480px) {
+	.header {
+		height: 21em;
+	}
+	.support {
+		height: 30em;
+	}
+	.support2 {
+		height: 40em;
+	}
+	.footer {
+		height: 20em;
+	}
+}
+/* Medium sized screens */
+@media only screen and (min-width: 481px) {
+	.header {
+		height: 17em;
+	}
+	.support {
+		height: 30em;
+	}
+	.support2 {
+		height: 35em;
+	}
+	.footer {
+		height: 20em;
+	}
+}
+/* Large sized screens */
+@media only screen and (min-width: 1024px) {
+	.header {
+		height: 10em;
+	}
+	.support {
+		height: 15em;
+	}
+	.support2 {
+		height: 22em;
+	}
+	.footer {
+		height: 15em;
+	}
+}
+.dropdown-menu {
+  background-color: black;
+  border: 1px solid white;
+  text-align: center;
+}
+.dropdown-menu li {
+	margin: 0px !important;
+	top: 0px !important;
+	left: 0px !important;
+	padding: 0px !important;
+	background-color: black;
+	border-right: 1px solid black !important;
+}
+.dropdown-menu li a:hover {
+	background-color: black;
+	color: orange;
+}
+.dropdown-menu li a {
+	background-color: black;
+	color: white;
+}
+

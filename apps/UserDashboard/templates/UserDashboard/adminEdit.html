@@ -1,9 +1,12 @@
 <html>
     <head>
         <title>Admin Edit </title>
+        {% load staticfiles %}
         <meta name="viewport" content="width=device-width, initial-scale=0.5">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     </head>
     <style>
     {% load staticfiles %}
@@ -20,9 +23,6 @@
     h1 {
       margin-left: 50px;
     }
-    body {
-    background-image: linear-gradient(rgba(250, 197, 100, .65), rgba(250, 197, 100, .65)), url('{% static "GreatHomesRealty/diagonal_striped_brick.png" %}');
-    }
     ul {
       list-style-type: none;
       display: inline-block;
@@ -36,26 +36,6 @@
     }
     a {
       color: rgb(55, 150, 239);
-    }
-    header ul {
-      list-style-type: none;
-      display: inline-block;
-      width: 99%;
-    }
-    header ul li {
-      display: inline-block;
-      margin-left: 2%;
-      margin-top: 1.5%;
-      font-size: 1.5em;
-      color: white;
-    }
-    header li a {
-      font-size: .9em;
-      color: rgb(55, 150, 239);
-    }
-    header {
-      background-color: rgb(1, 49, 94);
-      color: white;
     }
     .Manage {
       display: inline-block;
@@ -78,6 +58,8 @@
     </ul>
   </header>
   {% endif %}
+
+  <div class = "container">
       <form action="{%url 'login:updateInfo' id=User.id %}" method='post' class = "form-horizontal">
         {% csrf_token %}
           <h1> Edit {{User.firstName}}'s Information</h1>
@@ -88,14 +70,14 @@
             <p class = 'error'> {{ error_messages.IsAlpha }} </p>
           {% endif %}
           <div class = "form-group">
-            <label for ="first_name" class="col-sm-2 control-label">First Name:</label>
-            <div class = "col-sm-6">
+            <label for ="first_name" class="col-sm-3 control-label">First Name:</label>
+            <div class = "col-sm-8">
               <input type='text' class = "form-control" name='first_name' id = "first_name" value = "{{User.firstName}}" "First Name"> 
             </div>
           </div>
           <div class = "form-group">
-            <label for = "last_name" class = "col-sm-2 control-label">Last Name:</label>
-            <div class = "col-sm-6">
+            <label for = "last_name" class = "col-sm-3 control-label">Last Name:</label>
+            <div class = "col-sm-8">
               <input type='text' name='last_name' class = "form-control" id = "last_name" value = "{{User.lastName}}">
             </div>
           </div>
@@ -109,8 +91,8 @@
             <p class = 'error'> {{ error_messages.EmailDuplicate }} </p>
           {% endif %}
         <div class = "form-group">
-          <label for = "email" class = "col-sm-2 control-label">Email:</label>
-          <div class = "col-sm-6">
+          <label for = "email" class = "col-sm-3 control-label">Email:</label>
+          <div class = "col-sm-8">
             <input type='text' name='email' class = "form-control" id = "email" value = "{{User.email}}">
           </div>
         </div>
@@ -118,8 +100,8 @@
             <p class = 'error'> {{ error_messages.InvalidPhone }} </p>
         {% endif %}
         <div class = "form-group">
-          <label for = "phone" class = "col-sm-2 control-label">Phone Number: (XXX)-XXX-XXXX </label>
-          <div class = "col-sm-6">
+          <label for = "phone" class = "col-sm-3 control-label">Phone Number: (XXX)-XXX-XXXX </label>
+          <div class = "col-sm-8">
             <input type='text' name='phone' class = "form-control" id = "phone" value = "{{User.phone}}">
             <input type='submit' value='Save' class = "btn btn-warning">
           </div>
@@ -141,18 +123,19 @@
             <p class = 'error'> {{ error_messages.PasswordNonmatch }} </p>
           {% endif %}
         <div class = "form-group">
-          <label for = "password" class = "col-sm-2 control-label">Password:</label>
-          <div class = "col-sm-6">
+          <label for = "password" class = "col-sm-3 control-label">Password:</label>
+          <div class = "col-sm-8">
             <input type='password' name='password' class = "form-control" id = "password" placeholder = "Password">
           </div>
         </div>
         <div class = "form-group">
-          <label for = "confirmpassword" class = "col-sm-2 control-label">Confirm Password:</label>
-          <div class = "col-sm-6">
+          <label for = "confirmpassword" class = "col-sm-3 control-label">Confirm Password:</label>
+          <div class = "col-sm-8">
             <input type='password' name='confirm_password' class = "form-control" id = "confirmpassword"placeholder = "Password">
             <input type='submit' value='Update Password' class = "btn btn-warning">
           </div>
         </div>
         </form>
+    </div>
     </body>
 </html>

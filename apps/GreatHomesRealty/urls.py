@@ -2,12 +2,12 @@ from django.conf.urls import url, include
 from django.conf.urls.static import static 
 from django.conf import settings
 from . import views
-from views import Suscribe, Unsuscribe, SendMail, ClientLogin
+from views import Suscribe, Unsuscribe, SendMail, ClientLogin, AddListing
 
 urlpatterns = [
 	url(r'^$', views.index, name = "index"),
 	url(r'^addListingDisplay$', views.addListingDisplay, name = "addListingDisplay"),
-	url(r'^addListing$', views.addListing, name = "addListing"),
+	url(r'^addListing$', AddListing.as_view(), name = "addListing"),
 	url(r'^addListingImage/(?P<id>\d+)$', views.addListingImage, name = "addListingImage"),
 	url(r'^addMainImage/(?P<id>\d+)$', views.addMainImage, name = "addMainImage"),
 	url(r'^editListingDisplay/(?P<id>\d+)$', views.editListingDisplay, name = "editListingDisplay"),
@@ -33,8 +33,8 @@ urlpatterns = [
 	url(r'^selling$', views.selling, name = "selling"),
 	url(r'^mortgage$', views.mortgage, name = "mortgage"),
 	url(r'^investing$', views.investing, name = "investing"),
-	url(r'^owningHome$', views.owningHome, name = "owningHome")
-	# url(r'^latLon$', views.latLon, name = "latLon")
+	url(r'^owningHome$', views.owningHome, name = "owningHome"),
+	url(r'^latLon$', views.latLon, name = "latLon")
 
 ]
 # + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

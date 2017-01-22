@@ -7,77 +7,17 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<link rel="stylesheet" type="text/css" href="{% static 'GreatHomesRealty/ionicons.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 </head>
-<style>
-	.header {
-		background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
-		color: white;
-		padding-bottom: 3%;
-		font-family: serif;
-	}
-	.header h1 {
-		display: inline-block;
-		position: relative;
-		top: .15em;
-		left: 5%;
-		font-size: 3em;
-		font-family: serif;
-	}
-	.header ul {
-		margin-left: 8%;
-		list-style: none;
-	}
-	.header ul li {
-		display: inline-block;
-		font-size: 1.2em;
-		padding-right: 2%;
-		padding-left: 2%;
-		border-right: 2px solid white;
-		position: relative;
-		right: 2em;
-		top: 4em;
-	}
-	.header ul li:last-child {
-		border-right: none;
-	}
-	.header a {
-		color: white;
-	}
-	a:hover {
-		color: rgb(255, 127, 0);
-		text-decoration: none;
-	}
-	.ion-ios-home {
-		font-size: 1.5em;
-		position: relative;
-	}
-	header ul {
-		list-style-type: none;
-		display: inline-block;
-		width: 99%;
-	}
-	header ul li {
-		display: inline-block;
-		margin-left: 2%;
-		margin-top: 1.5%;
-		font-size: 1.5em;
-		color: white;
-	}
-	header li a {
-		font-size: .9em;
-		color: rgb(55, 150, 239);
-	}
-	header {
-		background-color: rgb(1, 49, 94);
-		color: white;
-	}
-	body {
-		background-image: linear-gradient(rgba(250, 197, 100, .65), rgba(250, 197, 100, .65)), url('{% static "GreatHomesRealty/diagonal_striped_brick.png" %}');
-		font-family: serif;
-	}
+<style>	
 	.error {
 		color: red;
-		margin-left: 17%;
+		margin-left: 13%;
+	}
+	.red {
+		color: red;
+		position: relative;
+		left: -2%;
 	}
 	.smallH1 {
 		font-size: .4em;
@@ -85,78 +25,6 @@
 	}
 	.body {
 		margin: 0 1%;
-	}
-	.footer {
-		background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
-		height: 15em;
-		color: white;
-		font-family: sans-serif;
-		font-weight: 100;
-		margin-top: 5%;
-		padding-top: 5%;
-	}
-	.footer address {
-		font-size: 1.1em;
-		margin-left: 15%;
-	}
-	.footerlist ul {
-		margin-left: 15%;
-	}
-	.footerlist li { 
-		display: inline-block;
-		font-size: 1.1em;
-		padding-right: 3%;
-		margin-top: 3%;
-	}
-	.footerlist li a {
-		color: white
-	}
-	.footerlist li a i {
-		font-size: 1.5em;
-	}
-	@media only screen and (max-width: 480px) {
-		.header {
-			height: 21em;
-		}
-		.support {
-			height: 30em;
-		}
-		.support2 {
-			height: 40em;
-		}
-		.footer {
-			height: 20em;
-		}
-	}
-/* Medium sized screens */
-	@media only screen and (min-width: 481px) {
-		.header {
-			height: 17em;
-		}
-		.support {
-			height: 30em;
-		}
-		.support2 {
-			height: 35em;
-		}
-		.footer {
-			height: 20em;
-		}
-	}
-	/* Large sized screens */
-	@media only screen and (min-width: 1024px) {
-		.header {
-			height: 10em;
-		}
-		.support {
-			height: 15em;
-		}
-		.support2 {
-			height: 22em;
-		}
-		.footer {
-			height: 15em;
-		}
 	}
 </style>
 <body>
@@ -196,19 +64,21 @@
 
 	<div class = "container-fluid body">
 	<div class = "row">
-	<div class = "col-sm-6">
 	<form action = "{%url 'GreatHomes:addListing' %}" method='post' class = "addListingForm form-horizontal">
         {% csrf_token %}
-          <h1>Add Listing <span class = "smallH1">All Input Fields are required except Apt/Suite#</span></h1>
+        <div class = "addListingAjax">
+	<div class = "col-sm-6">
+          <h1>Add Listing</h1>
           {% if allInputLengths %}
             <p class = 'error'> {{ allInputLengths }} </p>
           {% endif %}
-          <div class = "form-group">
+<!--           <p class = 'error'> Edit the status field again</p>
+ -->          <div class = "form-group">
             <label for = "status" class = "col-sm-3 control-label">Status: </label>
              <div class = "col-sm-9">
 	         <select name = "status" class="form-control" id = "status">
-				<option>Undercontract</option>
 				<option>Available</option>
+				<option>Undercontract</option>
 				<option>Sold</option>
 				<option>Open House</option>
 				<option>For Rent</option>
@@ -261,35 +131,13 @@
          <div class = "form-group">
             <label for = "bedrooms" class = "col-sm-3 control-label">Bedrooms: </label>
              <div class = "col-sm-9">
-	         <select name = "bedrooms" class="form-control" id = "bedrooms">
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-				<option>4</option>
-				<option>5</option>
-				<option>6</option>
-				<option>7</option>
-				<option>8</option>
-			</select>
+	         <input type='number' name='bedrooms' class = "form-control" id = "bedrooms" placeholder = "#">
 			</div>
          </div>
           <div class = "form-group">
             <label for = "bathrooms" class = "col-sm-3 control-label">Bathrooms: </label>
              <div class = "col-sm-9">
-	         <select class="form-control" id = "bathrooms" name = "bathrooms">
-				<option>1</option>
-				<option>1.5</option>
-				<option>2</option>
-				<option>2.5</option>
-				<option>3</option>
-				<option>3.5</option>
-				<option>4</option>
-				<option>4.5</option>
-				<option>5</option>
-				<option>5.5</option>
-				<option>6</option>
-				<option>6.5</option>
-			</select>
+	         <input type='number' name='bathrooms' class = "form-control" id = "bathrooms" step="0.5" placeholder = "#">
 			</div>
          </div>
         </div>
@@ -315,7 +163,7 @@
           </div>
         </div>
         <div class = "form-group">
-          <label for = "neighborhood" class = "col-sm-3 control-label">neighborhood:</label>
+          <label for = "neighborhood" class = "col-sm-3 control-label">Neighborhood:</label>
           <div class = "col-sm-9">
             <input type='text' name='neighborhood' class = "form-control" id = "neighborhood"placeholder = "neighborhood">
           </div>
@@ -323,21 +171,18 @@
 		<div class = "form-group">
           <label for = "neighborhood" class = "col-sm-3 control-label">Year built:</label>
           <div class = "col-sm-9">
-            <input type='number' name='yearBuilt' class = "form-control" id = "yearBuilt"placeholder = "yearBuilt">
+            <input type='number' name='yearBuilt' class = "form-control" id = "yearBuilt"placeholder = "Year Built">
           </div>
         </div>
          <div class="form-group">
-            <label for="description" class = "col-sm-3 control-label">Edit Description:</label>
+            <label for="description" class = "col-sm-3 control-label">Description:</label>
             <div class = "col-sm-9">
-            <textarea class="form-control" rows="6" name="description" id="description"></textarea>
+            <textarea class="form-control" rows="6" name="description" id="description" placeholder= "Description" ></textarea>
           	</div>
          </div>
          {% if allInputLengths %}
             <p class = 'error'> {{ allInputLengths }} </p>
           {% endif %}
-		{% if success %}
-	        <p class = 'success'> {{ success }} </p>
-	      {% endif %}
  		<div class = "form-group">
  			<div class = "col-sm-8 col-sm-offset-3">
             <input type='submit' value='Add Listing' class = "btn btn-primary">
@@ -347,6 +192,7 @@
         </form>
 	    </div>
        </div>
+   </div>
    </div>
 
 
@@ -376,17 +222,21 @@
 	</div>
 </body>
  <script type="text/javascript">
-// 	$('.addListingForm').on('submit', function(e){
-// 	    e.preventDefault()
-// 	    $.ajax({
-// 	      url: '/addListing',
-// 	      method: 'post',
-// 	      data: $(this).serialize(),
-// 	      success: function(serverResponse){
-// 	        $('.addListingAjax').html(serverResponse)
-// 	      }
-// 	    })
-// 	    $('.sendMail').trigger('reset')
-// 	  });
-// </script>
+	$('.addListingForm').on('submit', function(e){
+		console.log('here')
+	    e.preventDefault()
+	    $.ajax({
+	      url: '/addListing',
+	      method: 'post',
+	      data: $(this).serialize(),
+	      success: function(serverResponse){
+	      	if(serverResponse.data) {
+	      		window.location.replace("http://localhost:8000/showListing/" + serverResponse.data)
+	      	} else {
+		        $('.addListingAjax').html(serverResponse)	
+	      	}
+	      }
+	    })
+	  });
+ </script>
 </html>

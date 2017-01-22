@@ -13,17 +13,17 @@ class ListingManager(models.Manager):
     def addListing(self, streetAddress, suite, city, state, zipcode, price, bedrooms, bathrooms, squarefootage, houseType, county, neighborhood, MLS, description, edit, createdBy, yearBuilt,status):
 		errors = {}
 
-		if any(x < 1 for x in (len(streetAddress), len(city), len(state), len(zipcode), len(price), len(bedrooms), len(bathrooms), len(squarefootage), len(houseType), len(county), len(neighborhood), len(MLS), len(description), len(status), len(yearBuilt) )):
-			errors['allInputLengths'] = "All fields are required except Apt/Suite #"
+		if any(x < 1 for x in (len(streetAddress), len(city), len(state), len(zipcode), len(price), len(bedrooms), len(bathrooms), len(squarefootage), len(houseType), len(county), len(neighborhood), len(MLS), len(status), len(yearBuilt) )):
+			errors['allInputLengths'] = "All fields are required except Apt/Suite and description"
 		if len(errors) is not 0:
 			return (False, errors)
 		elif len(errors) == 0 and edit == "no":
 			listing = Listing.listingMgr.create(addressStreet = streetAddress, addressCity = city, addressState = state, addressAptNumber = suite, addressZipcode = zipcode, price = price, bedrooms= bedrooms, bathrooms= bathrooms, squarefootage= squarefootage, houseType= houseType, county= county, neighborhood= neighborhood, MLS= MLS, description = description, createdById = createdBy, yearBuilt= yearBuilt, status = status )
 			User_Listings.objects.create(user_id = createdBy, listing = listing)
-			return (True, listing)
+			return (True, listing.id)
 		elif len(errors) == 0 and edit != "no":
 			listing = Listing.listingMgr.filter(id = edit).update(addressStreet = streetAddress, addressCity = city, addressState = state, addressAptNumber = suite, addressZipcode = zipcode, price = price, bedrooms= bedrooms, bathrooms= bathrooms, squarefootage= squarefootage, houseType= houseType, county= county, neighborhood= neighborhood, MLS= MLS, description = description, yearBuilt = yearBuilt, status = status )
-			return (True, listing)
+			return (True, listing.id)
 
 class ClientManager(models.Manager):
 	def addClient(self, firstName, lastName, email):
@@ -36,7 +36,7 @@ class ClientManager(models.Manager):
 		if client != 0:
 			errors['EmailDuplicate'] = "Email already suscribed!"
 		if any(x < 1 for x in (len(firstName), len(lastName), len(email) )):
-			errors['allInputLengths'] = "Input fields must not be empty"
+			errors['allInputLengths'] = "All Fields are required"
 		if not EMAIL_REGEX.match(email):
 		    errors['InvalidEmail'] = ("Invalid Email")
 		if firstName.isalpha() == False or lastName.isalpha() == False:
@@ -51,7 +51,7 @@ class SendMailManager(models.Manager):
 	def sendMail(self, firstName, lastName, phone, email, question):
 		errors = {}
 		if any(x < 1 for x in (len(firstName), len(lastName), len(phone), len(email), len(question) )):
-			errors['allInputLengths'] = "Input fields must not be empty"
+			errors['allInputLengths'] = "All fields are required"
 		if not EMAIL_REGEX.match(email):
 		    errors['InvalidEmail'] = ("Please enter a valid email address")
 		if not PHONE_REGEX.match(phone):
@@ -71,13 +71,13 @@ class Listing(models.Model):
 	bedrooms = models.IntegerField()
 	lat = models.DecimalField(max_digits = 20, decimal_places = 10, null = True)
 	lon = models.DecimalField(max_digits = 20, decimal_places = 10, null = True)
-	bathrooms = models.DecimalField(max_digits = 5, decimal_places = 1)
+	bathrooms = models.DecimalField(max_digits = 15, decimal_places = 1)
 	squarefootage = models.IntegerField()
 	houseType = models.CharField(max_length = 100)
 	county = models.CharField(max_length = 100)
 	neighborhood = models.CharField(max_length = 100)
 	MLS = models.IntegerField()
-	description = models.TextField()
+	description = models.TextField(null = True)
 	# mainPicture = models.ImageField(null = True, upload_to = 'uploads/')
 	url = models.CharField(max_length = 128,  null = True)
 	status = models.CharField(max_length = 100, null = True)
