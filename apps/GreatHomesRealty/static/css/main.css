@@ -29,6 +29,7 @@ img {
 .header {
 	background-image: linear-gradient(rgba(43, 43, 43, 1), rgba(43, 43, 43, 1));
 	color: white;
+	padding-top: .9%;
 	padding-bottom: 3%;
 	font-family: serif;
 }
@@ -214,7 +215,7 @@ a:hover {
 /* Large sized screens */
 @media only screen and (min-width: 1024px) {
 	.header {
-		height: 10em;
+		height: 11em;
 	}
 	.support {
 		height: 15em;

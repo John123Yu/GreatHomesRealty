@@ -18,7 +18,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^login', include('apps.LoginAndReg.urls', namespace = "login")),
+    url(r'^login/', include('apps.LoginAndReg.urls', namespace = "login")),
     url(r'^UserDashboard/', include('apps.UserDashboard.urls', namespace = "UserDashboard")),
     url(r'^', include('apps.GreatHomesRealty.urls', namespace = "GreatHomes"))
     # url(r'^s3direct/', include('s3direct.urls'))

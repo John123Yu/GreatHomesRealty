@@ -17,8 +17,9 @@
 		margin-bottom: 0px;
 		display: inline-block;
 	}
-	h3 {
-		font-weight: 600;
+	h1 a{
+		position: relative;
+		top: .3em;	
 	}
 	img {
 		width: 100%;
@@ -73,6 +74,7 @@
 	h3 {
 		display: inline-block;
 		margin-bottom: 2%;
+		font-weight: 600;
 	}
 	.edits {
 		background-color: grey;
@@ -217,17 +219,38 @@
 		</ul>
 	</header>
 	{% endif %}
-	<div class = "header">
+		<div class = "header">
 		<div class = "container-fluid">
 			<div class = "col-sm-5">
 				<h1><a href="{%url 'GreatHomes:index' %}"><i class = "ion-ios-home"></i> Great Homes Realty</a></h1>
 			</div>
 			<div class = "col-sm-7 navlinks">
 				<ul>
-					<li><a href="{%url 'GreatHomes:showAllListing' %}">More Listings</a></li>
-					<li><a href="{%url 'GreatHomes:buying' %}">Buying</a></li>
-					<li><a href="{%url 'GreatHomes:selling' %}">Selling</a></li>
-					<li>About Us</li>
+					<li>
+						  <a class="dropdown-toggle" data-toggle="dropdown">All Listings
+						  <span class="caret"></span></a>
+						  <ul class="dropdown-menu">
+						    <li><a href="{%url 'GreatHomes:showAllListing' %}">For Sale</a></li>
+						    <li><a href="{%url 'GreatHomes:showAllRentals' %}">For Rent</a></li>
+						  </ul>
+					</li>
+					<li>
+						  <a class="dropdown-toggle" data-toggle="dropdown">Buying
+						  <span class="caret"></span></a>
+						  <ul class="dropdown-menu">
+						    <li><a href="{%url 'GreatHomes:buying' %}">Buying a Home</a></li>
+						    <li><a href="{%url 'GreatHomes:mortgage' %}">Mortgages</a></li>
+						    <li><a href="{%url 'GreatHomes:owningHome' %}">Owning A Home</a></li>
+						  </ul>
+					</li>
+					<li>
+						<a class="dropdown-toggle" data-toggle="dropdown">Selling
+						  <span class="caret"></span></a>
+						  <ul class="dropdown-menu">
+						    <li><a href="{%url 'GreatHomes:selling' %}">Selling</a></li>
+						    <li><a href="{%url 'GreatHomes:investing' %}">Investing</a></li>
+						  </ul>
+					<li><a href="{%url 'GreatHomes:aboutUs' %}">About Us</a></li>
 					<li><a href="{%url 'GreatHomes:suscribeDisplay' %}">Newsfeed</a></li>
 					<li><a href="{%url 'login:index' %}">Login</a></li>
 				</ul>

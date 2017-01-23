@@ -4,11 +4,11 @@
           {% if allInputLengths %}
           <p class = 'error'>{{ allInputLengths }} </p>
           {% endif %}
-          <p class = "red">Listing status needs to be selected again</p>
           <div class = "form-group">
             <label for = "status" class = "col-sm-3 control-label">Status: </label>
              <div class = "col-sm-9">
-           <select name = "status" class="form-control" id = "status">
+           <select name = "status" class="form-control" id = "status" value = '{{Status}}'>
+        <option>{{Status}}</option>
         <option>Available</option>
         <option>Undercontract</option>
         <option>Sold</option>
@@ -109,12 +109,9 @@
          <div class="form-group">
             <label for="description" class = "col-sm-3 control-label">Description:</label>
             <div class = "col-sm-9">
-            <textarea class="form-control" rows="6" name="description" id="description" placeholder = "Description" value = "{{D}}"></textarea>
+            <textarea rows = "13" class="form-control" rows="6" name="description" id="description" placeholder = "Description" value = "{{D}}">{{D}}</textarea>
             </div>
          </div>
-         {% if allInputLengths %}
-            <p class = 'error'> {{ allInputLengths }} </p>
-          {% endif %}
     <div class = "form-group">
       <div class = "col-sm-8 col-sm-offset-3">
             <input type='submit' value='Add Listing' class = "btn btn-primary">
@@ -126,24 +123,8 @@
       </div>
        </div>
    </div>
-
-<!--  // <script type="text/javascript">
- //  $('.addListingForm').on('submit', function(e){
- //     console.log('here')
- //      e.preventDefault()
- //      $.ajax({
- //        url: '/addListing',
- //        method: 'post',
- //        data: $(this).serialize(),
- //        success: function(serverResponse){
- //          console.log(serverResponse)
- //          if(serverResponse.data) {
- //            window.location.replace("http://localhost:8000/showListing/" + serverResponse.data)
- //          } else {
- //            $('.addListingAjax').html(serverResponse) 
- //          }
- //        }
- //      })
- //      $('.sendMail').trigger('reset')
- //    });
- // </script> -->
+   {% if allInputLengths %}
+      <p class = 'error'>{{ allInputLengths }} </p>
+  {% endif %}
+<script type="text/javascript">
+</script>

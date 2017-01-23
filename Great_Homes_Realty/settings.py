@@ -119,13 +119,8 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.10/howto/static-files/
-
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR , 'static')
-# MEDIA_ROOT = os.path.join(BASE_DIR , 'media')
-# MEDIA_URL = '/media/'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
@@ -135,12 +130,4 @@ EMAIL_PORT = 587
 
 AWS_SECRET_ACCESS_KEY = 'KeAhAwkm3kVLT446I8N2tcvcnCVgHXpit8zt5UvT'
 AWS_ACCESS_KEY_ID = 'AKIAJNYQVRBWC4DYMD3A'
-# AWS_STORAGE_BUCKET_NAME = 'greathomesrealty'
 
-# S3DIRECT_REGION = 'us-east-1'
-
-# S3DIRECT_DESTINATIONS = {
-#      'greathomes': {
-#         'key': 'uploads/imgs'
-#     }
-# }

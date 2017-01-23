@@ -9,7 +9,7 @@ PASSWORD_REGEX = re.compile(r'^(?=.*[A-Z])(?=.*\d)')
 PHONE_REGEX = re.compile(r'^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$')
 
 class RegisterManager(models.Manager):
-    def userRegister(self, firstName, lastName, email, password, confirmPassword, phone, session, changePassword):
+    def userRegister(self, firstName, lastName, email, password, confirmPassword, phone, session, changePassword, passcode):
 		errors = {}
 
 		try:
@@ -36,6 +36,8 @@ class RegisterManager(models.Manager):
 			errors['InvalidPhone'] = ("Please enter a valid phone number")
 		if password != confirmPassword:
 			errors['PasswordNonmatch'] = ("Confirm password must match password")
+		if passcode != "Ellicott042":
+			errors['passcodeError'] = "Incorrect Passcode"
 		if len(errors) is not 0:
 			return (False, errors)
 		elif len(errors) == 0 and session == 0:

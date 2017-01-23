@@ -22,7 +22,7 @@ import random
 from django.db.models import Q
 
 def index(request):
-	allListings = Listing.listingMgr.filter(price__gte = 300000).filter(price__lte = 700000).order_by('-created_at')[0:3]
+	allListings = Listing.listingMgr.filter(price__gte = 300000).filter(price__lte = 700000).order_by('-created_at')[0:6]
 	try:
 		user = User.registerMgr.get(id = request.session['login'])
 	except:
@@ -34,7 +34,7 @@ def index(request):
 	return render(request, 'GreatHomesRealty/index.html', context)
 
 def addListingDisplay(request):
-	if request.session['login'] > 0:
+	if request.session['login']:
 		addListing = addListingForm()
 		context = {
 			'addListing': addListing,
@@ -59,10 +59,10 @@ class AddListing(View):
 			if result[0]:
 				global listing
 				error_messages['listing'] = result[1]
-				error_messages['success'] = "Listing has been successfully added"
 				return JsonResponse({"data": result[1]})
 			else:
 				error_messages = result[1]
+				error_messages['Status'] = request.POST['status']
 				error_messages['SA'] = request.POST['streetAddress']
 				error_messages['C'] = request.POST['city']
 				error_messages['Apt'] = request.POST['suite']
@@ -83,7 +83,7 @@ class AddListing(View):
 			return redirect(reverse('GreatHomes:addListingDisplay'))
 
 def editListingDisplay(request, id):
-	if request.session['login'] > 0:
+	if request.session['login']:
 		listing = Listing.listingMgr.get(id = id)
 		context = {
 			'listing': listing
@@ -93,27 +93,51 @@ def editListingDisplay(request, id):
 	else:
 		return redirect(reverse('GreatHomes:index'))
 
-def editListing(request, id):
-	marker = False 
-	admin = User.registerMgr.get(id = request.session['login'])
-	user_listings = User_Listings.objects.filter(listing_id = id)
-	currentUser = User.registerMgr.get(id = request.session['login'])
-	for item in user_listings:
-		if currentUser == item.user:
-			marker = True
-	if request.method == "POST" and (admin.user_level == "Admin" or marker == True):
-		listingone = Listing.listingMgr.get(id = id)
-		result = Listing.listingMgr.addListing(request.POST['streetAddress'], request.POST['suite'], request.POST['city'], request.POST['state'], request.POST['zipcode'], request.POST['price'], request.POST['bedrooms'], request.POST['bathrooms'], request.POST['squarefootage'], request.POST['housetype'], request.POST['county'], request.POST['neighborhood'], request.POST['mls'], request.POST['description'], listingone.id, listingone.createdById, request.POST['yearBuilt'], request.POST['status'])
-		if result[0]:
-			url = "/showListing/" + str(listingone.id)
-			return redirect(url)
+class EditListing(View):
+	def get(self, request, id):
+		if request.method == "GET":
+			context = error_messages
+			return render(request, 'GreatHomesRealty/editListingAjax.html', context)
+		else: 
+			return redirect(reverse('GreatHomes:editListingDisplay'))
+
+	def post(self, request, id):
+		marker = False 
+		user_listings = User_Listings.objects.filter(listing_id = id)
+		currentUser = User.registerMgr.get(id = request.session['login'])
+		for item in user_listings:
+			if currentUser == item.user:
+				marker = True
+		if request.method == "POST" and (currentUser.user_level == "Admin" or marker == True):
+			global error_messages
+			error_messages = {}
+			listingone = Listing.listingMgr.get(id = id)
+			result = Listing.listingMgr.addListing(request.POST['streetAddress'], request.POST['suite'], request.POST['city'], request.POST['state'], request.POST['zipcode'], request.POST['price'], request.POST['bedrooms'], request.POST['bathrooms'], request.POST['squarefootage'], request.POST['housetype'], request.POST['county'], request.POST['neighborhood'], request.POST['mls'], request.POST['description'], listingone.id, listingone.createdById, request.POST['yearBuilt'], request.POST['status'])
+			if result[0]:
+				print result[1]
+				return JsonResponse({"data": result[1]})
+			else:
+				error_messages = result[1]
+				error_messages['Status'] = request.POST['status']
+				error_messages['SA'] = request.POST['streetAddress']
+				error_messages['C'] = request.POST['city']
+				error_messages['Apt'] = request.POST['suite']
+				error_messages['Bathrooms'] = request.POST['bathrooms']
+				error_messages['S'] = request.POST['state']
+				error_messages['ZC'] = request.POST['zipcode']
+				error_messages['MLS'] = request.POST['mls']
+				error_messages['P'] = request.POST['price']
+				error_messages['Bed'] = request.POST['bedrooms']
+				error_messages['SF'] = request.POST['squarefootage']
+				error_messages['HT'] = request.POST['housetype']
+				error_messages['County'] = request.POST['county']
+				error_messages['N'] = request.POST['neighborhood']
+				error_messages['Y'] = request.POST['yearBuilt']
+				error_messages['D'] = request.POST['description']
+				url = "/editListing/" + str(id)
+				return redirect(url)
 		else:
-			context = result[1]
-			context['listing'] = listingone
-			print context
-			return render(request, 'GreatHomesRealty/editListing.html',  context)
-	else:
-		return redirect(reverse('GreatHomes:index'))
+			return redirect(reverse('GreatHomes:index'))
 
 def addMainImage(request, id):
 	def store_in_s3(filename, content): 
@@ -240,7 +264,9 @@ def showAgentListing(request, id):
 
 def deleteListing(request, id):
 	if request.method == "POST":
-		listing = Listing.listingMgr.get(id = id).delete()
+		listing = Listing.listingMgr.get(id = id)
+		userListing = User_Listings.objects.filter(listing = listing).delete()
+		listing.delete()
 		return redirect(reverse('GreatHomes:showAllListing'))
 	else:
 		return redirect(reverse('GreatHomes:showAllListing'))
@@ -486,6 +512,13 @@ def investing(request):
 
 def owningHome(request):
 	return render(request, 'GreatHomesRealty/owningHome.html')
+
+def aboutUs(request):
+	Users = User.registerMgr.all()
+	context = {
+		'Users': Users
+	}
+	return render(request, 'GreatHomesRealty/about.html', context)
 
 def latLon(request):
 	listing = Listing.listingMgr.get(id = request.GET.getlist('id')[0])

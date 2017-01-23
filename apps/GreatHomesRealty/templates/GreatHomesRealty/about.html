@@ -1,0 +1,119 @@
+<html>
+<head>
+	<title>About Us</title>
+	{% load staticfiles %}
+	<meta name="viewport" content="width=device-width, initial-scale=0.5">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'GreatHomesRealty/ionicons.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/infoPages.css' %}">
+</head>
+<script type="text/javascript">
+</script>
+<style type="text/css">
+  a {
+  	color: black;
+  }
+  .agentInfo a:hover {
+  	color: blue;
+  }
+  p, h4 {
+  	margin-top: 0%;
+  	margin-bottom: 0%;
+  }
+  .agentInfo {
+  	text-align: center;
+  }
+  .main p {
+  	font-size: 1.2em;
+  }
+  img {
+  	margin-top: 5%;
+  }
+</style>
+<body>
+	{% if request.session.login > 0 %}
+	<header>
+		<ul>
+			<li><a href="{%url 'GreatHomes:index' %}">HomePage</a></li>
+			<li><a href="{%url 'UserDashboard:index' %}">DashBoard</a></li>
+			<li><a href="{%url 'UserDashboard:editProfileDisplay' %}">Edit Profile</a></li>
+			<li><a href="{%url 'GreatHomes:showAgentListing' id=request.session.login %}">Your Profile</a></li>
+			<li><a href="{%url 'GreatHomes:showAllListing' %}">Listings</a></li>
+			<li><a href="{%url 'GreatHomes:addListingDisplay' %}">Add Listing</a></li>
+		{% if user.user_level == "Admin" %}
+			<li><a href="{%url 'UserDashboard:createDisplay' %}">Add New Agent</a></li>
+		{% endif %}
+			<li><a href="{%url 'UserDashboard:logout' %}">Log Off</a></li>
+		</ul>
+	</header>
+	{% endif %}
+	<div class = "header">
+		<div class = "container-fluid">
+			<div class = "col-sm-5">
+				<h1><a href="{%url 'GreatHomes:index' %}"><i class = "ion-ios-home"></i> Great Homes Realty</a></h1>
+			</div>
+			<div class = "col-sm-7 navlinks">
+				<ul>
+					<li><a href="{%url 'GreatHomes:showAllListing' %}">More Listings</a></li>
+					<li><a href="{%url 'GreatHomes:buying' %}">Buying</a></li>
+					<li><a href="{%url 'GreatHomes:selling' %}">Selling</a></li>
+					<li>About Us</li>
+					<li><a href="{%url 'GreatHomes:suscribeDisplay' %}">Newsfeed</a></li>
+					<li><a href="{%url 'login:index' %}">Login</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class = "container-fluid main">
+		<h1>About Great Homes Realty</h1>
+		<p>Bacon ipsum dolor amet jowl salami turkey, turducken doner cow rump alcatra ham sirloin capicola ball tip bacon. Turkey shank pancetta filet mignon chuck. Ham chicken ribeye cupim jowl tenderloin alcatra short ribs strip steak cow. Pork chop bacon alcatra tenderloin, porchetta hamburger pig beef ribs spare ribs shankle beef doner flank ham. Hamburger picanha capicola pancetta meatball andouille. Picanha alcatra jerky, prosciutto pork kielbasa meatball doner. Meatloaf ham hock andouille shoulder rump spare ribs flank turkey pastrami.
+
+		Fatback biltong turkey, venison kielbasa turducken ground round tenderloin. Meatloaf pork loin pork belly, shankle alcatra brisket spare ribs t-bone strip steak porchetta bacon picanha leberkas. Hamburger ham pork ribeye. Beef tri-tip spare ribs meatloaf, brisket pork loin turducken pork chop.</p>
+		<h1>Company Agents</h1>
+		<div class = "row">
+			{% for agent in Users %}
+			<div class = "col-md-4 col-xs-6 agentInfo">
+				<a href="{%url 'GreatHomes:showAgentListing' id=agent.id %}">
+				{% if agent.url %}
+				<img style = "height:30%" src="{{agent.url}}">
+				{% endif %}
+				{% if agent.url == null %}
+				<img class = "userPicture" src="{% static 'GreatHomesRealty/avatar.png' %}" style = "height:30%">
+				{% endif %}
+				<h4>{{agent.firstName}} {{agent.lastName}}</h4>
+				<p>{{agent.email}}</p>
+				<p>{{agent.phone}}</p>
+			</a>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+		<div class = "footer">
+		<div class = "container-fluid">
+		<div class = "row">
+			<div class = "col-xs-3">
+				<address>
+				Principal Broker: Bill Yu<br>
+				Cell: (410)-984-6661<br>
+				Email: BillYu99@gmail.com <br>
+				9822 Tenney Ct <br> Ellicott City, MD 21042
+				</address>
+			</div>
+			<div class = "col-xs-8 col-xs-offset-1 footerlist">
+				<ul>
+					<li><a href = "#">Home<a></li>
+					<li><a href = "#">Buying<a></li>
+					<li><a href = "#">Selling<a></li>
+					<li><a href = "#">Home Search<a></li>
+					<li><a href = "#">Team<a></li>
+					<li><a href = "#">About Us<a></li>
+				</ul>
+			</div>
+		</div>
+		</div>
+	</div>
+</body>
+</html>

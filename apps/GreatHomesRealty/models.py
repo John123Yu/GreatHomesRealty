@@ -13,8 +13,8 @@ class ListingManager(models.Manager):
     def addListing(self, streetAddress, suite, city, state, zipcode, price, bedrooms, bathrooms, squarefootage, houseType, county, neighborhood, MLS, description, edit, createdBy, yearBuilt,status):
 		errors = {}
 
-		if any(x < 1 for x in (len(streetAddress), len(city), len(state), len(zipcode), len(price), len(bedrooms), len(bathrooms), len(squarefootage), len(houseType), len(county), len(neighborhood), len(MLS), len(status), len(yearBuilt) )):
-			errors['allInputLengths'] = "All fields are required except Apt/Suite and description"
+		if any(x < 1 for x in (len(streetAddress), len(city), len(state), len(zipcode), len(price), len(bedrooms), len(bathrooms), len(squarefootage), len(houseType), len(county), len(neighborhood), len(MLS), len(status), len(yearBuilt), len(description) )):
+			errors['allInputLengths'] = "All fields are required except Apt/Suite#."
 		if len(errors) is not 0:
 			return (False, errors)
 		elif len(errors) == 0 and edit == "no":
@@ -22,8 +22,9 @@ class ListingManager(models.Manager):
 			User_Listings.objects.create(user_id = createdBy, listing = listing)
 			return (True, listing.id)
 		elif len(errors) == 0 and edit != "no":
+			OneListing = Listing.listingMgr.get(id = edit)
 			listing = Listing.listingMgr.filter(id = edit).update(addressStreet = streetAddress, addressCity = city, addressState = state, addressAptNumber = suite, addressZipcode = zipcode, price = price, bedrooms= bedrooms, bathrooms= bathrooms, squarefootage= squarefootage, houseType= houseType, county= county, neighborhood= neighborhood, MLS= MLS, description = description, yearBuilt = yearBuilt, status = status )
-			return (True, listing.id)
+			return (True, OneListing.id)
 
 class ClientManager(models.Manager):
 	def addClient(self, firstName, lastName, email):

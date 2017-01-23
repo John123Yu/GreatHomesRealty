@@ -27,7 +27,7 @@ img {
 	border: 1px solid grey;
 }
 .header {
-	background-image: linear-gradient(rgba(55, 55, 55, 1), rgba(55, 55, 55, 1));
+	/*background-image: linear-gradient(rgba(55, 55, 55, 1), rgba(55, 55, 55, 1));*/
 	color: white;
 	padding-bottom: 3%;
 	font-family: serif;

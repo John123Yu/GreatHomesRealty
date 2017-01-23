@@ -17,10 +17,14 @@
 	h2 {
 		font-weight: 700;
 	}
+	.main {
+		margin-top: 4%;
+	}
 	.main2 {
 		background: linear-gradient(rgba(250, 197, 100, .95), rgba(250, 197, 100, .95));
 		border-radius: 5%;
-		padding: 3%;
+		padding: 2%;
+		padding-left: 3%;
 	}
 	.userPicture {
 		margin-top: 5%;
@@ -40,6 +44,8 @@
 		background: linear-gradient(rgba(250, 197, 100, .95), rgba(250, 197, 100, .95));
 		border-radius: 5%;
 		padding-left: 3%;
+		padding-bottom: 3%;
+		min-height: 100px;
 	}
 </style>
 <body>
@@ -79,12 +85,14 @@
 
 <div class = "main container">
 	<div class = "col-xs-8 main2">
-
 	<div class = "container">
 	<div class = "row">
 		<div class = "col-sm-4 col-xs-6">
 			{% if user.url %}
 			<img class = "userPicture" src="{{user.url}}" style= "width:90%">
+			{% endif %}
+			{% if user.url == null %}
+			<img class = "userPicture" src="{% static 'GreatHomesRealty/avatar.png' %}" style = "width:90%">
 			{% endif %}
 			{% if user.id == request.session.login %}
 	        <form id = "addPicture" class="addPicture" action="{%url 'UserDashboard:addUserImage' id=user.id %}" method="post" enctype="multipart/form-data">
@@ -105,7 +113,10 @@
 
 	<div class = "row">
 		<div class = "col-sm-12 col-xs-12 profileinfo">
-			<p>{{user.profileInformation}}</p>
+			<p><span style="font-weight:bold">Agent Information: </span>{{user.profileInformation}}</p>
+			{% if user.id == request.session.login %}
+			<a class = "btn btn-success" href="{%url 'UserDashboard:editProfileDisplay' %}">Edit Description</a>
+			{% endif %}
 		</div>
 	</div>
 	</div>

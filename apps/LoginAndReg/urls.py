@@ -1,10 +1,11 @@
-from django.conf.urls import url, include # Notice we added include
+from django.conf.urls import url, include 
 from . import views
+from views import Register, Login
 
 urlpatterns = [
 	url(r'^$', views.index, name = "index"),
-	url(r'^users$', views.register, name = "register"),
-	url(r'^login$', views.login, name = "login"),
+	url(r'^users$', Register.as_view(), name = "register"),
+	url(r'^login$', Login.as_view(), name = "login"),
 	url(r'^updateInfo/(?P<id>\d+)$', views.updateInfo, name = "updateInfo"),
 	url(r'^updatePassword/(?P<id>\d+)$', views.updatePassword, name = "updatePassword"),
 	url(r'^updateDescription$', views.updateDescription, name = "updateDescription"),

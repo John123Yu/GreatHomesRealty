@@ -12,7 +12,7 @@
 <style>
 	.error {
 		color: red;
-		margin-left: 15em;
+		margin-left: 12em;
 	}
 	.red {
 		color: red;
@@ -55,9 +55,10 @@
 	</div>
 
 	<div class = "container-fluid">
-	<div class = "col-sm-6">
-	<form action="{%url 'GreatHomes:editListing' id=listing.id %}" method='post' class = "form-horizontal">
+	<form action="{%url 'GreatHomes:editListing' id=listing.id %}" method='post' class = "form-horizontal editListingForm">
          {% csrf_token %}
+    <div class = "editListingAjax">
+	<div class = "col-sm-6">
           <h1>Edit Listing</h1>
           {% if allInputLengths %}
             <p class = 'error'> {{ allInputLengths }} </p>
@@ -66,9 +67,10 @@
             <label for = "status" class = "col-sm-3 control-label">Status: </label>
              <div class = "col-sm-9">
 	         <select value = "{{listing.status}}"name = "status" class="form-control" id = "status">
-				<option>Undercontract</option>
-				<option>Available</option>
+	         	<option>{{listing.status}}</option>
 				<option>Sold</option>
+				<option>Available</option>
+				<option>Undercontract</option>
 				<option>Open House</option>
 				<option>For Rent</option>
 				<option>Rented Out</option>
@@ -120,38 +122,14 @@
          <div class = "form-group">
             <label for = "bedrooms" class = "col-sm-3 control-label">Bedrooms: </label>
              <div class = "col-sm-9">
-	         <select value = "{{listing.bedrooms}}" name = "bedrooms" class="form-control" id = "bedrooms">
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-				<option>4</option>
-				<option>5</option>
-				<option>6</option>
-				<option>7</option>
-				<option>8</option>
-			</select>
-			<p class = "red">Previous: {{listing.bedrooms}}</p>
-			</div>
+           <input type='number' name='bedrooms' class = "form-control" id = "bedrooms" placeholder = "#" value = "{{listing.bedrooms}}">
+      </div>
          </div>
           <div class = "form-group">
             <label for = "bathrooms" class = "col-sm-3 control-label">Bathrooms: </label>
              <div class = "col-sm-9">
-	         <select value = "{{listing.bathrooms}}" class="form-control" id = "bathrooms" name = "bathrooms">
-				<option>1</option>
-				<option>1.5</option>
-				<option>2</option>
-				<option>2.5</option>
-				<option>3</option>
-				<option>3.5</option>
-				<option>4</option>
-				<option>4.5</option>
-				<option>5</option>
-				<option>5.5</option>
-				<option>6</option>
-				<option>6.5</option>
-			</select>
-			<p class = "red">Previous: {{listing.bathrooms}}</p>
-			</div>
+           <input type='number' name='bathrooms' class = "form-control" id = "bathrooms" step="0.5" placeholder = "#" value = "{{listing.bathrooms}}">
+      </div>
          </div>
         </div>
 
@@ -192,15 +170,16 @@
             <label for="description" class = "col-sm-3 control-label">Edit Description:</label>
             <div class = "col-sm-9">
         	<!-- <input type='text' name='description' class = "form-control" id = "description" value = "{{listing.description}}"> -->
-            <textarea class="form-control" rows="6" name="description" id="description" value = "{{listing.description}}"></textarea>
-            <p><span class = "red">Copy and Paste:</span> {{listing.description}}</p>
+            <textarea rows = "15" class="form-control" rows="6" name="description" id="description" value = "{{listing.description}}">{{listing.description}}</textarea>
+            <br>
             <input rows="5" type='submit' value='Edit Listing' class = "btn btn-primary">
            </div>
          </div>
         </form>
 	    </div>
        </div>
-
+        </div>
+       </div>
 
 	<div class = "footer">
 		<div class = "container-fluid">
@@ -227,4 +206,21 @@
 		</div>
 	</div>
 </body>
+ <script type="text/javascript">
+	$('.editListingForm').on('submit', function(e){
+	    e.preventDefault()
+	    $.ajax({
+	      url: '/editListing/' + "{{listing.id}}",
+	      method: 'post',
+	      data: $(this).serialize(),
+	      success: function(serverResponse){
+	      	if(serverResponse.data) {
+	      		window.location.replace("http://localhost:8000/showListing/" + serverResponse.data)
+	      	} else {
+		        $('.editListingAjax').html(serverResponse)
+	      	}
+	      }
+	    })
+	  });
+ </script>
 </html>

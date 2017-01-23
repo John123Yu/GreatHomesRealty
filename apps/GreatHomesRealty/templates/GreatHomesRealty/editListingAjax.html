@@ -1,0 +1,128 @@
+<div class = "editListingAjax">
+  <div class = "col-sm-6">
+          <h1>Edit Listing</h1>
+          {% if allInputLengths %}
+          <p class = 'error'>{{ allInputLengths }} </p>
+          {% endif %}
+          <div class = "form-group">
+            <label for = "status" class = "col-sm-3 control-label">Status: </label>
+             <div class = "col-sm-9">
+           <select name = "status" class="form-control" id = "status" value = '{{Status}}'>
+        <option>{{Status}}</option>
+        <option>Available</option>
+        <option>Undercontract</option>
+        <option>Sold</option>
+        <option>Open House</option>
+        <option>For Rent</option>
+        <option>Rented Out</option>
+      </select>
+      </div>
+         </div>
+          <div class = "form-group">
+            <label for ="streetAddress" class="col-sm-3 control-label">Street Address:</label>
+            <div class = "col-sm-9">
+              <input type='text' class = "form-control" name='streetAddress' id = "streetAddress" placeholder = "Street Address" value = "{{SA}}"> 
+            </div>
+          </div>
+          <div class = "form-group">
+            <label for ="suite" class="col-sm-3 control-label">Apt/Suite #:</label>
+            <div class = "col-sm-9">
+              <input type='text' class = "form-control" name='suite' id = "suite" placeholder = "#" value = "{{Apt}}"> 
+            </div>
+          </div>
+          <div class = "form-group">
+            <label for ="city" class="col-sm-3 control-label">City:</label>
+            <div class = "col-sm-9">
+              <input type='text' class = "form-control" name='city' id = "city" placeholder = "City" value = "{{C}}"> 
+            </div>
+          </div>
+           <div class = "form-group">
+            <label for ="state" class="col-sm-3 control-label">State:</label>
+            <div class = "col-sm-9">
+              <input type='text' class = "form-control" name='state' id = "state" placeholder = "State" value = "{{S}}"> 
+            </div>
+          </div>
+           <div class = "form-group">
+            <label for ="zipcode" class="col-sm-3 control-label">Zip Code:</label>
+            <div class = "col-sm-9">
+              <input type='number' class = "form-control" name='zipcode' id = "zipcode" placeholder = "Zip Code" value = "{{ZC}}"> 
+            </div>
+          </div>
+          <div class = "form-group">
+            <label for = "MLS" class = "col-sm-3 control-label">MLS number:</label>
+            <div class = "col-sm-9">
+              <input type='number' name='mls' class = "form-control" id = "mls" placeholder = "MLS" value = "{{MLS}}">
+          </div>
+       </div>
+          <div class = "form-group">
+            <label for = "price" class = "col-sm-3 control-label">Price: </label>
+            <div class = "col-sm-9">
+              <input type='number' name='price' class = "form-control" id = "price" placeholder = "Price" value = "{{P}}">
+            </div>
+          </div>
+         <div class = "form-group">
+            <label for = "bedrooms" class = "col-sm-3 control-label">Bedrooms: </label>
+             <div class = "col-sm-9">
+           <input type='number' name='bedrooms' class = "form-control" id = "bedrooms" placeholder = "#" value = "{{Bed}}">
+      </div>
+         </div>
+          <div class = "form-group">
+            <label for = "bathrooms" class = "col-sm-3 control-label">Bathrooms: </label>
+             <div class = "col-sm-9">
+           <input type='number' name='bathrooms' class = "form-control" id = "bathrooms" step="0.5" placeholder = "#" value = "{{Bathrooms}}">
+      </div>
+         </div>
+        </div>
+
+        <div class = "col-sm-6 form-horizontal">
+        <h1>&zwnj;</h1>
+        <div class = "form-group">
+          <label for = "squarefootage" class = "col-sm-3 control-label">Square Footage:</label>
+          <div class = "col-sm-9">
+            <input type='number' name='squarefootage' class = "form-control" id = "squarefootage" placeholder = "Square Footage" value = "{{SF}}">
+          </div>
+        </div>
+        <div class = "form-group">
+          <label for = "housetype" class = "col-sm-3 control-label">House Type:</label>
+          <div class = "col-sm-9">
+            <input type='text' name='housetype' class = "form-control" id = "housetype" placeholder = "House Type" value = "{{HT}}">
+          </div>
+        </div>
+        <div class = "form-group">
+          <label for = "county" class = "col-sm-3 control-label">County:</label>
+          <div class = "col-sm-9">
+            <input type='text' name='county' class = "form-control" id = "county" placeholder = "County" value = "{{County}}">
+          </div>
+        </div>
+        <div class = "form-group">
+          <label for = "neighborhood" class = "col-sm-3 control-label">Neighborhood:</label>
+          <div class = "col-sm-9">
+            <input type='text' name='neighborhood' class = "form-control" id = "neighborhood"placeholder = "neighborhood" value = "{{N}}">
+          </div>
+        </div>
+    <div class = "form-group">
+          <label for = "neighborhood" class = "col-sm-3 control-label">Year built:</label>
+          <div class = "col-sm-9">
+            <input type='number' name='yearBuilt' class = "form-control" id = "yearBuilt"placeholder = "Year Built" value = "{{Y}}">
+          </div>
+        </div>
+         <div class="form-group">
+            <label for="description" class = "col-sm-3 control-label">Description:</label>
+            <div class = "col-sm-9">
+            <textarea rows = "13" class="form-control" rows="6" name="description" id="description" placeholder = "Description" value = "{{D}}">{{D}}</textarea>
+            </div>
+         </div>
+    <div class = "form-group">
+      <div class = "col-sm-8 col-sm-offset-3">
+            <input type='submit' value='Edit Listing' class = "btn btn-primary">
+           </div>
+         </div>
+         </div>
+        </form>
+      </div>
+      </div>
+       </div>
+   </div>
+   {% if allInputLengths %}
+      <p class = 'error'>{{ allInputLengths }} </p>
+  {% endif %}

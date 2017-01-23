@@ -1,0 +1,80 @@
+        <div class = "RegisterAjax">
+          <h1>Agent Registration</h1>
+          {% if TwoCharacters %}
+            <p class = 'error'> {{ TwoCharacters }} </p>
+          {% endif %}
+          {% if IsAlpha %}
+            <p class = 'error'> {{ IsAlpha }} </p>
+          {% endif %}
+          <div class = "form-group">
+            <label for ="first_name" class="col-sm-2 control-label">First Name:</label>
+            <div class = "col-sm-6">
+              <input type='text' class = "form-control" name='first_name' id = "first_name" placeholder = "First Name" value = "{{FN}}"> 
+            </div>
+          </div>
+          <div class = "form-group">
+            <label for = "last_name" class = "col-sm-2 control-label">Last Name:</label>
+            <div class = "col-sm-6">
+              <input type='text' name='last_name' class = "form-control" id = "last_name" placeholder = "Last Name" value = "{{LN}}">
+            </div>
+          </div>
+          {% if EmailRequired %}
+            <p class = 'error'> {{ EmailRequired }} </p>
+          {% endif %}
+          {% if InvalidEmail %}
+            <p class = 'error'> {{ InvalidEmail }} </p>
+          {% endif %}
+          {% if EmailDuplicate %}
+            <p class = 'error'> {{ EmailDuplicate }} </p>
+          {% endif %}
+        <div class = "form-group">
+          <label for = "email" class = "col-sm-2 control-label">Email:</label>
+          <div class = "col-sm-6">
+            <input type='text' name='email' class = "form-control" id = "email" placeholder = "Email" value = "{{E}}">
+          </div>
+        </div>
+        {% if InvalidPhone %}
+            <p class = 'error'> {{ InvalidPhone }} </p>
+        {% endif %}
+        <div class = "form-group">
+          <label for = "phone" class = "col-sm-2 control-label">Phone Number: (XXX)-XXX-XXXX </label>
+          <div class = "col-sm-6">
+            <input type='tel' name='phone' class = "form-control" id = "phone" placeholder = "Number" value = "{{P}}">
+          </div>
+        </div>
+         {% if PasswordRequired %}
+            <p class = 'error'> {{ PasswordRequired }} </p>
+          {% endif %}
+          {% if PasswordLength %}
+            <p class = 'error'> {{ PasswordLength }} </p>
+          {% endif %}
+          {% if InvalidPassword %}
+            <p class = 'error'> {{ InvalidPassword }} </p>
+          {% endif %}
+          {% if PasswordNonmatch %}
+            <p class = 'error'> {{ PasswordNonmatch }} </p>
+          {% endif %}
+        <div class = "form-group">
+          <label for = "password" class = "col-sm-2 control-label">Password:</label>
+          <div class = "col-sm-6">
+            <input type='password' name='password' class = "form-control" id = "password" placeholder = "Password">
+          </div>
+        </div>
+        <div class = "form-group">
+          <label for = "confirmpassword" class = "col-sm-2 control-label">Confirm Password:</label>
+          <div class = "col-sm-6">
+            <input type='password' name='confirm_password' class = "form-control" id = "confirmpassword"placeholder = "Password">
+          </div>
+        </div>
+        {% if passcodeError %}
+          <p class = 'error'>{{ passcodeError }} </p>
+        {% endif %}
+        <div class = "form-group">
+          <label for = "passcode" class = "col-sm-2 control-label">Agent Passcode:</label>
+          <div class = "col-sm-6">
+            <input type='password' name='passcode' class = "form-control" id = "passcode"placeholder = "Passcode">
+            <input type='submit' value='Create User' class = "btn btn-success">
+          </div>
+        </div>
+        </form>
+  </div>

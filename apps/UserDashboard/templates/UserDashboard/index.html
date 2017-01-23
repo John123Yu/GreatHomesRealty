@@ -50,7 +50,9 @@
 				<th>Name</th>
 				<th>Email</th>
 				<th>Joined Date</th>
+				{% if user.user_level == "Admin" %}
 				<th>Actions</th>
+				{% endif %}
 			</tr>	
 		</thead>
 		<tbody>

@@ -1,8 +1,12 @@
 <html>
     <head>
         <title>Login and Reg Index</title>
+        {% load staticfiles %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'GreatHomesRealty/ionicons.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     </head>
     <style>
     {% load staticfiles %}
@@ -19,7 +23,8 @@
     .last-btn {
       margin-bottom: 5%;
     }
-    h1 {
+    .registerAjax h1,
+    .loginAjax h1 {
       margin-left: 50px;
     }
     body {
@@ -27,8 +32,65 @@
     }
     </style>
     <body>
-        <form action="{%url 'login:register' %}" method='post' class = "form-horizontal">
+
+{% if request.session.login > 0 %}
+  <header>
+    <ul>
+      <li><a href="{%url 'GreatHomes:index' %}">HomePage</a></li>
+      <li><a href="{%url 'UserDashboard:index' %}">DashBoard</a></li>
+      <li><a href="{%url 'UserDashboard:editProfileDisplay' %}">Edit Profile</a></li>
+      <li><a href="{%url 'GreatHomes:showAgentListing' id=request.session.login %}">Your Profile</a></li>
+      <li><a href="{%url 'GreatHomes:showAllListing' %}">Listings</a></li>
+      <li><a href="{%url 'GreatHomes:addListingDisplay' %}">Add Listing</a></li>
+    {% if user.user_level == "Admin" %}
+      <li><a href="{%url 'UserDashboard:createDisplay' %}">Add New Agent</a></li>
+    {% endif %}
+      <li><a href="{%url 'UserDashboard:logout' %}">Log Off</a></li>
+    </ul>
+  </header>
+  {% endif %}
+  <div class = "header">
+    <div class = "container-fluid">
+      <div class = "col-sm-5">
+        <h1 class = "mainh1"><a href="{%url 'GreatHomes:index' %}"><i class = "ion-ios-home"></i> Great Homes Realty</a></h1>
+      </div>
+      <div class = "col-sm-7 navlinks">
+        <ul>
+          <li>
+              <a class="dropdown-toggle" data-toggle="dropdown">All Listings
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{%url 'GreatHomes:showAllListing' %}">For Sale</a></li>
+                <li><a href="{%url 'GreatHomes:showAllRentals' %}">For Rent</a></li>
+              </ul>
+          </li>
+          <li>
+              <a class="dropdown-toggle" data-toggle="dropdown">Buying
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{%url 'GreatHomes:buying' %}">Buying a Home</a></li>
+                <li><a href="{%url 'GreatHomes:mortgage' %}">Mortgages</a></li>
+                <li><a href="{%url 'GreatHomes:owningHome' %}">Owning A Home</a></li>
+              </ul>
+          </li>
+          <li>
+            <a class="dropdown-toggle" data-toggle="dropdown">Selling
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{%url 'GreatHomes:selling' %}">Selling</a></li>
+                <li><a href="{%url 'GreatHomes:investing' %}">Investing</a></li>
+              </ul>
+          <li><a href="{%url 'GreatHomes:aboutUs' %}">About Us</a></li>
+          <li><a href="{%url 'GreatHomes:suscribeDisplay' %}">Newsfeed</a></li>
+          <li><a href="{%url 'login:index' %}">Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+    <form action="{%url 'login:register' %}" method='post' class = "form-horizontal registerForm">
         {% csrf_token %}
+        <div class = "RegisterAjax">
           <h1>Agent Registration</h1>
           {% if TwoCharacters %}
             <p class = 'error'> {{ TwoCharacters }} </p>
@@ -103,12 +165,14 @@
           <label for = "passcode" class = "col-sm-2 control-label">Agent Passcode:</label>
           <div class = "col-sm-6">
             <input type='password' name='passcode' class = "form-control" id = "passcode"placeholder = "Passcode">
-            <input type='submit' value='Create User' class = "btn btn-primary">
+            <input type='submit' value='Create User' class = "btn btn-success">
           </div>
         </div>
         </form>
-        <form action="{%url 'login:login' %}" method='post' class = "form-horizontal">
+  </div>
+        <form action="{%url 'login:login' %}" method='post' class = "form-horizontal loginForm">
         {% csrf_token %}
+        <div class = "loginAjax">
           <h1> Agent Login </h1>
           {% if NoEmail %}
             <p class = 'error'> {{ NoEmail }} </p>
@@ -122,23 +186,50 @@
           {% if IncorrectLogin %}
             <p class = 'error'> {{ IncorrectLogin }} </p>
           {% endif %}
-          {% if messages %}
-            <ul>
-                {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-                {% endfor %}
-            </ul>
-          {% endif %}
           <div class = "form-group">
             <label for = "password" class = "col-sm-2 control-label">Password:</label>
             <div class = "col-sm-6">
               <input type='password' name='password' id = "password" class = "form-control" placeholder = "Password">
-              <input type='submit' value='Login' class = "btn btn-primary last-btn">
+              <input type='submit' value='Login' class = "btn btn-success last-btn">
             </div>
           </div>
         </form>
+      </div>
     </body>
+<script type="text/javascript">
+  $('.registerForm').on('submit', function(e){
+      e.preventDefault()
+      $.ajax({
+        url: 'users',
+        method: 'post',
+        data: $(this).serialize(),
+        success: function(serverResponse){
+          if(serverResponse.data) {
+            window.location.replace(
+              "http://localhost:8000/UserDashboard/"
+              )
+          } else {
+            $('.registerAjax').html(serverResponse)
+          }
+        }
+      })
+    });
+  $('.loginForm').on('submit', function(e){
+      e.preventDefault()
+      $.ajax({
+        url: 'login',
+        method: 'post',
+        data: $(this).serialize(),
+        success: function(serverResponse){
+          if(serverResponse.data) {
+            window.location.replace(
+              "http://localhost:8000/UserDashboard/"
+              )
+          } else {
+            $('.loginAjax').html(serverResponse)
+          }
+        }
+      })
+    });
+ </script>
 </html>
-
-
-

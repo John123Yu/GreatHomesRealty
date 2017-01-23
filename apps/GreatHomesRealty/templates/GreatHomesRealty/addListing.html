@@ -12,7 +12,7 @@
 <style>	
 	.error {
 		color: red;
-		margin-left: 13%;
+		margin-left: 25%;
 	}
 	.red {
 		color: red;
@@ -62,7 +62,7 @@
 		</div>
 	</div>
 
-	<div class = "container-fluid body">
+	<div class = "container-fluid">
 	<div class = "row">
 	<form action = "{%url 'GreatHomes:addListing' %}" method='post' class = "addListingForm form-horizontal">
         {% csrf_token %}
@@ -72,8 +72,7 @@
           {% if allInputLengths %}
             <p class = 'error'> {{ allInputLengths }} </p>
           {% endif %}
-<!--           <p class = 'error'> Edit the status field again</p>
- -->          <div class = "form-group">
+	        <div class = "form-group">
             <label for = "status" class = "col-sm-3 control-label">Status: </label>
              <div class = "col-sm-9">
 	         <select name = "status" class="form-control" id = "status">
@@ -177,7 +176,7 @@
          <div class="form-group">
             <label for="description" class = "col-sm-3 control-label">Description:</label>
             <div class = "col-sm-9">
-            <textarea class="form-control" rows="6" name="description" id="description" placeholder= "Description" ></textarea>
+            <textarea rows = "13" class="form-control" rows="6" name="description" id="description" placeholder= "Description" ></textarea>
           	</div>
          </div>
          {% if allInputLengths %}
@@ -190,6 +189,9 @@
 	       </div>
          </div>
         </form>
+       <!--    {% if allInputLengths %}
+            <p class = 'error'> {{ allInputLengths }} </p>
+          {% endif %} -->
 	    </div>
        </div>
    </div>
@@ -223,7 +225,6 @@
 </body>
  <script type="text/javascript">
 	$('.addListingForm').on('submit', function(e){
-		console.log('here')
 	    e.preventDefault()
 	    $.ajax({
 	      url: '/addListing',
@@ -233,7 +234,7 @@
 	      	if(serverResponse.data) {
 	      		window.location.replace("http://localhost:8000/showListing/" + serverResponse.data)
 	      	} else {
-		        $('.addListingAjax').html(serverResponse)	
+		        $('.addListingAjax').html(serverResponse)
 	      	}
 	      }
 	    })
