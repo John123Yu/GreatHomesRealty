@@ -3,6 +3,7 @@ from django.db import models
 import re
 from datetime import datetime
 import bcrypt
+import random
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9\.\+_-]+@[a-zA-Z0-9\._-]+\.[a-zA-Z]*$')
 PASSWORD_REGEX = re.compile(r'^(?=.*[A-Z])(?=.*\d)')
@@ -63,7 +64,6 @@ class LoginManager(models.Manager):
 			user = User.loginMgr.get(email = email)
 		except:
 			user = 0
-
 		if user != 0:
 			hashed = user.password.encode('utf-8')
 			pw_bytes = password.encode('utf-8')
@@ -73,11 +73,36 @@ class LoginManager(models.Manager):
 				errors["IncorrectLogin"] = "Incorrect Password"
 		else:
 			errors["NoEmail"] = "Entered Email Not in Database"
+		print errors
 		if len(errors) is not 0:
 			return (False, errors)
 		else:
 			return (True, 0)
 
+class PasscodeManager(models.Manager):
+	def resetPassword(self, passcode, password, confirmPassword):
+		newPasscode = str(random.randint(1,10)) + str(random.randint(1,10)) + str(random.randint(1,10)) + str(random.randint(1,10))  + str(random.randint(1,10)) + str(random.randint(1,10)) 
+		errors = {}
+		if password != confirmPassword:
+			errors['PasswordNonmatch'] = ("Confirm password must match password")
+		if len(password) < 8:
+			errors['PasswordLength'] = ("Password needs to be at least 8 characters")
+		if not PASSWORD_REGEX.match(password):
+			errors['InvalidPassword'] = ("Password requires one uppercase letter and one number")
+		try:
+			user = User.passcodeMgr.get(passcode = passcode)
+		except:
+			user = 0
+		if user == 0:
+			errors["IncorrectPasscode"] = "Incorrect Passcode"
+		if user != 0 and len(errors) is 0:
+			pw_bytes = password.encode('utf-8')
+			hashed = bcrypt.hashpw(pw_bytes, bcrypt.gensalt())
+			User.registerMgr.filter(passcode = passcode).update(password = hashed)
+		if len(errors) is not 0:
+			return (False, errors)
+		else:
+			return (True, user)
 
 class User(models.Model):
 	firstName = models.CharField(max_length=100)
@@ -92,4 +117,6 @@ class User(models.Model):
 	created_at = models.DateField(auto_now_add=True)
 	updated_at = models.DateField(auto_now=True)
 	registerMgr = RegisterManager()
+	passcodeMgr = PasscodeManager()
 	loginMgr = LoginManager()
+	passcode = models.CharField(max_length= 50, null = True)

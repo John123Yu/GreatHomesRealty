@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'djng',
-    'tastypie'
+    'jquery',
+    'bootstrap3'
 ]
 
 MIDDLEWARE = [

@@ -10,7 +10,7 @@
             </div>
           </div>
           {% if IncorrectLogin %}
-            <p class = "error"><a href="">Forgot Password?</a></p>
+            <p class = "error"><a href="{%url 'login:resetPasswordDisplay' %}">Forgot Password?</a></p>
           {% endif %}
           <div class = "form-group">
             <label for = "password" class = "col-sm-2 control-label">Password:</label>

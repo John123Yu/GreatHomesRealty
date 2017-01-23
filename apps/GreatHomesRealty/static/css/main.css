@@ -164,12 +164,17 @@ a:hover {
 	margin-top: 5%;
 	padding-top: 5%;
 }
+/*.footer a:hover  {
+	color: orange;
+}*/
 .footer address {
 	font-size: 1.1em;
 	margin-left: 15%;
 }
 .footerlist ul {
-	margin-left: 15%;
+	margin-right: 5%;
+	text-align: right;
+
 }
 .footerlist li { 
 	display: inline-block;
@@ -178,7 +183,10 @@ a:hover {
 	margin-top: 3%;
 }
 .footerlist li a {
-	color: white
+	color: white;
+}
+.footerlist li a:hover{
+	color: orange;
 }
 .footerlist li a i {
 	font-size: 1.5em;

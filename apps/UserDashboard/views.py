@@ -20,7 +20,7 @@ def index(request):
 		}
 		return render(request, 'UserDashboard/index.html', context)
 	else:
-		return redirect(reverse('GreatHomesRealty:index'))
+		return redirect(reverse('GreatHomes:index'))
 
 def createDisplay(request):
 	try:

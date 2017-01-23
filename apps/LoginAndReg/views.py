@@ -4,6 +4,9 @@ from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.views.generic.edit import View
 from django.http import JsonResponse
+from django.core.mail import send_mail
+import random
+import json 
 error_messages = {}
 # Create your views here.
 def index(request):
@@ -64,6 +67,67 @@ class Login(View):
 				return redirect(reverse('login:login'))
 		else:
 			return redirect ('/')
+
+def resetPasswordDisplay(request):
+	return render(request, 'LoginAndReg/resetPassword.html')
+
+class ResetPassword(View):
+	def get(self, request):
+		if request.method == "GET":
+			context = error_messages
+			return render(request, 'LoginAndReg/resetPasswordAjax.html', context)
+		else: 
+			return redirect ('/')
+
+	def post(self, request):
+		if request.method == "POST":
+			global error_messages
+			error_messages = {}
+			user = User.loginMgr.filter(email = request.POST['email'])
+			if user:
+				passcode = str(random.randint(1,10)) + str(random.randint(1,10)) + str(random.randint(1,10)) + str(random.randint(1,10))  + str(random.randint(1,10)) + str(random.randint(1,10))
+				user[0].passcode = passcode
+				print passcode
+				user[0].save()
+				fromEmail = "BillYu99@gmail.com"
+				subject = "Great Homes Realty Password Reset"
+				message =  "Someone requested a password reset for this email. Your passcode is " + str(passcode)
+				emails = []
+				emails.append(request.POST['email'])
+				send_mail(
+					subject,
+					message,
+					fromEmail,
+					emails,
+					fail_silently=False
+				)
+				print passcode
+				error_messages['Success'] = "Check your email for a passcode and then fill out the form on the right. "
+			else:
+				error_messages['NoEmail'] = "Entered email not in database"
+			return redirect(reverse('login:resetPassword'))
+
+class ChangePassword(View):
+	def get(self, request):
+		if request.method == "GET":
+			context = error_messages
+			return render(request, 'LoginAndReg/changePasswordAjax.html', context)
+		else: 
+			return redirect ('/')
+
+	def post(self, request):
+		if request.method == "POST":
+			global error_messages
+			error_messages = {}
+			result = User.passcodeMgr.resetPassword(request.POST['passcode'], request.POST['password'], request.POST['confirmPassword'])
+			if result[0]:
+				# user = User.loginMgr.get(passcode = request.POST['passcode'])
+				request.session['login'] = result[1].id
+				return JsonResponse({"data": "true"})
+			else:
+				error_messages = result[1]
+				error_messages['Success'] = ""
+				return redirect(reverse('login:changePassword'))
 
 def updateInfo(request, id):
 	if request.method == "POST" and request.session['login'] > 0:

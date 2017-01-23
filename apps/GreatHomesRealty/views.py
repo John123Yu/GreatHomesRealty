@@ -472,7 +472,7 @@ def suscriptionEmail(request):
 		message = request.POST['message'] 
 		# + "\nunsuscribe: www.unsuscribe.com"
 
-		clients = Client.objects.all()
+		clients = Client.clientMgr.all()
 		sentemails = []
 		for client in clients:
 			sentemails.append(client.email)
