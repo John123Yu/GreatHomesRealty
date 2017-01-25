@@ -10,7 +10,7 @@ import json
 error_messages = {}
 # Create your views here.
 def index(request):
-    return render (request, 'LoginAndReg/index.html')
+    return render(request, 'LoginAndReg/index.html')
 
 class Register(View):
 	def get(self, request):
