@@ -20,15 +20,16 @@ header {
 	font-family: sans-serif;
 }
 body {
-	background-image: linear-gradient(rgba(250, 197, 100, .65), rgba(250, 197, 100, .65)), url('diagonal_striped_brick.png');
+	background-image: linear-gradient(rgba(250, 197, 100, .65), rgba(250, 197, 100, .65)), url("diagonal_striped_brick.png");
 	font-family: serif;
 }
 img {
 	border: 1px solid grey;
 }
 .header {
-	/*background-image: linear-gradient(rgba(55, 55, 55, 1), rgba(55, 55, 55, 1));*/
+	background-image: linear-gradient(rgba(43, 43, 43, 1), rgba(43, 43, 43, 1));
 	color: white;
+	padding-top: .9%;
 	padding-bottom: 3%;
 	font-family: serif;
 }
@@ -61,7 +62,7 @@ img {
 	color: white;
 }
 a:hover {
-	color: rgb(73, 162, 252);
+	color: orange;
 	text-decoration: none;
 }
 .ion-ios-home {
@@ -74,7 +75,7 @@ a:hover {
 	text-align: center;
 }
 .support {
-	background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
+	background-image: linear-gradient(rgba(43, 43, 43, 1), rgba(43, 43, 43, 1));
 	height: 15em;
 	margin-top: 6%;
 	text-align: center;
@@ -155,7 +156,7 @@ a:hover {
 	font-size: 1.4em;
 }
 .footer {
-	background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
+	background-image: linear-gradient(rgba(43, 43, 43, 1), rgba(43, 43, 43, 1));
 	height: 15em;
 	color: white;
 	font-family: serif;
@@ -163,12 +164,17 @@ a:hover {
 	margin-top: 5%;
 	padding-top: 5%;
 }
+/*.footer a:hover  {
+	color: orange;
+}*/
 .footer address {
 	font-size: 1.1em;
 	margin-left: 15%;
 }
 .footerlist ul {
-	margin-left: 15%;
+	margin-right: 5%;
+	text-align: right;
+
 }
 .footerlist li { 
 	display: inline-block;
@@ -177,7 +183,10 @@ a:hover {
 	margin-top: 3%;
 }
 .footerlist li a {
-	color: white
+	color: white;
+}
+.footerlist li a:hover{
+	color: orange;
 }
 .footerlist li a i {
 	font-size: 1.5em;
@@ -214,7 +223,7 @@ a:hover {
 /* Large sized screens */
 @media only screen and (min-width: 1024px) {
 	.header {
-		height: 10em;
+		height: 11em;
 	}
 	.support {
 		height: 15em;
@@ -227,7 +236,7 @@ a:hover {
 	}
 }
 .dropdown-menu {
-  background-color: black;
+  background-color: rgb(43,43,43);
   border: 1px solid white;
   text-align: center;
 }
@@ -236,14 +245,14 @@ a:hover {
 	top: 0px !important;
 	left: 0px !important;
 	padding: 0px !important;
-	background-color: black;
-	border-right: 1px solid black !important;
+	background-color: rgb(43,43,43);
+	border-right: 1px solid rgb(43,43,43) !important;
 }
 .dropdown-menu li a:hover {
-	background-color: black;
+	background-color: rgb(43,43,43);
 	color: orange;
 }
 .dropdown-menu li a {
-	background-color: black;
+	background-color: rgb(43,43,43);
 	color: white;
 }
