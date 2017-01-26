@@ -156,6 +156,20 @@
    		padding: 1% 4%;
    		border-radius: 2%;
    	}
+   	.error {
+		color: red;
+		display: block;
+		margin-left: 17%;
+	    margin-top: 0%;
+	    margin-bottom: 8px;
+	}
+	.success {
+		color: green;
+		display: block;
+	    margin-left: 17%;
+	    margin-top: 0%;
+	    margin-bottom: 8px;
+	}
 </STYLE>
 <SCRIPT>
 	var address = "{{listingAddress}}"
@@ -450,43 +464,45 @@
 		</div>
 		<div class = "col-sm-12 col-sm-offset-0 col-xs-12 inforequest">
 			<h3><i class = "ion-email"></i> Contact Agent / Request Information: </h3>
-		<form action="" method='post' class = "sendMail form-horizontal">
+	<form action="" method='post' class = "sendMail form-horizontal">
         {% csrf_token %}
-      <div class = "sendMailAjax">
+        	<p class = 'error allInputLengths'></p>
+        	<p class = 'success'></p>
         <div class = "form-group">
             <label for = "first_name" class = "col-sm-2 control-label">First Name:</label>
-            <div class = "col-sm-9">
+            <div class = "col-sm-8">
               <input type='text' name='first_name' class = "form-control" id = "first_name" placeholder = "First Name">
             </div>
           </div>
           <div class = "form-group">
             <label for = "last_name" class = "col-sm-2 control-label">Last Name:</label>
-            <div class = "col-sm-9">
+            <div class = "col-sm-8">
               <input type='text' name='last_name' class = "form-control" id = "last_name" placeholder = "Last Name">
             </div>
           </div>
+          <p class = 'error InvalidPhone'></p>
           <div class = "form-group">
-            <label for = "phone" class = "col-sm-2 control-label">Phone (xxx)-xxx-xxxx:</label>
-            <div class = "col-sm-9">
+            <label for = "phone" class = "col-sm-2 control-label">Phone (555)-555-5555:</label>
+            <div class = "col-sm-8">
               <input type='text' name='phone' class = "form-control" id = "phone" placeholder = "Phone Number">
             </div>
           </div>
+          <p class = 'error InvalidEmail'></p>
         <div class = "form-group">
           <label for = "email" class = "col-sm-2 control-label">Your Email:</label>
-          <div class = "col-sm-9">
+          <div class = "col-sm-8">
             <input type='text' name='email' class = "form-control" id = "email" placeholder = "Email">
           </div>
         </div>
           <div class="form-group">
-            <label for="message" class = "col-sm-2 control-label"> Message: </label>
-            <div class = "col-sm-9">
+            <label for="message" class = "col-sm-2 control-label">Your Question/Message:</label>
+            <div class = "col-sm-8">
             <textarea class="form-control" rows="5" name="message" id="message"></textarea>
            </div>
          </div>
-      </div>
           <div class="form-group">
             <label for="submit" class="col-sm-2"></label>
-            <div class = "col-sm-9">
+            <div class = "col-sm-8">
             <input id = "submit" type='submit' value='Send Message' class = "btn btn-success">
            </div>
          </div>
@@ -529,10 +545,28 @@
 	      method: 'post',
 	      data: $(this).serialize(),
 	      success: function(serverResponse){
-	        $('.sendMailAjax').html(serverResponse)
+	        if(!serverResponse['InvalidEmail']) {
+	            $('.InvalidEmail').html("")
+		    } else {
+		         $('.InvalidEmail').html(serverResponse['InvalidEmail'])
+		    }
+		    if(!serverResponse['InvalidPhone']) {
+	            $('.InvalidPhone').html("")
+		    } else {
+		         $('.InvalidPhone').html(serverResponse['InvalidPhone'])
+		    }
+		    if(!serverResponse['allInputLengths']) {
+	            $('.allInputLengths').html("")
+		    } else {
+		         $('.allInputLengths').html(serverResponse['allInputLengths'])
+		    }
+		    if(!serverResponse['success']) {
+	            $('.success').html("")
+		    } else {
+		         $('.success').html(serverResponse['success'])
+		    }
 	      }
 	    })
-	    $('.sendMail').trigger('reset')
 	  });
 
 		var slideIndex = 1;

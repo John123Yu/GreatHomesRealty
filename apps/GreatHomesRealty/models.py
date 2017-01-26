@@ -56,7 +56,7 @@ class SendMailManager(models.Manager):
 		if not EMAIL_REGEX.match(email):
 		    errors['InvalidEmail'] = ("Please enter a valid email address")
 		if not PHONE_REGEX.match(phone):
-			errors['InvalidPhone'] = ("Please enter a valid phone number")
+			errors['InvalidPhone'] = ("Please enter a valid phone number in the format of (555)-555-5555")
 		if len(errors) is not 0:
 			return (False, errors)
 		elif len(errors) == 0:

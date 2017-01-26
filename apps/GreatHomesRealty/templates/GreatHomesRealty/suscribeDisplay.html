@@ -87,7 +87,18 @@
 	}
 	.error {
 		color: red;
-		margin-bottom: 0px;
+		margin-left: -7%;
+		margin-top: 10px !important;
+		margin-bottom: 0px !important;
+	}
+	.error2, .success2 {
+		margin-bottom: -12px !important;
+		margin-top: 20px !important;
+	}
+	.success {
+		color: green;
+		margin-top: 10px !important;
+		margin-bottom: 0px !important;
 		margin-left: -7%;
 	}
 	</style>
@@ -153,9 +164,12 @@
  	<div class = "clientLoginAjax">
  			<div class = "newsfeed col-sm-8">
  				<h2><i class = "ion-ios-lightbulb-outline"></i> Newsfeed From The Broker </h2>
+ 				<div class = "all_messages">
+
+ 				</div>
 			  	{% for message in all_messages %}
-			   <p class = "message"> <strong>{{message.subject}}</strong> {{ message.created_at }}</p>
-			   <p class = "message1">{{ message.message}}</p>
+			   <p class = "message OriginalMessage"> <strong>{{message.subject}}</strong> {{ message.created_at }}</p>
+			   <p class = "message1 OriginalMessage">{{ message.message}}</p>
 			   {% if Admin.user_level == "Admin" %}
 			   <form class = "deleteMessage" action = "{% url 'UserDashboard:deleteMessage' id=message.id %}" method = 'POST'>
 			   	{% csrf_token %}
@@ -181,12 +195,9 @@
 			<form action="" method='post' class = "suscribe form-horizontal">
 		<div class = "suscribeAjaxCut">
 	        {% csrf_token %}
-	        {% if allInputLengths %}
-	        	<p class = "error">{{ allInputLengths }}</p>
-	        {% endif %}
-	        {% if IsAlpha %}
-	        	<p class = "error">{{ IsAlpha }}</p>
-	        {% endif %}
+	        	<p class = "error allInputLengths"></p>
+	        	<p class = "error IsAlpha"></p>
+	        	<p class = "success successSuscribe"></p>
 	        <div class = "form-group">
 	            <div class = "">
 	            <label for = "first_name" class = "control-label">First Name:</label>
@@ -199,12 +210,8 @@
 	              <input type='text' name='last_name' class = "form-control" id = "last_name" placeholder = "Last Name">
 	            </div>
 	          </div>
-	          {% if InvalidEmail %}
-	          	<p class = "error">{{InvalidEmail}}</p>
-	          {% endif %}
-	           {% if EmailDuplicate %}
-	        	<p class = "error">{{ EmailDuplicate }}</p>
-	       		{% endif %}
+	        	<p class = "error EmailDuplicate"></p>
+	          	<p class = "error InvalidEmail"></p>
 	        <div class = "form-group">
 	          <div class = "">
 	          <label for = "email" class = "control-label">Your Email:</label>
@@ -223,9 +230,8 @@
 			<form action="" method='post' class = "unsuscribe form-horizontal">
         <div class = "unsuscribeAjax">
 	        {% csrf_token %}
-	         {% if NoEmail %}
-	        	<p class = "error">{{ NoEmail }}</p>
-	       	{% endif %}
+	        <p class = "error NoEmailUnsuscribe"></p>
+	         <p class = "success successUnsuscribe"></p>
 	        <div class = "form-group">
 	          <div class = "">
 	          <label for = "email" class = "control-label">Unsuscribe Your Email:</label>
@@ -243,6 +249,8 @@
 
 	    	<form action="" method='post' class = "clientLogin form-horizontal">
 	        {% csrf_token %}
+	        <p class = "error error2 NoEmailLogin"></p>
+	        <p class = "success success2 successLogin"></p>
 	        <div class = "form-group">
 	          <div class = "">
 	          <label for = "emailLogin" class = "control-label">Client Login - Your Email:</label>
@@ -320,7 +328,6 @@
         $('.newsfeed').html(serverResponse)
       }
     })
-    $('.formPostMessage').trigger('reset')
   });
 
 
@@ -331,10 +338,35 @@
       method: 'POST',
       data: $(this).serialize(),
       success: function(serverResponse){
-        $('.suscribeAjaxCut').html(serverResponse)
+        console.log(serverResponse)
+          if(!serverResponse['InvalidEmail']) {
+	        $('.InvalidEmail').html("")
+	      } else {
+	         $('.InvalidEmail').html(serverResponse['InvalidEmail'])
+	      }
+	      if(!serverResponse['IsAlpha']) {
+	        $('.IsAlpha').html("")
+	      } else {
+	         $('.IsAlpha').html(serverResponse['IsAlpha'])
+	      }
+	      if(!serverResponse['allInputLengths']) {
+	        $('.allInputLengths').html("")
+	      } else {
+	         $('.allInputLengths').html(serverResponse['allInputLengths'])
+	      }
+	      if(!serverResponse['EmailDuplicate']) {
+	        $('.EmailDuplicate').html("")
+	      } else {
+	         $('.EmailDuplicate').html(serverResponse['EmailDuplicate'])
+	      }
+	      if(!serverResponse['success']) {
+	        $('.successSuscribe').html("")
+	      } else {
+	         $('.successSuscribe').html(serverResponse['success'])
+	      }
+
       }
     })
-    $('.suscribe').trigger('select')
   });
 
   $('.unsuscribe').on('submit', function(e){
@@ -344,10 +376,19 @@
       method: 'post',
       data: $(this).serialize(),
       success: function(serverResponse){
-        $('.unsuscribeAjax').html(serverResponse)
+        console.log(serverResponse)
+          if(!serverResponse['NoEmail']) {
+	        $('.NoEmailUnsuscribe').html("")
+	      } else {
+	         $('.NoEmailUnsuscribe').html(serverResponse['NoEmail'])
+	      }
+	      if(!serverResponse['success']) {
+	        $('.successUnuscribe').html("")
+	      } else {
+	         $('.successUnsuscribe').html(serverResponse['success'])
+	      }
       }
     })
-    $('.unsuscribe').trigger('reset')
   });
 
   $('.clientLogin').on('submit', function(e){
@@ -357,10 +398,30 @@
       method: 'post',
       data: $(this).serialize(),
       success: function(serverResponse){
-        $('.clientLoginAjax').html(serverResponse)
+	      if(!serverResponse['noEmail']) {
+	        $('.noEmailLogin').html("")
+	      } else {
+	         $('.noEmailLogin').html(serverResponse['noEmail'])
+	      }
+	      if(!serverResponse['success']) {
+	        $('.successLogin').html("")
+	      } else {
+	         $('.successLogin').html(serverResponse['success'])
+	      }
+	      if(!serverResponse['all_messages']) {
+	        $('.all_messages').html("")
+	      } else {
+	      	$('.OriginalMessage').html("")
+	      	var appendHtml = '<p class = "message"><strong>';
+	         for(var item in serverResponse['all_messages']) {
+	         	var date = new Date(serverResponse['all_messages'][item].created_at).toDateString()
+	         	appendHtml += serverResponse['all_messages'][item].subject + '</strong> ' + date + '</p>'; 
+	         	appendHtml += '<p class = "message1">' + serverResponse['all_messages'][item].message + '</p><p class = "message"><strong>'
+	         }
+	         $('.all_messages').html(appendHtml)
+	      }
       }
     })
-    $('.clientLogin').trigger('reset')
   });
 
 </script>
