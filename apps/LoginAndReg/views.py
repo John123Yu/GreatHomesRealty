@@ -13,12 +13,6 @@ def index(request):
     return render(request, 'LoginAndReg/index.html')
 
 class Register(View):
-	def get(self, request):
-		if request.method == "GET":
-			context = error_messages
-			return render(request, 'LoginAndReg/registerAjax.html', context)
-		else: 
-			return redirect ('/')
 	def post(self, request):
 		if request.method == "POST":
 			global error_messages
@@ -36,22 +30,11 @@ class Register(View):
 				return JsonResponse({"data": "true"})
 			else:
 				error_messages = result[1]
-				error_messages['FN'] = request.POST['first_name']
-				error_messages['LN'] = request.POST['last_name']
-				error_messages['E'] = request.POST['email']
-				error_messages['P'] = request.POST['phone']
-				return redirect(reverse('login:register'))
+				return JsonResponse(error_messages)
 		else:
-			pass
-
-class Login(View):
-	def get(self, request):
-		if request.method == "GET":
-			context = error_messages
-			return render(request, 'LoginAndReg/loginAjax.html', context)
-		else: 
 			return redirect ('/')
 
+class Login(View):
 	def post(self, request):
 		if request.method == "POST":
 			global error_messages
@@ -63,8 +46,7 @@ class Login(View):
 				return JsonResponse({"data": "true"})
 			else:
 				error_messages = result[1]
-				error_messages['E'] = request.POST['email']
-				return redirect(reverse('login:login'))
+				return JsonResponse(error_messages)
 		else:
 			return redirect ('/')
 
