@@ -32,7 +32,7 @@ class Register(View):
 				error_messages = result[1]
 				return JsonResponse(error_messages)
 		else:
-			return redirect ('/')
+			return JsonResponse({"error": "true"})
 
 class Login(View):
 	def post(self, request):
@@ -48,22 +48,14 @@ class Login(View):
 				error_messages = result[1]
 				return JsonResponse(error_messages)
 		else:
-			return redirect ('/')
+			return JsonResponse({"error": "true"})
 
 def resetPasswordDisplay(request):
 	return render(request, 'LoginAndReg/resetPassword.html')
 
 class ResetPassword(View):
-	def get(self, request):
-		if request.method == "GET":
-			context = error_messages
-			return render(request, 'LoginAndReg/resetPasswordAjax.html', context)
-		else: 
-			return redirect ('/')
-
 	def post(self, request):
 		if request.method == "POST":
-			global error_messages
 			error_messages = {}
 			user = User.loginMgr.filter(email = request.POST['email'])
 			if user:
@@ -71,45 +63,40 @@ class ResetPassword(View):
 				user[0].passcode = passcode
 				print passcode
 				user[0].save()
-				fromEmail = "BillYu99@gmail.com"
-				subject = "Great Homes Realty Password Reset"
-				message =  "Someone requested a password reset for this email. Your passcode is " + str(passcode)
-				emails = []
-				emails.append(request.POST['email'])
-				send_mail(
-					subject,
-					message,
-					fromEmail,
-					emails,
-					fail_silently=False
-				)
-				print passcode
+				# fromEmail = "BillYu99@gmail.com"
+				# subject = "Great Homes Realty Password Reset"
+				# message =  "Someone requested a password reset for this email. Your passcode is " + str(passcode)
+				# emails = []
+				# emails.append(request.POST['email'])
+				# send_mail(
+				# 	subject,
+				# 	message,
+				# 	fromEmail,
+				# 	emails,
+				# 	fail_silently=False
+				# )
 				error_messages['Success'] = "Check your email for a passcode and then fill out the form on the right. "
+				error_messages['Success2'] = "Enter your passcode, then set your new password"
+				return JsonResponse(error_messages)
 			else:
 				error_messages['NoEmail'] = "Entered email not in database"
-			return redirect(reverse('login:resetPassword'))
+				return JsonResponse(error_messages)
+		else:
+			return JsonResponse({"error": "true"})
 
 class ChangePassword(View):
-	def get(self, request):
-		if request.method == "GET":
-			context = error_messages
-			return render(request, 'LoginAndReg/changePasswordAjax.html', context)
-		else: 
-			return redirect ('/')
-
 	def post(self, request):
 		if request.method == "POST":
-			global error_messages
 			error_messages = {}
 			result = User.passcodeMgr.resetPassword(request.POST['passcode'], request.POST['password'], request.POST['confirmPassword'])
 			if result[0]:
-				# user = User.loginMgr.get(passcode = request.POST['passcode'])
 				request.session['login'] = result[1].id
 				return JsonResponse({"data": "true"})
 			else:
 				error_messages = result[1]
-				error_messages['Success'] = ""
-				return redirect(reverse('login:changePassword'))
+				return JsonResponse(error_messages)
+		else:
+			return JsonResponse({"error": "true"})
 
 def updateInfo(request, id):
 	if request.method == "POST" and request.session['login'] > 0:

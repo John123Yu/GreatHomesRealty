@@ -189,6 +189,12 @@
           } else {
             $('.InvalidPassword').html(serverResponse['InvalidPassword'])
           }
+          if(!serverResponse['EmailDuplicate']) {
+            $('.EmailDuplicate').html("")
+          } else {
+            console.log("here")
+            $('.EmailDuplicate').html(serverResponse['EmailDuplicate'])
+          }
           if(!serverResponse['IsAlpha']) {
             $('.IsAlpha').html("")
           } else {
@@ -226,18 +232,20 @@
       })
     });
   $('.loginForm').on('submit', function(e){
-    $('.NoEmail').html("")
-    $('.IncorrectLogin').html("")
       e.preventDefault()
       $.ajax({
         url: 'login',
         method: 'post',
         data: $(this).serialize(),
         success: function(serverResponse){
-          if(serverResponse['NoEmail']) {
+          if(!serverResponse['NoEmail']) {
+            $('.NoEmail').html("")
+          } else {
             $('.NoEmail').html(serverResponse['NoEmail'])
           }
-          if(serverResponse['IncorrectLogin']) {
+          if(!serverResponse['IncorrectLogin']) {
+            $('.IncorrectLogin').html("")
+          } else {
             $('.IncorrectLogin').html('<a href="{%url "login:resetPasswordDisplay" %}">Forgot Password?</a>')
           }
           if(serverResponse.data) {
