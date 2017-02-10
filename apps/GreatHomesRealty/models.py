@@ -79,11 +79,10 @@ class Listing(models.Model):
 	neighborhood = models.CharField(max_length = 100)
 	MLS = models.IntegerField()
 	description = models.TextField(null = True)
-	# mainPicture = models.ImageField(null = True, upload_to = 'uploads/')
 	url = models.CharField(max_length = 128,  null = True)
 	status = models.CharField(max_length = 100, null = True)
 	yearBuilt = models.IntegerField(null = True)
-	createdById = models.IntegerField(null = True)
+	createdById = models.IntegerField()
 	created_at = models.DateField(auto_now_add=True)
 	updated_at = models.DateField(auto_now=True)
 	listingMgr = ListingManager()
@@ -95,7 +94,6 @@ class User_Listings(models.Model):
 	updated_at = models.DateField(auto_now=True, null = True)
 
 class Image(models.Model):
-	# image = models.ImageField(upload_to='uploads/')
 	url = models.CharField(max_length = 128,  null = True)
 	listing = models.ForeignKey(Listing, null = True, related_name = "images")
 	created_at = models.DateField(auto_now_add=True)
