@@ -25,7 +25,7 @@ SECRET_KEY = ''
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.greathomesrealty1.com', 'greathomesrealty1.com']
+ALLOWED_HOSTS = ['greathomesrealty1.com']
 
 
 
