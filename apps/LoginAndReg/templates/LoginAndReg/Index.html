@@ -92,12 +92,8 @@
         {% csrf_token %}
         <div class = "RegisterAjax">
           <h1>Agent Registration</h1>
-          {% if TwoCharacters %}
-            <p class = 'error'> {{ TwoCharacters }} </p>
-          {% endif %}
-          {% if IsAlpha %}
-            <p class = 'error'> {{ IsAlpha }} </p>
-          {% endif %}
+            <p class = 'error TwoCharacters'></p>
+            <p class = 'error IsAlpha'></p>
           <div class = "form-group">
             <label for ="first_name" class="col-sm-2 control-label">First Name:</label>
             <div class = "col-sm-6">
@@ -110,42 +106,26 @@
               <input type='text' name='last_name' class = "form-control" id = "last_name" placeholder = "Last Name">
             </div>
           </div>
-          {% if EmailRequired %}
-            <p class = 'error'> {{ EmailRequired }} </p>
-          {% endif %}
-          {% if InvalidEmail %}
-            <p class = 'error'> {{ InvalidEmail }} </p>
-          {% endif %}
-          {% if EmailDuplicate %}
-            <p class = 'error'> {{ EmailDuplicate }} </p>
-          {% endif %}
+            <p class = 'error EmailRequired'></p>
+            <p class = 'error InvalidEmail'></p>
+            <p class = 'error EmailDuplicate'></p>
         <div class = "form-group">
           <label for = "email" class = "col-sm-2 control-label">Email:</label>
           <div class = "col-sm-6">
             <input type='text' name='email' class = "form-control" id = "email" placeholder = "Email">
           </div>
         </div>
-        {% if InvalidPhone %}
-            <p class = 'error'> {{ InvalidPhone }} </p>
-        {% endif %}
+            <p class = 'error InvalidPhone'></p>
         <div class = "form-group">
           <label for = "phone" class = "col-sm-2 control-label">Phone Number: (XXX)-XXX-XXXX </label>
           <div class = "col-sm-6">
             <input type='tel' name='phone' class = "form-control" id = "phone" placeholder = "Number">
           </div>
         </div>
-         {% if PasswordRequired %}
-            <p class = 'error'> {{ PasswordRequired }} </p>
-          {% endif %}
-          {% if PasswordLength %}
-            <p class = 'error'> {{ PasswordLength }} </p>
-          {% endif %}
-          {% if InvalidPassword %}
-            <p class = 'error'> {{ InvalidPassword }} </p>
-          {% endif %}
-          {% if PasswordNonmatch %}
-            <p class = 'error'> {{ PasswordNonmatch }} </p>
-          {% endif %}
+            <p class = 'error PasswordRequired'></p>
+            <p class = 'error PasswordLength'></p>
+            <p class = 'error InvalidPassword'></p>
+            <p class = 'error PasswordNonmatch'></p>
         <div class = "form-group">
           <label for = "password" class = "col-sm-2 control-label">Password:</label>
           <div class = "col-sm-6">
@@ -158,9 +138,7 @@
             <input type='password' name='confirm_password' class = "form-control" id = "confirmpassword"placeholder = "Password">
           </div>
         </div>
-        {% if passcodeError %}
-          <p class = 'error'>{{ passcodeError }} </p>
-        {% endif %}
+          <p class = 'error passcodeError'></p>
         <div class = "form-group">
           <label for = "passcode" class = "col-sm-2 control-label">Agent Passcode:</label>
           <div class = "col-sm-6">
@@ -174,18 +152,14 @@
         {% csrf_token %}
         <div class = "loginAjax">
           <h1> Agent Login </h1>
-          {% if NoEmail %}
-            <p class = 'error'> {{ NoEmail }} </p>
-          {% endif %}
+            <p class = 'error NoEmail'></p>
           <div class = "form-group">
             <label for = "email" class = "col-sm-2 control-label">Email:</label>
             <div class = "col-sm-6">
               <input type ='text' name ='email' id = "email" class = "form-control" placeholder = "Email">
             </div>
           </div>
-          {% if IncorrectLogin %}
-            <p class = 'error'> {{ IncorrectLogin }} </p>
-          {% endif %}
+            <p class = 'error IncorrectLogin'></p>
           <div class = "form-group">
             <label for = "password" class = "col-sm-2 control-label">Password:</label>
             <div class = "col-sm-6">
@@ -204,12 +178,55 @@
         method: 'post',
         data: $(this).serialize(),
         success: function(serverResponse){
-          if(serverResponse.data) {
-            window.location.replace(
-              "http://localhost:8000/UserDashboard/"
-              )
+          console.log(serverResponse)
+          if(!serverResponse['EmailRequired']){ 
+            $('.EmailRequired').html("")
+          } else { 
+            $('.EmailRequired').html(serverResponse['EmailRequired']) 
+          }
+          if(!serverResponse['InvalidPassword']) {
+            $('.InvalidPassword').html("")
           } else {
-            $('.registerAjax').html(serverResponse)
+            $('.InvalidPassword').html(serverResponse['InvalidPassword'])
+          }
+          if(!serverResponse['EmailDuplicate']) {
+            $('.EmailDuplicate').html("")
+          } else {
+            console.log("here")
+            $('.EmailDuplicate').html(serverResponse['EmailDuplicate'])
+          }
+          if(!serverResponse['IsAlpha']) {
+            $('.IsAlpha').html("")
+          } else {
+            $('.IsAlpha').html(serverResponse['IsAlpha'])
+          }
+          if(!serverResponse['PasswordLength']) {
+            $('.PasswordLength').html("")
+          } else {
+            $('.PasswordLength').html(serverResponse['PasswordLength'])
+          }
+          if(!serverResponse['PasswordRequired']) {
+            $('.PasswordRequired').html("")
+          } else {
+            $('.PasswordRequired').html(serverResponse['PasswordRequired'])
+          }
+          if(!serverResponse['TwoCharacters']) {
+            $('.TwoCharacters').html("")
+          } else {
+            $('.TwoCharacters').html(serverResponse['TwoCharacters'])
+          }
+          if(!serverResponse['passcodeError']) {
+            $('.passcodeError').html("")
+          } else {
+            $('.passcodeError').html(serverResponse['passcodeError'])
+          }
+          if(!serverResponse['InvalidPhone']) {
+            $('.InvalidPhone').html("")
+          } else {
+            $('.InvalidPhone').html(serverResponse['InvalidPhone'])
+          }
+          if(serverResponse.data) {
+            window.location.replace("http://localhost:8000/UserDashboard/")
           }
         }
       })
@@ -221,12 +238,18 @@
         method: 'post',
         data: $(this).serialize(),
         success: function(serverResponse){
-          if(serverResponse.data) {
-            window.location.replace(
-              "http://localhost:8000/UserDashboard/"
-              )
+          if(!serverResponse['NoEmail']) {
+            $('.NoEmail').html("")
           } else {
-            $('.loginAjax').html(serverResponse)
+            $('.NoEmail').html(serverResponse['NoEmail'])
+          }
+          if(!serverResponse['IncorrectLogin']) {
+            $('.IncorrectLogin').html("")
+          } else {
+            $('.IncorrectLogin').html('<a href="{%url "login:resetPasswordDisplay" %}">Forgot Password?</a>')
+          }
+          if(serverResponse.data) {
+            window.location.replace("http://localhost:8000/UserDashboard/")
           }
         }
       })

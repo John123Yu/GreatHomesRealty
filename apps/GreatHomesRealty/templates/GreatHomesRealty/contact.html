@@ -16,6 +16,20 @@
 		padding: 2%;
 		margin-top: 4%;
 	}
+	.error {
+		color: red;
+		display: block;
+		margin-left: 17%;
+	    margin-top: 0%;
+	    margin-bottom: 8px;
+	}
+	.success {
+		color: green;
+		display: block;
+	    margin-left: 17%;
+	    margin-top: 0%;
+	    margin-bottom: 8px;
+	}
 </style>
 <body>
 	{% if request.session.login > 0 %}
@@ -80,6 +94,8 @@
 	<form action="" method='post' class = "sendMail form-horizontal">
         {% csrf_token %}
         <div class = "sendMailAjax">
+        	<p class = 'error allInputLengths'></p>
+        	<p class = 'success'></p>
         <div class = "form-group">
             <label for = "first_name" class = "col-sm-2 control-label">First Name:</label>
             <div class = "col-sm-8">
@@ -92,12 +108,14 @@
               <input type='text' name='last_name' class = "form-control" id = "last_name" placeholder = "Last Name">
             </div>
           </div>
+          <p class = 'error InvalidPhone'></p>
           <div class = "form-group">
-            <label for = "phone" class = "col-sm-2 control-label">Phone (xxx)-xxx-xxxx::</label>
+            <label for = "phone" class = "col-sm-2 control-label">Phone (555)-555-5555:</label>
             <div class = "col-sm-8">
               <input type='text' name='phone' class = "form-control" id = "phone" placeholder = "Phone Number">
             </div>
           </div>
+          <p class = 'error InvalidEmail'></p>
         <div class = "form-group">
           <label for = "email" class = "col-sm-2 control-label">Your Email:</label>
           <div class = "col-sm-8">
@@ -155,10 +173,28 @@
 	      method: 'post',
 	      data: $(this).serialize(),
 	      success: function(serverResponse){
-	        $('.sendMailAjax').html(serverResponse)
+		      if(!serverResponse['InvalidEmail']) {
+	            $('.InvalidEmail').html("")
+		      } else {
+		         $('.InvalidEmail').html(serverResponse['InvalidEmail'])
+		      }
+		      if(!serverResponse['InvalidPhone']) {
+	            $('.InvalidPhone').html("")
+		      } else {
+		         $('.InvalidPhone').html(serverResponse['InvalidPhone'])
+		      }
+		      if(!serverResponse['allInputLengths']) {
+	            $('.allInputLengths').html("")
+		      } else {
+		         $('.allInputLengths').html(serverResponse['allInputLengths'])
+		      }
+		      if(!serverResponse['success']) {
+	            $('.success').html("")
+		      } else {
+		         $('.success').html(serverResponse['success'])
+		      }
 	      }
 	    })
-	    $('.sendMail').trigger('reset')
 	  });
 </script>
 </html>

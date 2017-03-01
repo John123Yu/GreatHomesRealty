@@ -56,7 +56,7 @@ class SendMailManager(models.Manager):
 		if not EMAIL_REGEX.match(email):
 		    errors['InvalidEmail'] = ("Please enter a valid email address")
 		if not PHONE_REGEX.match(phone):
-			errors['InvalidPhone'] = ("Please enter a valid phone number")
+			errors['InvalidPhone'] = ("Please enter a valid phone number in the format of (555)-555-5555")
 		if len(errors) is not 0:
 			return (False, errors)
 		elif len(errors) == 0:
@@ -79,11 +79,10 @@ class Listing(models.Model):
 	neighborhood = models.CharField(max_length = 100)
 	MLS = models.IntegerField()
 	description = models.TextField(null = True)
-	# mainPicture = models.ImageField(null = True, upload_to = 'uploads/')
 	url = models.CharField(max_length = 128,  null = True)
 	status = models.CharField(max_length = 100, null = True)
 	yearBuilt = models.IntegerField(null = True)
-	createdById = models.IntegerField(null = True)
+	createdById = models.IntegerField()
 	created_at = models.DateField(auto_now_add=True)
 	updated_at = models.DateField(auto_now=True)
 	listingMgr = ListingManager()
@@ -95,7 +94,6 @@ class User_Listings(models.Model):
 	updated_at = models.DateField(auto_now=True, null = True)
 
 class Image(models.Model):
-	# image = models.ImageField(upload_to='uploads/')
 	url = models.CharField(max_length = 128,  null = True)
 	listing = models.ForeignKey(Listing, null = True, related_name = "images")
 	created_at = models.DateField(auto_now_add=True)

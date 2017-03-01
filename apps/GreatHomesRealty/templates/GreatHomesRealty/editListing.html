@@ -81,9 +81,7 @@
     <div class = "editListingAjax">
 	<div class = "col-sm-6">
           <h1>Edit Listing</h1>
-          {% if allInputLengths %}
-            <p class = 'error'> {{ allInputLengths }} </p>
-          {% endif %}
+            <p class = 'error allInputLengths'></p>
           <div class = "form-group">
             <label for = "status" class = "col-sm-3 control-label">Status: </label>
              <div class = "col-sm-9">
@@ -190,7 +188,6 @@
          <div class="form-group">
             <label for="description" class = "col-sm-3 control-label">Edit Description:</label>
             <div class = "col-sm-9">
-        	<!-- <input type='text' name='description' class = "form-control" id = "description" value = "{{listing.description}}"> -->
             <textarea rows = "15" class="form-control" rows="6" name="description" id="description" value = "{{listing.description}}">{{listing.description}}</textarea>
             <br>
             <input rows="5" type='submit' value='Edit Listing' class = "btn btn-primary">
@@ -201,6 +198,7 @@
        </div>
         </div>
        </div>
+       <p class = 'error allInputLengths'></p>
 
 	<div class = "footer">
 		<div class = "container-fluid">
@@ -234,10 +232,14 @@
 	      method: 'post',
 	      data: $(this).serialize(),
 	      success: function(serverResponse){
+	      	console.log(serverResponse)
+	      	if(!serverResponse['allInputLengths']) {
+	            $('.allInputLengths').html("")
+	        } else {
+	            $('.allInputLengths').html(serverResponse['allInputLengths'])
+	        }
 	      	if(serverResponse.data) {
 	      		window.location.replace("http://localhost:8000/showListing/" + serverResponse.data)
-	      	} else {
-		        $('.editListingAjax').html(serverResponse)
 	      	}
 	      }
 	    })

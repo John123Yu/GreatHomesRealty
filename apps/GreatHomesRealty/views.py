@@ -20,6 +20,8 @@ from django.conf import settings
 import mimetypes
 import random 
 from django.db.models import Q
+error_messages = {}
+
 
 def index(request):
 	allListings = Listing.listingMgr.filter(price__gte = 300000).filter(price__lte = 700000).order_by('-created_at')[0:6]
@@ -43,17 +45,9 @@ def addListingDisplay(request):
 	else:
 		return redirect(reverse('GreatHomes:index'))
 
-error_messages = {}
 class AddListing(View):
-	def get(self, request):
-		if request.method == "GET":
-			context = error_messages
-			return render(request, 'GreatHomesRealty/addListingAjax.html', context)
-		else: 
-			return redirect(reverse('GreatHomes:addListingDisplay'))
 	def post(self, request):
 		if request.method == "POST":
-			global error_messages
 			error_messages = {}
 			result = Listing.listingMgr.addListing(request.POST['streetAddress'], request.POST['suite'], request.POST['city'], request.POST['state'], request.POST['zipcode'], request.POST['price'], request.POST['bedrooms'], request.POST['bathrooms'], request.POST['squarefootage'], request.POST['housetype'], request.POST['county'], request.POST['neighborhood'], request.POST['mls'], request.POST['description'], "no", request.session['login'], request.POST['yearBuilt'], request.POST['status'])
 			if result[0]:
@@ -62,25 +56,9 @@ class AddListing(View):
 				return JsonResponse({"data": result[1]})
 			else:
 				error_messages = result[1]
-				error_messages['Status'] = request.POST['status']
-				error_messages['SA'] = request.POST['streetAddress']
-				error_messages['C'] = request.POST['city']
-				error_messages['Apt'] = request.POST['suite']
-				error_messages['Bathrooms'] = request.POST['bathrooms']
-				error_messages['S'] = request.POST['state']
-				error_messages['ZC'] = request.POST['zipcode']
-				error_messages['MLS'] = request.POST['mls']
-				error_messages['P'] = request.POST['price']
-				error_messages['Bed'] = request.POST['bedrooms']
-				error_messages['SF'] = request.POST['squarefootage']
-				error_messages['HT'] = request.POST['housetype']
-				error_messages['County'] = request.POST['county']
-				error_messages['N'] = request.POST['neighborhood']
-				error_messages['Y'] = request.POST['yearBuilt']
-				error_messages['D'] = request.POST['description']
-				return redirect(reverse('GreatHomes:addListing'))
+				return JsonResponse(error_messages)
 		else: 
-			return redirect(reverse('GreatHomes:addListingDisplay'))
+			return JsonResponse({"error": "false"})
 
 def editListingDisplay(request, id):
 	if request.session['login']:
@@ -94,13 +72,6 @@ def editListingDisplay(request, id):
 		return redirect(reverse('GreatHomes:index'))
 
 class EditListing(View):
-	def get(self, request, id):
-		if request.method == "GET":
-			context = error_messages
-			return render(request, 'GreatHomesRealty/editListingAjax.html', context)
-		else: 
-			return redirect(reverse('GreatHomes:editListingDisplay'))
-
 	def post(self, request, id):
 		marker = False 
 		user_listings = User_Listings.objects.filter(listing_id = id)
@@ -109,7 +80,6 @@ class EditListing(View):
 			if currentUser == item.user:
 				marker = True
 		if request.method == "POST" and (currentUser.user_level == "Admin" or marker == True):
-			global error_messages
 			error_messages = {}
 			listingone = Listing.listingMgr.get(id = id)
 			result = Listing.listingMgr.addListing(request.POST['streetAddress'], request.POST['suite'], request.POST['city'], request.POST['state'], request.POST['zipcode'], request.POST['price'], request.POST['bedrooms'], request.POST['bathrooms'], request.POST['squarefootage'], request.POST['housetype'], request.POST['county'], request.POST['neighborhood'], request.POST['mls'], request.POST['description'], listingone.id, listingone.createdById, request.POST['yearBuilt'], request.POST['status'])
@@ -118,26 +88,9 @@ class EditListing(View):
 				return JsonResponse({"data": result[1]})
 			else:
 				error_messages = result[1]
-				error_messages['Status'] = request.POST['status']
-				error_messages['SA'] = request.POST['streetAddress']
-				error_messages['C'] = request.POST['city']
-				error_messages['Apt'] = request.POST['suite']
-				error_messages['Bathrooms'] = request.POST['bathrooms']
-				error_messages['S'] = request.POST['state']
-				error_messages['ZC'] = request.POST['zipcode']
-				error_messages['MLS'] = request.POST['mls']
-				error_messages['P'] = request.POST['price']
-				error_messages['Bed'] = request.POST['bedrooms']
-				error_messages['SF'] = request.POST['squarefootage']
-				error_messages['HT'] = request.POST['housetype']
-				error_messages['County'] = request.POST['county']
-				error_messages['N'] = request.POST['neighborhood']
-				error_messages['Y'] = request.POST['yearBuilt']
-				error_messages['D'] = request.POST['description']
-				url = "/editListing/" + str(id)
-				return redirect(url)
+				return JsonResponse(error_messages)
 		else:
-			return redirect(reverse('GreatHomes:index'))
+			return JsonResponse({"error": "false"})
 
 def addMainImage(request, id):
 	def store_in_s3(filename, content): 
@@ -296,25 +249,10 @@ def deleteListingAgent(request, id):
 		url = "/showListing/" + str(id)
 		return redirect(url)
 
-sendMailMessages = {}
 class SendMail(View):
-	def get(self, request, id):
-		if request.method == "GET":
-			context = sendMailMessages
-			print id
-			print "HEEEEEEEe"
-			if id == "0": 
-				return render(request, 'GreatHomesRealty/contactAjax.html', context)
-			return render(request, 'GreatHomesRealty/sendMailAjax.html', context)
-		else:
-			url = "/showListing/" + str(id)
-			return redirect(url)
-
 	def post(self, request, id):
-		print "HREEEe"
 		if request.method == "POST":
 			emails = []
-			global sendMailMessages
 			sendMailMessages = {}
 			if id == "0":
 				pass
@@ -327,7 +265,7 @@ class SendMail(View):
 			emails.append("John123Yu@gmail.com")
 			results = Client.sendMailMgr.sendMail(request.POST['first_name'], request.POST['last_name'],request.POST['phone'], request.POST['email'], request.POST['message'])
 			if results[0]:
-				sendMailMessages['success'] = "Your email has been sent"
+				sendMailMessages['success'] = "Your email has been sent. An agent will get back to you shortly."
 				fromEmail = request.POST['email']
 				subject = request.POST['first_name'] + " " + request.POST['last_name'] + " " + "Prospective Client"
 				if id == "0":
@@ -341,17 +279,15 @@ class SendMail(View):
 					emails,
 					fail_silently=False
 				)
-				url = "/sendMail/" + str(id)
-				return redirect(url)
+				return JsonResponse(sendMailMessages)
 			else:
 				sendMailMessages = results[1]
-				url = "/sendMail/" + str(id)
-				return redirect(url)
+				return JsonResponse(sendMailMessages)
 		else:
-			url = "/showListing/" + str(id)
-			return redirect(url)
+			return JsonResponse({"error": "false"})
 
 def suscribeDisplay(request):
+	# request.session['clientLogin'] = "false"
 	try: 
 		user = User.registerMgr.get(id = request.session['login'])
 	except:
@@ -377,93 +313,59 @@ def suscribeDisplay(request):
 		}
 	return render(request, 'GreatHomesRealty/suscribeDisplay.html',  context )
 
-clientLoginMessage = {}
 class ClientLogin(View):
-	def get(self, request):
-		if request.method == "GET":
-			global clientLoginMessage
-			print clientLoginMessage
-			try: 
-				user = User.registerMgr.get(id = request.session['login'])
-			except:
-				user = "none"
-			if request.session['clientLogin'] == "true":
-				clientLoginMessage['all_messages'] = Messages.objects.all()
-				clientLoginMessage['Admin'] = user
-			else:
-				clientLoginMessage['all_messages'] = Messages.objects.all().order_by('created_at')[:2]
-				clientLoginMessage['Admin'] = user
-			return render(request, 'GreatHomesRealty/clientLoginAjax.html', clientLoginMessage)
-		else:
-			return redirect(reverse('GreatHomes:suscribeDisplay'))
-
 	def post(self, request):
+		print "HREE"
 		if request.method == "POST":
 			global clientLoginMessage
 			clientLoginMessage = {}
 			try:
-				client = Client.clientMgr.get(email = request.POST['emailLogin'])
+				client = Client.clientMgr.get(email = request.POST['emailLogin'].lower())
 			except:
 				client = 0
 			if client == 0:
 				clientLoginMessage['noEmail'] = "Entered email is not yet suscribed"
-				return redirect(reverse('GreatHomes:clientLogin'))
+				return JsonResponse(clientLoginMessage)
 			else:
-				print "HEREEEEEE"
-				clientLoginMessage['success'] = "You've successfully logged in"
 				request.session['clientLogin'] = "true"
-				return redirect(reverse('GreatHomes:clientLogin'))
+				clientLoginMessage['success'] = "You've successfully logged in"
+				all_messages = Messages.objects.values()
+				all_messages = [entry for entry in all_messages]
+				clientLoginMessage['all_messages'] = all_messages
+				return JsonResponse(clientLoginMessage)
 		else:
-			return redirect(reverse('GreatHomes:suscribeDisplay'))
+			return JsonResponse({"error": "false"})
 
 
-suscribe_error_messages = {}
 class Suscribe(View):
-	def get(self, request):
-		if request.method == "GET":
-			context = suscribe_error_messages
-			return render(request, 'GreatHomesRealty/suscribeAjax.html', context)
-		else:
-			return redirect(reverse('GreatHomes:suscribeDisplay'))
-
 	def post(self, request):
 		if request.method == "POST":
-			global suscribe_error_messages
 			suscribe_error_messages = {}
-			results = Client.clientMgr.addClient(request.POST['first_name'], request.POST['last_name'],request.POST['email'])
+			results = Client.clientMgr.addClient(request.POST['first_name'], request.POST['last_name'],request.POST['email'].lower())
 			if results[0]:
 				suscribe_error_messages['success'] = "You are suscribed"
-				return redirect(reverse('GreatHomes:suscribe'))
+				return JsonResponse(suscribe_error_messages)
 			else:
 				suscribe_error_messages = results[1]
-				return redirect(reverse('GreatHomes:suscribe'))
+				return JsonResponse(suscribe_error_messages)
 		else:
-			return redirect(reverse('GreatHomes:suscribeDisplay'))
+			return JsonResponse({"error": "false"})
 
-unsuscribe_error_messages = {}
 class Unsuscribe(View):
-	def get(self, request):
-		if request.method == "GET":
-			context = unsuscribe_error_messages
-			return render(request, 'GreatHomesRealty/unsuscribe.html', context)
-		else:
-			return redirect(reverse('GreatHomes:suscribeDisplay'))
-
 	def post(self, request):
 		if request.method == "POST":
-			global unsuscribe_error_messages
 			unsuscribe_error_messages = {}
 			try:
-				client = Client.clientMgr.get(email = request.POST['email']).delete()
+				client = Client.clientMgr.get(email = request.POST['email'].lower()).delete()
 			except:
 				unsuscribe_error_messages['NoEmail'] = "Please enter a suscribed email"
 			if 'NoEmail' in unsuscribe_error_messages:
-				return redirect(reverse('GreatHomes:unsuscribe'))
+				return JsonResponse(unsuscribe_error_messages)
 			else:
 				unsuscribe_error_messages['success'] = "You've successfully unsuscribed"
-				return redirect(reverse('GreatHomes:unsuscribe'))
+				return JsonResponse(unsuscribe_error_messages)
 		else: 
-			return redirect(reverse('GreatHomes:suscribeDisplay'))
+			return JsonResponse({"error": "false"})
 
 
 def suscriptionEmail(request):
