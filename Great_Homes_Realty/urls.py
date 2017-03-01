@@ -16,11 +16,16 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+from apps.LoginAndReg.models import User as U
+
+class UAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(U, UAdmin)
+
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login/', include('apps.LoginAndReg.urls', namespace = "login")),
     url(r'^UserDashboard/', include('apps.UserDashboard.urls', namespace = "UserDashboard")),
-    url(r'^', include('apps.GreatHomesRealty.urls', namespace = "GreatHomes"))
-    # url(r'^s3direct/', include('s3direct.urls'))
-
+    url(r'^', include('apps.GreatHomesRealty.urls', namespace = "GreatHomes"))    # url(r'^s3direct/', include('s3direct.urls'))
 ]

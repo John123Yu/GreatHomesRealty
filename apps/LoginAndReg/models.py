@@ -77,7 +77,7 @@ class LoginManager(models.Manager):
 		if len(errors) is not 0:
 			return (False, errors)
 		else:
-			return (True, 0)
+			return (True, user)
 
 class PasscodeManager(models.Manager):
 	def resetPassword(self, passcode, password, confirmPassword):

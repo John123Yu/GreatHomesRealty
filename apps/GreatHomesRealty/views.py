@@ -272,13 +272,13 @@ class SendMail(View):
 					message =  request.POST['phone'] + " " + fromEmail + " "  + request.POST['message']
 				else:
 					message =  request.POST['phone'] + " " + fromEmail + " " + listing.addressStreet + " " + str(listing.MLS) + " " + request.POST['message']
-				# send_mail(
-				# 	subject,
-				# 	message,
-				# 	fromEmail,
-				# 	emails,
-				# 	fail_silently=False
-				# )
+				send_mail(
+					subject,
+					message,
+					fromEmail,
+					emails,
+					fail_silently=False
+				)
 				return JsonResponse(sendMailMessages)
 			else:
 				sendMailMessages = results[1]
@@ -320,7 +320,7 @@ class ClientLogin(View):
 			global clientLoginMessage
 			clientLoginMessage = {}
 			try:
-				client = Client.clientMgr.get(email = request.POST['emailLogin'])
+				client = Client.clientMgr.get(email = request.POST['emailLogin'].lower())
 			except:
 				client = 0
 			if client == 0:
@@ -341,7 +341,7 @@ class Suscribe(View):
 	def post(self, request):
 		if request.method == "POST":
 			suscribe_error_messages = {}
-			results = Client.clientMgr.addClient(request.POST['first_name'], request.POST['last_name'],request.POST['email'])
+			results = Client.clientMgr.addClient(request.POST['first_name'], request.POST['last_name'],request.POST['email'].lower())
 			if results[0]:
 				suscribe_error_messages['success'] = "You are suscribed"
 				return JsonResponse(suscribe_error_messages)
@@ -356,7 +356,7 @@ class Unsuscribe(View):
 		if request.method == "POST":
 			unsuscribe_error_messages = {}
 			try:
-				client = Client.clientMgr.get(email = request.POST['email']).delete()
+				client = Client.clientMgr.get(email = request.POST['email'].lower()).delete()
 			except:
 				unsuscribe_error_messages['NoEmail'] = "Please enter a suscribed email"
 			if 'NoEmail' in unsuscribe_error_messages:
